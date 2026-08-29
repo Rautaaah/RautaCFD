@@ -2,16 +2,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta property="og:title" content="rautatientorii">
-    <meta property="og:description" content="hhi guys im rauta andd this is my websssite">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://rauta.cfd">
-    <meta property="og:image" content="background.gif">
 
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="theme-color" content="#8B5CF6">
+<meta property="og:title" content="rautatientorii">
+<meta property="og:description" content="hhi guys im rauta andd this is my websssite">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://rauta.cfd">
+<meta property="og:image" content="background.gif">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#8B5CF6">
 
 <style>
+
 * {
     margin: 0;
     padding: 0;
@@ -29,6 +31,10 @@ body {
     background: black;
     font-family: Tahoma, Arial, sans-serif;
 }
+
+/* =========================
+   INTRO
+========================= */
 
 #intro {
     position: fixed;
@@ -87,6 +93,10 @@ body {
     transform: translateY(1px);
 }
 
+/* =========================
+   SITE
+========================= */
+
 #site {
     position: fixed;
     inset: 0;
@@ -114,6 +124,10 @@ body {
 
     background: rgba(0, 0, 0, 0.25);
 }
+
+/* =========================
+   PANELS
+========================= */
 
 .panel {
     position: absolute;
@@ -279,16 +293,20 @@ body {
     color: #000099;
 }
 
+/* =========================
+   CLOCK
+========================= */
+
 .time-box {
     position: absolute;
 
     right: 15px;
     top: 15px;
 
-    width: 180px;
-    height: 70px;
+    width: 150px;
+    height: 180px;
 
-    padding: 8px 14px;
+    padding: 10px;
 
     color: white;
 
@@ -309,7 +327,82 @@ body {
     overflow: auto;
 
     min-width: 120px;
-    min-height: 50px;
+    min-height: 140px;
+
+    z-index: 1002;
+}
+
+/* Analog clock */
+
+.analog-clock {
+    width: 90px;
+    height: 90px;
+
+    margin: 0 auto 10px;
+
+    position: relative;
+
+    border: 3px solid white;
+    border-radius: 50%;
+
+    background: rgba(0, 0, 0, 0.35);
+
+    box-shadow:
+        inset 0 0 8px rgba(0,0,0,0.6),
+        0 2px 8px rgba(0,0,0,0.5);
+}
+
+/* Clock hands */
+
+.clock-hand {
+    position: absolute;
+
+    left: 50%;
+    bottom: 50%;
+
+    transform-origin: bottom center;
+    transform: translateX(-50%);
+
+    border-radius: 4px;
+
+    background: white;
+}
+
+.hour-hand {
+    width: 4px;
+    height: 25px;
+}
+
+.minute-hand {
+    width: 3px;
+    height: 33px;
+}
+
+.second-hand {
+    width: 2px;
+    height: 38px;
+
+    background: #ff7de9;
+}
+
+/* Center of clock */
+
+.clock-center {
+    position: absolute;
+
+    width: 8px;
+    height: 8px;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    background: white;
+
+    border-radius: 50%;
+
+    z-index: 5;
 }
 
 #currentTime {
@@ -324,6 +417,10 @@ body {
 
     font-size: 10px;
 }
+
+/* =========================
+   MUSIC
+========================= */
 
 .music-button {
     position: fixed;
@@ -361,9 +458,14 @@ body {
 
     transition: 0.15s;
 }
+
 .music-button:active {
     transform: scale(0.95);
 }
+
+/* =========================
+   XP BUTTON
+========================= */
 
 .xp-button {
     padding: 5px 20px;
@@ -387,6 +489,10 @@ body {
     border-right-color: white;
     border-bottom-color: white;
 }
+
+/* =========================
+   NAVBAR
+========================= */
 
 .navbar {
     position: absolute;
@@ -470,15 +576,12 @@ body {
         -1px -1px 2px black;
 }
 
-/* Windows-style selected icon */
-
 .desktop-icon.selected span {
     background: #316ac5;
 
     border: 1px dotted white;
 }
 
-/* selected icon image gets a slight blue overlay */
 .desktop-icon.selected img {
     filter: brightness(0.8);
 }
@@ -627,12 +730,19 @@ body {
     border-left: 1px solid rgba(0,0,0,0.5);
 }
 
+/* =========================
+   RALSEI CLIPPY
+========================= */
+
 .ralsei-clippy {
     position: fixed;
     right: 30px;
     bottom: 70px;
+
     width: 170px;
+
     z-index: 9999;
+
     user-select: none;
     cursor: grab;
 }
@@ -644,37 +754,56 @@ body {
 .clippy-image {
     width: 200px;
     height: auto;
+
     display: block;
+
     margin: 0 auto;
+
     image-rendering: pixelated;
 }
 
 .clippy-bubble {
     background: white;
+
     border: 2px solid #333;
     border-radius: 8px;
+
     padding: 10px;
+
     margin-bottom: 5px;
+
     font-family: Arial, sans-serif;
     font-size: 13px;
+
     color: #111;
+
     box-shadow: 3px 3px 0 rgba(0,0,0,.25);
+
     position: relative;
 }
 
 .clippy-close {
     position: absolute;
+
     right: 0;
     top: -5px;
+
     width: 20px;
     height: 20px;
+
     border: 1px solid #555;
+
     background: #eee;
+
     color: #111;
+
     font-size: 13px;
     line-height: 16px;
+
     padding: 0;
+
     cursor: pointer;
+
     z-index: 2;
 }
 
@@ -682,12 +811,22 @@ body {
     background: #ddd;
 }
 
+/* =========================
+   FRIENDS
+========================= */
+
 .friend img {
     width: 110px;
     height: 39px;
+
     object-fit: cover;
+
     image-rendering: auto;
 }
+
+/* =========================
+   PANEL SIZES
+========================= */
 
 #homePanel {
     width: 440px;
@@ -723,12 +862,16 @@ body {
 #chatroomPanel {
     width: 591px;
     height: 415px;
-} 
-</style>
+}
 
+</style>
 </head>
 
 <body>
+
+<!-- =========================
+     INTRO
+========================= -->
 
 <div id="intro">
 
@@ -742,6 +885,10 @@ body {
     <source src="https://rautacfd.vercel.app/signin.mp3" type="audio/mpeg">
 </audio>
 
+<!-- =========================
+     SITE
+========================= -->
+
 <div id="site">
 
 <div class="background">
@@ -749,6 +896,8 @@ body {
     <img src="background.gif">
 
     <div class="overlay"></div>
+
+    <!-- HOME -->
 
     <div class="panel" id="homePanel">
 
@@ -774,66 +923,69 @@ body {
 
         </div>
 
-<div class="panel-content">
+        <div class="panel-content">
 
-<h2>hai :3</h2>
+            <h2>hai :3</h2>
 
-<p>
-    welcome to rauta.cfd!!!
-</p>
+            <p>
+                welcome to rauta.cfd!!!
+            </p>
 
-<hr>
+            <hr>
 
-<p>
-    WELCOME TO rauta.cfd!!!! HAHAHAHAH
-</p>
+            <p>
+                WELCOME TO rauta.cfd!!!! HAHAHAHAH
+            </p>
 
-<p>
-    TTHANKJ U TO MY FRIEND FOR THE DOMAIN :P (his site: ralsei.cfd)
-    <br>
-    (I BASED IT OFF
-    <a
-        href="https://youtube.com/@rautatientorii"
-        target="_blank">
-        MY USERNAME
-    </a>)
-</p>
+            <p>
+                TTHANKJ U TO MY FRIEND FOR THE DOMAIN :P
+                (his site: ralsei.cfd)
+                <br>
+                (I BASED IT OFF
+                <a
+                    href="https://youtube.com/@rautatientorii"
+                    target="_blank">
+                    MY USERNAME
+                </a>)
+            </p>
 
-<p>
-    i made this site for jokes and funs lowkey but i hope u enjoyed ur time here :P (also this is a fork of ralsei.cfd)
-</p>
+            <p>
+                i made this site for jokes and funs lowkey but i hope u enjoyed ur time here :P
+                (also this is a fork of ralsei.cfd)
+            </p>
 
-<p>
-    i upload WHATEVER here and i make blogs and all that yada yada
-</p>
+            <p>
+                i upload WHATEVER here and i make blogs and all that yada yada
+            </p>
 
-<p>
-    btw!!!! i have a mc server!!! its coming soon!
-    <br>
-    u should see its site at:
-    <a href="https://ralseismp.xo.je">HERE</a>
-    <br>
-    (COMING SOON)
-</p>
+            <p>
+                btw!!!! i have a mc server!!! its coming soon!
+                <br>
+                u should see its site at:
+                <a href="https://ralseismp.xo.je">HERE</a>
+                <br>
+                (COMING SOON)
+            </p>
 
-<p>
-    hhope u like my site :P
-</p>
+            <p>
+                hhope u like my site :P
+            </p>
 
-<p>
-    - rautaaaaaa :3
-</p>
+            <p>
+                - rautaaaaaa :3
+            </p>
 
-<button
-    class="xp-button"
-    onclick="alert('meow :3')">
-    meow
-</button>
+            <button
+                class="xp-button"
+                onclick="alert('meow :3')">
+                meow
+            </button>
 
-</div>
-
+        </div>
 
     </div>
+
+    <!-- ABOUT -->
 
     <div class="panel hidden" id="aboutPanel">
 
@@ -868,25 +1020,30 @@ body {
             </p>
 
             <p>
-                i'm a video game creator, and i like to write stories and i make ALOT OF MUSIC and a bunch of
-                internet shit.
+                i'm a video game creator, and i like to write stories
+                and i make ALOT OF MUSIC and a bunch of internet shit.
             </p>
 
             <hr>
 
             <p>
-                i wanted to make alot of stuff when i started using the internet, like "what if this existed?" and "what if i made that?", i love to create and DESTROY.
+                i wanted to make alot of stuff when i started using the internet,
+                like "what if this existed?" and "what if i made that?",
+                i love to create and DESTROY.
             </p>
-            
-              <hr>
+
+            <hr>
 
             <p>
-                i got alot of hate so i don't like to do music as much as i wanted to do but i learn everyday!!!!!!
+                i got alot of hate so i don't like to do music as much as i wanted
+                to do but i learn everyday!!!!!!
             </p>
 
         </div>
 
     </div>
+
+    <!-- PROJECTS -->
 
     <div class="panel hidden" id="projectsPanel">
 
@@ -912,49 +1069,52 @@ body {
 
         </div>
 
-<div class="panel-content">
+        <div class="panel-content">
 
-<h2>my stuff</h2>
+            <h2>my stuff</h2>
 
-<p>
-    these are my cool and very great projects:
-</p>
+            <p>
+                these are my cool and very great projects:
+            </p>
 
-<hr>
+            <hr>
 
-<p>
-    <strong>redium.xyz</strong> - a 2017 Roblox revival i created with my best friend @pokltyy
-    after his first revival failed. it originally started as reblox.vip,
-    but staymad (owner of the name) sent me death threats for it-
-    now we have 150+ members (tysm all) :3
-</p>
+            <p>
+                <strong>redium.xyz</strong> - a 2017 Roblox revival i created
+                with my best friend @pokltyy after his first revival failed.
+                it originally started as reblox.vip, but staymad (owner of the name)
+                sent me death threats for it- now we have 150+ members (tysm all) :3
+            </p>
 
-<p>
-    <strong>mycontact</strong>
-    (<a href="http://mycontact.reblox.vip" target="_blank">mycontact.reblox.vip</a>):
-    a Facebook 2009 type social media that i'm admin on AND i help develop!
-    with 30+ users (if i counted correctly-)
-</p>
+            <p>
+                <strong>mycontact</strong>
+                (<a href="http://mycontact.reblox.vip" target="_blank">
+                    mycontact.reblox.vip
+                </a>):
+                a Facebook 2009 type social media that i'm admin on
+                AND i help develop! with 30+ users (if i counted correctly-)
+            </p>
 
-<p>
-    <strong>MiraOS</strong> - a psychological horror game where you find
-    a 2000's computer for the first time in decades, but you're not alone.
-    your only goal is to reset the PC, but don't worry!
-    Mira and her friends are here to keep you "safe..."
-    however i'm still planning the story so it's not out yet-
-</p>
+            <p>
+                <strong>MiraOS</strong> - a psychological horror game where you find
+                a 2000's computer for the first time in decades, but you're not alone.
+                your only goal is to reset the PC, but don't worry!
+                Mira and her friends are here to keep you "safe..."
+                however i'm still planning the story so it's not out yet-
+            </p>
 
-<p>
-    <strong>RalseiSMP</strong> (aka. mc.rauta.cfd) - a Minecraft server
-    i made that's the best SMP for new players!
-    we support 1.20.5 to the newest version!
-    (you can play on cracked)
-</p>
+            <p>
+                <strong>RalseiSMP</strong> (aka. mc.rauta.cfd) - a Minecraft server
+                i made that's the best SMP for new players!
+                we support 1.20.5 to the newest version!
+                (you can play on cracked)
+            </p>
 
-</div>
-
+        </div>
 
     </div>
+
+    <!-- CONTACT -->
 
     <div class="panel hidden" id="contactPanel">
 
@@ -993,8 +1153,8 @@ body {
             <p>
                 discord: @strawberry.wave - the fastest i can respond to
             </p>
-            
-              <p>
+
+            <p>
                 email contact: rauta@rauta.cfd
             </p>
 
@@ -1007,8 +1167,8 @@ body {
             </p>
 
             <hr>
-            
-              <p>
+
+            <p>
                 tiktok: @rautatientorii
             </p>
 
@@ -1020,72 +1180,80 @@ body {
 
     </div>
 
-<div class="panel hidden" id="catsPanel">
+    <!-- CATS -->
 
-    <div class="panel-title">
+    <div class="panel hidden" id="catsPanel">
 
-        <span>cats :3.exe</span>
+        <div class="panel-title">
 
-        <div class="window-buttons">
+            <span>cats :3.exe</span>
 
-            <button
-                class="window-button"
-                onclick="minimizePanel('catsPanel')">
-                −
-            </button>
+            <div class="window-buttons">
 
-            <button
-                class="window-button close"
-                onclick="closePanel('catsPanel')">
-                ×
-            </button>
+                <button
+                    class="window-button"
+                    onclick="minimizePanel('catsPanel')">
+                    −
+                </button>
+
+                <button
+                    class="window-button close"
+                    onclick="closePanel('catsPanel')">
+                    ×
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="panel-content">
+
+            <iframe
+                src="http://mycontact.reblox.vip/dashboard/embed.php?id=38&withplayer=1"
+                width="560"
+                height="315"
+                frameborder="0"
+                allowfullscreen>
+            </iframe>
+
+            <p class="powered-by">
+                powered by
+                <a href="http://mycontact.reblox.vip" target="_blank">
+                    MyContact
+                </a>
+            </p>
+
+            <p class="powered-by">
+                want more cats?
+                <a href="https://rauta.cfd/cats">
+                    go here
+                </a>
+            </p>
 
         </div>
 
     </div>
 
-<div class="panel-content">
+    <!-- MUSIC -->
 
-    <iframe
-        src="http://mycontact.reblox.vip/dashboard/embed.php?id=38&withplayer=1"
-        width="560"
-        height="315"
-        frameborder="0"
-        allowfullscreen>
-    </iframe>
+    <button id="musicButton" class="music-button" title="play music">
+        ▶
+    </button>
 
-    <p class="powered-by">
-        powered by
-        <a href="http://mycontact.reblox.vip" target="_blank">
-            MyContact
-        </a>
-    </p>
+    <audio id="siteMusic" preload="auto">
+        <source src="https://rauta.cfd/cat.mp3" type="audio/mpeg">
+    </audio>
 
-<p class="powered-by">
-    want more cats?
-    <a href="https://rauta.cfd/cats">
-        go here
-    </a>
-</p>
-    
-</div>
-
-</div>
-
-<button id="musicButton" class="music-button" title="play music">
-    ▶
-</button>
-
-<audio id="siteMusic" preload="auto">
-    <source src="https://rauta.cfd/cat.mp3" type="audio/mpeg">
-</audio>
+    <!-- NAVBAR -->
 
     <nav class="navbar">
 
-        <a href="#" class="logo" onclick="openPanel('homePanel'); return false;">
+        <a
+            href="#"
+            class="logo"
+            onclick="openPanel('homePanel'); return false;">
             rautatientori :P
         </a>
-
 
         <ul class="nav-links">
 
@@ -1121,36 +1289,40 @@ body {
                 </a>
             </li>
 
-           <li>
-               <a
-                   href="https://trello.com/invite/b/6a7a1ae204aae58603254c44/ATTI593854f1e5dd15ad289d1fba04fa8aebE1E7E2EB/ralseifit"
-                   target="_blank"
-                   rel="noopener noreferrer">
-                   trello
-              </a>
+            <li>
+                <a
+                    href="https://trello.com/invite/b/6a7a1ae204aae58603254c44/ATTI593854f1e5dd15ad289d1fba04fa8aebE1E7E2EB/ralseifit"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    trello
+                </a>
+            </li>
 
-           <li>
-               <a
-                   href="https://dsc.gg/clowzer"
-                   target="_blank"
-                   rel="noopener noreferrer">
-                   discord :P
-              </a>
+            <li>
+                <a
+                    href="https://dsc.gg/clowzer"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    discord :P
+                </a>
+            </li>
 
-           <li>
-               <a
-                   href="#"
-                   onclick="openPanel('friendsPanel'); return false;">
-                   my friends
-              </a>
-           <li>
-               <a
-                   href="#"
-                   onclick="openPanel('newsletterPanel'); return false;">
-                   newsletters :333
-              </a>
-</li>
-            
+            <li>
+                <a
+                    href="#"
+                    onclick="openPanel('friendsPanel'); return false;">
+                    my friends
+                </a>
+            </li>
+
+            <li>
+                <a
+                    href="#"
+                    onclick="openPanel('newsletterPanel'); return false;">
+                    newsletters :333
+                </a>
+            </li>
+
         </ul>
 
         <div
@@ -1174,48 +1346,99 @@ body {
 </div>
 
 </div>
-    
+
+<!-- =========================
+     ANALOG + DIGITAL CLOCK
+========================= -->
+
 <div class="time-box">
-    <div id="currentTime">00:00:00</div>
-    <div class="time-label">time for me</div>
+
+    <div class="analog-clock">
+
+        <div class="clock-hand hour-hand"></div>
+
+        <div class="clock-hand minute-hand"></div>
+
+        <div class="clock-hand second-hand"></div>
+
+        <div class="clock-center"></div>
+
+    </div>
+
+    <div id="currentTime">
+        00:00:00
+    </div>
+
+    <div class="time-label">
+        time for me
+    </div>
+
 </div>
+
+<!-- =========================
+     DESKTOP ICONS
+========================= -->
 
 <div class="desktop-icons">
 
-    <div class="desktop-icon"
-         data-panel="game1Panel"
-         style="left: 25px; top: 90px;">
+    <div
+        class="desktop-icon"
+        data-panel="game1Panel"
+        style="left: 25px; top: 90px;">
 
-        <img src="http://rauta.cfd/aliendestroyers.png" alt="Alien Destroyer">
-        <span>alien destroyer</span>
+        <img
+            src="http://rauta.cfd/aliendestroyers.png"
+            alt="Alien Destroyer">
 
-    </div>
-
-    <div class="desktop-icon"
-         data-panel="changelogPanel"
-         style="left: 25px; top: 180px;">
-
-        <img src="http://rauta.cfd/changelog.png" alt="Cat">
-        <span>changelogs!!!</span>
+        <span>
+            alien destroyer
+        </span>
 
     </div>
 
-    <div class="desktop-icon"
-         data-panel="chatroomPanel"
-         style="left: 25px; top: 270px;">
+    <div
+        class="desktop-icon"
+        data-panel="changelogPanel"
+        style="left: 25px; top: 180px;">
 
-        <img src="game3.png" alt="Game">
-        <span>chatroom.exe</span>
+        <img
+            src="http://rauta.cfd/changelog.png"
+            alt="Cat">
+
+        <span>
+            changelogs!!!
+        </span>
+
+    </div>
+
+    <div
+        class="desktop-icon"
+        data-panel="chatroomPanel"
+        style="left: 25px; top: 270px;">
+
+        <img
+            src="game3.png"
+            alt="Game">
+
+        <span>
+            chatroom.exe
+        </span>
 
     </div>
 
 </div>
+
+<!-- =========================
+     GAME PANEL
+========================= -->
 
 <div class="panel hidden" id="game1Panel">
 
     <div class="panel-title">
 
-        <span>alien destroyer.exe</span>
+        <span>
+            alien destroyer.exe
+        </span>
 
         <div class="window-buttons">
 
@@ -1237,22 +1460,29 @@ body {
 
     <div class="panel-content">
 
-<iframe
-    src="https://scratch.mit.edu/projects/1376240877/embed"
-    width="315"
-    height="315"
-    frameborder="0"
-    allowfullscreen>
-</iframe>
+        <iframe
+            src="https://scratch.mit.edu/projects/1376240877/embed"
+            width="315"
+            height="315"
+            frameborder="0"
+            allowfullscreen>
+        </iframe>
+
     </div>
 
 </div>
+
+<!-- =========================
+     CHANGELOG
+========================= -->
 
 <div class="panel hidden" id="changelogPanel">
 
     <div class="panel-title">
 
-        <span>changelog.exe</span>
+        <span>
+            changelog.exe
+        </span>
 
         <div class="window-buttons">
 
@@ -1272,92 +1502,99 @@ body {
 
     </div>
 
-<div class="panel-content changelog-content">
+    <div class="panel-content changelog-content">
 
-    <h2>rauta.cfd updates</h2>
+        <h2>rauta.cfd updates</h2>
 
-    <hr>
+        <hr>
 
-    <h3>8/9/26 v1.0 - main</h3>
+        <h3>8/9/26 v1.0 - main</h3>
 
-    <p>
-        I MADE IT!!!
-    </p>
+        <p>
+            I MADE IT!!!
+        </p>
 
-    <p>
-        yeah i made the site YIPPYY<br>
-        everything u see now<br>
-        and a bunch of random shit :P
-    </p>
+        <p>
+            yeah i made the site YIPPYY<br>
+            everything u see now<br>
+            and a bunch of random shit :P
+        </p>
 
-    <hr>
+        <hr>
 
-    <h3>8/9/26 v1.1 - games</h3>
+        <h3>8/9/26 v1.1 - games</h3>
 
-    <p>
-        added the games section!!
-    </p>
+        <p>
+            added the games section!!
+        </p>
 
-    <p>
-        alien destroyer.exe is now playable<br>
-        made in scratch but that's okie :3
-    </p>
+        <p>
+            alien destroyer.exe is now playable<br>
+            made in scratch but that's okie :3
+        </p>
 
-    <hr>
+        <hr>
 
-    <h3>8/10/26 v1.1.1 - cats!!!</h3>
+        <h3>8/10/26 v1.1.1 - cats!!!</h3>
 
-    <p>
-        added the cats page (u can go there from the cats button!!!)
-    </p>
+        <p>
+            added the cats page
+            (u can go there from the cats button!!!)
+        </p>
 
-    <hr>
+        <hr>
 
-    <h3>8/10/26 v1.1.2 - MORE CATS</h3>
+        <h3>8/10/26 v1.1.2 - MORE CATS</h3>
 
-    <p>
-        added oneko that chases u around, also u can pet it :P<br>
-        BEST FEATURE IN rauta.cfd TOPS<br>
-        also added trello board so u can see my progress meow
-    </p>
+        <p>
+            added oneko that chases u around, also u can pet it :P<br>
+            BEST FEATURE IN rauta.cfd TOPS<br>
+            also added trello board so u can see my progress meow
+        </p>
 
-    <hr>
+        <hr>
 
-    <h3>8/10/26 v1.1.2.1 - add the 1's update</h3>
+        <h3>8/10/26 v1.1.2.1 - add the 1's update</h3>
 
-    <p>
-        RALLIPY HAS BEEN ADDED! he's a goober who speaks now<br>
-        changed the sign in song<br>
-        ralseismp landing DONE!
-    </p>
+        <p>
+            RALLIPY HAS BEEN ADDED! he's a goober who speaks now<br>
+            changed the sign in song<br>
+            ralseismp landing DONE!
+        </p>
 
-    <hr>
-    
-    <h3>coming soon...</h3>
+        <hr>
 
-    <p>
-        who knows what i'll add next :P
-    </p>
+        <h3>coming soon...</h3>
 
-    <p>
-        probably something stupid.
-    </p>
+        <p>
+            who knows what i'll add next :P
+        </p>
 
-    <hr>
+        <p>
+            probably something stupid.
+        </p>
 
-    <p>
-        - rautaaaaaa :3
-    </p>
+        <hr>
+
+        <p>
+            - rautaaaaaa :3
+        </p>
+
+    </div>
 
 </div>
 
-    </div>
+<!-- =========================
+     CHATROOM
+========================= -->
 
 <div class="panel hidden" id="chatroomPanel">
 
     <div class="panel-title">
 
-        <span>chatroom.exe</span>
+        <span>
+            chatroom.exe
+        </span>
 
         <div class="window-buttons">
 
@@ -1377,40 +1614,52 @@ body {
 
     </div>
 
-<div class="panel-content">
+    <div class="panel-content">
 
-    <iframe
-        src="https://chat.rauta.cfd"
-        width="560"
-        height="315"
-        frameborder="0"
-        allowfullscreen>
-    </iframe>
-</p>
+        <iframe
+            src="https://chat.rauta.cfd"
+            width="560"
+            height="315"
+            frameborder="0"
+            allowfullscreen>
+        </iframe>
+
     </div>
 
 </div>
-    
+
 <script src="/oneko.js"></script>
 
+<!-- =========================
+     RALSEI CLIPPY
+========================= -->
+
 <div id="ralseiClippy" class="ralsei-clippy">
+
     <img
         src="/ralsei-clippy.png"
         alt="Ralsei Clippy"
-        class="clippy-image"
-    >
+        class="clippy-image">
 
-    <div class="clippy-bubble" id="clippyBubble">
+    <div
+        class="clippy-bubble"
+        id="clippyBubble">
         hey :3
     </div>
 
 </div>
 
+<!-- =========================
+     FRIENDS
+========================= -->
+
 <div class="panel hidden" id="friendsPanel">
 
     <div class="panel-title">
 
-        <span>friends.exe</span>
+        <span>
+            friends.exe
+        </span>
 
         <div class="window-buttons">
 
@@ -1437,32 +1686,58 @@ body {
         <div class="friend-grid">
 
             <a class="friend" href="#">
-                <img src="https://rauta.cfd/rautabadge.png" alt="rauta">
+                <img
+                    src="https://rauta.cfd/rautabadge.png"
+                    alt="rauta">
             </a>
 
-            <a class="friend" href="mycontact.reblox.vip">
-                <img src="poklty.png" alt="poklty">
+            <a
+                class="friend"
+                href="mycontact.reblox.vip">
+
+                <img
+                    src="poklty.png"
+                    alt="poklty">
+
             </a>
 
-            <a class="friend" href="https://rauta.rauta.cfd">
-                <img src="YOUR-IMAGE-URL.png" alt="rautatientori">
+            <a
+                class="friend"
+                href="https://rauta.rauta.cfd">
+
+                <img
+                    src="YOUR-IMAGE-URL.png"
+                    alt="rautatientori">
+
             </a>
 
-            <a class="friend" href="https://toxicchemical.xyz">
-                <img src="YOUR-IMAGE-URL.png" alt="quivering iirc">
+            <a
+                class="friend"
+                href="https://toxicchemical.xyz">
+
+                <img
+                    src="YOUR-IMAGE-URL.png"
+                    alt="quivering iirc">
+
             </a>
-            
+
         </div>
 
     </div>
 
 </div>
 
+<!-- =========================
+     NEWSLETTER
+========================= -->
+
 <div class="panel hidden" id="newsletterPanel">
 
     <div class="panel-title">
 
-        <span>newsletter.exe</span>
+        <span>
+            newsletter.exe
+        </span>
 
         <div class="window-buttons">
 
@@ -1484,9 +1759,14 @@ body {
 
     <div class="panel-content">
 
-        <h2>rauta.cfd newsletters</h2>
+        <h2>
+            rauta.cfd newsletters
+        </h2>
 
-        <p>sign up for updates about anything! blogs, projects...zzz i fell asleep</p>
+        <p>
+            sign up for updates about anything!
+            blogs, projects...zzz i fell asleep
+        </p>
 
         <form
             action="https://assets.mailerlite.com/jsonp/2568621/forms/195466784979027416/subscribe"
@@ -1518,18 +1798,34 @@ body {
     </div>
 
 </div>
-    
+
 <script>
 
-const intro = document.getElementById("intro");
-const site = document.getElementById("site");
-const enterButton = document.getElementById("enterButton");
-const music = document.getElementById("signinMusic");
+/* =========================
+   INTRO
+========================= */
+
+const intro =
+    document.getElementById("intro");
+
+const site =
+    document.getElementById("site");
+
+const enterButton =
+    document.getElementById("enterButton");
+
+const music =
+    document.getElementById("signinMusic");
 
 enterButton.addEventListener("click", function() {
 
     music.play().catch(function(error) {
-        console.log("son btw i couldnt start the audio", error);
+
+        console.log(
+            "son btw i couldnt start the audio",
+            error
+        );
+
     });
 
     intro.style.opacity = "0";
@@ -1537,10 +1833,16 @@ enterButton.addEventListener("click", function() {
     site.style.opacity = "1";
 
     setTimeout(function() {
+
         intro.style.display = "none";
+
     }, 1500);
 
 });
+
+/* =========================
+   PANELS
+========================= */
 
 let highestZ = 20;
 
@@ -1554,13 +1856,24 @@ const panelNames = {
 
     contactPanel: "contact.exe",
 
-    catsPanel: "cats :3"
+    catsPanel: "cats :3",
+
+    game1Panel: "alien destroyer.exe",
+
+    changelogPanel: "changelog.exe",
+
+    chatroomPanel: "chatroom.exe",
+
+    friendsPanel: "friends.exe",
+
+    newsletterPanel: "newsletter.exe"
 
 };
 
 function openPanel(id) {
 
-    const panel = document.getElementById(id);
+    const panel =
+        document.getElementById(id);
 
     if (!panel) return;
 
@@ -1576,7 +1889,8 @@ function openPanel(id) {
 
 function minimizePanel(id) {
 
-    const panel = document.getElementById(id);
+    const panel =
+        document.getElementById(id);
 
     if (!panel) return;
 
@@ -1588,7 +1902,8 @@ function minimizePanel(id) {
 
 function closePanel(id) {
 
-    const panel = document.getElementById(id);
+    const panel =
+        document.getElementById(id);
 
     if (!panel) return;
 
@@ -1607,16 +1922,17 @@ function addTaskButton(id) {
 
     if (existing) return;
 
-
     const button =
         document.createElement("button");
 
-    button.id = "task-" + id;
+    button.id =
+        "task-" + id;
 
-    button.className = "task-window";
+    button.className =
+        "task-window";
 
-    button.textContent = panelNames[id];
-
+    button.textContent =
+        panelNames[id] || id;
 
     button.onclick = function() {
 
@@ -1641,7 +1957,6 @@ function addTaskButton(id) {
 
     };
 
-
     document
         .getElementById("taskButtons")
         .appendChild(button);
@@ -1663,9 +1978,12 @@ function bringToFront(panel) {
 
     highestZ++;
 
-    panel.style.zIndex = highestZ;
+    panel.style.zIndex =
+        highestZ;
 
 }
+
+/* Panel click = bring to front */
 
 document.querySelectorAll(".panel").forEach(function(panel) {
 
@@ -1677,7 +1995,9 @@ document.querySelectorAll(".panel").forEach(function(panel) {
 
 });
 
-
+/* =========================
+   PANEL DRAGGING
+========================= */
 
 document.querySelectorAll(".panel-title").forEach(function(title) {
 
@@ -1689,20 +2009,16 @@ document.querySelectorAll(".panel-title").forEach(function(title) {
     const panel =
         title.closest(".panel");
 
-
     title.addEventListener("mousedown", function(e) {
 
         if (e.target.closest(".window-buttons")) {
             return;
         }
 
-
         dragging = true;
-
 
         const rect =
             panel.getBoundingClientRect();
-
 
         offsetX =
             e.clientX - rect.left;
@@ -1710,8 +2026,8 @@ document.querySelectorAll(".panel-title").forEach(function(title) {
         offsetY =
             e.clientY - rect.top;
 
-        panel.style.transform = "none";
-
+        panel.style.transform =
+            "none";
 
         panel.style.left =
             rect.left + "px";
@@ -1719,19 +2035,15 @@ document.querySelectorAll(".panel-title").forEach(function(title) {
         panel.style.top =
             rect.top + "px";
 
-
         bringToFront(panel);
-
 
         e.preventDefault();
 
     });
 
-
     document.addEventListener("mousemove", function(e) {
 
         if (!dragging) return;
-
 
         panel.style.left =
             (e.clientX - offsetX) + "px";
@@ -1741,7 +2053,6 @@ document.querySelectorAll(".panel-title").forEach(function(title) {
 
     });
 
-
     document.addEventListener("mouseup", function() {
 
         dragging = false;
@@ -1750,50 +2061,129 @@ document.querySelectorAll(".panel-title").forEach(function(title) {
 
 });
 
+/* =========================
+   CLOCK
+========================= */
+
 function updateTime() {
-    const now = new Date();
 
-    const hours = String(now.getHours()).padStart(2, "0");
-    const minutes = String(now.getMinutes()).padStart(2, "0");
-    const seconds = String(now.getSeconds()).padStart(2, "0");
+    const now =
+        new Date();
 
-    document.getElementById("currentTime").textContent =
-        `${hours}:${minutes}:${seconds}`;
+    const hours =
+        now.getHours();
+
+    const minutes =
+        now.getMinutes();
+
+    const seconds =
+        now.getSeconds();
+
+    /* Digital clock */
+
+    const displayHours =
+        String(hours).padStart(2, "0");
+
+    const displayMinutes =
+        String(minutes).padStart(2, "0");
+
+    const displaySeconds =
+        String(seconds).padStart(2, "0");
+
+    document
+        .getElementById("currentTime")
+        .textContent =
+        `${displayHours}:${displayMinutes}:${displaySeconds}`;
+
+    /* Analog clock */
+
+    const secondAngle =
+        seconds * 6;
+
+    const minuteAngle =
+        minutes * 6 +
+        seconds * 0.1;
+
+    const hourAngle =
+        (hours % 12) * 30 +
+        minutes * 0.5;
+
+    document
+        .querySelector(".second-hand")
+        .style.transform =
+        `translateX(-50%) rotate(${secondAngle}deg)`;
+
+    document
+        .querySelector(".minute-hand")
+        .style.transform =
+        `translateX(-50%) rotate(${minuteAngle}deg)`;
+
+    document
+        .querySelector(".hour-hand")
+        .style.transform =
+        `translateX(-50%) rotate(${hourAngle}deg)`;
+
 }
 
 updateTime();
-setInterval(updateTime, 1000);
 
-const timeBox = document.querySelector(".time-box");
+setInterval(
+    updateTime,
+    1000
+);
+
+/* =========================
+   CLOCK DRAGGING
+========================= */
+
+const timeBox =
+    document.querySelector(".time-box");
 
 let draggingTime = false;
+
 let timeOffsetX = 0;
 let timeOffsetY = 0;
 
 timeBox.addEventListener("mousedown", function(e) {
 
-    // Don't start dragging from the resize corner
+    /* Don't start dragging from resize corner */
+
     if (
-        e.offsetX > timeBox.clientWidth - 20 &&
-        e.offsetY > timeBox.clientHeight - 20
+        e.offsetX >
+            timeBox.clientWidth - 20 &&
+        e.offsetY >
+            timeBox.clientHeight - 20
     ) {
+
         return;
+
     }
 
     draggingTime = true;
 
-    const rect = timeBox.getBoundingClientRect();
+    const rect =
+        timeBox.getBoundingClientRect();
 
-    timeOffsetX = e.clientX - rect.left;
-    timeOffsetY = e.clientY - rect.top;
+    timeOffsetX =
+        e.clientX - rect.left;
 
-    timeBox.style.right = "auto";
-    timeBox.style.bottom = "auto";
+    timeOffsetY =
+        e.clientY - rect.top;
 
-    timeBox.style.left = rect.left + "px";
-    timeBox.style.top = rect.top + "px";
+    timeBox.style.right =
+        "auto";
+
+    timeBox.style.bottom =
+        "auto";
+
+    timeBox.style.left =
+        rect.left + "px";
+
+    timeBox.style.top =
+        rect.top + "px";
 
     e.preventDefault();
+
 });
 
 document.addEventListener("mousemove", function(e) {
@@ -1805,11 +2195,18 @@ document.addEventListener("mousemove", function(e) {
 
     timeBox.style.top =
         (e.clientY - timeOffsetY) + "px";
+
 });
 
 document.addEventListener("mouseup", function() {
+
     draggingTime = false;
+
 });
+
+/* =========================
+   DESKTOP ICONS
+========================= */
 
 document.querySelectorAll(".desktop-icon").forEach(icon => {
 
@@ -1826,36 +2223,54 @@ document.querySelectorAll(".desktop-icon").forEach(icon => {
 
         if (e.button !== 0) return;
 
-        const rect = icon.getBoundingClientRect();
+        const rect =
+            icon.getBoundingClientRect();
 
-        startX = e.clientX;
-        startY = e.clientY;
+        startX =
+            e.clientX;
 
-        offsetX = e.clientX - rect.left;
-        offsetY = e.clientY - rect.top;
+        startY =
+            e.clientY;
+
+        offsetX =
+            e.clientX - rect.left;
+
+        offsetY =
+            e.clientY - rect.top;
 
         moved = false;
 
-        // Select icon
-        document.querySelectorAll(".desktop-icon")
-            .forEach(other => other.classList.remove("selected"));
+        document
+            .querySelectorAll(".desktop-icon")
+            .forEach(other =>
+                other.classList.remove("selected")
+            );
 
         icon.classList.add("selected");
 
         e.preventDefault();
+
     });
 
     document.addEventListener("mousemove", function(e) {
 
-        if (!icon.classList.contains("selected")) return;
+        if (!icon.classList.contains("selected")) {
+            return;
+        }
 
-        const distanceX = Math.abs(e.clientX - startX);
-        const distanceY = Math.abs(e.clientY - startY);
+        const distanceX =
+            Math.abs(e.clientX - startX);
 
-        // Only start dragging after moving a few pixels
-        if (distanceX > 5 || distanceY > 5) {
+        const distanceY =
+            Math.abs(e.clientY - startY);
+
+        if (
+            distanceX > 5 ||
+            distanceY > 5
+        ) {
 
             moved = true;
+
             dragging = true;
 
             icon.classList.add("dragging");
@@ -1865,6 +2280,7 @@ document.querySelectorAll(".desktop-icon").forEach(icon => {
 
             icon.style.top =
                 (e.clientY - offsetY) + "px";
+
         }
 
     });
@@ -1874,16 +2290,17 @@ document.querySelectorAll(".desktop-icon").forEach(icon => {
         if (e.button !== 0) return;
 
         dragging = false;
+
         icon.classList.remove("dragging");
 
     });
 
-    // Double click opens the app
     icon.addEventListener("dblclick", function() {
 
         if (moved) return;
 
-        const panel = icon.dataset.panel;
+        const panel =
+            icon.dataset.panel;
 
         if (panel) {
             openPanel(panel);
@@ -1893,8 +2310,9 @@ document.querySelectorAll(".desktop-icon").forEach(icon => {
 
 });
 
-
-/* Click empty desktop to deselect */
+/* =========================
+   DESELECT DESKTOP ICONS
+========================= */
 
 document.addEventListener("mousedown", function(e) {
 
@@ -1905,97 +2323,183 @@ document.addEventListener("mousedown", function(e) {
         !e.target.closest(".time-box")
     ) {
 
-        document.querySelectorAll(".desktop-icon")
+        document
+            .querySelectorAll(".desktop-icon")
             .forEach(icon => {
-                icon.classList.remove("selected");
+
+                icon.classList.remove(
+                    "selected"
+                );
+
             });
 
     }
 
-const musicButton = document.getElementById("musicButton");
-const siteMusic = document.getElementById("siteMusic");
+});
 
-musicButton.addEventListener("click", function () {
+/* =========================
+   MUSIC BUTTON
+========================= */
+
+const musicButton =
+    document.getElementById("musicButton");
+
+const siteMusic =
+    document.getElementById("siteMusic");
+
+musicButton.addEventListener("click", function() {
 
     if (siteMusic.paused) {
 
         siteMusic.play()
-            .then(function () {
-                musicButton.textContent = "❚❚";
+            .then(function() {
+
+                musicButton.textContent =
+                    "❚❚";
+
             })
-            .catch(function (error) {
-                console.error("Music couldn't play:", error);
+            .catch(function(error) {
+
+                console.error(
+                    "Music couldn't play:",
+                    error
+                );
+
             });
 
     } else {
 
         siteMusic.pause();
-        musicButton.textContent = "▶";
+
+        musicButton.textContent =
+            "▶";
 
     }
 
 });
 
+/* =========================
+   CLIPPY
+========================= */
+
 const clippyLines = [
+
     "hey :3",
+
     "meow/",
+
     "what are u doing",
+
     "this Website is getting big vro",
+
     "did u check the changelog?",
+
     "why are there so many cats",
+
     "rAlseismp when",
+
     "10000r37772323 bugs",
+
     "This site is pretty cool",
+
     "what if u added another cat",
+
     ":3",
+
     ":P"
+
 ];
 
-const clippyBubble = document.getElementById("clippyBubble");
+const clippyBubble =
+    document.getElementById("clippyBubble");
 
 function clippyTalk() {
-    const line =
-        clippyLines[Math.floor(Math.random() * clippyLines.length)];
 
-    clippyBubble.textContent = line;
+    const line =
+        clippyLines[
+            Math.floor(
+                Math.random() *
+                clippyLines.length
+            )
+        ];
+
+    clippyBubble.textContent =
+        line;
+
 }
 
 let clippyTimer = null;
 
 function startClippy() {
+
     if (clippyTimer) {
-        clearInterval(clippyTimer);
+
+        clearInterval(
+            clippyTimer
+        );
+
     }
 
-    clippyTimer = setInterval(clippyTalk, 15000);
+    clippyTimer =
+        setInterval(
+            clippyTalk,
+            15000
+        );
+
 }
 
 startClippy();
+
 function closeClippy() {
-    document.getElementById("ralseiClippy").style.display = "none";
+
+    document
+        .getElementById("ralseiClippy")
+        .style.display =
+        "none";
+
 }
 
-const clippy = document.getElementById("ralseiClippy");
+const clippy =
+    document.getElementById("ralseiClippy");
 
 let draggingClippy = false;
+
 let clippyOffsetX = 0;
 let clippyOffsetY = 0;
 
-clippy.addEventListener("mousedown", (e) => {
-    if (e.target.classList.contains("clippy-close")) return;
+clippy.addEventListener("mousedown", function(e) {
+
+    if (
+        e.target.classList.contains(
+            "clippy-close"
+        )
+    ) {
+
+        return;
+
+    }
 
     draggingClippy = true;
 
-    const rect = clippy.getBoundingClientRect();
+    const rect =
+        clippy.getBoundingClientRect();
 
-    clippyOffsetX = e.clientX - rect.left;
-    clippyOffsetY = e.clientY - rect.top;
+    clippyOffsetX =
+        e.clientX - rect.left;
 
-    clippy.style.right = "auto";
-    clippy.style.bottom = "auto";
+    clippyOffsetY =
+        e.clientY - rect.top;
+
+    clippy.style.right =
+        "auto";
+
+    clippy.style.bottom =
+        "auto";
+
 });
 
-document.addEventListener("mousemove", (e) => {
+document.addEventListener("mousemove", function(e) {
+
     if (!draggingClippy) return;
 
     clippy.style.left =
@@ -2003,12 +2507,13 @@ document.addEventListener("mousemove", (e) => {
 
     clippy.style.top =
         `${e.clientY - clippyOffsetY}px`;
+
 });
 
-document.addEventListener("mouseup", () => {
+document.addEventListener("mouseup", function() {
+
     draggingClippy = false;
-});
-    
+
 });
 
 </script>
