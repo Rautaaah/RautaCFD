@@ -2512,6 +2512,278 @@ nav {
 
 
 
+
+/* =========================================================
+   GTA 6 FAKE VIRUS / GLITCH PRANK
+   Browser-only simulation: does not touch the user's PC.
+========================================================= */
+
+#gta6Panel{
+    width:500px;
+    max-width:calc(100vw - 20px);
+}
+
+#gta6WarningOverlay{
+    position:fixed;
+    inset:0;
+    z-index:2000000;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    background:rgba(0,0,0,.78);
+}
+
+#gta6WarningOverlay.active{
+    display:flex;
+}
+
+.gta6-warning{
+    width:min(560px,calc(100vw - 30px));
+    padding:18px;
+    background:#ece9d8;
+    color:#111;
+    border:2px solid #fff;
+    box-shadow:8px 8px 0 #222;
+    font-family:Tahoma,Arial,sans-serif;
+}
+
+.gta6-warning h2{
+    margin-bottom:10px;
+    color:#8b004f;
+}
+
+.gta6-warning p{
+    margin:8px 0;
+    line-height:1.4;
+}
+
+.gta6-warning-actions{
+    display:flex;
+    gap:8px;
+    justify-content:flex-end;
+    margin-top:14px;
+}
+
+#gta6GlitchOverlay{
+    position:fixed;
+    inset:0;
+    z-index:1999999;
+    display:none;
+    overflow:hidden;
+    pointer-events:none;
+    background:
+        radial-gradient(circle at 20% 30%, rgba(255,0,160,.24), transparent 30%),
+        radial-gradient(circle at 80% 70%, rgba(80,0,255,.22), transparent 32%),
+        rgba(5,0,10,.88);
+}
+
+#gta6GlitchOverlay.active{
+    display:block;
+    animation:gta6GlitchPan 2.8s ease-in-out forwards;
+}
+
+#gta6GlitchOverlay::before,
+#gta6GlitchOverlay::after{
+    content:"";
+    position:absolute;
+    inset:-20%;
+    background:
+        repeating-linear-gradient(
+            0deg,
+            rgba(255,255,255,.035) 0 2px,
+            transparent 2px 7px
+        );
+}
+
+#gta6GlitchOverlay::before{
+    transform:rotate(-2deg) translateX(-4%);
+    animation:gta6Drift 1.2s linear infinite;
+}
+
+#gta6GlitchOverlay::after{
+    transform:rotate(2deg) translateX(4%);
+    animation:gta6DriftReverse 1.5s linear infinite;
+    opacity:.7;
+}
+
+.gta6-glitch-card{
+    position:absolute;
+    left:50%;
+    top:50%;
+    width:min(620px,90vw);
+    transform:translate(-50%,-50%) rotate(-1deg);
+    padding:24px;
+    border:3px solid #ff5acb;
+    background:rgba(12,0,20,.88);
+    color:#fff;
+    box-shadow:
+        18px 14px 0 rgba(255,0,170,.18),
+        -16px -12px 0 rgba(90,0,255,.18);
+    font-family:"Courier New",monospace;
+    text-align:center;
+    animation:gta6CardJitter .18s steps(2,end) infinite;
+}
+
+.gta6-glitch-card .gta6-big{
+    font-size:clamp(30px,7vw,68px);
+    font-weight:900;
+    letter-spacing:3px;
+    color:#ff79d9;
+    text-shadow:6px 0 #7c32ff,-6px 0 #00d9ff;
+}
+
+.gta6-glitch-card .gta6-status{
+    margin-top:12px;
+    font-size:14px;
+    line-height:1.5;
+}
+
+#gta6Blackout{
+    position:fixed;
+    inset:0;
+    z-index:2100000;
+    display:none;
+    background:#000;
+}
+
+#gta6Blackout.active{
+    display:block;
+}
+
+#gta6Panel .gta6-safe-note{
+    margin-top:12px;
+    padding:9px;
+    border:1px solid #9b7;
+    background:#f3fff0;
+    color:#242;
+    font-size:11px;
+}
+
+@keyframes gta6GlitchPan{
+    0%{transform:translate(0,0) scale(1);filter:none;opacity:0}
+    12%{opacity:1}
+    35%{transform:translate(-18px,10px) scale(1.03);filter:hue-rotate(55deg)}
+    60%{transform:translate(14px,-12px) scale(.98);filter:hue-rotate(120deg)}
+    82%{transform:translate(-8px,8px) scale(1.02);filter:hue-rotate(190deg)}
+    100%{transform:translate(0,0) scale(1);filter:hue-rotate(250deg);opacity:0}
+}
+
+@keyframes gta6Drift{
+    from{transform:translate(-3%,-2%) rotate(-2deg)}
+    to{transform:translate(3%,2%) rotate(-2deg)}
+}
+
+@keyframes gta6DriftReverse{
+    from{transform:translate(3%,2%) rotate(2deg)}
+    to{transform:translate(-3%,-2%) rotate(2deg)}
+}
+
+@keyframes gta6CardJitter{
+    0%{transform:translate(-50%,-50%) rotate(-1deg)}
+    50%{transform:translate(calc(-50% + 5px),calc(-50% - 3px)) rotate(.8deg)}
+    100%{transform:translate(calc(-50% - 4px),calc(-50% + 3px)) rotate(-.6deg)}
+}
+
+@media (prefers-reduced-motion:reduce){
+    #gta6GlitchOverlay.active,
+    .gta6-glitch-card,
+    #gta6GlitchOverlay::before,
+    #gta6GlitchOverlay::after{
+        animation:none !important;
+    }
+}
+
+
+.gta6-fake-window{
+    position:fixed;
+    z-index:2050000;
+    min-width:235px;
+    max-width:330px;
+    border:2px solid #111;
+    background:#ece9d8;
+    color:#111;
+    box-shadow:8px 8px 0 rgba(0,0,0,.65);
+    font:12px Tahoma,Arial,sans-serif;
+    pointer-events:none;
+    animation:gta6WindowPop .12s steps(2,end);
+}
+
+.gta6-fake-title{
+    display:flex;
+    justify-content:space-between;
+    padding:4px 7px;
+    color:#fff;
+    font-weight:bold;
+    background:linear-gradient(90deg,#ff7bd8,#bb45a4,#69295f);
+}
+
+.gta6-fake-body{
+    padding:15px;
+    min-height:48px;
+}
+
+.gta6-fake-task{
+    background:linear-gradient(90deg,#ff7bd8,#c34ca8,#7c326e) !important;
+    color:#fff !important;
+    border-color:#ffb5eb !important;
+    animation:gta6TaskJitter .12s infinite;
+}
+
+body.gta6-chaos{
+    animation:gta6ScreenShake .09s infinite;
+}
+
+body.gta6-insane{
+    animation:
+        gta6ScreenShake .055s infinite,
+        gta6Hue .23s linear infinite;
+}
+
+body.gta6-chaos::after{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:2049999;
+    pointer-events:none;
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent 0 3px,
+            rgba(255,0,200,.07) 3px 5px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent 0 6px,
+            rgba(0,180,255,.035) 6px 8px
+        );
+    mix-blend-mode:screen;
+}
+
+@keyframes gta6WindowPop{
+    from{opacity:0;transform:scale(.7) rotate(-8deg)}
+    to{opacity:1}
+}
+
+@keyframes gta6TaskJitter{
+    0%{transform:translateX(0)}
+    50%{transform:translateX(2px)}
+    100%{transform:translateX(-2px)}
+}
+
+@keyframes gta6ScreenShake{
+    0%{transform:translate(0,0)}
+    25%{transform:translate(2px,-2px)}
+    50%{transform:translate(-3px,2px)}
+    75%{transform:translate(2px,3px)}
+    100%{transform:translate(-2px,-1px)}
+}
+
+@keyframes gta6Hue{
+    0%{filter:hue-rotate(0deg) saturate(1)}
+    50%{filter:hue-rotate(160deg) saturate(2)}
+    100%{filter:hue-rotate(320deg) saturate(1)}
+}
+
 /* =========================================================
    WINDOWS XP TASK MANAGER — CLASSIC UI
 ========================================================= */
@@ -2544,10 +2816,10 @@ nav {
         ),
         linear-gradient(
             90deg,
-            #6db7ff 0%,
-            #398fe7 32%,
-            #6f63df 67%,
-            #9b5bd7 100%
+            #ff8adf 0%,
+            #ef63c6 32%,
+            #b04f9d 67%,
+            #6f2c62 100%
         );
 
     color: #fff;
@@ -2602,7 +2874,7 @@ nav {
 }
 
 .tm-menu-row span:hover {
-    background: #316ac5;
+    background: linear-gradient(90deg,#ff8adf,#b04f9d,#6f2c62);
     color: #fff;
 }
 
@@ -2698,7 +2970,7 @@ nav {
 }
 
 .tm-process-table tr.selected td {
-    background: #316ac5;
+    background: linear-gradient(90deg,#ff8adf,#b04f9d,#6f2c62);
     color: #fff;
 }
 
@@ -2739,7 +3011,7 @@ nav {
 }
 
 .tm-xp-button:not(:disabled):hover {
-    border-color: #316ac5;
+    border-color: #d85bb4;
 }
 
 .tm-list {
@@ -2755,7 +3027,7 @@ nav {
 }
 
 .tm-row:hover {
-    background: #316ac5;
+    background: linear-gradient(90deg,#ff8adf,#b04f9d,#6f2c62);
     color: #fff;
 }
 
@@ -5713,6 +5985,21 @@ for(let i = 0; i < 60; i++){
 <div class="desktop-icons">
 
 
+<!-- GTA 6 — intentionally no icon -->
+
+<div
+    class="desktop-icon"
+    data-panel="gta6Panel"
+    style="
+        left:125px;
+        top:90px;
+        width:110px;
+    "
+>
+    <span>Gta 6</span>
+</div>
+
+
 <!-- TASK MANAGER -->
 
 <div
@@ -6002,6 +6289,97 @@ for(let i = 0; i < 60; i++){
 
 
 <!-- =========================================================
+     GTA 6 FAKE VIRUS PRANK
+========================================================= -->
+
+<div
+    class="panel hidden"
+    id="gta6Panel"
+>
+
+<div class="panel-title">
+    <span>Gta 6.exe</span>
+
+    <div class="window-buttons">
+        <button
+            class="window-button"
+            onclick="minimizePanel('gta6Panel')"
+        >−</button>
+
+        <button
+            class="window-button close"
+            onclick="closePanel('gta6Panel')"
+        >×</button>
+    </div>
+</div>
+
+<div class="panel-content">
+    <h2>Gta 6</h2>
+
+    <p>
+        wow!!! totally real GTA 6 installer/game thing.
+    </p>
+
+    <hr>
+
+    <p>
+        <strong>WARNING:</strong> the next screen contains intense
+        glitchy visual effects and rapid movement. If you are
+        sensitive to flashing/glitch effects, do not continue.
+    </p>
+
+    <div class="gta6-safe-note">
+        This is only a browser prank/simulation. It does not install
+        malware, modify files, access your operating system, or infect
+        your computer.
+    </div>
+
+    <div style="margin-top:14px;text-align:right;">
+        <button class="xp-button" onclick="startGta6Prank()">
+            I understand — OPEN Gta 6
+        </button>
+    </div>
+</div>
+
+</div>
+
+
+<div id="gta6WarningOverlay" aria-hidden="true">
+    <div class="gta6-warning" role="dialog" aria-modal="true" aria-labelledby="gta6WarningTitle">
+        <h2 id="gta6WarningTitle">⚠ VISUAL EFFECT WARNING</h2>
+
+        <p>
+            Gta 6 is about to start a deliberately chaotic fake-virus
+            sequence with intense glitching, movement, color changes,
+            and screen distortion.
+        </p>
+
+        <p>
+            <strong>If you have photosensitive epilepsy or are sensitive
+            to visual effects, choose Cancel.</strong>
+        </p>
+
+        <div class="gta6-warning-actions">
+            <button class="xp-button" onclick="cancelGta6Prank()">Cancel</button>
+            <button class="xp-button" onclick="acceptGta6Warning()">I understand</button>
+        </div>
+    </div>
+</div>
+
+<div id="gta6GlitchOverlay" aria-hidden="true">
+    <div class="gta6-glitch-card">
+        <div class="gta6-big">GTA 6.EXE</div>
+        <div class="gta6-status" id="gta6GlitchStatus">
+            INITIALIZING FAKE VIRUS...<br>
+            PLEASE PANIC RESPONSIBLY :3
+        </div>
+    </div>
+</div>
+
+<div id="gta6Blackout" aria-hidden="true"></div>
+
+
+<!-- =========================================================
      TASK MANAGER
 ========================================================= -->
 
@@ -6139,7 +6517,10 @@ for(let i = 0; i < 60; i++){
                 <tr data-process="rautatientoori.exe">
                     <td>rautatientoori.exe</td><td>3000</td><td>02</td><td>48,120 K</td>
                 </tr>
-                <tr data-process="Ralsei-Clippy">
+                <tr data-process="Gta6.exe">
+    <td>Gta6.exe</td><td>6666</td><td>01</td><td>12,420 K</td>
+</tr>
+<tr data-process="Ralsei-Clippy">
                     <td>Ralsei-Clippy</td><td>3136</td><td>01</td><td>9,216 K</td>
                 </tr>
                 <tr data-process="oneko.exe">
@@ -6439,6 +6820,9 @@ const panelNames = {
 
     confusedGirlsPanel:
         "ConfusedGirls",
+
+    gta6Panel:
+        "Gta 6",
 
     taskManagerPanel:
         "Rauta's super pro task manager"
@@ -12490,6 +12874,243 @@ catch(error){
 
 
 
+
+
+/* =========================================================
+   GTA 6 FAKE VIRUS PRANK — EXTREME BROWSER-ONLY SIMULATION
+========================================================= */
+
+let gta6PrankTimer = null;
+let gta6ChaosTimer = null;
+let gta6FakeWindows = [];
+let gta6ChaosStarted = false;
+
+function startGta6Prank(){
+    const warning = document.getElementById("gta6WarningOverlay");
+    if(!warning) return;
+
+    warning.classList.add("active");
+    warning.setAttribute("aria-hidden","false");
+
+    playRautaSFX("error");
+}
+
+function cancelGta6Prank(){
+    const warning = document.getElementById("gta6WarningOverlay");
+    if(!warning) return;
+
+    warning.classList.remove("active");
+    warning.setAttribute("aria-hidden","true");
+}
+
+function gta6MakeFakeWindow(title, text){
+    const w = document.createElement("div");
+    w.className = "gta6-fake-window";
+    w.innerHTML = `
+        <div class="gta6-fake-title">
+            <span>${title}</span>
+            <span>×</span>
+        </div>
+        <div class="gta6-fake-body">${text}</div>
+    `;
+
+    w.style.left = Math.max(3, Math.random()*82) + "vw";
+    w.style.top = Math.max(5, Math.random()*75) + "vh";
+    w.style.transform =
+        "rotate(" + ((Math.random()*10)-5).toFixed(2) + "deg)";
+
+    document.body.appendChild(w);
+    gta6FakeWindows.push(w);
+
+    setTimeout(function(){
+        w.style.opacity = "0";
+        w.style.transform += " scale(1.12)";
+        setTimeout(() => w.remove(), 350);
+    }, 850 + Math.random()*1000);
+}
+
+function gta6FakeTaskbarPanic(){
+    const taskButtons = document.getElementById("taskButtons");
+    if(!taskButtons) return;
+
+    const labels = [
+        "virus.exe",
+        "Gta6.exe",
+        "explorer.exe",
+        "SYSTEM32.exe",
+        "DO_NOT_CLICK.exe",
+        "RAUTA_INFECTOR.exe"
+    ];
+
+    labels.forEach(function(label, i){
+        setTimeout(function(){
+            const b = document.createElement("button");
+            b.className = "task-window gta6-fake-task";
+            b.textContent = label;
+            taskButtons.appendChild(b);
+
+            setTimeout(function(){
+                b.remove();
+            }, 2400 + i*100);
+        }, i*130);
+    });
+}
+
+function gta6UpdateFakeProcess(){
+    const table = document.getElementById("tmProcessTable");
+    if(!table) return;
+
+    if(!table.querySelector('tr[data-process="Gta6-VirusSimulation"]')){
+        const row = document.createElement("tr");
+        row.dataset.process = "Gta6-VirusSimulation";
+        row.innerHTML =
+            "<td>Gta6.exe</td><td>6666</td><td>99</td><td>666,666 K</td>";
+        table.appendChild(row);
+    }
+
+    const row = table.querySelector(
+        'tr[data-process="Gta6-VirusSimulation"]'
+    );
+
+    if(row){
+        const cells = row.querySelectorAll("td");
+        if(cells[2])
+            cells[2].textContent =
+                String(70 + Math.floor(Math.random()*30));
+        if(cells[3])
+            cells[3].textContent =
+                (100000 + Math.floor(Math.random()*899999)).toLocaleString() + " K";
+    }
+}
+
+function acceptGta6Warning(){
+    cancelGta6Prank();
+
+    if(gta6ChaosStarted) return;
+    gta6ChaosStarted = true;
+
+    const panel = document.getElementById("gta6Panel");
+    const glitch = document.getElementById("gta6GlitchOverlay");
+    const status = document.getElementById("gta6GlitchStatus");
+
+    if(panel){
+        panel.style.display = "none";
+        panel.classList.add("hidden");
+    }
+
+    document.body.classList.add("gta6-chaos");
+
+    if(glitch){
+        glitch.classList.add("active");
+        glitch.setAttribute("aria-hidden","false");
+    }
+
+    const messages = [
+        "GTA6.EXE HAS STOPPED BEING NORMAL",
+        "CONNECTING TO C:\\\\TOTALLY_REAL_VIRUS",
+        "COPYING SYSTEM32... JUST KIDDING",
+        "████████████████ 99%",
+        "CRITICAL ERROR: TOO MUCH GTA",
+        "explorer.exe is confused",
+        "TASK MANAGER HAS BEEN COMPROMISED",
+        "WHY ARE THERE 47 INSTANCES OF GTA6.EXE",
+        "DO NOT CLOSE THIS WINDOW",
+        "DO NOT PANIC",
+        "okay panic a little",
+        "RAUTA.EXE: bro what",
+        "YOUR COMPUTER IS ABSOLUTELY NOT INFECTED",
+        "THIS IS A BROWSER PRANK :3"
+    ];
+
+    let i = 0;
+
+    if(status){
+        status.innerHTML =
+            messages[0] +
+            "<br><small>FAKE SYSTEM STATUS: EXTREMELY COOKED</small>";
+
+        gta6PrankTimer = setInterval(function(){
+            i = (i + 1) % messages.length;
+            status.innerHTML =
+                messages[i] +
+                "<br><small>FAKE SYSTEM STATUS: EXTREMELY COOKED</small>";
+        }, 180);
+    }
+
+    gta6FakeTaskbarPanic();
+    gta6UpdateFakeProcess();
+
+    gta6ChaosTimer = setInterval(function(){
+        const roll = Math.random();
+
+        if(roll < .65){
+            gta6MakeFakeWindow(
+                [
+                    "Windows Security",
+                    "Gta 6.exe",
+                    "Task Manager",
+                    "RautaOS",
+                    "CRITICAL ERROR",
+                    "explorer.exe"
+                ][Math.floor(Math.random()*6)],
+                [
+                    "Threat detected: gta6.exe",
+                    "Access violation at 0xDEADBEEF",
+                    "Process cannot be terminated",
+                    "SYSTEM IS DEFINITELY FINE",
+                    "This message is fake. Probably.",
+                    "ERROR ERROR ERROR ERROR"
+                ][Math.floor(Math.random()*6)]
+            );
+        }
+
+        if(roll > .55)
+            gta6FakeTaskbarPanic();
+
+        gta6UpdateFakeProcess();
+    }, 240);
+
+    // Escalation phases.
+    setTimeout(function(){
+        document.body.classList.add("gta6-insane");
+    }, 1000);
+
+    setTimeout(function(){
+        const title = document.querySelector(".gta6-glitch-card .gta6-big");
+        if(title)
+            title.textContent = "YOU HAVE GTA 6 NOW";
+    }, 1800);
+
+    setTimeout(function(){
+        if(gta6PrankTimer){
+            clearInterval(gta6PrankTimer);
+            gta6PrankTimer = null;
+        }
+        if(gta6ChaosTimer){
+            clearInterval(gta6ChaosTimer);
+            gta6ChaosTimer = null;
+        }
+
+        gta6FakeWindows.forEach(w => w.remove());
+        gta6FakeWindows = [];
+
+        if(glitch){
+            glitch.classList.remove("active");
+            glitch.setAttribute("aria-hidden","true");
+        }
+
+        document.body.classList.remove("gta6-chaos","gta6-insane");
+
+        const blackout = document.getElementById("gta6Blackout");
+        if(blackout){
+            blackout.classList.add("active");
+            blackout.setAttribute("aria-hidden","false");
+        }
+
+        // The "infection" ends at a black browser screen.
+        document.body.style.background = "#000";
+    }, 5200);
+}
 
 /* =========================================================
    TASK MANAGER BEHAVIOR — WORKING TABS
