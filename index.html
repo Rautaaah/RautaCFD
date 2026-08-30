@@ -1732,43 +1732,49 @@ a:visited {
 .explorer-games-grid{
     display:grid;
     grid-template-columns:repeat(4,minmax(105px,1fr));
-    gap:14px;
-    padding:16px 0;
+    gap:18px 12px;
+    padding-top:16px;
 }
 
 .explorer-game-card{
     min-width:0;
-    padding:10px 6px;
+    padding:5px;
     border:1px solid transparent;
     text-align:center;
     cursor:pointer;
 }
 
-.explorer-game-card:hover{
+.explorer-game-card:hover,
+.explorer-game-card.selected{
     background:#dbe8ff;
     border-color:#8aaee8;
 }
 
 .explorer-game-icon{
-    width:72px;
-    height:72px;
+    width:90px;
+    height:90px;
     margin:0 auto 7px;
     display:flex;
     align-items:center;
     justify-content:center;
-    background:#d4d0c8;
-    border-top:2px solid white;
-    border-left:2px solid white;
-    border-right:2px solid #555;
-    border-bottom:2px solid #555;
+    background:#fff;
+    border:1px solid #999;
+    box-shadow:1px 1px 2px rgba(0,0,0,.15);
     color:#222;
-    font:bold 18px Tahoma,Arial,sans-serif;
+    font:bold 22px Tahoma,Arial,sans-serif;
 }
 
 .explorer-game-name{
     color:#222;
     font-size:10px;
+    line-height:1.25;
     overflow-wrap:anywhere;
+}
+
+.explorer-game-type{
+    margin-top:3px;
+    color:#777;
+    font-size:9px;
 }
 
 @media(max-width:700px){
@@ -4415,6 +4421,81 @@ a:visited {
 
 
 <!-- =========================================================
+     SNAKE
+========================================================= -->
+<div class="panel hidden" id="snakePanel">
+<div class="panel-title"><span>snake.exe</span><div class="window-buttons">
+<button class="window-button" onclick="minimizePanel('snakePanel')">−</button>
+<button class="window-button close" onclick="closePanel('snakePanel')">×</button>
+</div></div>
+<div class="panel-content game-content">
+<h2>Snake</h2><p>use the arrow keys to eat the food. don't hit yourself!</p>
+<canvas id="snakeCanvas" width="320" height="320" style="display:block;margin:12px auto;background:#111;border:2px solid #555;"></canvas>
+<p id="snakeStatus" style="text-align:center">score: 0</p>
+<button class="xp-button" onclick="resetSnakeGame()">restart</button>
+</div></div>
+
+<!-- =========================================================
+     PONG
+========================================================= -->
+<div class="panel hidden" id="pongPanel">
+<div class="panel-title"><span>rauta pong.exe</span><div class="window-buttons">
+<button class="window-button" onclick="minimizePanel('pongPanel')">−</button>
+<button class="window-button close" onclick="closePanel('pongPanel')">×</button>
+</div></div>
+<div class="panel-content game-content">
+<h2>Rauta Pong</h2><p>move with ↑ and ↓. first to 5 wins.</p>
+<canvas id="pongCanvas" width="520" height="300" style="display:block;max-width:100%;margin:12px auto;background:#111;border:2px solid #555;"></canvas>
+<p id="pongStatus" style="text-align:center">you 0 - 0 cpu</p>
+<button class="xp-button" onclick="resetPongGame()">restart</button>
+</div></div>
+
+<!-- =========================================================
+     MINESWEEPER
+========================================================= -->
+<div class="panel hidden" id="minesweeperPanel">
+<div class="panel-title"><span>minesweeper.exe</span><div class="window-buttons">
+<button class="window-button" onclick="minimizePanel('minesweeperPanel')">−</button>
+<button class="window-button close" onclick="closePanel('minesweeperPanel')">×</button>
+</div></div>
+<div class="panel-content game-content">
+<h2>Minesweeper</h2><p>click every safe tile. there are 5 mines.</p>
+<div id="minesweeperBoard" style="display:grid;grid-template-columns:repeat(6,42px);gap:2px;justify-content:center;margin:14px auto"></div>
+<p id="minesweeperStatus" style="text-align:center">find the mines :3</p>
+<button class="xp-button" onclick="resetMinesweeperGame()">restart</button>
+</div></div>
+
+<!-- =========================================================
+     2048
+========================================================= -->
+<div class="panel hidden" id="game2048Panel">
+<div class="panel-title"><span>2048.exe</span><div class="window-buttons">
+<button class="window-button" onclick="minimizePanel('game2048Panel')">−</button>
+<button class="window-button close" onclick="closePanel('game2048Panel')">×</button>
+</div></div>
+<div class="panel-content game-content">
+<h2>2048</h2><p>use the arrow keys to combine matching tiles.</p>
+<div id="game2048Board" style="display:grid;grid-template-columns:repeat(4,64px);gap:5px;justify-content:center;margin:14px auto"></div>
+<p id="game2048Status" style="text-align:center">score: 0</p>
+<button class="xp-button" onclick="reset2048Game()">restart</button>
+</div></div>
+
+<!-- =========================================================
+     BREAKOUT
+========================================================= -->
+<div class="panel hidden" id="breakoutPanel">
+<div class="panel-title"><span>breakout.exe</span><div class="window-buttons">
+<button class="window-button" onclick="minimizePanel('breakoutPanel')">−</button>
+<button class="window-button close" onclick="closePanel('breakoutPanel')">×</button>
+</div></div>
+<div class="panel-content game-content">
+<h2>Breakout</h2><p>move with ← and → and break all the blocks.</p>
+<canvas id="breakoutCanvas" width="520" height="320" style="display:block;max-width:100%;margin:12px auto;background:#111;border:2px solid #555;"></canvas>
+<p id="breakoutStatus" style="text-align:center">blocks left: 30</p>
+<button class="xp-button" onclick="resetBreakoutGame()">restart</button>
+</div></div>
+
+<!-- =========================================================
      GAMES FOLDER
 ========================================================= -->
 
@@ -4455,25 +4536,16 @@ a:visited {
 
         <div class="explorer-toolbar">
 
-            <button
-                class="explorer-tool"
-                type="button"
-            >
+            <button class="explorer-tool" type="button" onclick="gameFolderBack()">
                 <span class="explorer-tool-icon">◀</span>
                 Back
             </button>
 
-            <button
-                class="explorer-tool"
-                type="button"
-            >
+            <button class="explorer-tool" type="button">
                 <span class="explorer-tool-icon">▶</span>
             </button>
 
-            <button
-                class="explorer-tool"
-                type="button"
-            >
+            <button class="explorer-tool" type="button" onclick="openPanel('gamesFolderPanel')">
                 <span class="explorer-tool-icon">⬆</span>
             </button>
 
@@ -4486,10 +4558,7 @@ a:visited {
                 Search
             </button>
 
-            <button
-                class="explorer-tool"
-                type="button"
-            >
+            <button class="explorer-tool" type="button">
                 <span class="explorer-tool-icon">📁</span>
                 Folders
             </button>
@@ -4512,135 +4581,137 @@ a:visited {
 
         </div>
 
-        <div class="explorer-main">
+        <div class="explorer-body">
 
-            <div class="explorer-heading">
-                Games Stored on This Computer
-            </div>
+            <aside class="explorer-left">
 
-            <div
-                id="gamesFolderFiles"
-                class="explorer-games-grid"
-            >
+                <div class="explorer-box">
 
-                <div
-                    class="explorer-game-card"
-                    data-game-panel="game1Panel"
-                    onclick="openGameFromFolder(this)"
-                >
-                    <div class="explorer-game-icon">
-                        👾
+                    <div class="explorer-box-title">
+                        Game Tasks
                     </div>
-                    <div class="explorer-game-name">
-                        alien destroyer.exe
+
+                    <button
+                        class="explorer-left-button"
+                        type="button"
+                        onclick="gameFolderSearch()"
+                    >
+                        🔎 Search games
+                    </button>
+
+                    <button
+                        class="explorer-left-button"
+                        type="button"
+                        onclick="showAllGames()"
+                    >
+                        🎮 Show all games
+                    </button>
+
+                </div>
+
+                <div class="explorer-box">
+
+                    <div class="explorer-box-title">
+                        Other Places
                     </div>
+
+                    <button class="explorer-left-button" type="button">🌐 My Network Places</button>
+                    <button class="explorer-left-button" type="button">📁 My Documents</button>
+                    <button class="explorer-left-button" type="button">📁 Shared Documents</button>
+                    <button class="explorer-left-button" type="button">⚙ Control Panel</button>
+
+                </div>
+
+                <div class="explorer-box">
+
+                    <div class="explorer-box-title">
+                        Details
+                    </div>
+
+                    <div
+                        style="
+                            padding:9px;
+                            font-size:10px;
+                            color:#333;
+                        "
+                    >
+                        <strong>Games</strong>
+                        <br>
+                        9 game files
+                    </div>
+
+                </div>
+
+            </aside>
+
+            <main class="explorer-main">
+
+                <div class="explorer-heading">
+                    Games Stored on This Computer
                 </div>
 
                 <div
-                    class="explorer-game-card"
-                    data-game-panel="snakePanel"
-                    onclick="openGameFromFolder(this)"
+                    id="gamesFolderFiles"
+                    class="explorer-files explorer-games-grid"
                 >
-                    <div class="explorer-game-icon">
-                        🐍
+
+                    <div class="explorer-file-card explorer-game-card" data-game-panel="game1Panel">
+                        <div class="explorer-game-icon">👾</div>
+                        <div class="explorer-game-name">alien destroyer.exe</div>
+                        <div class="explorer-game-type">Game</div>
                     </div>
-                    <div class="explorer-game-name">
-                        snake.exe
+
+                    <div class="explorer-file-card explorer-game-card" data-game-panel="snakePanel">
+                        <div class="explorer-game-icon">🐍</div>
+                        <div class="explorer-game-name">snake.exe</div>
+                        <div class="explorer-game-type">Game</div>
                     </div>
+
+                    <div class="explorer-file-card explorer-game-card" data-game-panel="pongPanel">
+                        <div class="explorer-game-icon">🏓</div>
+                        <div class="explorer-game-name">rauta pong.exe</div>
+                        <div class="explorer-game-type">Game</div>
+                    </div>
+
+                    <div class="explorer-file-card explorer-game-card" data-game-panel="minesweeperPanel">
+                        <div class="explorer-game-icon">💣</div>
+                        <div class="explorer-game-name">minesweeper.exe</div>
+                        <div class="explorer-game-type">Game</div>
+                    </div>
+
+                    <div class="explorer-file-card explorer-game-card" data-game-panel="game2048Panel">
+                        <div class="explorer-game-icon">2048</div>
+                        <div class="explorer-game-name">2048.exe</div>
+                        <div class="explorer-game-type">Game</div>
+                    </div>
+
+                    <div class="explorer-file-card explorer-game-card" data-game-panel="breakoutPanel">
+                        <div class="explorer-game-icon">🧱</div>
+                        <div class="explorer-game-name">breakout.exe</div>
+                        <div class="explorer-game-type">Game</div>
+                    </div>
+
+                    <div class="explorer-file-card explorer-game-card" data-game-panel="tictactoePanel">
+                        <div class="explorer-game-icon">XO</div>
+                        <div class="explorer-game-name">tic tac toe.exe</div>
+                        <div class="explorer-game-type">Game</div>
+                    </div>
+
+                    <div class="explorer-file-card explorer-game-card" data-game-panel="flappyPanel">
+                        <div class="explorer-game-icon">🐤</div>
+                        <div class="explorer-game-name">flappy rauta.exe</div>
+                        <div class="explorer-game-type">Game</div>
+                    </div>
+
+                    <div class="explorer-file-card explorer-game-card" data-game-panel="memoryPanel">
+                        <div class="explorer-game-icon">🧠</div>
+                        <div class="explorer-game-name">memory.exe</div>
+                        <div class="explorer-game-type">Game</div>
+                    </div>
+
                 </div>
 
-                <div
-                    class="explorer-game-card"
-                    data-game-panel="pongPanel"
-                    onclick="openGameFromFolder(this)"
-                >
-                    <div class="explorer-game-icon">
-                        🏓
-                    </div>
-                    <div class="explorer-game-name">
-                        rauta pong.exe
-                    </div>
-                </div>
-
-                <div
-                    class="explorer-game-card"
-                    data-game-panel="minesweeperPanel"
-                    onclick="openGameFromFolder(this)"
-                >
-                    <div class="explorer-game-icon">
-                        💣
-                    </div>
-                    <div class="explorer-game-name">
-                        minesweeper.exe
-                    </div>
-                </div>
-
-                <div
-                    class="explorer-game-card"
-                    data-game-panel="game2048Panel"
-                    onclick="openGameFromFolder(this)"
-                >
-                    <div class="explorer-game-icon">
-                        2048
-                    </div>
-                    <div class="explorer-game-name">
-                        2048.exe
-                    </div>
-                </div>
-
-                <div
-                    class="explorer-game-card"
-                    data-game-panel="breakoutPanel"
-                    onclick="openGameFromFolder(this)"
-                >
-                    <div class="explorer-game-icon">
-                        🧱
-                    </div>
-                    <div class="explorer-game-name">
-                        breakout.exe
-                    </div>
-                </div>
-
-                <div
-                    class="explorer-game-card"
-                    data-game-panel="tictactoePanel"
-                    onclick="openGameFromFolder(this)"
-                >
-                    <div class="explorer-game-icon">
-                        XO
-                    </div>
-                    <div class="explorer-game-name">
-                        tic tac toe.exe
-                    </div>
-                </div>
-
-                <div
-                    class="explorer-game-card"
-                    data-game-panel="flappyPanel"
-                    onclick="openGameFromFolder(this)"
-                >
-                    <div class="explorer-game-icon">
-                        🐤
-                    </div>
-                    <div class="explorer-game-name">
-                        flappy rauta.exe
-                    </div>
-                </div>
-
-                <div
-                    class="explorer-game-card"
-                    data-game-panel="memoryPanel"
-                    onclick="openGameFromFolder(this)"
-                >
-                    <div class="explorer-game-icon">
-                        🧠
-                    </div>
-                    <div class="explorer-game-name">
-                        memory.exe
-                    </div>
-                </div>
-
-            </div>
+            </main>
 
         </div>
 
@@ -10393,6 +10464,99 @@ resetMemoryGame();
 
 
 /* =========================================================
+   EXTRA GAMES
+========================================================= */
+
+let snakeTimer=null, snakeState=null;
+function resetSnakeGame(){
+    clearInterval(snakeTimer);
+    const canvas=document.getElementById("snakeCanvas");
+    if(!canvas) return;
+    const ctx=canvas.getContext("2d"), size=20;
+    snakeState={snake:[{x:8,y:8},{x:7,y:8},{x:6,y:8}],dir:{x:1,y:0},next:{x:1,y:0},food:{x:14,y:10},score:0,over:false};
+    function placeFood(){
+        do{snakeState.food={x:Math.floor(Math.random()*16),y:Math.floor(Math.random()*16)}}while(snakeState.snake.some(p=>p.x===snakeState.food.x&&p.y===snakeState.food.y));
+    }
+    function draw(){
+        ctx.fillStyle="#111";ctx.fillRect(0,0,canvas.width,canvas.height);
+        ctx.fillStyle="#ef66c9";ctx.fillRect(snakeState.food.x*size,snakeState.food.y*size,size-1,size-1);
+        ctx.fillStyle="#7ee787";snakeState.snake.forEach(p=>ctx.fillRect(p.x*size,p.y*size,size-1,size-1));
+        const st=document.getElementById("snakeStatus");if(st)st.textContent="score: "+snakeState.score+(snakeState.over?" — game over":"");
+    }
+    function tick(){
+        if(snakeState.over)return;
+        snakeState.dir=snakeState.next;
+        const head={x:snakeState.snake[0].x+snakeState.dir.x,y:snakeState.snake[0].y+snakeState.dir.y};
+        if(head.x<0||head.x>=16||head.y<0||head.y>=16||snakeState.snake.some(p=>p.x===head.x&&p.y===head.y)){snakeState.over=true;clearInterval(snakeTimer);draw();return;}
+        snakeState.snake.unshift(head);
+        if(head.x===snakeState.food.x&&head.y===snakeState.food.y){snakeState.score++;placeFood()}else snakeState.snake.pop();
+        draw();
+    }
+    placeFood();draw();snakeTimer=setInterval(tick,110);
+}
+window.addEventListener("keydown",e=>{
+    if(!snakeState||snakeState.over)return;
+    const k={ArrowUp:{x:0,y:-1},ArrowDown:{x:0,y:1},ArrowLeft:{x:-1,y:0},ArrowRight:{x:1,y:0}}[e.key];
+    if(!k)return;
+    if(k.x!==-snakeState.dir.x||k.y!==-snakeState.dir.y)snakeState.next=k;
+});
+
+let pongTimer=null,pongState=null;
+function resetPongGame(){
+    clearInterval(pongTimer);pongState={py:125,cy:125,ball:{x:260,y:150,vx:4,vy:2},you:0,cpu:0,over:false};
+    const c=document.getElementById("pongCanvas");if(!c)return;const x=c.getContext("2d");
+    function draw(){
+        x.fillStyle="#111";x.fillRect(0,0,c.width,c.height);x.strokeStyle="#777";x.setLineDash([6,8]);x.beginPath();x.moveTo(260,0);x.lineTo(260,300);x.stroke();x.setLineDash([]);
+        x.fillStyle="#eee";x.fillRect(14,pongState.py,10,50);x.fillRect(496,pongState.cy,10,50);x.fillRect(pongState.ball.x-5,pongState.ball.y-5,10,10);
+        const st=document.getElementById("pongStatus");if(st)st.textContent="you "+pongState.you+" - "+pongState.cpu+" cpu"+(pongState.over?" — game over":"");
+    }
+    function resetBall(dir){pongState.ball={x:260,y:150,vx:dir*4,vy:(Math.random()>.5?2:-2)};}
+    function tick(){
+        if(pongState.over)return;const b=pongState.ball;
+        pongState.cy+=(b.y-(pongState.cy+25))*0.08;b.x+=b.vx;b.y+=b.vy;
+        if(b.y<5||b.y>295)b.vy*=-1;
+        if(b.x<34&&b.x>20&&b.y>pongState.py&&b.y<pongState.py+50)b.vx=Math.abs(b.vx);
+        if(b.x>486&&b.x<500&&b.y>pongState.cy&&b.y<pongState.cy+50)b.vx=-Math.abs(b.vx);
+        if(b.x<0){pongState.cpu++;resetBall(1)} if(b.x>520){pongState.you++;resetBall(-1)}
+        if(pongState.you>=5||pongState.cpu>=5){pongState.over=true;clearInterval(pongTimer)}draw();
+    }
+    draw();pongTimer=setInterval(tick,16);
+}
+window.addEventListener("keydown",e=>{if(!pongState||pongState.over)return;if(e.key==="ArrowUp")pongState.py=Math.max(0,pongState.py-20);if(e.key==="ArrowDown")pongState.py=Math.min(250,pongState.py+20)});
+
+let minesState=null;
+function resetMinesweeperGame(){
+    const board=document.getElementById("minesweeperBoard");if(!board)return;board.innerHTML="";minesState={mines:new Set(),safe:0,over:false};
+    while(minesState.mines.size<5)minesState.mines.add(Math.floor(Math.random()*36));
+    for(let i=0;i<36;i++){
+        const b=document.createElement("button");b.className="xp-button";b.style.cssText="width:42px;height:42px;padding:0;font-weight:bold";b.textContent="?";
+        b.onclick=()=>{if(minesState.over||b.disabled)return;if(minesState.mines.has(i)){b.textContent="💣";minesState.over=true;document.getElementById("minesweeperStatus").textContent="BOOM 💀 — restart!";return}b.textContent="✓";b.disabled=true;minesState.safe++;if(minesState.safe===31){minesState.over=true;document.getElementById("minesweeperStatus").textContent="YOU WIN :3"}};board.appendChild(b);
+    }
+    document.getElementById("minesweeperStatus").textContent="find the mines :3";
+}
+
+let g2048=[];let score2048=0;
+function reset2048Game(){g2048=Array(16).fill(0);score2048=0;add2048();add2048();draw2048();}
+function add2048(){const a=g2048.map((v,i)=>v?null:i).filter(v=>v!==null);if(a.length)g2048[a[Math.floor(Math.random()*a.length)]]=Math.random()<.9?2:4}
+function draw2048(){const b=document.getElementById("game2048Board");if(!b)return;b.innerHTML="";g2048.forEach(v=>{const d=document.createElement("div");d.textContent=v||"";d.style.cssText="height:64px;display:flex;align-items:center;justify-content:center;background:"+(v?"#d4d0c8":"#eee")+";border:2px solid #888;font:bold 20px Tahoma";b.appendChild(d)});document.getElementById("game2048Status").textContent="score: "+score2048}
+function move2048(dir){
+    const old=g2048.join(","), lines=[];
+    for(let r=0;r<4;r++){let line=[];for(let c=0;c<4;c++){const i=dir==="left"?r*4+c:dir==="right"?r*4+3-c:dir==="up"?c+r*4:c+(3-r)*4;line.push(g2048[i])}lines.push(line)}
+    lines.forEach((line,r)=>{let a=line.filter(Boolean);for(let i=0;i<a.length-1;i++)if(a[i]===a[i+1]){a[i]*=2;score2048+=a[i];a.splice(i+1,1)}while(a.length<4)a.push(0);for(let j=0;j<4;j++){const c=dir==="left"?j:dir==="right"?3-j:dir==="up"?r:3-r;const rr=dir==="left"||dir==="right"?r:j;g2048[rr*4+c]=a[j]}});
+    if(g2048.join(",")!==old)add2048();draw2048();
+}
+window.addEventListener("keydown",e=>{if(!document.getElementById("game2048Panel")?.classList.contains("hidden")){const m={ArrowLeft:"left",ArrowRight:"right",ArrowUp:"up",ArrowDown:"down"}[e.key];if(m){e.preventDefault();move2048(m)}}});
+
+let breakoutTimer=null,breakoutState=null;
+function resetBreakoutGame(){
+    clearInterval(breakoutTimer);const c=document.getElementById("breakoutCanvas");if(!c)return;breakoutState={x:245,bx:260,by:270,vx:3,vy:-3,blocks:Array.from({length:30},(_,i)=>({x:12+(i%10)*50,y:20+Math.floor(i/10)*22,on:true})),over:false};const x=c.getContext("2d");
+    function draw(){x.fillStyle="#111";x.fillRect(0,0,520,320);x.fillStyle="#ef66c9";breakoutState.blocks.forEach(b=>{if(b.on)x.fillRect(b.x,b.y,44,16)});x.fillStyle="#eee";x.fillRect(breakoutState.x,300,70,10);x.beginPath();x.arc(breakoutState.bx,breakoutState.by,6,0,Math.PI*2);x.fill();const left=breakoutState.blocks.filter(b=>b.on).length;document.getElementById("breakoutStatus").textContent=left?"blocks left: "+left:(breakoutState.over=true,"YOU WIN :3");}
+    function tick(){if(breakoutState.over)return;let b=breakoutState;b.bx+=b.vx;b.by+=b.vy;if(b.bx<6||b.bx>514)b.vx*=-1;if(b.by<6)b.vy*=-1;if(b.by>294&&b.bx>b.x&&b.bx<b.x+70)b.vy=-Math.abs(b.vy);if(b.by>325){b.over=true;clearInterval(breakoutTimer);document.getElementById("breakoutStatus").textContent="game over — restart!";return}for(const q of b.blocks)if(q.on&&b.bx>q.x&&b.bx<q.x+44&&b.by>q.y&&b.by<q.y+16){q.on=false;b.vy*=-1;break}draw()}
+    draw();breakoutTimer=setInterval(tick,16);
+}
+window.addEventListener("keydown",e=>{if(!breakoutState||breakoutState.over)return;if(e.key==="ArrowLeft")breakoutState.x=Math.max(0,breakoutState.x-25);if(e.key==="ArrowRight")breakoutState.x=Math.min(450,breakoutState.x+25)});
+
+/* =========================================================
    GAMES FOLDER
 ========================================================= */
 
@@ -10401,16 +10565,71 @@ function openGameFromFolder(card){
     if(!card)
         return;
 
+    document
+        .querySelectorAll(
+            "#gamesFolderFiles .explorer-game-card"
+        )
+        .forEach(
+            item => item.classList.remove("selected")
+        );
+
+    card.classList.add("selected");
+
     const panel =
         card.dataset.gamePanel;
 
-    if(!panel)
+    if(!panel){
+        playRautaSFX("error");
         return;
+    }
 
-    openPanel(
-        panel
-    );
+    if(!document.getElementById(panel)){
+        playRautaSFX("error");
+        console.warn("Game panel not found:", panel);
+        return;
+    }
+
+    playRautaSFX("game");
+    openPanel(panel);
 }
+
+function showAllGames(){
+    document
+        .querySelectorAll(
+            "#gamesFolderFiles .explorer-game-card"
+        )
+        .forEach(
+            card => {
+                card.style.display = "";
+                card.classList.remove("selected");
+            }
+        );
+}
+
+function gameFolderBack(){
+    closePanel("gamesFolderPanel");
+}
+
+document
+    .querySelectorAll("#gamesFolderFiles .explorer-game-card")
+    .forEach(
+        card => {
+            card.addEventListener("click", function(){
+                document
+                    .querySelectorAll(
+                        "#gamesFolderFiles .explorer-game-card"
+                    )
+                    .forEach(
+                        item => item.classList.remove("selected")
+                    );
+                card.classList.add("selected");
+            });
+
+            card.addEventListener("dblclick", function(){
+                openGameFromFolder(card);
+            });
+        }
+    );
 
 function gameFolderSearch(){
 
