@@ -2486,93 +2486,372 @@ nav {
 
 
 /* =========================================================
-   GTA-6 / SAFE GLITCH ADVENTURE
-   Visual effects are deliberately slow/non-strobing.
+   ROUNDED XP GUI CORNERS
 ========================================================= */
-#gta6Panel{width:760px;min-height:0;max-height:calc(100vh - 70px);}
-#gta6Panel .panel-content{padding:0;min-height:0;overflow:hidden;background:#000 !important;}
-#gta6Launch{position:relative;min-height:520px;background:#080808;color:#fff;font-family:"Courier New",monospace;overflow:hidden;}
-#gta6Warning{position:absolute;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;background:#111;}
-#gta6WarningBox{width:min(620px,calc(100% - 30px));padding:24px;background:#f3f3f3;color:#111;border:3px solid #222;box-shadow:8px 8px 0 #000;text-align:left;}
-#gta6WarningBox h2{margin-bottom:12px;color:#b00000;}
-#gta6WarningBox p{margin:8px 0;line-height:1.45;}
-#gta6WarningBox .gta6-warning-actions{margin-top:18px;text-align:right;}
-#gta6Start{font-weight:bold;}
-#gta6Glitch{position:absolute;inset:0;display:none;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(120deg,#13001f,#001b2a,#25000d,#00221b);background-size:300% 300%;animation:gta6Drift 7s ease-in-out infinite;}
-#gta6Glitch.gta6-active{display:flex;}
-#gta6Noise{position:absolute;inset:-10%;opacity:.28;background:repeating-linear-gradient(0deg,rgba(255,255,255,.08) 0 1px,transparent 1px 6px);animation:gta6Scan 3s linear infinite;}
-#gta6Rainbow{position:absolute;width:75%;height:75%;border-radius:50%;background:conic-gradient(#ff4d6d,#ffd166,#7bed9f,#70a1ff,#c77dff,#ff4d6d);filter:blur(28px);opacity:.24;animation:gta6Spin 10s linear infinite;}
-#gta6Disturb{position:relative;z-index:2;width:min(680px,90%);text-align:center;transform:rotate(-1deg);animation:gta6Sway 2.8s ease-in-out infinite alternate;}
-#gta6Disturb h1{font-size:clamp(32px,7vw,72px);letter-spacing:7px;text-shadow:8px 0 #ff4d6d,-8px 0 #70a1ff;margin-bottom:18px;}
-#gta6Disturb p{font-size:14px;line-height:1.7;}
-#gta6Faces{position:absolute;inset:0;pointer-events:none;font-size:44px;opacity:.5;}
-#gta6Faces span{position:absolute;animation:gta6Float 5s ease-in-out infinite alternate;}
-#gta6Black{position:absolute;inset:0;z-index:30;display:none;align-items:center;justify-content:center;background:#000;color:#fff;}
-#gta6Black.gta6-show{display:flex;}
-#gta6ClickMe{border:0;background:none;color:#fff;font:26px "Courier New",monospace;cursor:pointer;padding:20px;}
-#gta6Game{display:none;position:absolute;inset:0;background:#050505;color:#fff;font-family:"Courier New",monospace;}
-#gta6Game.gta6-show{display:block;}
-#gta6GameLayout{height:100%;display:grid;grid-template-columns:1fr 240px;gap:10px;padding:10px;}
-#gta6World{position:relative;min-width:0;min-height:0;background:#111;border:2px solid #777;overflow:hidden;}
-#gta6Grid{position:absolute;inset:0;display:grid;grid-template-columns:repeat(9,1fr);grid-template-rows:repeat(7,1fr);}
-.gta6-tile{display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.07);font-size:24px;user-select:none;}
-.gta6-wall{background:#252525;}
-.gta6-floor{background:#101a14;}
-.gta6-item{cursor:pointer;}
-.gta6-player{position:absolute;z-index:5;width:11%;height:14.28%;display:flex;align-items:center;justify-content:center;font-size:28px;transition:left .08s,top .08s;}
-#gta6Side{background:#111;border:2px solid #777;padding:12px;overflow:auto;}
-#gta6Side h2{font-size:18px;margin-bottom:8px;}
-#gta6Stats{line-height:1.6;margin-bottom:12px;}
-#gta6Log{height:190px;overflow:auto;background:#050505;border:1px solid #555;padding:7px;font-size:11px;line-height:1.4;}
-#gta6Battle{position:absolute;inset:0;z-index:20;display:none;align-items:flex-end;justify-content:center;background:rgba(0,0,0,.72);padding:20px;}
-#gta6Battle.gta6-show{display:flex;}
-#gta6BattleBox{width:min(650px,100%);background:#050505;border:3px solid #fff;padding:16px;box-shadow:0 0 0 4px #222;}
-#gta6BattleText{min-height:72px;margin-bottom:10px;line-height:1.5;}
-#gta6BattleButtons{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;}
-#gta6BattleButtons button{padding:9px 5px;background:#111;color:#fff;border:1px solid #aaa;font:12px "Courier New",monospace;cursor:pointer;}
-#gta6BattleButtons button:hover{background:#333;}
-#gta6ExitHint{font-size:10px;opacity:.75;margin-top:10px;}
-@keyframes gta6Drift{0%,100%{background-position:0% 50%;transform:scale(1)}50%{background-position:100% 50%;transform:scale(1.025) rotate(.4deg)}}
-@keyframes gta6Scan{0%{transform:translateY(-8%)}100%{transform:translateY(8%)}}
-@keyframes gta6Spin{to{transform:rotate(360deg)}}
-@keyframes gta6Sway{from{transform:rotate(-1deg) translate(0,0)}to{transform:rotate(1deg) translate(5px,-4px)}}
-@keyframes gta6Float{from{transform:translateY(-10px) rotate(-8deg)}to{transform:translateY(10px) rotate(8deg)}}
-@media(max-width:700px){
-  #gta6Panel{width:calc(100vw - 20px);}
-  #gta6Launch{min-height:calc(100vh - 120px);}
-  #gta6GameLayout{grid-template-columns:1fr;height:100%;overflow:auto;}
-  #gta6Side{min-height:220px;}
-  #gta6BattleButtons{grid-template-columns:repeat(2,1fr);}
+
+.panel {
+    border-radius: 8px 8px 0 0;
+}
+
+.panel-title {
+    border-radius: 6px 6px 0 0;
+}
+
+.window-button {
+    border-radius: 2px;
+}
+
+.task-window {
+    border-radius: 3px 3px 0 0;
+}
+
+.clippy-bubble {
+    border-radius: 6px 6px 0 0;
+}
+
+
+
+
+/* =========================================================
+   WINDOWS XP TASK MANAGER — CLASSIC UI
+========================================================= */
+
+#taskManagerPanel {
+    width: 410px;
+    max-width: calc(100vw - 18px);
+    background: rgba(236,233,216,.96);
+    border: 1px solid rgba(0,0,0,.42);
+    border-radius: 7px 7px 0 0;
+    box-shadow: 2px 3px 8px rgba(0,0,0,.45);
+    overflow: hidden;
+    color: #111;
+    font-family: Tahoma, Arial, sans-serif;
+}
+
+#taskManagerPanel .panel-title {
+    height: 30px;
+    padding: 0 5px 0 8px;
+    border-radius: 6px 6px 0 0;
+
+    /* The site's usual "sick" gradient, not a literal XP title bar. */
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,.34) 0%,
+            rgba(255,255,255,.08) 18%,
+            rgba(0,0,0,.08) 19%,
+            rgba(0,0,0,.22) 100%
+        ),
+        linear-gradient(
+            90deg,
+            #6db7ff 0%,
+            #398fe7 32%,
+            #6f63df 67%,
+            #9b5bd7 100%
+        );
+
+    color: #fff;
+    font: bold 13px Tahoma, Arial, sans-serif;
+    text-shadow: 1px 1px 2px rgba(0,0,0,.55);
+}
+
+#taskManagerPanel .window-button {
+    width: 22px;
+    height: 21px;
+    margin-top: 4px;
+    border-radius: 4px;
+    border: 1px solid rgba(255,255,255,.65);
+    background: linear-gradient(
+        rgba(255,255,255,.35),
+        rgba(255,255,255,.04)
+    );
+    color: #fff;
+    font: bold 15px Arial, sans-serif;
+    line-height: 16px;
+    text-shadow: 1px 1px 2px #555;
+}
+
+#taskManagerPanel .window-button.close {
+    background:
+        linear-gradient(
+            rgba(255,255,255,.28),
+            rgba(0,0,0,.12)
+        ),
+        linear-gradient(135deg,#ff8c79,#df4528);
+}
+
+#taskManagerPanel .window-button:hover {
+    filter: brightness(1.12);
+}
+
+.tm-menu-row {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    height: 23px;
+    padding: 0 5px;
+    background: rgba(255,255,255,.22);
+    border-bottom: 1px solid rgba(0,0,0,.16);
+    color: #222;
+    font: 11px Tahoma, Arial, sans-serif;
+}
+
+.tm-menu-row span {
+    padding: 4px 8px;
+    cursor: default;
+}
+
+.tm-menu-row span:hover {
+    background: #316ac5;
+    color: #fff;
+}
+
+.task-manager-tabs {
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    padding: 4px 7px 0;
+    background: #ece9d8;
+    border-bottom: 1px solid #808080;
+}
+
+.tm-tab {
+    min-width: 0;
+    padding: 3px 8px 4px;
+    border: 1px solid #aaa;
+    border-bottom-color: #777;
+    border-radius: 3px 3px 0 0;
+    background: linear-gradient(#fff,#dedbd0);
+    color: #111;
+    font: 11px Tahoma, Arial, sans-serif;
+    cursor: pointer;
+}
+
+.tm-tab.active {
+    position: relative;
+    top: 1px;
+    background: #fff;
+    border-bottom-color: #fff;
+}
+
+.panel-content.task-manager-content {
+    max-height: 54vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-color: #bfcbe0 #eee;
+    scrollbar-width: auto;
+    padding: 10px;
+    min-height: 0;
+    background: #ece9d8;
+    color: #111;
+    font: 11px Tahoma, Arial, sans-serif;
+}
+
+.tm-toolbar {
+    display: none;
+}
+
+.tm-process-table-wrap {
+    height: 205px;
+    max-height: 42vh;
+    overflow: auto;
+    border: 1px solid #9b9b9b;
+    background: #fff;
+    scrollbar-color: #bfcbe0 #eee;
+}
+
+.tm-process-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    background: #fff;
+    color: #111;
+    font: 11px Tahoma, Arial, sans-serif;
+}
+
+.tm-process-table th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    padding: 4px 6px;
+    text-align: left;
+    font-weight: normal;
+    background: linear-gradient(#f8f8f8,#dedbd0);
+    border-right: 1px solid #c2bfb5;
+    border-bottom: 1px solid #aaa;
+}
+
+.tm-process-table th:nth-child(1){ width: 48%; }
+.tm-process-table th:nth-child(2){ width: 15%; }
+.tm-process-table th:nth-child(3){ width: 12%; }
+.tm-process-table th:nth-child(4){ width: 25%; }
+
+.tm-process-table td {
+    padding: 2px 6px;
+    height: 17px;
+    white-space: nowrap;
+    border: 0;
+}
+
+.tm-process-table tr {
+    cursor: default;
+}
+
+.tm-process-table tr.selected td {
+    background: #316ac5;
+    color: #fff;
+}
+
+.tm-users-checkbox {
+    display: block;
+    margin: 7px 0 3px;
+    color: #111;
+    font: 11px Tahoma, Arial, sans-serif;
+}
+
+.tm-users-checkbox input {
+    vertical-align: -2px;
+}
+
+.tm-process-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 2px;
+}
+
+.tm-xp-button {
+    min-width: 82px;
+    height: 24px;
+    padding: 1px 10px;
+    border: 1px solid #777;
+    border-radius: 3px;
+    background: linear-gradient(#fff,#e5e2d8);
+    color: #111;
+    font: 11px Tahoma, Arial, sans-serif;
+    box-shadow: inset 1px 1px rgba(255,255,255,.8);
+    cursor: pointer;
+}
+
+.tm-xp-button:disabled {
+    color: #999;
+    background: #eee;
+    cursor: default;
+}
+
+.tm-xp-button:not(:disabled):hover {
+    border-color: #316ac5;
+}
+
+.tm-list {
+    border: 1px solid #9b9b9b;
+    border-radius: 0;
+    background: #fff;
+}
+
+.tm-row {
+    padding: 4px 7px;
+    border-bottom: 1px solid #ddd;
+    color: #111;
+}
+
+.tm-row:hover {
+    background: #316ac5;
+    color: #fff;
+}
+
+.tm-performance-grid {
+    gap: 8px;
+}
+
+.tm-meter-box,
+.tm-history-box,
+.tm-stats-grid > div {
+    border: 1px solid #b4b0a3;
+    border-radius: 2px;
+    background: #ece9d8;
+    color: #111;
+    padding: 7px;
+}
+
+.tm-history-box canvas {
+    border: 1px solid #808080;
+    border-radius: 0;
+}
+
+.tm-statusbar {
+    display: flex;
+    min-height: 20px;
+    border-top: 1px solid #aaa;
+    background: #ece9d8;
+    color: #111;
+    font: 10px Tahoma, Arial, sans-serif;
+}
+
+.tm-statusbar span {
+    padding: 3px 5px;
+    border-right: 1px solid #c5c2b7;
+}
+
+.tm-statusbar span:last-child {
+    border-right: 0;
+}
+
+/* Top-only rounding: all Task Manager bottom edges remain square. */
+#taskManagerPanel .tm-statusbar {
+    border-radius: 0;
+}
+
+
+/* Explorer termination effect */
+#xpExplorerCrash {
+    position: fixed;
+    inset: 0;
+    z-index: 1000000;
+    display: none;
+    background: #000;
+    overflow: hidden;
+}
+
+#xpExplorerCrash.active {
+    display: block;
+}
+
+#xpExplorerCrash .xp-crash-site {
+    position: absolute;
+    inset: 0;
+    background: #000;
+}
+
+
+    55% {
+        transform: translate(-50%,-180%) scale(.82);
+        opacity: .85;
+    }
+    100% {
+        transform: translate(-50%,-500%) scale(.45);
+        opacity: 0;
+    }
+}
+
+
+.tm-application-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 6px;
+    margin-top: 8px;
 }
 
 </style>
 
 <audio id="signinAudio" src="/signin.mp3" preload="auto"></audio>
-
-<style>
-/* GTA-6: restore the Windows XP desktop icon look */
-.gta6-xp-icon{
-    width:48px;
-    height:48px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    margin:0 auto 4px;
-    box-sizing:border-box;
-    border:1px solid #fff;
-    border-radius:3px;
-    background:linear-gradient(135deg,#2f7fd3 0%,#0b3d91 55%,#06245c 100%);
-    color:#fff;
-    font:bold 22px Tahoma,Arial,sans-serif;
-    text-shadow:1px 1px 1px #17365f;
-    box-shadow:inset 1px 1px 0 rgba(255,255,255,.55),2px 2px 3px rgba(0,0,0,.45);
-}
-</style>
-
 </head>
 
 
 <body>
+
+<div id="xpExplorerCrash" aria-hidden="true"><div class="xp-crash-site"></div></div>
+</div>
+
 
 
 <!-- =========================================================
@@ -4892,7 +5171,7 @@ nav {
                     >
                         <strong>Games</strong>
                         <br>
-                        10 game files
+                        9 game files
                     </div>
 
                 </div>
@@ -4964,13 +5243,6 @@ nav {
                         <div class="explorer-game-type">Game</div>
                     </div>
 
-
-                    <div class="explorer-file-card explorer-game-card" data-game-panel="gta6Panel">
-                        <div class="explorer-game-icon">GTA-6</div>
-                        <div class="explorer-game-name">Gta-6.exe</div>
-                        <div class="explorer-game-type">Game</div>
-                    </div>
-
                 </div>
 
             </main>
@@ -4978,7 +5250,7 @@ nav {
         </div>
 
         <div class="explorer-statusbar">
-            <span>10 games</span>
+            <span>9 games</span>
             <span>My Computer</span>
         </div>
 
@@ -4986,83 +5258,6 @@ nav {
 
 </div>
 
-</div>
-
-
-
-<!-- =========================================================
-     GTA-6
-========================================================= -->
-<div class="panel hidden" id="gta6Panel">
-<div class="panel-title">
-    <span>Gta-6.exe</span>
-    <div class="window-buttons">
-        <button class="window-button" onclick="minimizePanel('gta6Panel')">−</button>
-        <button class="window-button close" onclick="closePanel('gta6Panel')">×</button>
-    </div>
-</div>
-<div class="panel-content">
-<div id="gta6Launch">
-    <div id="gta6Warning">
-        <div id="gta6WarningBox">
-            <h2>⚠ EPILEPSY / PHOTOSENSITIVITY WARNING</h2>
-            <p>This game contains animated color changes, visual distortion, screen effects and other intense visual material.</p>
-            <p><strong>If you are sensitive to flashing lights or visual effects, please close Gta-6 now.</strong></p>
-            <p>The effects in this version are intentionally slow and non-strobing, but they may still be uncomfortable.</p>
-            <div class="gta6-warning-actions">
-                <button class="xp-button" onclick="closePanel('gta6Panel')">Close game</button>
-                <button class="xp-button" id="gta6Start" onclick="startGta6Glitch()">I understand — launch</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="gta6Glitch">
-        <div id="gta6Noise"></div><div id="gta6Rainbow"></div>
-        <div id="gta6Faces">
-            <span style="left:8%;top:12%">◉_◉</span>
-            <span style="right:12%;top:28%">ಠ_ಠ</span>
-            <span style="left:18%;bottom:16%">:3</span>
-            <span style="right:20%;bottom:12%">0_0</span>
-        </div>
-        <div id="gta6Disturb">
-            <h1>GTA-6?</h1>
-            <p>THE DESKTOP IS LOOKING BACK</p>
-            <p>rainbows in the walls • files are moving • something is here</p>
-        </div>
-    </div>
-
-    <div id="gta6Black">
-        <button id="gta6ClickMe" onclick="enterGta6Game()">click on me! :3</button>
-    </div>
-
-    <div id="gta6Game">
-        <div id="gta6GameLayout">
-            <div id="gta6World">
-                <div id="gta6Grid"></div>
-                <div id="gta6Player" class="gta6-player">♥</div>
-                <div id="gta6Battle">
-                    <div id="gta6BattleBox">
-                        <div id="gta6BattleText"></div>
-                        <div id="gta6BattleButtons">
-                            <button onclick="gta6BattleAction('fight')">FIGHT</button>
-                            <button onclick="gta6BattleAction('act')">ACT</button>
-                            <button onclick="gta6BattleAction('item')">ITEM</button>
-                            <button onclick="gta6BattleAction('mercy')">MERCY</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <aside id="gta6Side">
-                <h2>GTA-6: LOST FILE</h2>
-                <div id="gta6Stats"></div>
-                <div id="gta6Log"></div>
-                <div id="gta6ExitHint">Find 3 items. Defeat 2 people. Then reach the green EXIT.</div>
-                <button class="xp-button" style="margin-top:10px" onclick="resetGta6Game()">restart</button>
-            </aside>
-        </div>
-    </div>
-</div>
-</div>
 </div>
 
 
@@ -5518,6 +5713,33 @@ for(let i = 0; i < 60; i++){
 <div class="desktop-icons">
 
 
+<!-- TASK MANAGER -->
+
+<div
+    class="desktop-icon"
+    data-panel="taskManagerPanel"
+    style="
+        left:825px;
+        top:450px;
+    "
+>
+
+    <img
+        class="xp-desktop-icon"
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAABhUlEQVR4nO2YYW6DMAyF3Wn3am6Wl5uZk2U/aFiHWmwnDkWaPwlFggA2jv1MiIIgCIL/zM16A4B6cM38vFMBUI84cu7j/BpPlZnfjpd0Qmv8J5wQ1yyAmlIyP5iZTfMBqOwxI617L4ioHSa+9FNvtCzLtHENwARaBDRrf2QE+iKgyoGcM61fiul+T+JYCjo+1fZGAvS58K2daDG+J+mJ6Pm+Sl4JbSmhIwkPUCu/pqXkFoFSQDnnR2L2gK671A5Iy4eIt7kWDRhz2jECzNjmQl0TQTnbDN6j1gE5Anuq4hhH7YAUgZec0BFNjMA5zI3ACb83EYHDCJzAFB1YRan4WvqGKTpQ62BxNzAlAiPKSrQK4aMvEsuAqp3W9SmaOeK7NhVPKbXu1KWWHUrqrovsPgBUAM8bA/Ol0PufuRmvdUCdAxKj675h3c1wc6CRHprAO3GTDOv9i3N3YCv/6e9pqcW2fvmGuwOc+PX5SRtdLg6U4qu6ll06r37Ru9xde5s+CIIguAw/l1Iy8zfzHOkAAAAASUVORK5CYII="
+        alt=""
+        draggable="false"
+    >
+
+    <span>
+        Task Manager
+    </span>
+
+</div>
+
+
+
+
 <!-- GAMES FOLDER -->
 
 <div
@@ -5529,19 +5751,7 @@ for(let i = 0; i < 60; i++){
     "
 >
 
-    <div
-        class="app-icon"
-        style="
-            background:
-                linear-gradient(
-                    135deg,
-                    #f6c85f,
-                    #b77b16
-                );
-        "
-    >
-        📁
-    </div>
+    <img class="xp-desktop-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAABPElEQVR4nO2ZUY7DIAxEJ9Xeq9yMOZo5GfsR0Xa1AawCMkTMj/MRKfMYB0cB2NraWlqH9kaS8duHkFQ/Z4hIxha1wHc0jygiX1UziB7mzSB6mh8J8ZMz770HcCAEwfPpOtUD3kcAaIKobgpp9Xut/FUSLaouwIj26VlJlCFGJ9Ba1QAzmN0JWJu9fQLHp+l07ZzLwlkqzRMRBxJA8t/6sTZaACLJywQeiS6EgHPyzldJguQrgX86E7Dv7XzPMwKFXegznhmriPxpo8tdaHaIBJCdAyu10ZIJqACsTWrbKDuJZ4dQAVib1LTRsgmoAKxNlur7PSh8jc4OoQKwNqlpo2UTUAFYm9S0URZgBQgVgLXJnYC1yfKLXAGYHUINMIPZ2yeQ/c9+DgwWIS2V/gvVTg/tDufqsj353NqaRL/1lkv0kr/ZtgAAAABJRU5ErkJggg==" alt="" draggable="false">
 
     <span>
         Games
@@ -5564,19 +5774,7 @@ for(let i = 0; i < 60; i++){
     "
 >
 
-    <div
-        class="app-icon"
-        style="
-            background:
-                linear-gradient(
-                    135deg,
-                    #f6c85f,
-                    #b77b16
-                );
-        "
-    >
-        📁
-    </div>
+    <img class="xp-desktop-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAC5ElEQVR4nO2aa3LkIAyEm629F9wMcTNxMu0PBhtjgWH8iLcqqnKRGcfma7V4OA7wG/0gIiEiuev+f++6MZDgnXP5owAwd/Z3aRCRMLPkYGZBEvH+0OD/GxFq5ovvXi2iBQ+R94s4gn+1iFH4O0ScntbyVGmtBQDEGOGYAe9BIejXAODPNTFGfKba56fYXuaJSARQDyK6zIkh1UTazQm9zHuiPVLRWyC6xAl1Ja6Bvd+ShBCa8Mhls1xSXCsAjEltAOA9XAhgANZaMDOcc+dXbCJIGclqCDPL0YBNpSOpXOpYvi9K6eqBneFL6FH4be3L2pbwS7uOhUtFrNnHTgSQft50VE2RiwMq9ArfcmCTnFkRPfhREYsDUjmwfG7PRnVMi+iVz6gI1YEyquy34L8SMeLAlAhAKGdcEdCDz2PuCH4zXRFBvBfEGGGtQ4zcbY0BmBkA1rnc2nUFJoLHZ8YsW9qvITmYXS/BO2ZVAGAO4b8RAerlMkVec1IS7eacMWbHXCscGgPD5SQiRFiOkcilk0u5LGko5aSuxCOZL1sRB2McmHnJHMcIZrdZxctSaQUzw3v/SbQsLbO+MVQFzMC3RGT4Eegj+BgjKA2AXflc4gCzA3MaZHkQXgWfWm5eN+1AhgXWtt7spXvMwafQ4Nvl0xTQg2/B7n+XUfxNqAvvnPuI2MP3ygcA/mhf9uBTZs2m1QSvUMfw1maheweO7rGJ1kr87fRa7mDrY12JMT11TjuQY3Zwt5woM7/to679iezf5UDtRJ35lgOnttN1BzObvBER2vkkYO1nZCP3qAMj4mZqf9iBJ+BrB04LuKN8Zhz4qnze4sDX2dcceAq+dODr7GsOPFU+2YFT2f95B1LCLhHwhAPlk9oH+vz7ghL4SvgSVgG+9iUH0fnyeRRYEzDrwAHsrcDqA035YqXeXaZz69OY8szy6JsWtbP8fsB7QQimPjd0j6ei+68GIZjXAc/E/QPuN4B/Pe4A0oBp3rYAAAAASUVORK5CYII=" alt="" draggable="false">
 
     <span>
         Confused looking anime girls with interrogation marks on their heads
@@ -5645,19 +5843,7 @@ for(let i = 0; i < 60; i++){
     "
 >
 
-    <div
-        class="app-icon"
-        style="
-            background:
-                linear-gradient(
-                    135deg,
-                    #8B5CF6,
-                    #241238
-                );
-        "
-    >
-        R
-    </div>
+    <img class="xp-desktop-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAACtklEQVR4nO1abY6sIBAsNu9ecjPam+HJen8Ais036jibvEpMx1HYKoqmwSzwx6He+9PE4v5FLsMgBjMD8YVwDeHnfnKdUBB0GQBB/trCewIYmQlsMCriixwIGBPxJQ6sIhr/wnhOfAjkEveUyFSIdRFf6IARse7Ev8cIthByYBdB0UMpooz3BKSrkL8LBS4Wsf+erFtNAUTtRCKaqOiJA/ETKaKMooBA3JiehUDxsIg8+b3DXhHVJHbkFbZtq0ZjuMspSTFuQQTO9zHhABH4IG+xLLoRj3Y93ImQOGAMY10VoifeBW6KyApgZrbWMjM6Yz/SOkDMvDsQD4J/d8DdOfJjMd2NEltrcwKQue8T8BR5Zow4MI4vdKCK4jLaTtxyVIoAWLjq6iLz8RygpA4si4a1PsErIuRynazEYQXatu0CeV89xX6HPLsaWnVHKZXlfRIwkwNEtM9t15r3eX70WUfo7+jhHLum2EwOBPISMflje3yIc+1cDP2UyLPvq1vAiAOBiMSJfDY68o449jhNfsaBY+oQh+1AuHrI9zowLKBOOn8lU2iA/MccOEYpRZ5snXwQUHNgqD7UHMiJi8mMku91YEpAfrVJxYVRbIvIkw+kSw60yBfPA7JIWauR22Jrrb3wFUTGVVK1ihg/PyIAaB1XaOBcoie2RSUH6s6kI9uK8dwvOTC1uSvlQGt1mhGRXyAm537Ngd7iFka2NfI58tKBXvJdORDQ2shprWEM+YFYs9EYgtY6295hcu4HXHHgapxxoCjg0+TjHLh0MpMOfOKEJh24RcBbDlw+F7/rwA0H+3jEnyYvd7Oe+H1fJe6cPhWy9xCXAq6S7yD8DOQB5cYRfgTZzxOeQHb3uSwa65q839333Sh+2NLaAsC+lbYWAE4fn2K89m8CVQei+65234hnE+4/gF8qmY6aEYPAcAAAAABJRU5ErkJggg==" alt="" draggable="false">
 
     <span>
         Rautatify
@@ -5677,19 +5863,7 @@ for(let i = 0; i < 60; i++){
     "
 >
 
-    <div
-        class="app-icon"
-        style="
-            background:
-                linear-gradient(
-                    135deg,
-                    #222,
-                    #777
-                );
-        "
-    >
-        🔐
-    </div>
+    <img class="xp-desktop-icon" src="data:image/png;base64,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" alt="" draggable="false">
 
     <span>
         RautaObfuscator
@@ -5709,19 +5883,7 @@ for(let i = 0; i < 60; i++){
     "
 >
 
-    <div
-        class="app-icon"
-        style="
-            background:
-                linear-gradient(
-                    135deg,
-                    #4f46e5,
-                    #172554
-                );
-        "
-    >
-        📋
-    </div>
+    <img class="xp-desktop-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAACh0lEQVR4nN2aYZarIAyF45y3L9iZYWdhZcwPRCkkgIDYeTmnBzsqfjc3DdYOwB+P7YlJEdFV9j927eFAREdEDhFdGkTkAOAc32bNIsAH2FhEDB+/f5v5jBheyri0/2V0Hl7KvLT/K+FjyNr+V0S0wHOw3DnLRcyEXy5iFL4k5HERM+FnlFN1NUSMJ0LQWoNSqlmwtRYAAJRS4rZ0nta6iZENRHCI8JEZbnUdzXzY7nXip7Rz3x0AbEe2tjMzLdGS+Xibc0IpBc45qInIIs68zwycY2vfb818ui3Nd0tEEJDCt4iYDX9bxGfd5/AlEU/BdwqQ4SURvfBTS6hWPi0iVsJnPRYR3NV9CJTS1dGYfH2424WMaWv3/stcYW2460BvOYV1hltv0jniKLnxIeAOfK2cUlgOOF7Q/DnonLtYWsppyAFJRCm70ouDD9dIBfyThLTUPjfuu/9MAAAQ6WM1b1/BiQj2HQ/O7RytJSCi7HjxQ2ytvQVvTA4T5mkNCR7AiTd3XQ54WA0+IX4MmY7DGBMu2gTvI4cH2IAI2fNEASV4DpZru1p722siQuZ96eXw1hIgagCmYsS70TL8dYd6jbxgrTVbuym8teGY3IHS+VlIXWikvYbOInWbuIN1tU5OQA4w1l5TESn89bfP1nk8Zx2/lR51IIbk4CUHbsE/7UCLuKHyWeFAbRUfKh/JgRXwqQNd2ZccWFE+qQNd2f8WB7qzzzmwCj52oDv7nAOryideJ7rh33fAv6YIWOFA+i3tAB9/Mo04H74AOw88FjBaPg3Az0WPA28Bs89X4t8EuGdERDo9vnnu2SFeJIjYd5c9dGKAX/u3AfErZQhjtq8Cvhvf8Uv6/xy/Q9XQyf2ah7QAAAAASUVORK5CYII=" alt="" draggable="false">
 
     <span>
         RautaPaste
@@ -5741,19 +5903,7 @@ for(let i = 0; i < 60; i++){
     "
 >
 
-    <div
-        class="app-icon"
-        style="
-            background:
-                linear-gradient(
-                    135deg,
-                    #22c55e,
-                    #166534
-                );
-        "
-    >
-        🖼️
-    </div>
+    <img class="xp-desktop-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAC5ElEQVR4nO2aa3LkIAyEm629F9wMcTNxMu0PBhtjgWH8iLcqqnKRGcfma7V4OA7wG/0gIiEiuev+f++6MZDgnXP5owAwd/Z3aRCRMLPkYGZBEvH+0OD/GxFq5ovvXi2iBQ+R94s4gn+1iFH4O0ScntbyVGmtBQDEGOGYAe9BIejXAODPNTFGfKba56fYXuaJSARQDyK6zIkh1UTazQm9zHuiPVLRWyC6xAl1Ja6Bvd+ShBCa8Mhls1xSXCsAjEltAOA9XAhgANZaMDOcc+dXbCJIGclqCDPL0YBNpSOpXOpYvi9K6eqBneFL6FH4be3L2pbwS7uOhUtFrNnHTgSQft50VE2RiwMq9ArfcmCTnFkRPfhREYsDUjmwfG7PRnVMi+iVz6gI1YEyquy34L8SMeLAlAhAKGdcEdCDz2PuCH4zXRFBvBfEGGGtQ4zcbY0BmBkA1rnc2nUFJoLHZ8YsW9qvITmYXS/BO2ZVAGAO4b8RAerlMkVec1IS7eacMWbHXCscGgPD5SQiRFiOkcilk0u5LGko5aSuxCOZL1sRB2McmHnJHMcIZrdZxctSaQUzw3v/SbQsLbO+MVQFzMC3RGT4Eegj+BgjKA2AXflc4gCzA3MaZHkQXgWfWm5eN+1AhgXWtt7spXvMwafQ4Nvl0xTQg2/B7n+XUfxNqAvvnPuI2MP3ygcA/mhf9uBTZs2m1QSvUMfw1maheweO7rGJ1kr87fRa7mDrY12JMT11TjuQY3Zwt5woM7/to679iezf5UDtRJ35lgOnttN1BzObvBER2vkkYO1nZCP3qAMj4mZqf9iBJ+BrB04LuKN8Zhz4qnze4sDX2dcceAq+dODr7GsOPFU+2YFT2f95B1LCLhHwhAPlk9oH+vz7ghL4SvgSVgG+9iUH0fnyeRRYEzDrwAHsrcDqA035YqXeXaZz69OY8szy6JsWtbP8fsB7QQimPjd0j6ei+68GIZjXAc/E/QPuN4B/Pe4A0oBp3rYAAAAASUVORK5CYII=" alt="" draggable="false">
 
     <span>
         RautaImage
@@ -5773,19 +5923,7 @@ for(let i = 0; i < 60; i++){
     "
 >
 
-    <div
-        class="app-icon"
-        style="
-            background:
-                linear-gradient(
-                    135deg,
-                    #06b6d4,
-                    #155e75
-                );
-        "
-    >
-        ⏱️
-    </div>
+    <img class="xp-desktop-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAILElEQVR4nO2ZW2wU1xnHf+Ox1/baC2s2xvHiNXaNnYYGDHJBhdCWljRNIRRCAfWhavpSaNW8RJHy0FZNW1Vq1YvykD4UFySQKhHSNI1CVS6lRU5ECa0dHGNjbINtvMZer723mfXsdXb6MOtZr3cXe40dVIm/tJpz5lzm/z/n+77zzSw8wtJC22nVjhw5oj1sHouCttOqaS1oWgsLFlGw3KTyguzPe8hDEzCxx6aN7W5csKlEt5mz7spDEaDttGqrXR6qJwbo3t8yrwitBa0oqvD7G39iroiHIsBdJhrlzzg77itCa8Fou11gyWgXlprcQjG2u1Grnhgw6kNftVL/lD9V77ZSfyFVnxDLeLHyWdauqaS1tdXgvSAB/3lzh7EKWiyIUFTO8X+tT5toMXBtLdOq1Gk4DOzK0uGfwFvQW1LFqxWbsdtrM56ZQaDr1AotGpYoW7WeohIbJlsLhSYrpnIHphWPAeDp+yu3+3v4c8fmBxYx+EOrVn/An7N96B0rL3VtocZen/VZhXPJb/h2ALR4ei/BBVoUhCmgCsvjuwlPNedNdmKPTVO1VYiCl5mrpTmY6mDbhlr2HOL0efBcBeDx5hA/v9CO2dfFsZ1WwxKONh2mtbVVMBT1nVmnVX/+d1iqt4B2LUncnZ2Jtht1eppzf9jO2YGDWVfmH8e2pDnmM+f+C84scx2bVd70OohmUBXofDl1/2jmsJjJzEsbvpXagUjYjaXqWdDO5yY+A6EN0fQcOw6eoOzdQxyaQxZg49Z9lFZtQDTVYl5ZDfJP4HRr5lxOwJEse67C6l3G6t8P/VVP6lRAN52GPW0UF5cilrfNO1iHHTW6AzHSA0X1UChCXIUCLxREoTAIiTAICgh+IAoDIyCF5zB5C5qybY2OoXes/Kjv06z2lafdD637VMqEuk6t0Da8MAjlH8y/+rMh10DZShAmQZgGphc+FuBnJ+HsVfgxqV2Yi6PQQQWf7fBlDRapg6x0Kj/yAJZRKOhJjlskeYBfQOfHxWnNHR0Ytt+Cj/aWiqyHXUpAIpYfgQeA+suTKfIADnj7Q4dOOPmzWNeBPbUtLfiyntipMBoJgLA8IlS/BzUYQAm4UBUJ28XeVKPdgfPVb/ADkxWO/tS43XR4AL7mgaPPQH8noKcduQUAxJZOgDxwnfGBNiKKD/OqZsTyBootTZTam+F5ux6RmjbBsUs4LLbkqJQAtDiUr4STl+A7uojfFG8COnMI0CxLJsA/1Imz62807GnDbNuUTkpIwCtfgld+DSigheD692Hzr9InEXSfUhG5c8DHy6e+QnF5Lfw7lwBYEgHyvT5ctztZ/827iEXlwGiyJZg985onEVE873O5XUHVyqlcIWa0pwQIMkSjeRNWgwGUkJfw+BBSxA3iahq/fkUnL9wGwvPOkaRKdO9+TGff1a+oQAR3x2/puFuVkYVmCgCIRHITjYWRFTdqwIMS8hIKupG9d/Wkr6IBc+UubLZmLPadSfLdQDDnfAYSM5xUTK+9Aa+9gSkpSB7/iFs97YxGDuY8JtIFxM2Q8Kf3iMXov/UeJIoQbU9itm7DsrYZm6Uui31PAzLQDwTmJw+zAvk0aEVpTe6bx7nQ24ijsjRn1jtLQAAtXohAIq1D/633KF3zAo5tr88iOqk7HzeSRP0gPOiXEA2EWSYsDzJy4xz9U3tZuyb3qJSAYIiEGkZE1Z25qIiI5CZBWZL8ONAOhEBDPzNmr9hMfTFXYK6vjHed4VKvI6ftZwqYwUwkisXwSsOseuK7QBS4kCQ6q68wDUmLNUQs5grJZySR8DPRd4bOsS9QY89FPYcANZZy5Cl3L088vR+00fTtTUP+kWu+ecY/epsLnasoLs98hZwLQ4AsTWIG4nEFgFgsTJG5BpOlDhIXIb7cuVLIKMnDF3l/6Clq7Jlxfy6MGFASHU1rkKQRVtYf1ivqAMuPCCQ0okPnudyuLGj1YdYOSJEolkKBWEx3Jo/vDg3b94E2uKQ5Um5oUBCh74PjtN1eT6Vt/tWHDB9IEFETIEYpLlmtx/nERVDVpec7F1qI6PA1RsZj+BONnF7g145CgLD1EJZCDbHQDGIUOTBKqeN5vYc0AnwCAoDBjvOc7WrAUVm64DGGD0y4OgFIhBRkvxNb04sQ9YA6qe/Acv6A6PA1xkf7GQ405vWtKc2E1HiYeDKcmW2bQP47xOPZxi05xoauGAdXPigA2LrvRFJxglBwEkvtAb0aHIBEYtl/alkJ7r5rdI6ty/tLn7EDJUQQC81MK1M46vYBAYhP5bUaC4UaCiIrbvzeO0S9LmTvXS73VlNjr897LkNAeFYuYq3bD/KVJSELIHtHiE57kaeGkP1OomEJAJevlIFJK4NTG4kUf25R31kNAaGgG0Xqwbzmi/qNYDsoChQlE7ZkgreQsl9yEnM5kSL6O4OaPFtcvlK671m5M1mLsGK7QaL1VKsAXflyTxcA4JdGsNZ/T48+0kiK1AyylWMxPJ5+FGnCeMkBPbhcv1uJX6ngzqQtjfAf32wVoHtRhO8vwN2H/csHINKjO1gWqHIAf2gMOTCaZg6SUki/q4IRXz1Dniosto3LQjinAEVyUWrfi2iyguemvoSiiOxzEpbcyMF7SPJYhjnck+qYCprTCJ/+S6sAHy4L4ZwC1HiEijVPE5WH8Xx8AjnoMswB4OZYBWPeCoY8Nu5JNdjttXpDMZw+9ckRngvD69uPpf5MU1Xom6igb8zGoPcx/InGtOP9Qf+VWUoYO5BYuYNht5lL3XU4J0M6YQEsNhacWD3CI/wf4n96kgiFzHkc6wAAAABJRU5ErkJggg==" alt="" draggable="false">
 
     <span>
         Temp Image
@@ -5804,19 +5942,7 @@ for(let i = 0; i < 60; i++){
         top:450px;
     "
 >
-    <div
-        class="app-icon"
-        style="
-            background:
-                linear-gradient(
-                    135deg,
-                    #80a2d6,
-                    #34547f
-                );
-        "
-    >
-        XO
-    </div>
+    <img class="xp-desktop-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAABhUlEQVR4nO2YYW6DMAyF3Wn3am6Wl5uZk2U/aFiHWmwnDkWaPwlFggA2jv1MiIIgCIL/zM16A4B6cM38vFMBUI84cu7j/BpPlZnfjpd0Qmv8J5wQ1yyAmlIyP5iZTfMBqOwxI617L4ioHSa+9FNvtCzLtHENwARaBDRrf2QE+iKgyoGcM61fiul+T+JYCjo+1fZGAvS58K2daDG+J+mJ6Pm+Sl4JbSmhIwkPUCu/pqXkFoFSQDnnR2L2gK671A5Iy4eIt7kWDRhz2jECzNjmQl0TQTnbDN6j1gE5Anuq4hhH7YAUgZec0BFNjMA5zI3ACb83EYHDCJzAFB1YRan4WvqGKTpQ62BxNzAlAiPKSrQK4aMvEsuAqp3W9SmaOeK7NhVPKbXu1KWWHUrqrovsPgBUAM8bA/Ol0PufuRmvdUCdAxKj675h3c1wc6CRHprAO3GTDOv9i3N3YCv/6e9pqcW2fvmGuwOc+PX5SRtdLg6U4qu6ll06r37Ru9xde5s+CIIguAw/l1Iy8zfzHOkAAAAASUVORK5CYII=" alt="" draggable="false">
     <span>Tic-Tac-Toe</span>
 </div>
 
@@ -5830,19 +5956,7 @@ for(let i = 0; i < 60; i++){
         top:540px;
     "
 >
-    <div
-        class="app-icon"
-        style="
-            background:
-                linear-gradient(
-                    135deg,
-                    #f3ca4c,
-                    #9d7510
-                );
-        "
-    >
-        🐤
-    </div>
+    <img class="xp-desktop-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAC0klEQVR4nO2ZXZKsIAyFD7dmX8POjDvDlXEf6ECE8Ke2+jCpshinp+FLchJkNLjJiMhn9+autU/bB96zAfBE5HOnXmkaPMAjTjvxcwXkqK3rKu4CN5GJ8nqdrGT0+ecQ/fy6JhuXmoR3zkVI5E54Ob6kNgSEqvt473UnMJGNXQ0QYdhzIjT1SkTw3qu6B0y4DIJf5vNRvDcgIg7EWF2E9caNCF5zuN51ctmIbOSZAKTsmvYv/8W2bQBMd1yWcu487cZwaIXJSPNnRmQEBs45WGt77HLhVGzeY3gU3aWhe+VqaF8W/HAxJ/mMw+dO6F1nFD45wd+9BZ7HYy2zDo8B7Z+WjxwZvpROr2Xq8FP7wNkMcPTrsmEnqAk/LZ2PGSL4ZfHYtg2/vxbb5oZH51zs90Cn6/C2sev7qcUTjUPv9qAzGUCvaGWko7zoE+n9lWTcts/e4wsHjhZu+yHNF6ASOEFRnJM7W22sOnC06/TgW5EMNRTm43pqwYe1L8hACV+2TDmvhM1Hhr8tA/voa90Gh+BHMlDAQzwLjXYfNmPyh0TPAQF3NecsrHXVEYAy9+7RNBtLi4/T/ZZp4RwAkGh55aSj8M45LAvt1gBcFX5dY6vdLzpSA1rnqFlPNkkqenOYkc9QBpyz4tHZVDc0EZJO5C0AUuepZWBdjR59dGqA4dNZQJeYtRbLwrqiLry1tlFfY9ovJKSn9NguzY/Xva6jfS+XT006hQM17ffqo7fhhaut/VYNDDtwNbyWkZG/m4JvZeCKg86RjE3Jp+XElRmYydQ0vCajJ+DzDBxy4En5yAxMwb8xA4cdeEMGpuHzDDwFzxk45cCT8uG1p+GfzoA8JwMnHbgDPj/cC+h58JoD34JVgI9Dtxy4Qg5fBdYcOAI/APsdYGHFa9axc3EY09k42u2vSQ2Q3o2Fo6OJsLm9AVgFYAdyeyNwbvo/d+qf/9mfZfYfwfya20/EkQIAAAAASUVORK5CYII=" alt="" draggable="false">
     <span>Flappy Rauta</span>
 </div>
 
@@ -5856,19 +5970,7 @@ for(let i = 0; i < 60; i++){
         top:540px;
     "
 >
-    <div
-        class="app-icon"
-        style="
-            background:
-                linear-gradient(
-                    135deg,
-                    #c47bd9,
-                    #653578
-                );
-        "
-    >
-        🧠
-    </div>
+    <img class="xp-desktop-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAByklEQVR4nO1Zba6EIAysL+9e68129mblZH0/FKksHw8VkMRJSGMAd4ZpIbJEg2OKdQAkpS8D0u9sBoDkCFbRxcKrkGdmEaHi2FXEWfJdRVxFvouIq8k3FVGLfCsRv0RExhh6vWYyhi+P7/dsf+syEbvt+uiW2Rt2QX6cromMMcPE1QVRDix5W6sWUpEIx2vLL+Ie5IlQPO9LQA8HFvIypgOOvIznwJ78YA58kx/IAU1ehMZywCfvC+juACguPpw2N6oBAAJaYjn5GziAlQkoRZ4C7QYO2NW3AgAo8oiu8DLGCbDzmjsALx+siHCquHm5/iYO6NX/FhBKGff+XH8TBzR5ADsRNbbiSx3Y5f66+1gRuhaizq3tqIjTDujV3/UpF3Lkz4g45UAo9/0WOhcsYZvv+rmpAznysVrwCevnow5s38T2JiF3y8DMuxuCKdA0mHmbn0LpbceGUgf06sdWDp4LNR0oqgGQE2BzOJdmUCJSAqrXQOjQSW2VsfHdakBkyWcd57lsvEtb0OQVCzPT54P6NXAm+i6EnpucA2dF6Jz/Tzpefg7cIUYFjBKtgAkgmWcm5vRBc0cAy8EpuYE3Rv+/dB88ePBgbPwBpkmSQgxF5kQAAAAASUVORK5CYII=" alt="" draggable="false">
     <span>Memory</span>
 </div>
 
@@ -5886,19 +5988,7 @@ for(let i = 0; i < 60; i++){
     "
 >
 
-    <div
-        class="app-icon"
-        style="
-            background:
-                linear-gradient(
-                    135deg,
-                    #f59e0b,
-                    #92400e
-                );
-        "
-    >
-        💼
-    </div>
+    <img class="xp-desktop-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAABl0lEQVR4nO1Yba6EIAwcX969ytG6N2tP5vuhqHRR60eUvHQS02UjONMBigKBQCAQCATeQ3e0AzP3jnsOj/sImLn3wCPycczk0YvIbmxKxFHyT4rYnavM3KeUTj9ARE71u20deef93QDgcu/HL6WDqj4WmQGviE1kB47M/Vpk5uny3Q+3Cy4BV8kvkYVsbwA3CzhDfs745jzvgcYcKKfLOvnmHFiSzu0z5B93wBKvXZb83oL2Cvj1ClEVEKUiighEGLnQqSoSDb9FxfTXop37fD4M5gSRcnxv/XMLsOSHhwzkiWgimYlTFmWY5MpsK7QdH0j3Cqg5AAiIaMruUoglbgXsjf+YAyWJbyF7xNfG9zrgPkrUHGBmdN33mUtVoaogonGdrJPn8cxgx/fiogMDubwgLVG7cGvEc79X1gBRQkoz8TUhNeLLWE+Ol9kOPHUAi+OAiBTtvN/n/2y7qUq8JqRGvKlKvOWIN+NNOLDmCBwZb8qBO6JXgOulHuDLiTiDcaPa5Oh983/rG0+bX/gCgUAgEAj8F/wB8tjawO75YYMAAAAASUVORK5CYII=" alt="" draggable="false">
 
     <span>
         commissions
@@ -5906,6 +5996,261 @@ for(let i = 0; i < 60; i++){
 
 </div>
 
+
+</div>
+
+
+
+<!-- =========================================================
+     TASK MANAGER
+========================================================= -->
+
+<div
+    class="panel hidden"
+    id="taskManagerPanel"
+>
+
+<div class="panel-title">
+
+    <span>Rauta's super pro task manager</span>
+
+    <div class="window-buttons">
+
+        <button
+            class="window-button"
+            onclick="minimizePanel('taskManagerPanel')"
+        >
+            −
+        </button>
+
+        <button
+            class="window-button close"
+            onclick="closePanel('taskManagerPanel')"
+        >
+            ×
+        </button>
+
+    </div>
+
+</div>
+
+
+<div class="tm-menu-row">
+    <span>File</span>
+    <span>Options</span>
+    <span>View</span>
+    <span>Windows</span>
+    <span>Shut Down</span>
+    <span>Help</span>
+</div>
+
+<div class="task-manager-tabs">
+    <button class="tm-tab active" data-tab="applications">Applications</button>
+    <button class="tm-tab" data-tab="processes">Processes</button>
+    <button class="tm-tab" data-tab="performance">Performance</button>
+    <button class="tm-tab" data-tab="users">Users</button>
+</div>
+
+<div class="panel-content task-manager-content">
+
+    <section class="tm-page" data-page="applications">
+
+    <div class="tm-toolbar">
+        <strong>Applications</strong>
+        <span id="tmAppStatus">0 applications running</span>
+    </div>
+
+    <div class="tm-list" id="tmApplicationsList">
+        <!-- Filled from the currently open/minimized desktop GUIs. -->
+    </div>
+
+    <div class="tm-application-buttons">
+        <button id="tmSwitchToApp" class="tm-xp-button" disabled>
+            Switch To
+        </button>
+        <button id="tmNewTask" class="tm-xp-button">
+            New Task...
+        </button>
+    </div>
+
+</section>
+
+    <section class="tm-page hidden" data-page="processes">
+
+    <div class="tm-process-table-wrap">
+        <table class="tm-process-table">
+            <thead>
+                <tr>
+                    <th>Image Name</th>
+                    <th>PID</th>
+                    <th>CPU</th>
+                    <th>Mem Usage</th>
+                </tr>
+            </thead>
+            <tbody id="tmProcessTable">
+                <tr data-process="accelerometerST.exe">
+                    <td>accelerometerST.exe</td><td>1432</td><td>00</td><td>2,320 K</td>
+                </tr>
+                <tr data-process="CLI.exe">
+                    <td>CLI.exe</td><td>1944</td><td>00</td><td>5,352 K</td>
+                </tr>
+                <tr data-process="CLI.exe">
+                    <td>CLI.exe</td><td>2792</td><td>00</td><td>5,308 K</td>
+                </tr>
+                <tr data-process="cmd.exe">
+                    <td>cmd.exe</td><td>3669</td><td>00</td><td>4,080 K</td>
+                </tr>
+                <tr data-process="csrss.exe">
+                    <td>csrss.exe</td><td>564</td><td>01</td><td>10,908 K</td>
+                </tr>
+                <tr data-process="explorer.exe">
+                    <td>explorer.exe</td><td>1244</td><td>01</td><td>76,140 K</td>
+                </tr>
+                <tr data-process="firefox.exe">
+                    <td>firefox.exe</td><td>448</td><td>01</td><td>83,180 K</td>
+                </tr>
+                <tr data-process="FrameWorkService.exe">
+                    <td>FrameWorkService.exe</td><td>1620</td><td>00</td><td>8,896 K</td>
+                </tr>
+                <tr data-process="GoogleUpdaterService.exe">
+                    <td>GoogleUpdaterService.exe</td><td>912</td><td>01</td><td>3,176 K</td>
+                </tr>
+                <tr data-process="HPTQTA1.exe">
+                    <td>HPTQTA1.exe</td><td>2156</td><td>00</td><td>4,476 K</td>
+                </tr>
+                <tr data-process="hpqwmiex.exe">
+                    <td>hpqwmiex.exe</td><td>1832</td><td>00</td><td>4,388 K</td>
+                </tr>
+                <tr data-process="jusched.exe">
+                    <td>jusched.exe</td><td>604</td><td>00</td><td>2,772 K</td>
+                </tr>
+                <tr data-process="lsass.exe">
+                    <td>lsass.exe</td><td>448</td><td>00</td><td>1,164 K</td>
+                </tr>
+                <tr data-process="MsSched.exe">
+                    <td>MsSched.exe</td><td>1648</td><td>01</td><td>67,112 K</td>
+                </tr>
+                <tr data-process="MDM.EXE">
+                    <td>MDM.EXE</td><td>2140</td><td>00</td><td>3,052 K</td>
+                </tr>
+                <tr data-process="mmc.exe">
+                    <td>mmc.exe</td><td>472</td><td>00</td><td>19,632 K</td>
+                </tr>
+                <tr data-process="rautatientoori.exe">
+                    <td>rautatientoori.exe</td><td>3000</td><td>02</td><td>48,120 K</td>
+                </tr>
+                <tr data-process="Ralsei-Clippy">
+                    <td>Ralsei-Clippy</td><td>3136</td><td>01</td><td>9,216 K</td>
+                </tr>
+                <tr data-process="oneko.exe">
+                    <td>oneko.exe</td><td>3320</td><td>00</td><td>4,812 K</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <label class="tm-users-checkbox">
+        <input type="checkbox" checked>
+        Show processes from all users
+    </label>
+
+    <div class="tm-process-actions">
+        <button id="tmEndProcess" class="tm-xp-button" disabled>
+            End Process
+        </button>
+    </div>
+
+</section>
+
+    <section class="tm-page hidden" data-page="performance">
+
+        <div class="tm-performance-grid">
+
+            <div class="tm-meter-box">
+                <div class="tm-meter-title">CPU Usage</div>
+                <div class="tm-meter">
+                    <div id="tmCpuBar"></div>
+                </div>
+                <strong id="tmCpuValue">10%</strong>
+            </div>
+
+            <div class="tm-meter-box">
+                <div class="tm-meter-title">PF Usage</div>
+                <div class="tm-meter">
+                    <div id="tmPfBar"></div>
+                </div>
+                <strong id="tmPfValue">853 MB</strong>
+            </div>
+
+        </div>
+
+        <div class="tm-history-box">
+            <div>CPU Usage History</div>
+            <canvas id="tmCpuGraph" width="420" height="100"></canvas>
+        </div>
+
+        <div class="tm-history-box">
+            <div>Page File Usage History</div>
+            <canvas id="tmPfGraph" width="420" height="75"></canvas>
+        </div>
+
+        <div class="tm-stats-grid">
+
+            <div>
+                <strong>Totals</strong>
+                <p>Handles: <span id="tmHandles">9923</span></p>
+                <p>Threads: <span id="tmThreads">494</span></p>
+                <p>Processes: <span id="tmProcesses">35</span></p>
+            </div>
+
+            <div>
+                <strong>Physical Memory (K)</strong>
+                <p>Total: 2096620</p>
+                <p>Available: 1129956</p>
+                <p>System Cache: 1037136</p>
+            </div>
+
+            <div>
+                <strong>Commit Charge (K)</strong>
+                <p>Total: <span id="tmCommit">873668</span></p>
+                <p>Limit: 4037036</p>
+                <p>Peak: 1099748</p>
+            </div>
+
+            <div>
+                <strong>Kernel Memory (K)</strong>
+                <p>Total: 66880</p>
+                <p>Paged: 56472</p>
+                <p>Nonpaged: 10408</p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="tm-page hidden" data-page="users">
+
+        <div class="tm-toolbar">
+            <strong>Users</strong>
+            <span>1 user</span>
+        </div>
+
+        <div class="tm-list">
+            <div class="tm-row">
+                <span>rauta</span>
+                <span>Active</span>
+            </div>
+        </div>
+
+    </section>
+
+</div>
+
+<div class="tm-statusbar">
+    <span>Processes: <strong id="tmStatusProcesses">35</strong></span>
+    <span>CPU Usage: <strong id="tmStatusCpu">10%</strong></span>
+    <span>Commit Charge: <strong id="tmStatusCommit">853M / 3942M</strong></span>
+</div>
 
 </div>
 
@@ -6012,26 +6357,8 @@ enterButton.addEventListener(
     "click",
     function(){
 
-        intro.style.opacity =
-            "0";
-
-        site.style.opacity =
-            "1";
-
-        const signinAudio =
-            document.getElementById("signinAudio");
-
-        if(signinAudio){
-            signinAudio.currentTime = 0;
-            signinAudio.volume = 1;
-            signinAudio.play().catch(
-                error =>
-                    console.warn(
-                        "Could not play /signin.mp3:",
-                        error
-                    )
-            );
-        }
+        intro.style.opacity = "0";
+        site.style.opacity = "1";
 
         setTimeout(
             function(){
@@ -6039,8 +6366,23 @@ enterButton.addEventListener(
                 intro.style.display =
                     "none";
 
+                const signinAudio =
+                    document.getElementById("signinAudio");
+
+                if(signinAudio){
+                    signinAudio.currentTime = 0;
+                    signinAudio.volume = 1;
+                    signinAudio.play().catch(
+                        error =>
+                            console.warn(
+                                "Could not play /signin.mp3:",
+                                error
+                            )
+                    );
+                }
+
             },
-            1500
+            700
         );
 
     }
@@ -6098,8 +6440,8 @@ const panelNames = {
     confusedGirlsPanel:
         "ConfusedGirls",
 
-    gta6Panel:
-        "Gta-6.exe"
+    taskManagerPanel:
+        "Rauta's super pro task manager"
 
 };
 
@@ -6117,6 +6459,8 @@ document
         }
     );
 
+
+window.panelNames = panelNames;
 
 function openPanel(id){
 
@@ -11527,208 +11871,6 @@ function resetBreakoutGame(){
 }
 window.addEventListener("keydown",e=>{if(!breakoutState||breakoutState.over)return;if(e.key==="ArrowLeft")breakoutState.x=Math.max(0,breakoutState.x-25);if(e.key==="ArrowRight")breakoutState.x=Math.min(450,breakoutState.x+25)});
 
-
-/* =========================================================
-   GTA-6 STORY / MINI RPG
-========================================================= */
-let gta6Timer=null;
-let gta6State=null;
-
-function startGta6Glitch(){
-    const warning=document.getElementById("gta6Warning");
-    const glitch=document.getElementById("gta6Glitch");
-    const black=document.getElementById("gta6Black");
-    if(!warning||!glitch||!black)return;
-    warning.style.display="none";
-    glitch.classList.add("gta6-active");
-    black.classList.remove("gta6-show");
-    clearTimeout(gta6Timer);
-    gta6Timer=setTimeout(function(){
-        glitch.classList.remove("gta6-active");
-        black.classList.add("gta6-show");
-    },4200);
-}
-
-function enterGta6Game(){
-    const black=document.getElementById("gta6Black");
-    const game=document.getElementById("gta6Game");
-    if(!black||!game)return;
-    black.classList.remove("gta6-show");
-    game.classList.add("gta6-show");
-    resetGta6Game();
-}
-
-function gta6Log(msg){
-    const log=document.getElementById("gta6Log");
-    if(!log)return;
-    const line=document.createElement("div");
-    line.textContent="> "+msg;
-    log.appendChild(line);
-    log.scrollTop=log.scrollHeight;
-}
-
-function resetGta6Game(){
-    gta6State={
-        x:0,y:0,hp:20,maxHp:20,items:0,defeated:0,
-        inventory:[],battle:null,battleEnemyHp:0,
-        enemies:[
-            {x:4,y:2,name:"THE STRANGER",hp:10,maxHp:10,emoji:"☻",alive:true},
-            {x:7,y:5,name:"WINDOWS PERSON",hp:12,maxHp:12,emoji:"☹",alive:true}
-        ],
-        items:[
-            {x:2,y:1,name:"mysterious key",emoji:"🔑",got:false},
-            {x:6,y:1,name:"red soul",emoji:"♥",got:false},
-            {x:1,y:5,name:"weird snack",emoji:"🍪",got:false}
-        ],
-        exit:{x:8,y:6}
-    };
-    const warning=document.getElementById("gta6Warning");
-    const glitch=document.getElementById("gta6Glitch");
-    const black=document.getElementById("gta6Black");
-    const game=document.getElementById("gta6Game");
-    if(warning)warning.style.display="none";
-    if(glitch)glitch.classList.remove("gta6-active");
-    if(black)black.classList.remove("gta6-show");
-    if(game)game.classList.add("gta6-show");
-    const log=document.getElementById("gta6Log");
-    if(log)log.innerHTML="";
-    gta6Log("You wake up inside a broken save file.");
-    gta6Log("WASD / arrow keys: move. Find the items.");
-    gta6Render();
-}
-
-function gta6TileBlocked(x,y){
-    if(x<0||x>8||y<0||y>6)return true;
-    return (x===3&&y>=1&&y<=4)||(x===5&&y<=3)||(y===4&&x>=4&&x<=7);
-}
-
-function gta6Render(){
-    const grid=document.getElementById("gta6Grid");
-    const player=document.getElementById("gta6Player");
-    const stats=document.getElementById("gta6Stats");
-    if(!grid||!player||!stats||!gta6State)return;
-    grid.innerHTML="";
-    for(let y=0;y<7;y++){
-        for(let x=0;x<9;x++){
-            const tile=document.createElement("div");
-            tile.className="gta6-tile "+(gta6TileBlocked(x,y)?"gta6-wall":"gta6-floor");
-            const enemy=gta6State.enemies.find(e=>e.alive&&e.x===x&&e.y===y);
-            const item=gta6State.items.find(i=>!i.got&&i.x===x&&i.y===y);
-            if(enemy)tile.textContent=enemy.emoji;
-            else if(item)tile.textContent=item.emoji;
-            else if(gta6State.exit.x===x&&gta6State.exit.y===y)tile.textContent=(gta6State.items>=3&&gta6State.defeated>=2)?"🚪":"·";
-            grid.appendChild(tile);
-        }
-    }
-    player.style.left=(gta6State.x*11.111)+"%";
-    player.style.top=(gta6State.y*14.2857)+"%";
-    stats.innerHTML="HP: <strong>"+gta6State.hp+"/"+gta6State.maxHp+"</strong><br>Items: <strong>"+gta6State.items+"/3</strong><br>Defeated: <strong>"+gta6State.defeated+"/2</strong><br>Inventory: "+(gta6State.inventory.join(", ")||"empty");
-}
-
-function gta6TryMove(dx,dy){
-    if(!gta6State||gta6State.battle)return;
-    const nx=gta6State.x+dx,ny=gta6State.y+dy;
-    if(gta6TileBlocked(nx,ny)){gta6Log("A wall whispers: no.");return;}
-    gta6State.x=nx;gta6State.y=ny;
-    const item=gta6State.items.find(i=>!i.got&&i.x===nx&&i.y===ny);
-    if(item){
-        item.got=true;gta6State.items++;gta6State.inventory.push(item.name);
-        gta6State.hp=Math.min(gta6State.maxHp,gta6State.hp+2);
-        gta6Log("You found "+item.name+". Your HP feels better.");
-    }
-    const enemy=gta6State.enemies.find(e=>e.alive&&e.x===nx&&e.y===ny);
-    if(enemy)gta6StartBattle(enemy);
-    if(nx===gta6State.exit.x&&ny===gta6State.exit.y){
-        if(gta6State.items>=3&&gta6State.defeated>=2){
-            gta6Log("The exit opens. You escaped the cursed GTA-6 file. YOU WIN :3");
-            alert("YOU ESCAPED GTA-6! :3");
-        }else gta6Log("The exit is locked. It wants 3 items and 2 defeated enemies.");
-    }
-    gta6Render();
-}
-
-function gta6StartBattle(enemy){
-    gta6State.battle=enemy;
-    gta6State.battleEnemyHp=enemy.hp;
-    const battle=document.getElementById("gta6Battle");
-    if(battle)battle.classList.add("gta6-show");
-    gta6BattleText(enemy.name+" blocks your path. HP "+enemy.hp+"/"+enemy.maxHp+". What will you do?");
-}
-
-function gta6BattleText(msg){
-    const el=document.getElementById("gta6BattleText");
-    if(el)el.textContent=msg;
-}
-
-function gta6BattleAction(action){
-    const e=gta6State?.battle;
-    if(!e)return;
-    if(action==="fight"){
-        const dmg=3+Math.floor(Math.random()*4);
-        gta6State.battleEnemyHp-=dmg;
-        gta6BattleText("You FIGHT "+e.name+" for "+dmg+" damage.");
-    }else if(action==="act"){
-        gta6State.battleEnemyHp=Math.max(0,gta6State.battleEnemyHp-2);
-        gta6BattleText("You say something deeply confusing. "+e.name+" loses 2 HP.");
-    }else if(action==="item"){
-        if(gta6State.inventory.length){
-            const used=gta6State.inventory.pop();
-            gta6State.hp=Math.min(gta6State.maxHp,gta6State.hp+5);
-            gta6BattleText("You use "+used+". +5 HP.");
-        }else{
-            gta6BattleText("You have no items. Awkward.");
-        }
-    }else if(action==="mercy"){
-        if(gta6State.battleEnemyHp<=3){
-            e.alive=false;gta6State.defeated++;gta6State.battle=null;
-            document.getElementById("gta6Battle").classList.remove("gta6-show");
-            gta6Log(e.name+" accepts MERCY and vanishes.");
-            gta6Render();
-            return;
-        }
-        gta6BattleText("MERCY is rejected. They look unconvinced.");
-    }
-    if(gta6State.battleEnemyHp<=0){
-        e.alive=false;gta6State.defeated++;gta6State.battle=null;
-        document.getElementById("gta6Battle").classList.remove("gta6-show");
-        gta6Log(e.name+" was defeated.");
-        gta6Render();
-        return;
-    }
-    const hit=1+Math.floor(Math.random()*3);
-    gta6State.hp-=hit;
-    gta6BattleText(document.getElementById("gta6BattleText").textContent+"\\n\\n"+e.name+" hits you for "+hit+".");
-    if(gta6State.hp<=0){
-        gta6State.hp=gta6State.maxHp;gta6State.x=0;gta6State.y=0;gta6State.battle=null;
-        document.getElementById("gta6Battle").classList.remove("gta6-show");
-        gta6Log("You collapsed and woke back at the entrance.");
-    }
-    gta6Render();
-}
-
-window.addEventListener("keydown",function(e){
-    if(!gta6State||!document.getElementById("gta6Game")?.classList.contains("gta6-show"))return;
-    const map={ArrowUp:[0,-1],w:[0,-1],W:[0,-1],ArrowDown:[0,1],s:[0,1],S:[0,1],ArrowLeft:[-1,0],a:[-1,0],A:[-1,0],ArrowRight:[1,0],d:[1,0],D:[1,0]};
-    const m=map[e.key];
-    if(m){e.preventDefault();gta6TryMove(m[0],m[1]);}
-});
-
-const gta6OriginalOpenPanel=openPanel;
-openPanel=function(id){
-    gta6OriginalOpenPanel(id);
-    if(id==="gta6Panel"){
-        clearTimeout(gta6Timer);
-        const warning=document.getElementById("gta6Warning");
-        const glitch=document.getElementById("gta6Glitch");
-        const black=document.getElementById("gta6Black");
-        const game=document.getElementById("gta6Game");
-        if(warning)warning.style.display="flex";
-        if(glitch)glitch.classList.remove("gta6-active");
-        if(black)black.classList.remove("gta6-show");
-        if(game)game.classList.remove("gta6-show");
-    }
-};
-
 /* =========================================================
    GAMES FOLDER
 ========================================================= */
@@ -12346,6 +12488,640 @@ catch(error){
 
 }
 
+
+
+
+/* =========================================================
+   TASK MANAGER BEHAVIOR — WORKING TABS
+========================================================= */
+
+(function(){
+
+    const tm = document.getElementById("taskManagerPanel");
+    if(!tm) return;
+
+    const tabs = Array.from(tm.querySelectorAll(".tm-tab"));
+    const pages = Array.from(tm.querySelectorAll(".tm-page"));
+
+    function showTab(name){
+
+        tabs.forEach(function(tab){
+            const active =
+                tab.getAttribute("data-tab") === name;
+
+            tab.classList.toggle("active", active);
+            tab.setAttribute("aria-selected", active ? "true" : "false");
+        });
+
+        pages.forEach(function(page){
+            const match =
+                page.getAttribute("data-page") === name;
+
+            page.classList.toggle("hidden", !match);
+        });
+
+        /* Keep the Task Manager's compact layout after changing tabs. */
+        const content =
+            tm.querySelector(".task-manager-content");
+
+        if(content)
+            content.scrollTop = 0;
+    }
+
+    tabs.forEach(function(tab){
+
+        tab.type = "button";
+
+        tab.addEventListener("click", function(event){
+
+            event.preventDefault();
+            event.stopPropagation();
+
+            const name =
+                tab.getAttribute("data-tab");
+
+            if(name)
+                showTab(name);
+
+        }, true);
+
+    });
+
+    /* Default tab. */
+    if(tabs.length)
+        showTab(
+            tabs[0].getAttribute("data-tab") || "applications"
+        );
+
+    /* ---------------------------------------------------------
+       LIVE PERFORMANCE GRAPH
+    --------------------------------------------------------- */
+
+    const cpuGraph = document.getElementById("tmCpuGraph");
+    const pfGraph = document.getElementById("tmPfGraph");
+
+    const cpuCtx =
+        cpuGraph ? cpuGraph.getContext("2d") : null;
+
+    const pfCtx =
+        pfGraph ? pfGraph.getContext("2d") : null;
+
+    let cpuHistory =
+        Array.from({length:70}, () => Math.random() * 18);
+
+    let pfHistory =
+        Array.from({length:70}, () => 42 + Math.random() * 8);
+
+    function drawGraph(ctx, values, max){
+
+        if(!ctx) return;
+
+        const w = ctx.canvas.width;
+        const h = ctx.canvas.height;
+
+        ctx.clearRect(0,0,w,h);
+
+        ctx.strokeStyle = "#006600";
+        ctx.lineWidth = 1;
+
+        for(let x=0; x<w; x+=25){
+            ctx.beginPath();
+            ctx.moveTo(x,0);
+            ctx.lineTo(x,h);
+            ctx.stroke();
+        }
+
+        for(let y=0; y<h; y+=25){
+            ctx.beginPath();
+            ctx.moveTo(0,y);
+            ctx.lineTo(w,y);
+            ctx.stroke();
+        }
+
+        ctx.strokeStyle = "#20d020";
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+
+        values.forEach(function(value,i){
+
+            const x =
+                i * (w / (values.length - 1));
+
+            const y =
+                h - (value / max) * h;
+
+            if(i === 0)
+                ctx.moveTo(x,y);
+            else
+                ctx.lineTo(x,y);
+
+        });
+
+        ctx.stroke();
+    }
+
+    function updateTaskManager(){
+
+        const cpu =
+            Math.floor(3 + Math.random() * 12);
+
+        const pf =
+            Math.floor(800 + Math.random() * 100);
+
+        cpuHistory.push(cpu);
+        cpuHistory.shift();
+
+        pfHistory.push(pf / 10);
+        pfHistory.shift();
+
+        const cpuValue =
+            document.getElementById("tmCpuValue");
+
+        const pfValue =
+            document.getElementById("tmPfValue");
+
+        const cpuBar =
+            document.getElementById("tmCpuBar");
+
+        const pfBar =
+            document.getElementById("tmPfBar");
+
+        if(cpuValue)
+            cpuValue.textContent = cpu + "%";
+
+        if(pfValue)
+            pfValue.textContent = pf + " MB";
+
+        if(cpuBar)
+            cpuBar.style.height =
+                Math.max(8,cpu) + "%";
+
+        if(pfBar)
+            pfBar.style.height =
+                Math.min(100,pf / 10) + "%";
+
+        const statusCpu =
+            document.getElementById("tmStatusCpu");
+
+        if(statusCpu)
+            statusCpu.textContent =
+                cpu + "%";
+
+        drawGraph(cpuCtx, cpuHistory, 100);
+        drawGraph(pfCtx, pfHistory, 100);
+    }
+
+    updateTaskManager();
+    setInterval(updateTaskManager, 1200);
+
+})();
+
+
+
+
+/* =========================================================
+   LIVE APPLICATIONS TAB
+   Applications = currently open desktop GUIs.
+   Processes = the process list.
+   Performance = live system-style stats.
+========================================================= */
+
+(function(){
+
+    const tm =
+        document.getElementById("taskManagerPanel");
+
+    if(!tm)
+        return;
+
+    const list =
+        document.getElementById("tmApplicationsList");
+
+    const status =
+        document.getElementById("tmAppStatus");
+
+    const switchButton =
+        document.getElementById("tmSwitchToApp");
+
+    const newTaskButton =
+        document.getElementById("tmNewTask");
+
+    let selectedId = null;
+
+    function isOpen(panel){
+
+        if(!panel || panel === tm)
+            return false;
+
+        return !panel.classList.contains("hidden") &&
+               getComputedStyle(panel).display !== "none";
+    }
+
+    function refreshApplications(){
+
+        if(!list)
+            return;
+
+        list.innerHTML = "";
+
+        const panels =
+            Array.from(
+                document.querySelectorAll(".panel")
+            ).filter(isOpen);
+
+        /* Task Manager itself is an open application too. */
+        if(isOpen(tm))
+            panels.push(tm);
+
+        const seen = new Set();
+
+        panels.forEach(function(panel){
+
+            if(seen.has(panel.id))
+                return;
+
+            seen.add(panel.id);
+
+            const row =
+                document.createElement("div");
+
+            row.className = "tm-row";
+            row.dataset.panelId = panel.id;
+
+            const name =
+                (window.panelNames &&
+                 window.panelNames[panel.id]) ||
+                panel.id;
+
+            const left =
+                document.createElement("span");
+
+            const right =
+                document.createElement("span");
+
+            left.textContent = name;
+            right.textContent = "Running";
+
+            row.appendChild(left);
+            row.appendChild(right);
+
+            row.addEventListener("click", function(){
+
+                list.querySelectorAll(".tm-row.selected")
+                    .forEach(
+                        r => r.classList.remove("selected")
+                    );
+
+                row.classList.add("selected");
+                selectedId = panel.id;
+
+                if(switchButton)
+                    switchButton.disabled = false;
+
+            });
+
+            list.appendChild(row);
+
+        });
+
+        if(status){
+            status.textContent =
+                panels.length +
+                (panels.length === 1
+                    ? " application running"
+                    : " applications running");
+        }
+
+        if(!selectedId ||
+           !document.getElementById(selectedId) ||
+           !isOpen(document.getElementById(selectedId))){
+
+            selectedId = null;
+
+            if(switchButton)
+                switchButton.disabled = true;
+
+        }
+    }
+
+    window.refreshTaskManagerApplications =
+        refreshApplications;
+
+    if(switchButton){
+
+        switchButton.addEventListener(
+            "click",
+            function(){
+
+                if(!selectedId)
+                    return;
+
+                const panel =
+                    document.getElementById(selectedId);
+
+                if(!panel)
+                    return;
+
+                panel.classList.remove("hidden");
+                panel.style.display = "block";
+
+                if(typeof bringToFront === "function")
+                    bringToFront(panel);
+
+            }
+        );
+
+    }
+
+    if(newTaskButton){
+
+        newTaskButton.addEventListener(
+            "click",
+            function(){
+
+                const command =
+                    prompt(
+                        "Type the name of a site app to open:"
+                    );
+
+                if(!command)
+                    return;
+
+                const match =
+                    Object.keys(window.panelNames || {})
+                        .find(function(id){
+
+                            const name =
+                                window.panelNames[id];
+
+                            return (
+                                name.toLowerCase() ===
+                                command.toLowerCase()
+                            ) ||
+                            id.toLowerCase() ===
+                                command.toLowerCase();
+
+                        });
+
+                if(match &&
+                   document.getElementById(match)){
+
+                    openPanel(match);
+                    refreshApplications();
+
+                } else {
+
+                    alert(
+                        "That app isn't installed on Rautatientori."
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+    /*
+     * Wrap the existing window functions so Applications always
+     * mirrors what is actually visible on the desktop.
+     */
+    const originalOpen = window.openPanel;
+    const originalMinimize = window.minimizePanel;
+    const originalClose = window.closePanel;
+
+    if(typeof originalOpen === "function"){
+        window.openPanel = function(id){
+
+            originalOpen(id);
+
+            setTimeout(
+                refreshApplications,
+                0
+            );
+
+        };
+    }
+
+    if(typeof originalMinimize === "function"){
+        window.minimizePanel = function(id){
+
+            originalMinimize(id);
+
+            setTimeout(
+                refreshApplications,
+                0
+            );
+
+        };
+    }
+
+    if(typeof originalClose === "function"){
+        window.closePanel = function(id){
+
+            originalClose(id);
+
+            setTimeout(
+                refreshApplications,
+                0
+            );
+
+        };
+    }
+
+    /* Also notice windows restored from the taskbar. */
+    document.addEventListener(
+        "click",
+        function(event){
+
+            if(
+                event.target.closest &&
+                event.target.closest(".task-window")
+            ){
+                setTimeout(
+                    refreshApplications,
+                    0
+                );
+            }
+
+        }
+    );
+
+    refreshApplications();
+
+})();
+
+
+/* =========================================================
+   RALSEI + EXPLORER PROCESS END BEHAVIOR
+========================================================= */
+
+(function(){
+
+    const table =
+        document.getElementById("tmProcessTable");
+
+    const endButton =
+        document.getElementById("tmEndProcess");
+
+    let selectedRow = null;
+
+    if(!table || !endButton)
+        return;
+
+    table.querySelectorAll("tr[data-process]").forEach(
+        function(row){
+
+            row.addEventListener("click", function(){
+
+                table.querySelectorAll("tr.selected")
+                    .forEach(
+                        r => r.classList.remove("selected")
+                    );
+
+                row.classList.add("selected");
+                selectedRow = row;
+                endButton.disabled = false;
+
+            });
+
+        }
+    );
+
+    function ralseiProcessEnd(){
+
+        const ralsei =
+            document.getElementById("ralseiClippy");
+
+        const bubble =
+            document.getElementById("clippyBubble");
+
+        if(!ralsei)
+            return;
+
+        if(bubble){
+            bubble.textContent =
+                "NOOOOOOOOOOOOO";
+            bubble.style.display =
+                "block";
+            bubble.style.opacity =
+                "1";
+            bubble.style.transition =
+                "opacity 3.5s ease";
+        }
+
+        ralsei.style.transition =
+            "opacity 4s ease, transform 4s ease";
+
+        ralsei.style.transform =
+            "translateY(35px)";
+
+        ralsei.style.opacity =
+            "0";
+
+        setTimeout(function(){
+
+            ralsei.style.display =
+                "none";
+
+        }, 4200);
+
+    }
+
+    function explorerProcessEnd(){
+
+        const crash =
+            document.getElementById("xpExplorerCrash");
+
+        const site =
+            document.getElementById("site");
+
+        if(!site)
+            return;
+
+        /*
+         * Explorer is the desktop itself here:
+         * everything starts moving upward and fading together.
+         * The black layer only becomes visible underneath it.
+         */
+        if(crash){
+            crash.classList.add("active");
+        }
+
+        site.style.transformOrigin = "50% 100%";
+        site.style.transition =
+            "transform 1.8s cubic-bezier(.18,.72,.24,1), opacity 1.8s ease";
+
+        requestAnimationFrame(function(){
+            site.style.transform =
+                "translate3d(0,-115vh,0) scale(.96)";
+            site.style.opacity = "0";
+        });
+
+        setTimeout(function(){
+
+            if(crash){
+                const crashWindow =
+                    crash.querySelector(".xp-crash-window");
+
+                if(crashWindow)
+                    crashWindow.style.display = "none";
+            }
+
+        }, 1900);
+
+    }
+
+    endButton.addEventListener(
+        "click",
+        function(){
+
+            if(!selectedRow)
+                return;
+
+            const process =
+                selectedRow.getAttribute("data-process");
+
+            if(process === "Ralsei-Clippy"){
+
+                ralseiProcessEnd();
+
+            } else if(process === "explorer.exe"){
+
+                explorerProcessEnd();
+
+            } else {
+
+                selectedRow.remove();
+
+                const count =
+                    table.querySelectorAll(
+                        "tr[data-process]"
+                    ).length;
+
+                const countEls = [
+                    document.getElementById("tmProcessCount"),
+                    document.getElementById("tmStatusProcesses")
+                ];
+
+                countEls.forEach(function(el){
+                    if(el)
+                        el.textContent =
+                            count +
+                            (el.id === "tmProcessCount"
+                                ? " processes"
+                                : "");
+                });
+
+            }
+
+            endButton.disabled = true;
+            selectedRow = null;
+
+        }
+    );
+
+})();
 
 </script>
 
