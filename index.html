@@ -334,25 +334,198 @@ body {
 
 /* Analog clock */
 
+/* =========================
+   WINDOWS-STYLE ANALOG CLOCK
+========================= */
+
 .analog-clock {
-    width: 90px;
-    height: 90px;
+    width: 145px;
+    height: 145px;
 
     margin: 0 auto 10px;
 
-    position: relative;
+    padding: 7px;
 
-    border: 3px solid white;
     border-radius: 50%;
 
-    background: rgba(0, 0, 0, 0.35);
+    background:
+        linear-gradient(
+            145deg,
+            #111 0%,
+            #444 35%,
+            #111 70%,
+            #555 100%
+        );
 
     box-shadow:
-        inset 0 0 8px rgba(0,0,0,0.6),
-        0 2px 8px rgba(0,0,0,0.5);
+        0 4px 8px rgba(0,0,0,0.8),
+        inset 0 2px 2px rgba(255,255,255,0.35),
+        inset 0 -3px 4px rgba(0,0,0,0.8);
+
+    position: relative;
 }
 
-/* Clock hands */
+/* Inner clock face */
+
+.clock-face {
+    width: 100%;
+    height: 100%;
+
+    position: relative;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 45% 35%,
+            #ffffff 0%,
+            #eeeeee 55%,
+            #cfcfcf 100%
+        );
+
+    border: 1px solid #777;
+
+    box-shadow:
+        inset 0 1px 3px rgba(0,0,0,0.35),
+        inset 0 -2px 4px rgba(255,255,255,0.7);
+}
+
+/* =========================
+   CLOCK NUMBERS
+========================= */
+
+.number {
+    position: absolute;
+
+    width: 30px;
+    height: 25px;
+
+    margin-left: -15px;
+    margin-top: -12px;
+
+    text-align: center;
+
+    font-family:
+        Arial,
+        Tahoma,
+        sans-serif;
+
+    font-size: 22px;
+
+    font-weight: normal;
+
+    color: #111;
+
+    line-height: 25px;
+
+    z-index: 3;
+
+    text-shadow:
+        0 1px 0 white;
+}
+
+/* Positions */
+
+.n12 {
+    left: 50%;
+    top: 14%;
+}
+
+.n1 {
+    left: 70%;
+    top: 19%;
+}
+
+.n2 {
+    left: 83%;
+    top: 32%;
+}
+
+.n3 {
+    left: 88%;
+    top: 50%;
+}
+
+.n4 {
+    left: 83%;
+    top: 68%;
+}
+
+.n5 {
+    left: 70%;
+    top: 81%;
+}
+
+.n6 {
+    left: 50%;
+    top: 86%;
+}
+
+.n7 {
+    left: 30%;
+    top: 81%;
+}
+
+.n8 {
+    left: 17%;
+    top: 68%;
+}
+
+.n9 {
+    left: 12%;
+    top: 50%;
+}
+
+.n10 {
+    left: 17%;
+    top: 32%;
+}
+
+.n11 {
+    left: 30%;
+    top: 19%;
+}
+
+/* =========================
+   MINUTE TICKS
+========================= */
+
+.ticks {
+    position: absolute;
+
+    inset: 5px;
+
+    border-radius: 50%;
+
+    z-index: 1;
+}
+
+.tick {
+    position: absolute;
+
+    width: 1px;
+    height: 5px;
+
+    background: #555;
+
+    left: 50%;
+    top: 2px;
+
+    transform-origin:
+        50%
+        65px;
+}
+
+.tick.major {
+    width: 2px;
+    height: 7px;
+
+    background: #222;
+}
+
+/* =========================
+   CLOCK HANDS
+========================= */
 
 .clock-hand {
     position: absolute;
@@ -360,64 +533,146 @@ body {
     left: 50%;
     bottom: 50%;
 
-    transform-origin: bottom center;
-    transform: translateX(-50%);
+    transform-origin:
+        bottom center;
+
+    transform:
+        translateX(-50%);
 
     border-radius: 4px;
-
-    background: white;
-}
-
-.hour-hand {
-    width: 4px;
-    height: 25px;
-}
-
-.minute-hand {
-    width: 3px;
-    height: 33px;
-}
-
-.second-hand {
-    width: 2px;
-    height: 38px;
-
-    background: #ff7de9;
-}
-
-/* Center of clock */
-
-.clock-center {
-    position: absolute;
-
-    width: 8px;
-    height: 8px;
-
-    left: 50%;
-    top: 50%;
-
-    transform: translate(-50%, -50%);
-
-    background: white;
-
-    border-radius: 50%;
 
     z-index: 5;
 }
 
-#currentTime {
-    font-size: 18px;
+/* Hour */
+
+.hour-hand {
+    width: 5px;
+    height: 34px;
+
+    background:
+        linear-gradient(
+            to right,
+            #111,
+            #444,
+            #111
+        );
+
+    box-shadow:
+        1px 1px 2px rgba(0,0,0,0.5);
+}
+
+/* Minute */
+
+.minute-hand {
+    width: 4px;
+    height: 48px;
+
+    background:
+        linear-gradient(
+            to right,
+            #111,
+            #444,
+            #111
+        );
+
+    box-shadow:
+        1px 1px 2px rgba(0,0,0,0.5);
+}
+
+/* Second */
+
+.second-hand {
+    width: 2px;
+    height: 55px;
+
+    background: #111;
+
+    box-shadow:
+        1px 1px 2px rgba(0,0,0,0.4);
+
+    z-index: 6;
+}
+
+/* =========================
+   CENTER PIN
+========================= */
+
+.clock-center {
+    position: absolute;
+
+    width: 11px;
+    height: 11px;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #eeeeee,
+            #555 45%,
+            #111 100%
+        );
+
+    border: 1px solid #222;
+
+    box-shadow:
+        0 1px 2px rgba(0,0,0,0.7);
+
+    z-index: 10;
+}
+
+/* =========================
+   DATE BOX
+========================= */
+
+.clock-date {
+    position: absolute;
+
+    left: 50%;
+    top: 43%;
+
+    transform:
+        translate(-50%, -50%);
+
+    width: 28px;
+    height: 18px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #f5f5f5,
+            #d6d6d6
+        );
+
+    border: 1px solid #aaa;
+
+    color: #666;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 12px;
+
     font-weight: bold;
+
+    line-height: 16px;
+
+    text-align: center;
+
+    box-shadow:
+        inset 0 1px white,
+        0 1px 1px rgba(0,0,0,0.3);
+
+    z-index: 4;
 }
-
-.time-label {
-    margin-top: 2px;
-
-    color: #cfcfcf;
-
-    font-size: 10px;
-}
-
 /* =========================
    MUSIC
 ========================= */
@@ -1355,13 +1610,40 @@ body {
 
     <div class="analog-clock">
 
-        <div class="clock-hand hour-hand"></div>
+        <div class="clock-face">
 
-        <div class="clock-hand minute-hand"></div>
+            <!-- Minute ticks -->
+            <div class="ticks" id="clockTicks"></div>
 
-        <div class="clock-hand second-hand"></div>
+            <!-- Numbers -->
+            <div class="number n12">12</div>
+            <div class="number n1">1</div>
+            <div class="number n2">2</div>
+            <div class="number n3">3</div>
+            <div class="number n4">4</div>
+            <div class="number n5">5</div>
+            <div class="number n6">6</div>
+            <div class="number n7">7</div>
+            <div class="number n8">8</div>
+            <div class="number n9">9</div>
+            <div class="number n10">10</div>
+            <div class="number n11">11</div>
 
-        <div class="clock-center"></div>
+            <!-- Date -->
+            <div class="clock-date" id="clockDate">
+                16
+            </div>
+
+            <!-- Hands -->
+            <div class="clock-hand hour-hand"></div>
+
+            <div class="clock-hand minute-hand"></div>
+
+            <div class="clock-hand second-hand"></div>
+
+            <div class="clock-center"></div>
+
+        </div>
 
     </div>
 
@@ -1374,7 +1656,6 @@ body {
     </div>
 
 </div>
-
 <!-- =========================
      DESKTOP ICONS
 ========================= -->
