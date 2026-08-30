@@ -2368,6 +2368,60 @@ a:visited {
         1px solid #555;
 }
 
+
+/* =========================================================
+   RAUTA DESKTOP STACKING SYSTEM — HARD FIX
+   0  background
+   10 desktop icons
+   1000 windows
+   2000 taskbar
+   3000 navbar
+   9999 Clippy / overlays
+========================================================= */
+
+#site,
+.desktop,
+#desktop,
+.desktop-area {
+    position: relative;
+    isolation: isolate;
+}
+
+.desktop-icon,
+.time-box {
+    z-index: 10 !important;
+}
+
+.panel {
+    position: fixed !important;
+    z-index: calc(1000 + var(--window-level, 0)) !important;
+    isolation: isolate;
+}
+
+#taskbar,
+.taskbar,
+#taskButtons {
+    position: fixed;
+    z-index: 2000 !important;
+}
+
+.navbar,
+#navbar,
+nav {
+    position: fixed;
+    z-index: 3000 !important;
+}
+
+/* The active window gets a value above the base window layer.
+   JS sets this inline, so it can actually change. */
+.panel.active-window {
+    z-index: calc(1000 + var(--window-level, 0)) !important;
+}
+
+.ralsei-clippy {
+    z-index: 9999 !important;
+}
+
 </style>
 
 <audio id="signinAudio" src="/signin.mp3" preload="auto"></audio>
@@ -5819,6 +5873,20 @@ const panelNames = {
 };
 
 
+
+/* Initialize every window in the same desktop layer. */
+document
+    .querySelectorAll(".panel")
+    .forEach(
+        panel => {
+            panel.style.setProperty(
+                "--window-level",
+                "0"
+            );
+        }
+    );
+
+
 function openPanel(id){
 
     playRautaSFX(
@@ -5961,33 +6029,54 @@ function bringToFront(panel){
     if(!panel)
         return;
 
+    /*
+        Every window lives in the SAME stacking context.
+        The active panel gets an incrementing custom property.
+        This avoids CSS !important defeating inline z-index.
+    */
     highestZ =
         Math.max(
             highestZ + 1,
-            101
+            1
         );
-
-    panel.style.zIndex =
-        highestZ;
 
     document
         .querySelectorAll(".panel")
         .forEach(
-            p => p.classList.remove("active-window")
+            p => {
+                p.classList.remove("active-window");
+            }
         );
 
-    panel.classList.add("active-window");
+    panel.style.setProperty(
+        "--window-level",
+        String(highestZ)
+    );
+
+    panel.classList.add(
+        "active-window"
+    );
+
+    /* Keep the active panel above the desktop icons even if
+       some old CSS rule tries to assign a z-index. */
+    panel.style.setProperty(
+        "z-index",
+        String(1000 + highestZ),
+        "important"
+    );
 }
 
 
 
+
 /* =========================================================
-   WINDOW LAYER SYSTEM
+   REAL WINDOW LAYER BEHAVIOR
 ========================================================= */
 
 document.addEventListener(
     "pointerdown",
     function(e){
+
         const panel =
             e.target.closest(".panel");
 
@@ -6000,7 +6089,6 @@ document.addEventListener(
     },
     true
 );
-
 
 /* =========================================================
    WINDOW DRAGGING
@@ -6044,6 +6132,8 @@ document
 
                     if(e.button !== 0)
                         return;
+
+                    bringToFront(panel);
 
                     const rect =
                         panel.getBoundingClientRect();
