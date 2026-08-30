@@ -1,18 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 
 <title>R</title>
 
-<meta property="og:title" content="rautatientorii">
-<meta property="og:description" content="hhi guys im rauta andd this is my websssite">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://rauta.cfd">
-<meta property="og:image" content="background.gif">
+<meta
+    property="og:title"
+    content="rautatientorii"
+>
 
-<meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#8B5CF6">
+<meta
+    property="og:description"
+    content="hhi guys im rauta andd this is my websssite"
+>
+
+<meta
+    property="og:type"
+    content="website"
+>
+
+<meta
+    property="og:url"
+    content="https://rauta.cfd"
+>
+
+<meta
+    property="og:image"
+    content="background.gif"
+>
+
+<meta
+    name="twitter:card"
+    content="summary_large_image"
+>
+
+<meta
+    name="theme-color"
+    content="#8B5CF6"
+>
+
+
+<!-- =========================================================
+     MONACO
+========================================================= -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.52.2/min/vs/loader.min.js"></script>
+
 
 <style>
 
@@ -34,8 +70,13 @@ body {
 
 body {
     overflow: hidden;
+
     background: #000;
-    font-family: Tahoma, Arial, sans-serif;
+
+    font-family:
+        Tahoma,
+        Arial,
+        sans-serif;
 }
 
 
@@ -44,10 +85,13 @@ body {
 ========================================================= */
 
 #intro {
+
     position: fixed;
+
     inset: 0;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
@@ -57,30 +101,41 @@ body {
 
     z-index: 100000;
 
-    transition: opacity 1.5s ease;
+    transition:
+        opacity 1.5s ease;
 }
 
 #enterButton {
+
     color: white;
 
-    background: linear-gradient(
-        to bottom,
-        rgb(243,110,210),
-        rgb(122,56,105) 50%,
-        rgb(51,24,44)
-    );
+    background:
+        linear-gradient(
+            to bottom,
+            rgb(243,110,210),
+            rgb(122,56,105) 50%,
+            rgb(51,24,44)
+        );
 
-    border: 1px solid #a77ce8;
+    border:
+        1px solid #a77ce8;
+
     border-radius: 4px;
 
-    padding: 10px 28px;
+    padding:
+        10px 28px;
 
-    font-family: Tahoma, Arial, sans-serif;
+    font-family:
+        Tahoma,
+        Arial,
+        sans-serif;
+
     font-size: 13px;
 
     cursor: pointer;
 
-    text-shadow: 1px 1px #222;
+    text-shadow:
+        1px 1px #222;
 
     box-shadow:
         inset 0 1px rgba(255,255,255,.35),
@@ -101,10 +156,15 @@ body {
 ========================================================= */
 
 #site {
+
     position: fixed;
+
     inset: 0;
+
     opacity: 0;
-    transition: opacity 1.5s ease;
+
+    transition:
+        opacity 1.5s ease;
 }
 
 
@@ -112,21 +172,47 @@ body {
    BACKGROUND
 ========================================================= */
 
+/*
+    IMPORTANT GLASS FIX:
+
+    The background is now its own layer.
+    Panels sit ABOVE it.
+
+    backdrop-filter can therefore actually
+    blur the background behind them.
+*/
+
 .background {
-    position: absolute;
+
+    position: fixed;
+
     inset: 0;
+
+    z-index: 0;
+
+    overflow: hidden;
 }
 
 .background img {
+
+    position: absolute;
+
+    inset: 0;
+
     width: 100%;
     height: 100%;
+
     object-fit: cover;
 }
 
-.overlay {
+.background .overlay {
+
     position: absolute;
+
     inset: 0;
-    background: rgba(0,0,0,.25);
+
+    background:
+        rgba(0,0,0,.25);
 }
 
 
@@ -135,15 +221,18 @@ body {
 ========================================================= */
 
 #dragBox {
+
     position: fixed;
 
     display: none;
 
     pointer-events: none;
 
-    background: rgba(40,150,255,.20);
+    background:
+        rgba(40,150,255,.20);
 
-    border: 1px solid rgba(0,255,255,.95);
+    border:
+        1px solid rgba(0,255,255,.95);
 
     box-shadow:
         inset 0 0 8px rgba(0,220,255,.18),
@@ -158,77 +247,129 @@ body {
 ========================================================= */
 
 .panel {
+
     position: absolute;
 
     width: 440px;
+
     min-height: 220px;
 
     top: 50%;
     left: 50%;
 
-    transform: translate(-50%,-50%);
+    transform:
+        translate(-50%,-50%);
 
-    background: rgba(212,208,200,.72);
+    /*
+        More transparent so the blur is visible.
+    */
 
-    border-top: 2px solid rgba(255,255,255,.9);
-    border-left: 2px solid rgba(255,255,255,.9);
-    border-right: 2px solid rgba(64,64,64,.85);
-    border-bottom: 2px solid rgba(64,64,64,.85);
+    background:
+        rgba(212,208,200,.52);
+
+    /*
+        Classic XP bevel
+    */
+
+    border-top:
+        2px solid rgba(255,255,255,.9);
+
+    border-left:
+        2px solid rgba(255,255,255,.9);
+
+    border-right:
+        2px solid rgba(64,64,64,.85);
+
+    border-bottom:
+        2px solid rgba(64,64,64,.85);
 
     box-shadow:
         5px 5px 15px rgba(0,0,0,.7);
 
     /*
-       FIXED GLASS EFFECT
+        GLASS EFFECT
     */
-    backdrop-filter: blur(14px) saturate(125%);
-    -webkit-backdrop-filter: blur(14px) saturate(125%);
+
+    backdrop-filter:
+        blur(18px)
+        saturate(140%);
+
+    -webkit-backdrop-filter:
+        blur(18px)
+        saturate(140%);
 
     z-index: 20;
 
     user-select: none;
+
+    overflow: hidden;
 }
 
 .panel.hidden {
     display: none;
 }
 
+
+/* =========================================================
+   WINDOW TITLE
+========================================================= */
+
 .panel-title {
+
     height: 30px;
 
     display: flex;
+
     align-items: center;
 
-    padding: 0 4px 0 8px;
+    padding:
+        0 4px 0 8px;
 
     color: white;
 
     background:
         linear-gradient(
             to right,
-            rgba(243,110,210,.88),
-            rgba(122,56,105,.88) 50%,
-            rgba(51,24,44,.88)
+            rgba(243,110,210,.92),
+            rgba(122,56,105,.92) 50%,
+            rgba(51,24,44,.92)
         );
 
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    /*
+        Keep title itself translucent.
+    */
+
+    backdrop-filter:
+        blur(10px)
+        saturate(130%);
+
+    -webkit-backdrop-filter:
+        blur(10px)
+        saturate(130%);
 
     font-size: 12px;
+
     font-weight: bold;
 
-    text-shadow: 1px 1px #222;
+    text-shadow:
+        1px 1px #222;
 
     cursor: move;
+
+    flex-shrink: 0;
 }
 
 .window-buttons {
+
     display: flex;
+
     gap: 2px;
+
     margin-left: auto;
 }
 
 .window-button {
+
     width: 21px;
     height: 20px;
 
@@ -243,12 +384,20 @@ body {
             #6e5b9a
         );
 
-    border-top: 1px solid #c5a9f5;
-    border-left: 1px solid #c5a9f5;
-    border-right: 1px solid #24104f;
-    border-bottom: 1px solid #24104f;
+    border-top:
+        1px solid #c5a9f5;
+
+    border-left:
+        1px solid #c5a9f5;
+
+    border-right:
+        1px solid #24104f;
+
+    border-bottom:
+        1px solid #24104f;
 
     font-size: 13px;
+
     font-weight: bold;
 
     cursor: pointer;
@@ -259,6 +408,7 @@ body {
 }
 
 .window-button.close {
+
     background:
         linear-gradient(
             to bottom,
@@ -271,7 +421,13 @@ body {
     background: #df0000;
 }
 
+
+/* =========================================================
+   PANEL CONTENT
+========================================================= */
+
 .panel-content {
+
     padding: 18px;
 
     color: #111;
@@ -280,22 +436,30 @@ body {
 
     min-height: 170px;
 
-    /*
-       Don't put a second giant backdrop-filter here.
-       This was one of the things making the old glass
-       effect look muddy.
-    */
-    background: rgba(212,208,200,.45);
+    background:
+        rgba(212,208,200,.30);
 
-    backdrop-filter: blur(7px) saturate(110%);
-    -webkit-backdrop-filter: blur(7px) saturate(110%);
+    /*
+        Small secondary blur.
+        This no longer fights the main panel blur.
+    */
+
+    backdrop-filter:
+        blur(6px)
+        saturate(110%);
+
+    -webkit-backdrop-filter:
+        blur(6px)
+        saturate(110%);
 
     user-select: text;
 }
 
 .panel-content h1,
 .panel-content h2 {
-    margin-bottom: 10px;
+
+    margin-bottom:
+        10px;
 }
 
 .panel-content h2 {
@@ -307,10 +471,17 @@ body {
 }
 
 .panel-content hr {
+
     border: 0;
-    border-top: 1px solid rgba(128,128,128,.8);
-    border-bottom: 1px solid rgba(255,255,255,.8);
-    margin: 12px 0;
+
+    border-top:
+        1px solid rgba(128,128,128,.8);
+
+    border-bottom:
+        1px solid rgba(255,255,255,.8);
+
+    margin:
+        12px 0;
 }
 
 
@@ -321,16 +492,30 @@ body {
 .xp-button,
 .tool-button,
 .paste-button {
-    padding: 6px 14px;
 
-    background: rgba(212,208,200,.85);
+    padding:
+        6px 14px;
 
-    border-top: 2px solid white;
-    border-left: 2px solid white;
-    border-right: 2px solid #404040;
-    border-bottom: 2px solid #404040;
+    background:
+        rgba(212,208,200,.85);
 
-    font-family: Tahoma, Arial, sans-serif;
+    border-top:
+        2px solid white;
+
+    border-left:
+        2px solid white;
+
+    border-right:
+        2px solid #404040;
+
+    border-bottom:
+        2px solid #404040;
+
+    font-family:
+        Tahoma,
+        Arial,
+        sans-serif;
+
     font-size: 12px;
 
     cursor: pointer;
@@ -339,33 +524,47 @@ body {
 .xp-button:active,
 .tool-button:active,
 .paste-button:active {
-    border-top-color: #404040;
-    border-left-color: #404040;
-    border-right-color: white;
-    border-bottom-color: white;
+
+    border-top-color:
+        #404040;
+
+    border-left-color:
+        #404040;
+
+    border-right-color:
+        white;
+
+    border-bottom-color:
+        white;
 }
 
 input,
-select,
-textarea {
-    font-family: Tahoma, Arial, sans-serif;
+select {
+
+    font-family:
+        Tahoma,
+        Arial,
+        sans-serif;
+
     font-size: 12px;
 
-    background: rgba(255,255,255,.82);
+    background:
+        rgba(255,255,255,.88);
 
-    border-top: 2px solid #777;
-    border-left: 2px solid #777;
-    border-right: 2px solid white;
-    border-bottom: 2px solid white;
+    border-top:
+        2px solid #777;
 
-    padding: 6px;
-}
+    border-left:
+        2px solid #777;
 
-textarea {
-    width: 100%;
-    min-height: 180px;
-    resize: vertical;
-    font-family: "Courier New", monospace;
+    border-right:
+        2px solid white;
+
+    border-bottom:
+        2px solid white;
+
+    padding:
+        6px;
 }
 
 
@@ -387,7 +586,8 @@ a:visited {
 ========================================================= */
 
 .navbar {
-    position: absolute;
+
+    position: fixed;
 
     bottom: 0;
     left: 0;
@@ -396,9 +596,11 @@ a:visited {
     height: 40px;
 
     display: flex;
+
     align-items: center;
 
-    padding: 0 6px;
+    padding:
+        0 6px;
 
     background:
         linear-gradient(
@@ -408,10 +610,16 @@ a:visited {
             rgba(51,24,44,.78)
         );
 
-    backdrop-filter: blur(12px) saturate(125%);
-    -webkit-backdrop-filter: blur(12px) saturate(125%);
+    backdrop-filter:
+        blur(14px)
+        saturate(135%);
 
-    border-top: 2px solid rgba(220,170,255,.7);
+    -webkit-backdrop-filter:
+        blur(14px)
+        saturate(135%);
+
+    border-top:
+        2px solid rgba(220,170,255,.7);
 
     box-shadow:
         0 -2px 6px rgba(0,0,0,.6);
@@ -420,15 +628,19 @@ a:visited {
 }
 
 .logo {
+
     display: block;
 
     color: #111;
+
     text-decoration: none;
 
     font-size: 14px;
+
     font-weight: bold;
 
-    padding: 7px 14px;
+    padding:
+        7px 14px;
 
     background:
         linear-gradient(
@@ -438,15 +650,19 @@ a:visited {
             #e6a900
         );
 
-    border: 1px solid #9b7200;
+    border:
+        1px solid #9b7200;
 
-    border-radius: 0 9px 9px 0;
+    border-radius:
+        0 9px 9px 0;
 
     margin-right: 7px;
 }
 
 .nav-links {
+
     display: flex;
+
     align-items: center;
 
     gap: 3px;
@@ -456,6 +672,7 @@ a:visited {
 
 .nav-links a,
 .nav-button {
+
     display: block;
 
     color: white;
@@ -464,18 +681,23 @@ a:visited {
 
     font-size: 12px;
 
-    padding: 6px 10px;
+    padding:
+        6px 10px;
 
-    border: 1px solid transparent;
+    border:
+        1px solid transparent;
+
     border-radius: 3px;
 
-    text-shadow: 1px 1px rgba(0,0,0,.5);
+    text-shadow:
+        1px 1px rgba(0,0,0,.5);
 
     cursor: pointer;
 }
 
 .nav-links a:hover,
 .nav-button:hover {
+
     background:
         linear-gradient(
             to bottom,
@@ -483,35 +705,53 @@ a:visited {
             rgba(55,20,90,.9)
         );
 
-    border-color: rgba(200,160,255,.7);
+    border-color:
+        rgba(200,160,255,.7);
 }
 
 .task-buttons {
+
     display: flex;
+
     align-items: center;
+
     gap: 3px;
+
     margin-left: 5px;
+
     height: 100%;
 }
 
 .task-window {
+
     width: 120px;
     max-width: 120px;
 
     overflow: hidden;
+
     white-space: nowrap;
+
     text-overflow: ellipsis;
 
     color: white;
 
-    background: rgba(25,10,40,.5);
+    background:
+        rgba(25,10,40,.5);
 
-    border-top: 1px solid rgba(200,160,255,.45);
-    border-left: 1px solid rgba(200,160,255,.45);
-    border-right: 1px solid rgba(20,5,30,.8);
-    border-bottom: 1px solid rgba(20,5,30,.8);
+    border-top:
+        1px solid rgba(200,160,255,.45);
 
-    padding: 5px 10px;
+    border-left:
+        1px solid rgba(200,160,255,.45);
+
+    border-right:
+        1px solid rgba(20,5,30,.8);
+
+    border-bottom:
+        1px solid rgba(20,5,30,.8);
+
+    padding:
+        5px 10px;
 
     font-size: 11px;
 
@@ -520,13 +760,19 @@ a:visited {
 
 .task-window:hover,
 .task-window.active {
-    background: rgba(120,70,190,.7);
+
+    background:
+        rgba(120,70,190,.7);
 }
 
 .nav-right {
+
     margin-left: auto;
+
     padding-left: 8px;
-    border-left: 1px solid rgba(0,0,0,.5);
+
+    border-left:
+        1px solid rgba(0,0,0,.5);
 }
 
 
@@ -535,7 +781,9 @@ a:visited {
 ========================================================= */
 
 .desktop-icons {
-    position: absolute;
+
+    position: fixed;
+
     inset: 0;
 
     z-index: 1001;
@@ -544,12 +792,15 @@ a:visited {
 }
 
 .desktop-icon {
+
     position: absolute;
 
     width: 80px;
 
     display: flex;
+
     flex-direction: column;
+
     align-items: center;
 
     color: white;
@@ -557,6 +808,7 @@ a:visited {
     font-size: 11px;
 
     text-align: center;
+
     user-select: none;
 
     pointer-events: auto;
@@ -565,6 +817,7 @@ a:visited {
 }
 
 .desktop-icon img {
+
     width: 48px;
     height: 48px;
 
@@ -574,9 +827,11 @@ a:visited {
 }
 
 .desktop-icon span {
+
     display: block;
 
-    padding: 2px 3px;
+    padding:
+        2px 3px;
 
     color: white;
 
@@ -586,8 +841,12 @@ a:visited {
 }
 
 .desktop-icon.selected span {
-    background: #316ac5;
-    border: 1px dotted white;
+
+    background:
+        #316ac5;
+
+    border:
+        1px dotted white;
 }
 
 .desktop-icon.selected img {
@@ -596,11 +855,42 @@ a:visited {
 
 
 /* =========================================================
+   GENERIC APP ICON
+========================================================= */
+
+.app-icon {
+
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+
+    border:
+        2px solid rgba(255,255,255,.7);
+
+    color: white;
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+    box-shadow:
+        0 3px 8px rgba(0,0,0,.6);
+}
+
+
+/* =========================================================
    CLOCK
 ========================================================= */
 
 .time-box {
-    position: absolute;
+
+    position: fixed;
 
     right: 15px;
     top: 15px;
@@ -619,12 +909,14 @@ a:visited {
 }
 
 .analog-clock {
+
     position: relative;
 
     width: 120px;
     height: 120px;
 
-    margin: 0 auto;
+    margin:
+        0 auto;
 
     border-radius: 50%;
 
@@ -636,7 +928,8 @@ a:visited {
             #d8d8d8
         );
 
-    border: 5px solid #383838;
+    border:
+        5px solid #383838;
 
     box-shadow:
         inset 0 0 0 2px rgba(255,255,255,.8),
@@ -645,6 +938,7 @@ a:visited {
 }
 
 .clock-number {
+
     position: absolute;
 
     left: 50%;
@@ -657,6 +951,7 @@ a:visited {
     margin-top: -10px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
@@ -676,9 +971,10 @@ a:visited {
 .n9  { transform: rotate(270deg) translateY(-45px) rotate(-270deg); }
 .n10 { transform: rotate(300deg) translateY(-45px) rotate(-300deg); }
 .n11 { transform: rotate(330deg) translateY(-45px) rotate(-330deg); }
-.n12 { transform: rotate(360deg) translateY(-45px) rotate(-360deg); }
+.n12 { transform: rotate(360deg) translateY(-45deg) rotate(-360deg); }
 
 .clock-mark {
+
     position: absolute;
 
     width: 2px;
@@ -691,10 +987,12 @@ a:visited {
 
     background: #666;
 
-    transform-origin: 1px 56px;
+    transform-origin:
+        1px 56px;
 }
 
 .clock-mark.big {
+
     width: 3px;
     height: 8px;
 
@@ -704,12 +1002,15 @@ a:visited {
 }
 
 .hand {
+
     position: absolute;
 
     left: 50%;
+
     bottom: 50%;
 
-    transform-origin: bottom center;
+    transform-origin:
+        bottom center;
 
     border-radius: 10px;
 
@@ -717,27 +1018,37 @@ a:visited {
 }
 
 .hour-hand {
+
     width: 5px;
     height: 30px;
+
     margin-left: -2.5px;
+
     background: #1d1d1d;
 }
 
 .minute-hand {
+
     width: 4px;
     height: 43px;
+
     margin-left: -2px;
+
     background: #1d1d1d;
 }
 
 .second-hand {
+
     width: 2px;
     height: 48px;
+
     margin-left: -1px;
+
     background: #4c8c75;
 }
 
 .clock-center {
+
     position: absolute;
 
     width: 9px;
@@ -746,21 +1057,25 @@ a:visited {
     left: 50%;
     top: 50%;
 
-    transform: translate(-50%,-50%);
+    transform:
+        translate(-50%,-50%);
 
     border-radius: 50%;
 
     background: #222;
 
-    border: 2px solid #888;
+    border:
+        2px solid #888;
 }
 
 #currentTime {
+
     margin-top: 5px;
 
     color: white;
 
     font-size: 14px;
+
     font-weight: bold;
 
     text-shadow:
@@ -769,13 +1084,15 @@ a:visited {
 }
 
 .time-label {
+
     margin-top: 1px;
 
     color: #e0e0e0;
 
     font-size: 8px;
 
-    text-shadow: 1px 1px 3px black;
+    text-shadow:
+        1px 1px 3px black;
 }
 
 
@@ -784,6 +1101,7 @@ a:visited {
 ========================================================= */
 
 .ralsei-clippy {
+
     position: fixed;
 
     right: 30px;
@@ -799,33 +1117,46 @@ a:visited {
 }
 
 .clippy-image {
+
     width: 200px;
+
     height: auto;
 
     display: block;
-    margin: 0 auto;
+
+    margin:
+        0 auto;
 
     image-rendering: pixelated;
 }
 
 .clippy-bubble {
+
     position: relative;
 
     background: #000;
+
     color: #fff;
 
-    border: 3px solid #fff;
+    border:
+        3px solid #fff;
 
-    padding: 12px 13px;
+    padding:
+        12px 13px;
 
     margin-bottom: 8px;
 
-    font-family: "Courier New", monospace;
+    font-family:
+        "Courier New",
+        monospace;
+
     font-size: 13px;
+
     line-height: 1.35;
 }
 
 .clippy-bubble::after {
+
     content: "";
 
     position: absolute;
@@ -838,10 +1169,14 @@ a:visited {
 
     background: #000;
 
-    border-right: 3px solid #fff;
-    border-bottom: 3px solid #fff;
+    border-right:
+        3px solid #fff;
 
-    transform: rotate(45deg);
+    border-bottom:
+        3px solid #fff;
+
+    transform:
+        rotate(45deg);
 }
 
 
@@ -850,12 +1185,16 @@ a:visited {
 ========================================================= */
 
 .friend-grid {
+
     display: flex;
+
     flex-wrap: wrap;
+
     gap: 10px;
 }
 
 .friend img {
+
     width: 110px;
     height: 39px;
 
@@ -868,30 +1207,43 @@ a:visited {
 ========================================================= */
 
 #rautatifyPanel {
+
     width: 570px;
+
     min-height: 400px;
 }
 
 .rautatify {
+
     color: #171717;
+
     background: #f5f5f7;
+
     margin: -18px;
+
     padding: 18px;
+
     min-height: 360px;
 }
 
 .rautatify-top {
+
     display: flex;
+
     align-items: center;
+
     gap: 10px;
+
     margin-bottom: 16px;
 }
 
 .rautatify-icon {
+
     width: 48px;
     height: 48px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
@@ -907,52 +1259,71 @@ a:visited {
     color: white;
 
     font-size: 26px;
+
     font-weight: bold;
 
-    box-shadow: 0 3px 8px rgba(0,0,0,.25);
+    box-shadow:
+        0 3px 8px rgba(0,0,0,.25);
 }
 
 .rautatify-name {
+
     font-size: 24px;
+
     font-weight: bold;
 }
 
 .rautatify-subtitle {
+
     color: #777;
+
     font-size: 11px;
 }
 
 .playlist {
+
     background: white;
 
-    border: 1px solid #d4d4d4;
+    border:
+        1px solid #d4d4d4;
+
     border-radius: 8px;
 
     padding: 12px;
 
-    box-shadow: 0 2px 6px rgba(0,0,0,.08);
+    box-shadow:
+        0 2px 6px rgba(0,0,0,.08);
 }
 
 .playlist-header {
+
     display: flex;
+
     justify-content: space-between;
+
     align-items: center;
 
     margin-bottom: 10px;
 }
 
 .playlist-title {
+
     font-size: 16px;
+
     font-weight: bold;
 }
 
 .track {
+
     display: flex;
+
     align-items: center;
 
-    padding: 9px 6px;
+    padding:
+        9px 6px;
 
-    border-top: 1px solid #eee;
+    border-top:
+        1px solid #eee;
 
     cursor: pointer;
 }
@@ -962,7 +1333,9 @@ a:visited {
 }
 
 .track-number {
+
     width: 28px;
+
     color: #888;
 }
 
@@ -975,27 +1348,34 @@ a:visited {
 }
 
 .track-artist {
+
     color: #888;
+
     font-size: 10px;
 }
 
 .play-button {
+
     width: 32px;
     height: 32px;
 
     border: 0;
+
     border-radius: 50%;
 
     background: #8B5CF6;
+
     color: white;
 
     cursor: pointer;
 }
 
 .player {
+
     margin-top: 12px;
 
     background: #222;
+
     color: white;
 
     padding: 10px;
@@ -1009,16 +1389,73 @@ a:visited {
 
 
 /* =========================================================
+   MONACO
+========================================================= */
+
+.monaco-editor-wrap {
+
+    width: 100%;
+
+    height: 300px;
+
+    background: #1e1e1e;
+
+    border-top:
+        2px solid #777;
+
+    border-left:
+        2px solid #777;
+
+    border-right:
+        2px solid white;
+
+    border-bottom:
+        2px solid white;
+
+    overflow: hidden;
+}
+
+.monaco-editor {
+
+    width: 100%;
+
+    height: 100%;
+}
+
+.editor-label {
+
+    display: block;
+
+    font-weight: bold;
+
+    margin-bottom: 5px;
+}
+
+#pasteEditorWrap {
+    height: 330px;
+}
+
+#obfInputEditorWrap,
+#obfOutputEditorWrap {
+    height: 260px;
+}
+
+
+/* =========================================================
    OBFUSCATOR
 ========================================================= */
 
 #obfuscatorPanel {
+
     width: 700px;
+
     min-height: 560px;
 }
 
 .obfuscator-wrap {
+
     margin: -18px;
+
     padding: 18px;
 
     background:
@@ -1032,37 +1469,49 @@ a:visited {
 }
 
 .obf-header {
+
     display: flex;
+
     justify-content: space-between;
+
     align-items: center;
 
     margin-bottom: 14px;
 }
 
 .obf-title {
+
     font-size: 21px;
+
     font-weight: bold;
 }
 
 .obf-subtitle {
+
     color: #666;
+
     font-size: 11px;
 }
 
 .safe-status {
-    padding: 6px 9px;
+
+    padding:
+        6px 9px;
 
     background: #eee;
 
-    border: 1px solid #bbb;
+    border:
+        1px solid #bbb;
 
     font-size: 11px;
 }
 
 .obf-grid {
+
     display: grid;
 
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns:
+        1fr 1fr;
 
     gap: 10px;
 
@@ -1070,14 +1519,18 @@ a:visited {
 }
 
 .obf-box {
-    background: rgba(255,255,255,.85);
 
-    border: 1px solid #bbb;
+    background:
+        rgba(255,255,255,.85);
+
+    border:
+        1px solid #bbb;
 
     padding: 10px;
 }
 
 .obf-box label {
+
     display: block;
 
     font-weight: bold;
@@ -1086,7 +1539,9 @@ a:visited {
 }
 
 .obf-actions {
+
     display: flex;
+
     flex-wrap: wrap;
 
     gap: 6px;
@@ -1099,32 +1554,91 @@ a:visited {
 }
 
 .obf-error {
+
     margin-top: 8px;
 
     padding: 8px;
 
     background: #ffdede;
 
-    border: 1px solid #d66;
+    border:
+        1px solid #d66;
 
     color: #800;
 }
 
 .obf-success {
+
     margin-top: 8px;
 
     padding: 8px;
 
     background: #def7de;
 
-    border: 1px solid #75b875;
+    border:
+        1px solid #75b875;
 
     color: #174d17;
 }
 
-.pin-display {
-    font-family: "Courier New", monospace;
-    letter-spacing: 4px;
+
+/* =========================================================
+   OBFUSCATOR TUTORIAL
+========================================================= */
+
+.obf-tutorial {
+
+    margin-top: 15px;
+
+    padding: 12px;
+
+    background:
+        #eeeeee;
+
+    border:
+        1px solid #aaa;
+
+    font-size: 12px;
+
+    line-height: 1.45;
+}
+
+.obf-tutorial h3 {
+    margin-bottom: 8px;
+}
+
+.obf-tutorial ol {
+
+    padding-left: 22px;
+}
+
+.obf-tutorial li {
+    margin-bottom: 5px;
+}
+
+.obf-tutorial code {
+
+    background: #ddd;
+
+    padding:
+        2px 4px;
+
+    font-family:
+        "Courier New",
+        monospace;
+}
+
+.obf-tutorial kbd {
+
+    background: white;
+
+    border:
+        1px solid #aaa;
+
+    padding:
+        1px 4px;
+
+    border-radius: 2px;
 }
 
 
@@ -1133,12 +1647,16 @@ a:visited {
 ========================================================= */
 
 #rautaPastePanel {
+
     width: 650px;
+
     min-height: 500px;
 }
 
 .paste-wrap {
+
     margin: -18px;
+
     padding: 18px;
 
     background: #f3f3f3;
@@ -1147,9 +1665,11 @@ a:visited {
 }
 
 .paste-meta {
+
     display: grid;
 
-    grid-template-columns: 1fr 160px;
+    grid-template-columns:
+        1fr 160px;
 
     gap: 8px;
 
@@ -1157,7 +1677,9 @@ a:visited {
 }
 
 .paste-actions {
+
     display: flex;
+
     flex-wrap: wrap;
 
     gap: 6px;
@@ -1166,13 +1688,15 @@ a:visited {
 }
 
 .paste-output {
+
     margin-top: 10px;
 
     padding: 8px;
 
     background: white;
 
-    border: 1px solid #aaa;
+    border:
+        1px solid #aaa;
 }
 
 
@@ -1185,16 +1709,25 @@ a:visited {
 }
 
 .commission-card {
+
     padding: 12px;
 
     margin-bottom: 10px;
 
-    background: rgba(255,255,255,.7);
+    background:
+        rgba(255,255,255,.7);
 
-    border-top: 2px solid white;
-    border-left: 2px solid white;
-    border-right: 2px solid #777;
-    border-bottom: 2px solid #777;
+    border-top:
+        2px solid white;
+
+    border-left:
+        2px solid white;
+
+    border-right:
+        2px solid #777;
+
+    border-bottom:
+        2px solid #777;
 }
 
 .commission-card h3 {
@@ -1225,7 +1758,9 @@ a:visited {
 }
 
 .changelog-content {
+
     max-height: 320px;
+
     overflow-y: auto;
 }
 
@@ -1245,7 +1780,8 @@ a:visited {
     }
 
     .panel {
-        max-width: calc(100vw - 20px);
+        max-width:
+            calc(100vw - 20px);
     }
 
     .panel,
@@ -1262,18 +1798,27 @@ a:visited {
     #obfuscatorPanel,
     #rautaPastePanel,
     #commissionsPanel {
-        width: calc(100vw - 20px);
+
+        width:
+            calc(100vw - 20px);
     }
 
     .obf-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns:
+            1fr;
     }
 
     .ralsei-clippy {
-        transform: scale(.8);
-        transform-origin: bottom right;
+
+        transform:
+            scale(.8);
+
+        transform-origin:
+            bottom right;
+
         right: 5px;
     }
+
 }
 
 
@@ -1290,6 +1835,7 @@ a:visited {
 }
 
 ::-webkit-scrollbar-thumb {
+
     background:
         linear-gradient(
             to right,
@@ -1297,14 +1843,23 @@ a:visited {
             #999
         );
 
-    border-top: 1px solid white;
-    border-left: 1px solid white;
-    border-right: 1px solid #555;
-    border-bottom: 1px solid #555;
+    border-top:
+        1px solid white;
+
+    border-left:
+        1px solid white;
+
+    border-right:
+        1px solid #555;
+
+    border-bottom:
+        1px solid #555;
 }
 
 </style>
+
 </head>
+
 
 <body>
 
@@ -1335,81 +1890,126 @@ a:visited {
 
 <div id="site">
 
+
+<!-- =========================================================
+     BACKGROUND
+========================================================= -->
+
 <div class="background">
 
-<img src="background.gif" alt="">
+    <img
+        src="background.gif"
+        alt=""
+    >
 
-<div class="overlay"></div>
+    <div class="overlay"></div>
+
+</div>
 
 
 <!-- =========================================================
      HOME
 ========================================================= -->
 
-<div class="panel" id="homePanel">
+<div
+    class="panel"
+    id="homePanel"
+>
 
 <div class="panel-title">
 
-<span>meow.exe</span>
+    <span>meow.exe</span>
 
-<div class="window-buttons">
+    <div class="window-buttons">
 
-<button class="window-button"
-onclick="minimizePanel('homePanel')">−</button>
+        <button
+            class="window-button"
+            onclick="minimizePanel('homePanel')"
+        >
+            −
+        </button>
 
-<button class="window-button close"
-onclick="closePanel('homePanel')">×</button>
+        <button
+            class="window-button close"
+            onclick="closePanel('homePanel')"
+        >
+            ×
+        </button>
+
+    </div>
 
 </div>
-</div>
+
 
 <div class="panel-content">
 
-<h2>hai :3</h2>
+    <h2>hai :3</h2>
 
-<p>welcome to rauta.cfd!!!</p>
+    <p>
+        welcome to rauta.cfd!!!
+    </p>
 
-<hr>
+    <hr>
 
-<p>
-WELCOME TO rauta.cfd!!!! HAHAHAHAH
-</p>
+    <p>
+        WELCOME TO rauta.cfd!!!! HAHAHAHAH
+    </p>
 
-<p>
-TTHANKJ U TO MY FRIEND FOR THE DOMAIN :P
-(his site: ralsei.cfd)
-<br>
-(I BASED IT OFF
-<a href="https://youtube.com/@rautatientorii"
-target="_blank">MY USERNAME</a>)
-</p>
+    <p>
 
-<p>
-i made this site for jokes and funs lowkey
-but i hope u enjoyed ur time here :P
-</p>
+        TTHANKJ U TO MY FRIEND FOR THE DOMAIN :P
 
-<p>
-i upload WHATEVER here and i make blogs
-and all that yada yada
-</p>
+        (his site: ralsei.cfd)
 
-<p>
-btw!!!! i have a mc server!!! its coming soon!
-</p>
+        <br>
 
-<p>
-hhope u like my site :P
-</p>
+        (I BASED IT OFF
+        <a
+            href="https://youtube.com/@rautatientorii"
+            target="_blank"
+        >
+            MY USERNAME
+        </a>)
 
-<p>- rautaaaaaa :3</p>
+    </p>
 
-<button class="xp-button"
-onclick="alert('meow :3')">
-meow
-</button>
+    <p>
+
+        i made this site for jokes and funs lowkey
+        but i hope u enjoyed ur time here :P
+
+    </p>
+
+    <p>
+
+        i upload WHATEVER here and i make blogs
+        and all that yada yada
+
+    </p>
+
+    <p>
+
+        btw!!!! i have a mc server!!! its coming soon!
+
+    </p>
+
+    <p>
+        hhope u like my site :P
+    </p>
+
+    <p>
+        - rautaaaaaa :3
+    </p>
+
+    <button
+        class="xp-button"
+        onclick="alert('meow :3')"
+    >
+        meow
+    </button>
 
 </div>
+
 </div>
 
 
@@ -1417,50 +2017,70 @@ meow
      ABOUT
 ========================================================= -->
 
-<div class="panel hidden" id="aboutPanel">
+<div
+    class="panel hidden"
+    id="aboutPanel"
+>
 
 <div class="panel-title">
 
-<span>who is this chud.exe</span>
+    <span>who is this chud.exe</span>
 
-<div class="window-buttons">
+    <div class="window-buttons">
 
-<button class="window-button"
-onclick="minimizePanel('aboutPanel')">−</button>
+        <button
+            class="window-button"
+            onclick="minimizePanel('aboutPanel')"
+        >
+            −
+        </button>
 
-<button class="window-button close"
-onclick="closePanel('aboutPanel')">×</button>
+        <button
+            class="window-button close"
+            onclick="closePanel('aboutPanel')"
+        >
+            ×
+        </button>
+
+    </div>
 
 </div>
-</div>
+
 
 <div class="panel-content">
 
-<h2>about me</h2>
+    <h2>about me</h2>
 
-<p>i'm rautatientoriiRR :3</p>
+    <p>
+        i'm rautatientoriiRR :3
+    </p>
 
-<p>
-i'm a video game creator, and i like to write
-stories and i make ALOT OF MUSIC and a bunch
-of internet shit.
-</p>
+    <p>
 
-<hr>
+        i'm a video game creator, and i like to write
+        stories and i make ALOT OF MUSIC and a bunch
+        of internet shit.
 
-<p>
-i wanted to make alot of stuff when i started
-using the internet, like "what if this existed?"
-and "what if i made that?"
-</p>
+    </p>
 
-<hr>
+    <hr>
 
-<p>
-i love to create and DESTROY.
-</p>
+    <p>
+
+        i wanted to make alot of stuff when i started
+        using the internet, like "what if this existed?"
+        and "what if i made that?"
+
+    </p>
+
+    <hr>
+
+    <p>
+        i love to create and DESTROY.
+    </p>
 
 </div>
+
 </div>
 
 
@@ -1468,54 +2088,78 @@ i love to create and DESTROY.
      PROJECTS
 ========================================================= -->
 
-<div class="panel hidden" id="projectsPanel">
+<div
+    class="panel hidden"
+    id="projectsPanel"
+>
 
 <div class="panel-title">
 
-<span>my stuff.exe</span>
+    <span>my stuff.exe</span>
 
-<div class="window-buttons">
+    <div class="window-buttons">
 
-<button class="window-button"
-onclick="minimizePanel('projectsPanel')">−</button>
+        <button
+            class="window-button"
+            onclick="minimizePanel('projectsPanel')"
+        >
+            −
+        </button>
 
-<button class="window-button close"
-onclick="closePanel('projectsPanel')">×</button>
+        <button
+            class="window-button close"
+            onclick="closePanel('projectsPanel')"
+        >
+            ×
+        </button>
+
+    </div>
 
 </div>
-</div>
+
 
 <div class="panel-content">
 
-<h2>my stuff</h2>
+    <h2>my stuff</h2>
 
-<p>these are my cool and very great projects:</p>
+    <p>
+        these are my cool and very great projects:
+    </p>
 
-<hr>
+    <hr>
 
-<p>
-<strong>redium.xyz</strong> -
-a 2017 Roblox revival i created with my best friend.
-</p>
+    <p>
 
-<p>
-<strong>mycontact</strong> -
-a Facebook 2009 type social media that i'm admin on
-AND i help develop!
-</p>
+        <strong>redium.xyz</strong> -
+        a 2017 Roblox revival i created with my best friend.
 
-<p>
-<strong>MiraOS</strong> -
-a psychological horror game where you find
-a 2000's computer for the first time in decades.
-</p>
+    </p>
 
-<p>
-<strong>RalseiSMP</strong> -
-a Minecraft server i made.
-</p>
+    <p>
+
+        <strong>mycontact</strong> -
+        a Facebook 2009 type social media that i'm admin on
+        AND i help develop!
+
+    </p>
+
+    <p>
+
+        <strong>MiraOS</strong> -
+        a psychological horror game where you find
+        a 2000's computer for the first time in decades.
+
+    </p>
+
+    <p>
+
+        <strong>RalseiSMP</strong> -
+        a Minecraft server i made.
+
+    </p>
 
 </div>
+
 </div>
 
 
@@ -1523,44 +2167,68 @@ a Minecraft server i made.
      CONTACT
 ========================================================= -->
 
-<div class="panel hidden" id="contactPanel">
+<div
+    class="panel hidden"
+    id="contactPanel"
+>
 
 <div class="panel-title">
 
-<span>talk to me :P</span>
+    <span>talk to me :P</span>
 
-<div class="window-buttons">
+    <div class="window-buttons">
 
-<button class="window-button"
-onclick="minimizePanel('contactPanel')">−</button>
+        <button
+            class="window-button"
+            onclick="minimizePanel('contactPanel')"
+        >
+            −
+        </button>
 
-<button class="window-button close"
-onclick="closePanel('contactPanel')">×</button>
+        <button
+            class="window-button close"
+            onclick="closePanel('contactPanel')"
+        >
+            ×
+        </button>
+
+    </div>
 
 </div>
-</div>
+
 
 <div class="panel-content">
 
-<h2>contact</h2>
+    <h2>contact</h2>
 
-<p>wow...you wanna talk to me?!</p>
+    <p>
+        wow...you wanna talk to me?!
+    </p>
 
-<hr>
+    <hr>
 
-<p>discord: @strawberry.wave</p>
+    <p>
+        discord: @strawberry.wave
+    </p>
 
-<p>email contact: rauta@rauta.cfd</p>
+    <p>
+        email contact: rauta@rauta.cfd
+    </p>
 
-<hr>
+    <hr>
 
-<h2>socials</h2>
+    <h2>socials</h2>
 
-<p>tiktok: @rautatientorii</p>
+    <p>
+        tiktok: @rautatientorii
+    </p>
 
-<p>YOUTUBEEEE: @rautatientorii</p>
+    <p>
+        YOUTUBEEEE: @rautatientorii
+    </p>
 
 </div>
+
 </div>
 
 
@@ -1568,40 +2236,66 @@ onclick="closePanel('contactPanel')">×</button>
      CATS
 ========================================================= -->
 
-<div class="panel hidden" id="catsPanel">
+<div
+    class="panel hidden"
+    id="catsPanel"
+>
 
 <div class="panel-title">
 
-<span>cats :3.exe</span>
+    <span>cats :3.exe</span>
 
-<div class="window-buttons">
+    <div class="window-buttons">
 
-<button class="window-button"
-onclick="minimizePanel('catsPanel')">−</button>
+        <button
+            class="window-button"
+            onclick="minimizePanel('catsPanel')"
+        >
+            −
+        </button>
 
-<button class="window-button close"
-onclick="closePanel('catsPanel')">×</button>
+        <button
+            class="window-button close"
+            onclick="closePanel('catsPanel')"
+        >
+            ×
+        </button>
+
+    </div>
 
 </div>
-</div>
+
 
 <div class="panel-content">
 
-<iframe
-src="http://mycontact.reblox.vip/dashboard/embed.php?id=38&withplayer=1"
-width="560"
-height="315"
-frameborder="0"
-allowfullscreen>
-</iframe>
+    <iframe
+        src="http://mycontact.reblox.vip/dashboard/embed.php?id=38&withplayer=1"
+        width="560"
+        height="315"
+        frameborder="0"
+        allowfullscreen
+    ></iframe>
 
-<p style="text-align:center;margin-top:8px;">
-powered by
-<a href="http://mycontact.reblox.vip"
-target="_blank">MyContact</a>
-</p>
+    <p
+        style="
+            text-align:center;
+            margin-top:8px;
+        "
+    >
+
+        powered by
+
+        <a
+            href="http://mycontact.reblox.vip"
+            target="_blank"
+        >
+            MyContact
+        </a>
+
+    </p>
 
 </div>
+
 </div>
 
 
@@ -1609,21 +2303,33 @@ target="_blank">MyContact</a>
      RAUTATIFY
 ========================================================= -->
 
-<div class="panel hidden" id="rautatifyPanel">
+<div
+    class="panel hidden"
+    id="rautatifyPanel"
+>
 
 <div class="panel-title">
 
-<span>rautatify.exe</span>
+    <span>rautatify.exe</span>
 
-<div class="window-buttons">
+    <div class="window-buttons">
 
-<button class="window-button"
-onclick="minimizePanel('rautatifyPanel')">−</button>
+        <button
+            class="window-button"
+            onclick="minimizePanel('rautatifyPanel')"
+        >
+            −
+        </button>
 
-<button class="window-button close"
-onclick="closePanel('rautatifyPanel')">×</button>
+        <button
+            class="window-button close"
+            onclick="closePanel('rautatifyPanel')"
+        >
+            ×
+        </button>
 
-</div>
+    </div>
+
 </div>
 
 
@@ -1633,21 +2339,21 @@ onclick="closePanel('rautatifyPanel')">×</button>
 
 <div class="rautatify-top">
 
-<div class="rautatify-icon">
-R
-</div>
+    <div class="rautatify-icon">
+        R
+    </div>
 
-<div>
+    <div>
 
-<div class="rautatify-name">
-Rautatify
-</div>
+        <div class="rautatify-name">
+            Rautatify
+        </div>
 
-<div class="rautatify-subtitle">
-music by rauta :3
-</div>
+        <div class="rautatify-subtitle">
+            music by rauta :3
+        </div>
 
-</div>
+    </div>
 
 </div>
 
@@ -1656,74 +2362,88 @@ music by rauta :3
 
 <div class="playlist-header">
 
-<div class="playlist-title">
-rauta playlist
-</div>
+    <div class="playlist-title">
+        rauta playlist
+    </div>
 
-<button class="play-button"
-onclick="playCurrentTrack()">
-▶
-</button>
-
-</div>
-
-
-<div class="track"
-onclick="playTrack(0)">
-
-<div class="track-number">1</div>
-
-<div class="track-info">
-
-<div class="track-name">
-Coming soon...
-</div>
-
-<div class="track-artist">
-rauta
-</div>
-
-</div>
+    <button
+        class="play-button"
+        onclick="playCurrentTrack()"
+    >
+        ▶
+    </button>
 
 </div>
 
 
-<div class="track"
-onclick="playTrack(1)">
+<div
+    class="track"
+    onclick="playTrack(0)"
+>
 
-<div class="track-number">2</div>
+    <div class="track-number">
+        1
+    </div>
 
-<div class="track-info">
+    <div class="track-info">
 
-<div class="track-name">
-Another rauta song
-</div>
+        <div class="track-name">
+            Coming soon...
+        </div>
 
-<div class="track-artist">
-rauta
-</div>
+        <div class="track-artist">
+            rauta
+        </div>
 
-</div>
-
-</div>
-
-
-<div class="track"
-onclick="playTrack(2)">
-
-<div class="track-number">3</div>
-
-<div class="track-info">
-
-<div class="track-name">
-secret track???
-</div>
-
-<div class="track-artist">
-rauta
-</div>
+    </div>
 
 </div>
+
+
+<div
+    class="track"
+    onclick="playTrack(1)"
+>
+
+    <div class="track-number">
+        2
+    </div>
+
+    <div class="track-info">
+
+        <div class="track-name">
+            Another rauta song
+        </div>
+
+        <div class="track-artist">
+            rauta
+        </div>
+
+    </div>
+
+</div>
+
+
+<div
+    class="track"
+    onclick="playTrack(2)"
+>
+
+    <div class="track-number">
+        3
+    </div>
+
+    <div class="track-info">
+
+        <div class="track-name">
+            secret track???
+        </div>
+
+        <div class="track-artist">
+            rauta
+        </div>
+
+    </div>
 
 </div>
 
@@ -1732,20 +2452,22 @@ rauta
 
 <div class="player">
 
-<div id="rautatifyNowPlaying">
-nothing playing :(
-</div>
+    <div id="rautatifyNowPlaying">
+        nothing playing :(
+    </div>
 
-<audio id="rautatifyAudio"
-controls
-preload="metadata">
-</audio>
-
-</div>
-
-</div>
+    <audio
+        id="rautatifyAudio"
+        controls
+        preload="metadata"
+    ></audio>
 
 </div>
+
+</div>
+
+</div>
+
 </div>
 
 
@@ -1753,21 +2475,33 @@ preload="metadata">
      RAUTA OBFUSCATOR
 ========================================================= -->
 
-<div class="panel hidden" id="obfuscatorPanel">
+<div
+    class="panel hidden"
+    id="obfuscatorPanel"
+>
 
 <div class="panel-title">
 
-<span>RautaObfuscator.exe</span>
+    <span>RautaObfuscator.exe</span>
 
-<div class="window-buttons">
+    <div class="window-buttons">
 
-<button class="window-button"
-onclick="minimizePanel('obfuscatorPanel')">−</button>
+        <button
+            class="window-button"
+            onclick="minimizePanel('obfuscatorPanel')"
+        >
+            −
+        </button>
 
-<button class="window-button close"
-onclick="closePanel('obfuscatorPanel')">×</button>
+        <button
+            class="window-button close"
+            onclick="closePanel('obfuscatorPanel')"
+        >
+            ×
+        </button>
 
-</div>
+    </div>
+
 </div>
 
 
@@ -1775,57 +2509,135 @@ onclick="closePanel('obfuscatorPanel')">×</button>
 
 <div class="obfuscator-wrap">
 
+
 <div class="obf-header">
 
-<div>
+    <div>
 
-<div class="obf-title">
-RautaObfuscator
-</div>
+        <div class="obf-title">
+            RautaObfuscator
+        </div>
 
-<div class="obf-subtitle">
-protect your code inside a PIN-locked Safe
-</div>
+        <div class="obf-subtitle">
+            protect your code inside a PIN-locked Safe
+        </div>
 
-</div>
+    </div>
 
-<div class="safe-status"
-id="safeStatus">
-🔒 No Safe
-</div>
+    <div
+        class="safe-status"
+        id="safeStatus"
+    >
+        🔒 No Safe
+    </div>
 
 </div>
 
 
 <div class="obf-grid">
 
+
 <div class="obf-box">
 
-<label>language</label>
+    <label>
+        language
+    </label>
 
-<select id="obfLanguage">
+    <select id="obfLanguage">
 
-<option value="luau">Luau</option>
-<option value="lua">Lua</option>
-<option value="html">HTML</option>
-<option value="css">CSS</option>
-<option value="php">PHP</option>
-<option value="python">Python</option>
+        <option value="luau">
+            Luau
+        </option>
 
-</select>
+        <option value="lua">
+            Lua
+        </option>
+
+        <option value="html">
+            HTML
+        </option>
+
+        <option value="css">
+            CSS
+        </option>
+
+        <option value="php">
+            PHP
+        </option>
+
+        <option value="python">
+            Python
+        </option>
+
+        <option value="javascript">
+            JavaScript
+        </option>
+
+        <option value="typescript">
+            TypeScript
+        </option>
+
+        <option value="json">
+            JSON
+        </option>
+
+        <option value="sql">
+            SQL
+        </option>
+
+        <option value="c">
+            C
+        </option>
+
+        <option value="cpp">
+            C++
+        </option>
+
+        <option value="csharp">
+            C#
+        </option>
+
+        <option value="java">
+            Java
+        </option>
+
+        <option value="go">
+            Go
+        </option>
+
+        <option value="rust">
+            Rust
+        </option>
+
+        <option value="shell">
+            Shell
+        </option>
+
+        <option value="markdown">
+            Markdown
+        </option>
+
+        <option value="xml">
+            XML
+        </option>
+
+    </select>
 
 </div>
 
 
 <div class="obf-box">
 
-<label>Safe PIN</label>
+    <label>
+        Safe PIN
+    </label>
 
-<input
-type="password"
-id="safePin"
-placeholder="PIN"
-autocomplete="off">
+    <input
+        type="password"
+        id="safePin"
+        placeholder="PIN"
+        autocomplete="off"
+    >
 
 </div>
 
@@ -1834,25 +2646,33 @@ autocomplete="off">
 
 <div class="obf-actions">
 
-<button class="tool-button"
-onclick="createSafe()">
-🔐 Create Safe
-</button>
+    <button
+        class="tool-button"
+        onclick="createSafe()"
+    >
+        🔐 Create Safe
+    </button>
 
-<button class="tool-button"
-onclick="unlockSafe()">
-🔓 Unlock Safe
-</button>
+    <button
+        class="tool-button"
+        onclick="unlockSafe()"
+    >
+        🔓 Unlock Safe
+    </button>
 
-<button class="tool-button"
-onclick="lockSafe()">
-🔒 Lock Safe
-</button>
+    <button
+        class="tool-button"
+        onclick="lockSafe()"
+    >
+        🔒 Lock Safe
+    </button>
 
-<button class="tool-button"
-onclick="deleteSafe()">
-🗑 Delete Safe
-</button>
+    <button
+        class="tool-button"
+        onclick="deleteSafe()"
+    >
+        🗑 Delete Safe
+    </button>
 
 </div>
 
@@ -1860,54 +2680,176 @@ onclick="deleteSafe()">
 <hr>
 
 
-<label>
-<strong>code</strong>
+<label class="editor-label">
+    <strong>code</strong>
 </label>
 
-<textarea
-id="obfInput"
-placeholder="paste your code here..."></textarea>
+
+<div
+    class="monaco-editor-wrap"
+    id="obfInputEditorWrap"
+>
+
+    <div
+        class="monaco-editor"
+        id="obfInputEditor"
+    ></div>
+
+</div>
 
 
 <div class="obf-actions">
 
-<button class="tool-button"
-onclick="obfuscateCode()">
-⚙ Obfuscate
-</button>
+    <button
+        class="tool-button"
+        onclick="obfuscateCode()"
+    >
+        ⚙ Obfuscate
+    </button>
 
-<button class="tool-button"
-onclick="deobfuscateCode()">
-🔓 Deobfuscate
-</button>
+    <button
+        class="tool-button"
+        onclick="deobfuscateCode()"
+    >
+        🔓 Deobfuscate
+    </button>
 
-<button class="tool-button"
-onclick="copyObfOutput()">
-📋 Copy
-</button>
+    <button
+        class="tool-button"
+        onclick="copyObfOutput()"
+    >
+        📋 Copy
+    </button>
 
 </div>
 
 
 <div class="obf-output">
 
-<label>
-<strong>output</strong>
-</label>
+    <label class="editor-label">
+        <strong>output</strong>
+    </label>
 
-<textarea
-id="obfOutput"
-readonly
-placeholder="output will appear here..."></textarea>
+    <div
+        class="monaco-editor-wrap"
+        id="obfOutputEditorWrap"
+    >
+
+        <div
+            class="monaco-editor"
+            id="obfOutputEditor"
+        ></div>
+
+    </div>
 
 </div>
 
 
 <div id="obfMessage"></div>
 
+
+<!-- =====================================================
+     TUTORIAL
+===================================================== -->
+
+<div class="obf-tutorial">
+
+    <h3>
+        📖 RautaObfuscator tutorial
+    </h3>
+
+    <ol>
+
+        <li>
+            Choose a language from the
+            <strong>language</strong>
+            dropdown.
+        </li>
+
+        <li>
+            Enter a PIN and click
+            <strong>Create Safe</strong>.
+        </li>
+
+        <li>
+            Type your code into the editor.
+            RautaObfuscator uses Monaco Editor,
+            so you get syntax highlighting and
+            autocomplete.
+        </li>
+
+        <li>
+            For example, select
+            <strong>Luau</strong>
+            and type:
+            <code>pri</code>
+        </li>
+
+        <li>
+            Monaco will suggest:
+            <code>print</code>
+        </li>
+
+        <li>
+            Press
+            <kbd>Enter</kbd>
+            or click the suggestion to insert it.
+        </li>
+
+        <li>
+            Click
+            <strong>Obfuscate</strong>
+            to generate the output.
+        </li>
+
+        <li>
+            Your code and generated output are saved
+            inside your browser's encrypted local Safe.
+        </li>
+
+        <li>
+            Click
+            <strong>Lock Safe</strong>
+            when you're finished.
+        </li>
+
+    </ol>
+
+    <p
+        style="
+            margin-top:10px;
+            color:#555;
+        "
+    >
+
+        💡 Tip:
+        press
+        <kbd>Ctrl</kbd>
+        +
+        <kbd>Space</kbd>
+        to manually open autocomplete.
+
+    </p>
+
+    <p
+        style="
+            margin-top:8px;
+            color:#666;
+        "
+    >
+
+        The Safe is stored locally in your browser.
+        Clearing browser storage can remove it.
+
+    </p>
+
+</div>
+
+
 </div>
 
 </div>
+
 </div>
 
 
@@ -1915,21 +2857,33 @@ placeholder="output will appear here..."></textarea>
      RAUTAPASTE
 ========================================================= -->
 
-<div class="panel hidden" id="rautaPastePanel">
+<div
+    class="panel hidden"
+    id="rautaPastePanel"
+>
 
 <div class="panel-title">
 
-<span>RautaPaste.exe</span>
+    <span>RautaPaste.exe</span>
 
-<div class="window-buttons">
+    <div class="window-buttons">
 
-<button class="window-button"
-onclick="minimizePanel('rautaPastePanel')">−</button>
+        <button
+            class="window-button"
+            onclick="minimizePanel('rautaPastePanel')"
+        >
+            −
+        </button>
 
-<button class="window-button close"
-onclick="closePanel('rautaPastePanel')">×</button>
+        <button
+            class="window-button close"
+            onclick="closePanel('rautaPastePanel')"
+        >
+            ×
+        </button>
 
-</div>
+    </div>
+
 </div>
 
 
@@ -1937,72 +2891,172 @@ onclick="closePanel('rautaPastePanel')">×</button>
 
 <div class="paste-wrap">
 
-<h2>RautaPaste</h2>
+    <h2>
+        RautaPaste
+    </h2>
 
-<p>
-paste literally anything :3
-</p>
+    <p>
+        paste literally anything :3
+    </p>
 
-<div class="paste-meta">
 
-<input
-id="pasteTitle"
-placeholder="paste title">
+    <div class="paste-meta">
 
-<select id="pasteLanguage">
+        <input
+            id="pasteTitle"
+            placeholder="paste title"
+        >
 
-<option>Plain Text</option>
-<option>Luau</option>
-<option>Lua</option>
-<option>HTML</option>
-<option>CSS</option>
-<option>PHP</option>
-<option>Python</option>
-<option>JavaScript</option>
-<option>JSON</option>
-</select>
+        <select id="pasteLanguage">
+
+            <option>
+                Plain Text
+            </option>
+
+            <option>
+                Luau
+            </option>
+
+            <option>
+                Lua
+            </option>
+
+            <option>
+                HTML
+            </option>
+
+            <option>
+                CSS
+            </option>
+
+            <option>
+                PHP
+            </option>
+
+            <option>
+                Python
+            </option>
+
+            <option>
+                JavaScript
+            </option>
+
+            <option>
+                TypeScript
+            </option>
+
+            <option>
+                JSON
+            </option>
+
+            <option>
+                SQL
+            </option>
+
+            <option>
+                C
+            </option>
+
+            <option>
+                C++
+            </option>
+
+            <option>
+                C#
+            </option>
+
+            <option>
+                Java
+            </option>
+
+            <option>
+                Go
+            </option>
+
+            <option>
+                Rust
+            </option>
+
+            <option>
+                Shell
+            </option>
+
+            <option>
+                Markdown
+            </option>
+
+            <option>
+                XML
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <label class="editor-label">
+        paste / code
+    </label>
+
+
+    <div
+        class="monaco-editor-wrap"
+        id="pasteEditorWrap"
+    >
+
+        <div
+            class="monaco-editor"
+            id="pasteEditor"
+        ></div>
+
+    </div>
+
+
+    <div class="paste-actions">
+
+        <button
+            class="paste-button"
+            onclick="copyPaste()"
+        >
+            📋 Copy
+        </button>
+
+        <button
+            class="paste-button"
+            onclick="makeRaw()"
+        >
+            📄 Raw
+        </button>
+
+        <button
+            class="paste-button"
+            onclick="downloadPaste()"
+        >
+            ⬇ Download
+        </button>
+
+        <button
+            class="paste-button"
+            onclick="savePasteLocal()"
+        >
+            💾 Save Paste
+        </button>
+
+    </div>
+
+
+    <div
+        class="paste-output"
+        id="pasteStatus"
+    >
+        ready :3
+    </div>
+
 
 </div>
 
-
-<textarea
-id="pasteContent"
-placeholder="paste anything here..."></textarea>
-
-
-<div class="paste-actions">
-
-<button class="paste-button"
-onclick="copyPaste()">
-📋 Copy
-</button>
-
-<button class="paste-button"
-onclick="makeRaw()">
-📄 Raw
-</button>
-
-<button class="paste-button"
-onclick="downloadPaste()">
-⬇ Download
-</button>
-
-<button class="paste-button"
-onclick="savePasteLocal()">
-💾 Save Paste
-</button>
-
 </div>
 
-
-<div class="paste-output"
-id="pasteStatus">
-ready :3
-</div>
-
-</div>
-
-</div>
 </div>
 
 
@@ -2010,101 +3064,328 @@ ready :3
      COMMISSIONS
 ========================================================= -->
 
-<div class="panel hidden" id="commissionsPanel">
+<div
+    class="panel hidden"
+    id="commissionsPanel"
+>
 
 <div class="panel-title">
 
-<span>commissions.exe</span>
+    <span>commissions.exe</span>
 
-<div class="window-buttons">
+    <div class="window-buttons">
 
-<button class="window-button"
-onclick="minimizePanel('commissionsPanel')">−</button>
+        <button
+            class="window-button"
+            onclick="minimizePanel('commissionsPanel')"
+        >
+            −
+        </button>
 
-<button class="window-button close"
-onclick="closePanel('commissionsPanel')">×</button>
+        <button
+            class="window-button close"
+            onclick="closePanel('commissionsPanel')"
+        >
+            ×
+        </button>
 
-</div>
+    </div>
+
 </div>
 
 
 <div class="panel-content">
 
-<h2>commissions :3</h2>
+    <h2>
+        commissions :3
+    </h2>
 
-<p>
-yes!!!! i do commissions and stuff
-</p>
+    <p>
+        yes!!!! i do commissions and stuff
+    </p>
 
-<hr>
+    <hr>
 
 
-<div class="commission-card">
+    <div class="commission-card">
 
-<h3>💻 websites</h3>
+        <h3>
+            💻 websites
+        </h3>
 
-<p>
-need a silly website, portfolio, landing page,
-personal site, or something completely stupid?
-i can make it.
-</p>
+        <p>
+
+            need a silly website, portfolio,
+            landing page, personal site,
+            or something completely stupid?
+
+            i can make it.
+
+        </p>
+
+    </div>
+
+
+    <div class="commission-card">
+
+        <h3>
+            🎮 games / prototypes
+        </h3>
+
+        <p>
+
+            i can also work on game ideas,
+            prototypes, web games and
+            interactive projects.
+
+        </p>
+
+    </div>
+
+
+    <div class="commission-card">
+
+        <h3>
+            🎵 music
+        </h3>
+
+        <p>
+
+            music commissions may be available too.
+            ask me about what you're looking for!
+
+        </p>
+
+    </div>
+
+
+    <div class="commission-card">
+
+        <h3>
+            🛠️ custom tools
+        </h3>
+
+        <p>
+
+            custom little web tools, utilities,
+            interfaces and random internet projects.
+
+        </p>
+
+    </div>
+
+
+    <hr>
+
+
+    <p>
+        <strong>
+            want a commission?
+        </strong>
+    </p>
+
+    <p>
+        contact me through Discord or email.
+    </p>
+
+    <p>
+
+        discord: @strawberry.wave
+
+        <br>
+
+        email: rauta@rauta.cfd
+
+    </p>
+
+</div>
 
 </div>
 
 
-<div class="commission-card">
+<!-- =========================================================
+     ALIEN DESTROYER
+========================================================= -->
 
-<h3>🎮 games / prototypes</h3>
+<div
+    class="panel hidden"
+    id="game1Panel"
+>
 
-<p>
-i can also work on game ideas, prototypes,
-web games and interactive projects.
-</p>
+<div class="panel-title">
+
+    <span>
+        alien destroyer.exe
+    </span>
+
+    <div class="window-buttons">
+
+        <button
+            class="window-button"
+            onclick="minimizePanel('game1Panel')"
+        >
+            −
+        </button>
+
+        <button
+            class="window-button close"
+            onclick="closePanel('game1Panel')"
+        >
+            ×
+        </button>
+
+    </div>
+
+</div>
+
+
+<div class="panel-content">
+
+    <iframe
+        src="https://scratch.mit.edu/projects/1376240877/embed"
+        width="315"
+        height="315"
+        frameborder="0"
+        allowfullscreen
+    ></iframe>
+
+</div>
 
 </div>
 
 
-<div class="commission-card">
+<!-- =========================================================
+     CHANGELOG
+========================================================= -->
 
-<h3>🎵 music</h3>
+<div
+    class="panel hidden"
+    id="changelogPanel"
+>
 
-<p>
-music commissions may be available too.
-ask me about what you're looking for!
-</p>
+<div class="panel-title">
+
+    <span>
+        changelog.exe
+    </span>
+
+    <div class="window-buttons">
+
+        <button
+            class="window-button"
+            onclick="minimizePanel('changelogPanel')"
+        >
+            −
+        </button>
+
+        <button
+            class="window-button close"
+            onclick="closePanel('changelogPanel')"
+        >
+            ×
+        </button>
+
+    </div>
+
+</div>
+
+
+<div
+    class="panel-content changelog-content"
+>
+
+    <h2>
+        rauta.cfd updates
+    </h2>
+
+    <hr>
+
+    <h3>
+        8/9/26 v1.0 - main
+    </h3>
+
+    <p>
+        I MADE IT!!!
+    </p>
+
+    <p>
+
+        yeah i made the site YIPPYY
+        <br>
+        everything u see now
+        <br>
+        and a bunch of random shit :P
+
+    </p>
+
+    <hr>
+
+    <h3>
+        8/10/26 - games
+    </h3>
+
+    <p>
+        added the games section!!
+    </p>
+
+    <hr>
+
+    <h3>
+        8/10/26 - cats!!!
+    </h3>
+
+    <p>
+        added the cats page.
+    </p>
+
+    <hr>
+
+    <h3>
+        8/29/26 - Rauta Code Update
+    </h3>
+
+    <p>
+
+        added Monaco Editor to RautaPaste
+        and RautaObfuscator!!!
+
+        <br><br>
+
+        autocomplete!!!!!
+        <br>
+
+        more coding languages!!!!!
+        <br>
+
+        tutorial!!!!!
+        <br>
+
+        and commissions is now an app!!!!!
+
+    </p>
+
+    <hr>
+
+    <h3>
+        coming soon...
+    </h3>
+
+    <p>
+        who knows what i'll add next :P
+    </p>
+
+    <p>
+        probably something stupid.
+    </p>
+
+    <hr>
+
+    <p>
+        - rautaaaaaa :3
+    </p>
 
 </div>
 
-
-<div class="commission-card">
-
-<h3>🛠️ custom tools</h3>
-
-<p>
-custom little web tools, utilities,
-interfaces and random internet projects.
-</p>
-
-</div>
-
-
-<hr>
-
-<p>
-<strong>want a commission?</strong>
-</p>
-
-<p>
-contact me through Discord or email.
-</p>
-
-<p>
-discord: @strawberry.wave
-<br>
-email: rauta@rauta.cfd
-</p>
-
-</div>
 </div>
 
 
@@ -2114,142 +3395,275 @@ email: rauta@rauta.cfd
 
 <nav class="navbar">
 
+
 <a
-href="#"
-class="logo"
-onclick="openPanel('homePanel');return false;">
-rautatientori :P
+    href="#"
+    class="logo"
+    onclick="
+        openPanel('homePanel');
+        return false;
+    "
+>
+    rautatientori :P
 </a>
 
 
 <ul class="nav-links">
 
-<li>
-<a href="#"
-onclick="openPanel('homePanel');return false;">
-meow
-</a>
-</li>
 
 <li>
-<a href="#"
-onclick="openPanel('aboutPanel');return false;">
-who is this chud
-</a>
+
+    <a
+        href="#"
+        onclick="
+            openPanel('homePanel');
+            return false;
+        "
+    >
+        meow
+    </a>
+
 </li>
 
-<li>
-<a href="#"
-onclick="openPanel('projectsPanel');return false;">
-my stuff
-</a>
-</li>
 
 <li>
-<a href="#"
-onclick="openPanel('contactPanel');return false;">
-talk to me :P
-</a>
+
+    <a
+        href="#"
+        onclick="
+            openPanel('aboutPanel');
+            return false;
+        "
+    >
+        who is this chud
+    </a>
+
 </li>
 
-<li>
-<a href="#"
-onclick="openPanel('rautatifyPanel');return false;">
-Rautatify
-</a>
-</li>
 
 <li>
-<a href="#"
-onclick="openPanel('obfuscatorPanel');return false;">
-RautaObfuscator
-</a>
+
+    <a
+        href="#"
+        onclick="
+            openPanel('projectsPanel');
+            return false;
+        "
+    >
+        my stuff
+    </a>
+
 </li>
 
-<li>
-<a href="#"
-onclick="openPanel('rautaPastePanel');return false;">
-RautaPaste
-</a>
-</li>
 
 <li>
-<a href="#"
-onclick="openPanel('commissionsPanel');return false;">
-commissions
-</a>
+
+    <a
+        href="#"
+        onclick="
+            openPanel('contactPanel');
+            return false;
+        "
+    >
+        talk to me :P
+    </a>
+
 </li>
+
+
+<li>
+
+    <a
+        href="#"
+        onclick="
+            openPanel('rautatifyPanel');
+            return false;
+        "
+    >
+        Rautatify
+    </a>
+
+</li>
+
+
+<li>
+
+    <a
+        href="#"
+        onclick="
+            openPanel('obfuscatorPanel');
+            return false;
+        "
+    >
+        RautaObfuscator
+    </a>
+
+</li>
+
+
+<li>
+
+    <a
+        href="#"
+        onclick="
+            openPanel('rautaPastePanel');
+            return false;
+        "
+    >
+        RautaPaste
+    </a>
+
+</li>
+
+
+<li>
+
+    <a
+        href="#"
+        onclick="
+            openPanel('commissionsPanel');
+            return false;
+        "
+    >
+        commissions
+    </a>
+
+</li>
+
 
 </ul>
 
 
 <div
-class="task-buttons"
-id="taskButtons">
-</div>
+    class="task-buttons"
+    id="taskButtons"
+></div>
 
 
 <div class="nav-right">
 
-<a
-href="#"
-class="nav-button"
-onclick="openPanel('catsPanel');return false;">
-cats :3
-</a>
+    <a
+        href="#"
+        class="nav-button"
+        onclick="
+            openPanel('catsPanel');
+            return false;
+        "
+    >
+        cats :3
+    </a>
 
 </div>
+
 
 </nav>
-
-</div>
-</div>
 
 
 <!-- =========================================================
      CLOCK
 ========================================================= -->
 
-<div class="time-box" id="timeBox">
+<div
+    class="time-box"
+    id="timeBox"
+>
 
 <div class="analog-clock">
 
-<div class="clock-number n12">12</div>
-<div class="clock-number n1">1</div>
-<div class="clock-number n2">2</div>
-<div class="clock-number n3">3</div>
-<div class="clock-number n4">4</div>
-<div class="clock-number n5">5</div>
-<div class="clock-number n6">6</div>
-<div class="clock-number n7">7</div>
-<div class="clock-number n8">8</div>
-<div class="clock-number n9">9</div>
-<div class="clock-number n10">10</div>
-<div class="clock-number n11">11</div>
+
+<div class="clock-number n12">
+    12
+</div>
+
+<div class="clock-number n1">
+    1
+</div>
+
+<div class="clock-number n2">
+    2
+</div>
+
+<div class="clock-number n3">
+    3
+</div>
+
+<div class="clock-number n4">
+    4
+</div>
+
+<div class="clock-number n5">
+    5
+</div>
+
+<div class="clock-number n6">
+    6
+</div>
+
+<div class="clock-number n7">
+    7
+</div>
+
+<div class="clock-number n8">
+    8
+</div>
+
+<div class="clock-number n9">
+    9
+</div>
+
+<div class="clock-number n10">
+    10
+</div>
+
+<div class="clock-number n11">
+    11
+</div>
+
 
 <script>
-for(let i=0;i<60;i++){
+
+for(let i = 0; i < 60; i++){
+
     document.write(
-        `<div class="clock-mark ${i%5===0?'big':''}"
-        style="transform:rotate(${i*6}deg)"></div>`
+
+        `<div
+            class="clock-mark ${i % 5 === 0 ? "big" : ""}"
+            style="transform:rotate(${i * 6}deg)"
+        ></div>`
+
     );
+
 }
+
 </script>
 
-<div class="hand hour-hand" id="hourHand"></div>
-<div class="hand minute-hand" id="minuteHand"></div>
-<div class="hand second-hand" id="secondHand"></div>
+
+<div
+    class="hand hour-hand"
+    id="hourHand"
+></div>
+
+<div
+    class="hand minute-hand"
+    id="minuteHand"
+></div>
+
+<div
+    class="hand second-hand"
+    id="secondHand"
+></div>
 
 <div class="clock-center"></div>
 
 </div>
 
+
 <div id="currentTime">
-00:00:00
+    00:00:00
 </div>
 
 <div class="time-label">
-time for me
+    time for me
 </div>
 
 </div>
@@ -2262,235 +3676,182 @@ time for me
 <div class="desktop-icons">
 
 
-<div
-class="desktop-icon"
-data-panel="game1Panel"
-style="left:25px;top:90px;">
-
-<img src="aliendestroyers.png"
-alt="Alien Destroyer">
-
-<span>
-alien destroyer
-</span>
-
-</div>
-
+<!-- ALIEN -->
 
 <div
-class="desktop-icon"
-data-panel="changelogPanel"
-style="left:25px;top:180px;">
+    class="desktop-icon"
+    data-panel="game1Panel"
+    style="
+        left:25px;
+        top:90px;
+    "
+>
 
-<img src="changelog.png"
-alt="Changelog">
+    <img
+        src="aliendestroyers.png"
+        alt="Alien Destroyer"
+    >
 
-<span>
-changelogs!!!
-</span>
+    <span>
+        alien destroyer
+    </span>
 
 </div>
 
+
+<!-- CHANGELOG -->
 
 <div
-class="desktop-icon"
-data-panel="rautatifyPanel"
-style="left:25px;top:270px;">
+    class="desktop-icon"
+    data-panel="changelogPanel"
+    style="
+        left:25px;
+        top:180px;
+    "
+>
+
+    <img
+        src="changelog.png"
+        alt="Changelog"
+    >
+
+    <span>
+        changelogs!!!
+    </span>
+
+</div>
+
+
+<!-- RAUTATIFY -->
 
 <div
-style="
-width:48px;
-height:48px;
-display:flex;
-align-items:center;
-justify-content:center;
-border-radius:8px;
-background:linear-gradient(135deg,#8B5CF6,#241238);
-border:2px solid rgba(255,255,255,.7);
-color:white;
-font-size:27px;
-font-weight:bold;
-box-shadow:0 3px 8px rgba(0,0,0,.6);
-">
-R
+    class="desktop-icon"
+    data-panel="rautatifyPanel"
+    style="
+        left:25px;
+        top:270px;
+    "
+>
+
+    <div
+        class="app-icon"
+        style="
+            background:
+                linear-gradient(
+                    135deg,
+                    #8B5CF6,
+                    #241238
+                );
+        "
+    >
+        R
+    </div>
+
+    <span>
+        Rautatify
+    </span>
+
 </div>
 
-<span>
-Rautatify
-</span>
 
-</div>
-
+<!-- OBFUSCATOR -->
 
 <div
-class="desktop-icon"
-data-panel="obfuscatorPanel"
-style="left:25px;top:360px;">
+    class="desktop-icon"
+    data-panel="obfuscatorPanel"
+    style="
+        left:25px;
+        top:360px;
+    "
+>
+
+    <div
+        class="app-icon"
+        style="
+            background:
+                linear-gradient(
+                    135deg,
+                    #222,
+                    #777
+                );
+        "
+    >
+        🔐
+    </div>
+
+    <span>
+        RautaObfuscator
+    </span>
+
+</div>
+
+
+<!-- RAUTAPASTE -->
 
 <div
-style="
-width:48px;
-height:48px;
-display:flex;
-align-items:center;
-justify-content:center;
-border-radius:8px;
-background:linear-gradient(135deg,#222,#777);
-border:2px solid rgba(255,255,255,.7);
-color:white;
-font-size:23px;
-font-weight:bold;
-box-shadow:0 3px 8px rgba(0,0,0,.6);
-">
-🔐
+    class="desktop-icon"
+    data-panel="rautaPastePanel"
+    style="
+        left:25px;
+        top:450px;
+    "
+>
+
+    <div
+        class="app-icon"
+        style="
+            background:
+                linear-gradient(
+                    135deg,
+                    #4f46e5,
+                    #172554
+                );
+        "
+    >
+        📋
+    </div>
+
+    <span>
+        RautaPaste
+    </span>
+
 </div>
 
-<span>
-RautaObfuscator
-</span>
 
-</div>
-
+<!-- =====================================================
+     COMMISSIONS APP ICON
+===================================================== -->
 
 <div
-class="desktop-icon"
-data-panel="rautaPastePanel"
-style="left:25px;top:450px;">
+    class="desktop-icon"
+    data-panel="commissionsPanel"
+    style="
+        left:25px;
+        top:540px;
+    "
+>
 
-<div
-style="
-width:48px;
-height:48px;
-display:flex;
-align-items:center;
-justify-content:center;
-border-radius:8px;
-background:linear-gradient(135deg,#4f46e5,#172554);
-border:2px solid rgba(255,255,255,.7);
-color:white;
-font-size:22px;
-box-shadow:0 3px 8px rgba(0,0,0,.6);
-">
-📋
-</div>
+    <div
+        class="app-icon"
+        style="
+            background:
+                linear-gradient(
+                    135deg,
+                    #f59e0b,
+                    #92400e
+                );
+        "
+    >
+        💼
+    </div>
 
-<span>
-RautaPaste
-</span>
-
-</div>
-
+    <span>
+        commissions
+    </span>
 
 </div>
 
 
-<!-- =========================================================
-     ALIEN DESTROYER
-========================================================= -->
-
-<div class="panel hidden" id="game1Panel">
-
-<div class="panel-title">
-
-<span>alien destroyer.exe</span>
-
-<div class="window-buttons">
-
-<button class="window-button"
-onclick="minimizePanel('game1Panel')">−</button>
-
-<button class="window-button close"
-onclick="closePanel('game1Panel')">×</button>
-
-</div>
-</div>
-
-<div class="panel-content">
-
-<iframe
-src="https://scratch.mit.edu/projects/1376240877/embed"
-width="315"
-height="315"
-frameborder="0"
-allowfullscreen>
-</iframe>
-
-</div>
-</div>
-
-
-<!-- =========================================================
-     CHANGELOG
-========================================================= -->
-
-<div class="panel hidden" id="changelogPanel">
-
-<div class="panel-title">
-
-<span>changelog.exe</span>
-
-<div class="window-buttons">
-
-<button class="window-button"
-onclick="minimizePanel('changelogPanel')">−</button>
-
-<button class="window-button close"
-onclick="closePanel('changelogPanel')">×</button>
-
-</div>
-</div>
-
-<div class="panel-content changelog-content">
-
-<h2>rauta.cfd updates</h2>
-
-<hr>
-
-<h3>8/9/26 v1.0 - main</h3>
-
-<p>I MADE IT!!!</p>
-
-<p>
-yeah i made the site YIPPYY<br>
-everything u see now<br>
-and a bunch of random shit :P
-</p>
-
-<hr>
-
-<h3>8/10/26 - games</h3>
-
-<p>
-added the games section!!
-</p>
-
-<hr>
-
-<h3>8/10/26 - cats!!!</h3>
-
-<p>
-added the cats page.
-</p>
-
-<hr>
-
-<h3>coming soon...</h3>
-
-<p>
-who knows what i'll add next :P
-</p>
-
-<p>
-probably something stupid.
-</p>
-
-<hr>
-
-<p>
-- rautaaaaaa :3
-</p>
-
-</div>
 </div>
 
 
@@ -2499,19 +3860,22 @@ probably something stupid.
 ========================================================= -->
 
 <div
-id="ralseiClippy"
-class="ralsei-clippy">
+    id="ralseiClippy"
+    class="ralsei-clippy"
+>
 
-<div
-class="clippy-bubble"
-id="clippyBubble">
-hey :3
-</div>
+    <div
+        class="clippy-bubble"
+        id="clippyBubble"
+    >
+        hey :3
+    </div>
 
-<img
-src="/ralsei-clippy.png"
-alt="Ralsei Clippy"
-class="clippy-image">
+    <img
+        src="/ralsei-clippy.png"
+        alt="Ralsei Clippy"
+        class="clippy-image"
+    >
 
 </div>
 
@@ -2525,37 +3889,51 @@ class="clippy-image">
 
 <script>
 
+
 /* =========================================================
    TITLE ANIMATION
 ========================================================= */
 
-const titleText = "RAUTATIENTORI";
+const titleText =
+    "RAUTATIENTORI";
 
 let titleIndex = 0;
 
-function animateTitle() {
+
+function animateTitle(){
 
     document.title =
-        titleText.substring(0,titleIndex);
+        titleText.substring(
+            0,
+            titleIndex
+        );
 
     titleIndex++;
 
-    if(titleIndex > titleText.length){
+    if(
+        titleIndex >
+        titleText.length
+    ){
 
-        setTimeout(() => {
+        setTimeout(
+            () => {
 
-            titleIndex = 0;
-            animateTitle();
+                titleIndex = 0;
 
-        },1000);
+                animateTitle();
+
+            },
+            1000
+        );
 
         return;
     }
 
     setTimeout(
         animateTitle,
-        1000
+        100
     );
+
 }
 
 animateTitle();
@@ -2566,36 +3944,39 @@ animateTitle();
 ========================================================= */
 
 const intro =
-document.getElementById("intro");
+    document.getElementById("intro");
 
 const site =
-document.getElementById("site");
+    document.getElementById("site");
 
 const enterButton =
-document.getElementById("enterButton");
+    document.getElementById("enterButton");
+
 
 enterButton.addEventListener(
-"click",
-function(){
+    "click",
+    function(){
 
-    intro.style.opacity = "0";
+        intro.style.opacity =
+            "0";
 
-    site.style.opacity = "1";
+        site.style.opacity =
+            "1";
 
-    /*
-       Start Rautatify after the user has
-       interacted with the page.
-    */
-    playTrack(0);
+        playTrack(0);
 
-    setTimeout(
-        function(){
-            intro.style.display = "none";
-        },
-        1500
-    );
+        setTimeout(
+            function(){
 
-});
+                intro.style.display =
+                    "none";
+
+            },
+            1500
+        );
+
+    }
+);
 
 
 /* =========================================================
@@ -2604,19 +3985,41 @@ function(){
 
 let highestZ = 20;
 
+
 const panelNames = {
 
-    homePanel:"meow.exe",
-    aboutPanel:"about.exe",
-    projectsPanel:"my stuff.exe",
-    contactPanel:"contact.exe",
-    catsPanel:"cats :3",
-    game1Panel:"alien destroyer.exe",
-    changelogPanel:"changelog.exe",
-    rautatifyPanel:"Rautatify.exe",
-    obfuscatorPanel:"RautaObfuscator.exe",
-    rautaPastePanel:"RautaPaste.exe",
-    commissionsPanel:"commissions.exe"
+    homePanel:
+        "meow.exe",
+
+    aboutPanel:
+        "about.exe",
+
+    projectsPanel:
+        "my stuff.exe",
+
+    contactPanel:
+        "contact.exe",
+
+    catsPanel:
+        "cats :3",
+
+    game1Panel:
+        "alien destroyer.exe",
+
+    changelogPanel:
+        "changelog.exe",
+
+    rautatifyPanel:
+        "Rautatify.exe",
+
+    obfuscatorPanel:
+        "RautaObfuscator.exe",
+
+    rautaPastePanel:
+        "RautaPaste.exe",
+
+    commissionsPanel:
+        "commissions.exe"
 
 };
 
@@ -2624,13 +4027,17 @@ const panelNames = {
 function openPanel(id){
 
     const panel =
-    document.getElementById(id);
+        document.getElementById(id);
 
-    if(!panel) return;
+    if(!panel)
+        return;
 
-    panel.classList.remove("hidden");
+    panel.classList.remove(
+        "hidden"
+    );
 
-    panel.style.display = "block";
+    panel.style.display =
+        "block";
 
     removeTaskButton(id);
 
@@ -2642,11 +4049,13 @@ function openPanel(id){
 function minimizePanel(id){
 
     const panel =
-    document.getElementById(id);
+        document.getElementById(id);
 
-    if(!panel) return;
+    if(!panel)
+        return;
 
-    panel.style.display = "none";
+    panel.style.display =
+        "none";
 
     addTaskButton(id);
 
@@ -2656,13 +4065,17 @@ function minimizePanel(id){
 function closePanel(id){
 
     const panel =
-    document.getElementById(id);
+        document.getElementById(id);
 
-    if(!panel) return;
+    if(!panel)
+        return;
 
-    panel.style.display = "none";
+    panel.style.display =
+        "none";
 
-    panel.classList.add("hidden");
+    panel.classList.add(
+        "hidden"
+    );
 
     removeTaskButton(id);
 
@@ -2673,15 +4086,18 @@ function addTaskButton(id){
 
     if(
         document.getElementById(
-            "task-"+id
+            "task-" + id
         )
-    ) return;
+    )
+        return;
 
     const button =
-    document.createElement("button");
+        document.createElement(
+            "button"
+        );
 
     button.id =
-        "task-"+id;
+        "task-" + id;
 
     button.className =
         "task-window";
@@ -2690,23 +4106,31 @@ function addTaskButton(id){
         panelNames[id] || id;
 
     button.onclick =
-    function(){
+        function(){
 
-        const panel =
-        document.getElementById(id);
+            const panel =
+                document.getElementById(
+                    id
+                );
 
-        if(!panel) return;
+            if(!panel)
+                return;
 
-        panel.style.display = "block";
+            panel.style.display =
+                "block";
 
-        panel.classList.remove("hidden");
+            panel.classList.remove(
+                "hidden"
+            );
 
-        bringToFront(panel);
+            bringToFront(panel);
 
-    };
+        };
 
     document
-        .getElementById("taskButtons")
+        .getElementById(
+            "taskButtons"
+        )
         .appendChild(button);
 
 }
@@ -2715,9 +4139,9 @@ function addTaskButton(id){
 function removeTaskButton(id){
 
     const button =
-    document.getElementById(
-        "task-"+id
-    );
+        document.getElementById(
+            "task-" + id
+        );
 
     if(button)
         button.remove();
@@ -2740,135 +4164,153 @@ function bringToFront(panel){
 ========================================================= */
 
 const dragBox =
-document.getElementById("dragBox");
+    document.getElementById(
+        "dragBox"
+    );
 
-let draggingPanel = null;
+let draggingPanel =
+    null;
 
-let panelDragOffsetX = 0;
-let panelDragOffsetY = 0;
+let panelDragOffsetX =
+    0;
+
+let panelDragOffsetY =
+    0;
 
 
 document
-.querySelectorAll(".panel-title")
-.forEach(title => {
+    .querySelectorAll(".panel-title")
+    .forEach(
+        title => {
 
-    const panel =
-    title.closest(".panel");
+            const panel =
+                title.closest(
+                    ".panel"
+                );
 
-    title.addEventListener(
-    "mousedown",
+            title.addEventListener(
+                "mousedown",
+                function(e){
+
+                    if(
+                        e.target.closest(
+                            ".window-buttons"
+                        )
+                    )
+                        return;
+
+                    if(e.button !== 0)
+                        return;
+
+                    const rect =
+                        panel.getBoundingClientRect();
+
+                    panelDragOffsetX =
+                        e.clientX -
+                        rect.left;
+
+                    panelDragOffsetY =
+                        e.clientY -
+                        rect.top;
+
+                    panel.style.transform =
+                        "none";
+
+                    panel.style.left =
+                        rect.left + "px";
+
+                    panel.style.top =
+                        rect.top + "px";
+
+                    draggingPanel =
+                        panel;
+
+                    bringToFront(
+                        panel
+                    );
+
+                    dragBox.style.display =
+                        "block";
+
+                    dragBox.style.left =
+                        rect.left + "px";
+
+                    dragBox.style.top =
+                        rect.top + "px";
+
+                    dragBox.style.width =
+                        rect.width + "px";
+
+                    dragBox.style.height =
+                        rect.height + "px";
+
+                    document.body.style.cursor =
+                        "move";
+
+                    e.preventDefault();
+
+                }
+            );
+
+        }
+    );
+
+
+document.addEventListener(
+    "mousemove",
     function(e){
 
-        if(
-            e.target.closest(
-                ".window-buttons"
-            )
-        )
+        if(!draggingPanel)
             return;
 
-        if(e.button !== 0)
-            return;
+        const left =
+            e.clientX -
+            panelDragOffsetX;
+
+        const top =
+            e.clientY -
+            panelDragOffsetY;
+
+        draggingPanel.style.left =
+            left + "px";
+
+        draggingPanel.style.top =
+            top + "px";
 
         const rect =
-        panel.getBoundingClientRect();
-
-        panelDragOffsetX =
-            e.clientX - rect.left;
-
-        panelDragOffsetY =
-            e.clientY - rect.top;
-
-        panel.style.transform =
-            "none";
-
-        panel.style.left =
-            rect.left+"px";
-
-        panel.style.top =
-            rect.top+"px";
-
-        draggingPanel =
-            panel;
-
-        bringToFront(panel);
-
-        dragBox.style.display =
-            "block";
+            draggingPanel.getBoundingClientRect();
 
         dragBox.style.left =
-            rect.left+"px";
+            left + "px";
 
         dragBox.style.top =
-            rect.top+"px";
+            top + "px";
 
         dragBox.style.width =
-            rect.width+"px";
+            rect.width + "px";
 
         dragBox.style.height =
-            rect.height+"px";
+            rect.height + "px";
+
+    }
+);
+
+
+document.addEventListener(
+    "mouseup",
+    function(){
+
+        draggingPanel =
+            null;
+
+        dragBox.style.display =
+            "none";
 
         document.body.style.cursor =
-            "move";
+            "";
 
-        e.preventDefault();
-
-    });
-
-});
-
-
-document.addEventListener(
-"mousemove",
-function(e){
-
-    if(!draggingPanel)
-        return;
-
-    const left =
-        e.clientX -
-        panelDragOffsetX;
-
-    const top =
-        e.clientY -
-        panelDragOffsetY;
-
-    draggingPanel.style.left =
-        left+"px";
-
-    draggingPanel.style.top =
-        top+"px";
-
-    const rect =
-        draggingPanel.getBoundingClientRect();
-
-    dragBox.style.left =
-        left+"px";
-
-    dragBox.style.top =
-        top+"px";
-
-    dragBox.style.width =
-        rect.width+"px";
-
-    dragBox.style.height =
-        rect.height+"px";
-
-});
-
-
-document.addEventListener(
-"mouseup",
-function(){
-
-    draggingPanel = null;
-
-    dragBox.style.display =
-        "none";
-
-    document.body.style.cursor =
-        "";
-
-});
+    }
+);
 
 
 /* =========================================================
@@ -2876,16 +4318,24 @@ function(){
 ========================================================= */
 
 const hourHand =
-document.getElementById("hourHand");
+    document.getElementById(
+        "hourHand"
+    );
 
 const minuteHand =
-document.getElementById("minuteHand");
+    document.getElementById(
+        "minuteHand"
+    );
 
 const secondHand =
-document.getElementById("secondHand");
+    document.getElementById(
+        "secondHand"
+    );
 
 const currentTime =
-document.getElementById("currentTime");
+    document.getElementById(
+        "currentTime"
+    );
 
 
 function updateClock(){
@@ -2903,20 +4353,21 @@ function updateClock(){
         now.getSeconds();
 
     hourHand.style.transform =
-        `rotate(${((h%12)*30)+(m*.5)}deg)`;
+        `rotate(${((h % 12) * 30) + (m * .5)}deg)`;
 
     minuteHand.style.transform =
-        `rotate(${(m*6)+(s*.1)}deg)`;
+        `rotate(${(m * 6) + (s * .1)}deg)`;
 
     secondHand.style.transform =
-        `rotate(${s*6}deg)`;
+        `rotate(${s * 6}deg)`;
 
     currentTime.textContent =
-        `${String(h).padStart(2,"0")}:`+
-        `${String(m).padStart(2,"0")}:`+
+        `${String(h).padStart(2,"0")}:` +
+        `${String(m).padStart(2,"0")}:` +
         `${String(s).padStart(2,"0")}`;
 
 }
+
 
 updateClock();
 
@@ -2931,89 +4382,21 @@ setInterval(
 ========================================================= */
 
 const timeBox =
-document.getElementById("timeBox");
+    document.getElementById(
+        "timeBox"
+    );
 
-let draggingTime = false;
+let draggingTime =
+    false;
 
-let timeOffsetX = 0;
-let timeOffsetY = 0;
+let timeOffsetX =
+    0;
+
+let timeOffsetY =
+    0;
+
 
 timeBox.addEventListener(
-"mousedown",
-function(e){
-
-    if(e.button !== 0)
-        return;
-
-    const rect =
-        timeBox.getBoundingClientRect();
-
-    timeOffsetX =
-        e.clientX - rect.left;
-
-    timeOffsetY =
-        e.clientY - rect.top;
-
-    timeBox.style.right =
-        "auto";
-
-    timeBox.style.bottom =
-        "auto";
-
-    timeBox.style.left =
-        rect.left+"px";
-
-    timeBox.style.top =
-        rect.top+"px";
-
-    draggingTime = true;
-
-    e.preventDefault();
-
-});
-
-
-document.addEventListener(
-"mousemove",
-function(e){
-
-    if(!draggingTime)
-        return;
-
-    timeBox.style.left =
-        (e.clientX-timeOffsetX)+"px";
-
-    timeBox.style.top =
-        (e.clientY-timeOffsetY)+"px";
-
-});
-
-
-document.addEventListener(
-"mouseup",
-function(){
-    draggingTime = false;
-});
-
-
-/* =========================================================
-   DESKTOP ICON DRAGGING
-========================================================= */
-
-document
-.querySelectorAll(".desktop-icon")
-.forEach(icon => {
-
-    let down = false;
-    let moved = false;
-
-    let startX = 0;
-    let startY = 0;
-
-    let offsetX = 0;
-    let offsetY = 0;
-
-    icon.addEventListener(
     "mousedown",
     function(e){
 
@@ -3021,93 +4404,219 @@ document
             return;
 
         const rect =
-            icon.getBoundingClientRect();
+            timeBox.getBoundingClientRect();
 
-        startX =
-            e.clientX;
-
-        startY =
-            e.clientY;
-
-        offsetX =
+        timeOffsetX =
             e.clientX -
             rect.left;
 
-        offsetY =
+        timeOffsetY =
             e.clientY -
             rect.top;
 
-        moved = false;
-        down = true;
+        timeBox.style.right =
+            "auto";
 
-        document
-        .querySelectorAll(".desktop-icon")
-        .forEach(
-            other =>
-            other.classList.remove(
-                "selected"
-            )
-        );
+        timeBox.style.bottom =
+            "auto";
 
-        icon.classList.add(
-            "selected"
-        );
+        timeBox.style.left =
+            rect.left + "px";
+
+        timeBox.style.top =
+            rect.top + "px";
+
+        draggingTime =
+            true;
 
         e.preventDefault();
 
-    });
+    }
+);
 
 
-    document.addEventListener(
+document.addEventListener(
     "mousemove",
     function(e){
 
-        if(!down)
+        if(!draggingTime)
             return;
 
-        if(
-            Math.abs(e.clientX-startX)>5 ||
-            Math.abs(e.clientY-startY)>5
-        ){
+        timeBox.style.left =
+            (
+                e.clientX -
+                timeOffsetX
+            ) + "px";
 
-            moved = true;
+        timeBox.style.top =
+            (
+                e.clientY -
+                timeOffsetY
+            ) + "px";
 
-            icon.style.left =
-                (e.clientX-offsetX)+"px";
-
-            icon.style.top =
-                (e.clientY-offsetY)+"px";
-
-        }
-
-    });
+    }
+);
 
 
-    document.addEventListener(
+document.addEventListener(
     "mouseup",
     function(){
 
-        down = false;
+        draggingTime =
+            false;
 
-    });
+    }
+);
 
 
-    icon.addEventListener(
-    "dblclick",
-    function(){
+/* =========================================================
+   DESKTOP ICON DRAGGING
+========================================================= */
 
-        if(moved)
-            return;
+document
+    .querySelectorAll(".desktop-icon")
+    .forEach(
+        icon => {
 
-        const panel =
-            icon.dataset.panel;
+            let down =
+                false;
 
-        if(panel)
-            openPanel(panel);
+            let moved =
+                false;
 
-    });
+            let startX =
+                0;
 
-});
+            let startY =
+                0;
+
+            let offsetX =
+                0;
+
+            let offsetY =
+                0;
+
+
+            icon.addEventListener(
+                "mousedown",
+                function(e){
+
+                    if(e.button !== 0)
+                        return;
+
+                    const rect =
+                        icon.getBoundingClientRect();
+
+                    startX =
+                        e.clientX;
+
+                    startY =
+                        e.clientY;
+
+                    offsetX =
+                        e.clientX -
+                        rect.left;
+
+                    offsetY =
+                        e.clientY -
+                        rect.top;
+
+                    moved =
+                        false;
+
+                    down =
+                        true;
+
+                    document
+                        .querySelectorAll(
+                            ".desktop-icon"
+                        )
+                        .forEach(
+                            other =>
+                                other.classList.remove(
+                                    "selected"
+                                )
+                        );
+
+                    icon.classList.add(
+                        "selected"
+                    );
+
+                    e.preventDefault();
+
+                }
+            );
+
+
+            icon.addEventListener(
+                "mousemove",
+                function(e){
+
+                    if(!down)
+                        return;
+
+                    if(
+                        Math.abs(
+                            e.clientX -
+                            startX
+                        ) > 5 ||
+
+                        Math.abs(
+                            e.clientY -
+                            startY
+                        ) > 5
+                    ){
+
+                        moved =
+                            true;
+
+                        icon.style.left =
+                            (
+                                e.clientX -
+                                offsetX
+                            ) + "px";
+
+                        icon.style.top =
+                            (
+                                e.clientY -
+                                offsetY
+                            ) + "px";
+
+                    }
+
+                }
+            );
+
+
+            icon.addEventListener(
+                "mouseup",
+                function(){
+
+                    down =
+                        false;
+
+                }
+            );
+
+
+            icon.addEventListener(
+                "dblclick",
+                function(){
+
+                    if(moved)
+                        return;
+
+                    const panel =
+                        icon.dataset.panel;
+
+                    if(panel)
+                        openPanel(panel);
+
+                }
+            );
+
+        }
+    );
 
 
 /* =========================================================
@@ -3117,41 +4626,61 @@ document
 const clippyLines = [
 
     "hey :3",
+
     "meow/",
+
     "what are u doing",
+
     "this Website is getting big vro",
+
     "did u check the changelog?",
+
     "why are there so many cats",
+
     "rAlseismp when",
+
     "10000r37772323 bugs",
+
     "This site is pretty cool",
+
     "what if u added another cat",
+
     ":3",
+
     ":P",
+
     "RAUTATIFY SOON????",
+
     "RAUTAOBF????",
-    "RAUTAPASTE????"
+
+    "RAUTAPASTE????",
+
+    "MONACO EDITOR!!!!!",
+
+    "commissions????? :O"
 
 ];
 
+
 const clippyBubble =
-document.getElementById(
-    "clippyBubble"
-);
+    document.getElementById(
+        "clippyBubble"
+    );
+
 
 setInterval(
-function(){
+    function(){
 
-    clippyBubble.textContent =
-        clippyLines[
-            Math.floor(
-                Math.random()*
-                clippyLines.length
-            )
-        ];
+        clippyBubble.textContent =
+            clippyLines[
+                Math.floor(
+                    Math.random() *
+                    clippyLines.length
+                )
+            ];
 
-},
-15000
+    },
+    15000
 );
 
 
@@ -3160,132 +4689,161 @@ function(){
 ========================================================= */
 
 const clippy =
-document.getElementById(
-    "ralseiClippy"
-);
+    document.getElementById(
+        "ralseiClippy"
+    );
 
-let draggingClippy = false;
+let draggingClippy =
+    false;
 
-let clippyOffsetX = 0;
-let clippyOffsetY = 0;
+let clippyOffsetX =
+    0;
+
+let clippyOffsetY =
+    0;
+
 
 clippy.addEventListener(
-"mousedown",
-function(e){
+    "mousedown",
+    function(e){
 
-    if(e.button !== 0)
-        return;
+        if(e.button !== 0)
+            return;
 
-    const rect =
-        clippy.getBoundingClientRect();
+        const rect =
+            clippy.getBoundingClientRect();
 
-    clippyOffsetX =
-        e.clientX-rect.left;
+        clippyOffsetX =
+            e.clientX -
+            rect.left;
 
-    clippyOffsetY =
-        e.clientY-rect.top;
+        clippyOffsetY =
+            e.clientY -
+            rect.top;
 
-    clippy.style.right =
-        "auto";
+        clippy.style.right =
+            "auto";
 
-    clippy.style.bottom =
-        "auto";
+        clippy.style.bottom =
+            "auto";
 
-    clippy.style.left =
-        rect.left+"px";
+        clippy.style.left =
+            rect.left + "px";
 
-    clippy.style.top =
-        rect.top+"px";
+        clippy.style.top =
+            rect.top + "px";
 
-    draggingClippy = true;
+        draggingClippy =
+            true;
 
-    e.preventDefault();
+        e.preventDefault();
 
-});
-
-
-document.addEventListener(
-"mousemove",
-function(e){
-
-    if(!draggingClippy)
-        return;
-
-    clippy.style.left =
-        `${e.clientX-clippyOffsetX}px`;
-
-    clippy.style.top =
-        `${e.clientY-clippyOffsetY}px`;
-
-});
+    }
+);
 
 
 document.addEventListener(
-"mouseup",
-function(){
-    draggingClippy = false;
-});
+    "mousemove",
+    function(e){
+
+        if(!draggingClippy)
+            return;
+
+        clippy.style.left =
+            `${
+                e.clientX -
+                clippyOffsetX
+            }px`;
+
+        clippy.style.top =
+            `${
+                e.clientY -
+                clippyOffsetY
+            }px`;
+
+    }
+);
+
+
+document.addEventListener(
+    "mouseup",
+    function(){
+
+        draggingClippy =
+            false;
+
+    }
+);
 
 
 /* =========================================================
    RAUTATIFY
 ========================================================= */
 
-/*
-   Put your real music files here later.
-
-   Example:
-
-   "/music/song1.mp3"
-
-   For now they're empty so the playlist UI works
-   without inventing music URLs.
-*/
-
 const rautatifyTracks = [
 
     {
-        name:"Coming soon...",
-        artist:"rauta",
-        src:""
+        name:
+            "Coming soon...",
+
+        artist:
+            "rauta",
+
+        src:
+            ""
     },
 
     {
-        name:"Another rauta song",
-        artist:"rauta",
-        src:""
+        name:
+            "Another rauta song",
+
+        artist:
+            "rauta",
+
+        src:
+            ""
     },
 
     {
-        name:"secret track???",
-        artist:"rauta",
-        src:""
+        name:
+            "secret track???",
+
+        artist:
+            "rauta",
+
+        src:
+            ""
     }
 
 ];
 
-let currentTrack = 0;
+
+let currentTrack =
+    0;
+
 
 const rautatifyAudio =
-document.getElementById(
-    "rautatifyAudio"
-);
+    document.getElementById(
+        "rautatifyAudio"
+    );
 
 const nowPlaying =
-document.getElementById(
-    "rautatifyNowPlaying"
-);
+    document.getElementById(
+        "rautatifyNowPlaying"
+    );
 
 
 function playTrack(index){
 
     if(
         index < 0 ||
-        index >= rautatifyTracks.length
+        index >=
+        rautatifyTracks.length
     )
         return;
 
-    currentTrack = index;
+    currentTrack =
+        index;
 
     const track =
         rautatifyTracks[index];
@@ -3306,9 +4864,11 @@ function playTrack(index){
     rautatifyAudio.src =
         track.src;
 
-    rautatifyAudio.play().catch(
-        () => {}
-    );
+    rautatifyAudio
+        .play()
+        .catch(
+            () => {}
+        );
 
 }
 
@@ -3319,8 +4879,11 @@ function playCurrentTrack(){
         rautatifyAudio.src
     ){
 
-        rautatifyAudio.play()
-        .catch(()=>{});
+        rautatifyAudio
+            .play()
+            .catch(
+                () => {}
+            );
 
     }else{
 
@@ -3333,45 +4896,1233 @@ function playCurrentTrack(){
 
 
 rautatifyAudio.addEventListener(
-"ended",
-function(){
+    "ended",
+    function(){
 
-    currentTrack++;
+        currentTrack++;
 
-    if(
-        currentTrack >=
-        rautatifyTracks.length
-    )
-        currentTrack = 0;
+        if(
+            currentTrack >=
+            rautatifyTracks.length
+        )
+            currentTrack = 0;
 
-    playTrack(currentTrack);
+        playTrack(
+            currentTrack
+        );
 
-});
+    }
+);
 
 
 /* =========================================================
-   RAUTAOBFUSCATOR
+   RAUTA MONACO SYSTEM
 ========================================================= */
 
-/*
-   SAFE DESIGN
+let pasteEditor =
+    null;
 
-   The Safe has:
-   - PIN
-   - encrypted payload
-   - browser crypto
-   - lock/unlock state
+let obfInputEditor =
+    null;
 
-   The actual encrypted Safe is stored locally.
+let obfOutputEditor =
+    null;
 
-   IMPORTANT:
-   This is client-side storage. It is not a replacement
-   for a server-side password manager.
-*/
+let monacoReady =
+    false;
 
 
-let safeUnlocked = false;
-let safeKey = null;
+/* ---------------------------------------------------------
+   LANGUAGE MAP
+--------------------------------------------------------- */
+
+const rautaMonacoLanguages = {
+
+    "Plain Text":
+        "plaintext",
+
+    "Luau":
+        "luau",
+
+    "Lua":
+        "lua",
+
+    "HTML":
+        "html",
+
+    "CSS":
+        "css",
+
+    "PHP":
+        "php",
+
+    "Python":
+        "python",
+
+    "JavaScript":
+        "javascript",
+
+    "TypeScript":
+        "typescript",
+
+    "JSON":
+        "json",
+
+    "C":
+        "c",
+
+    "C++":
+        "cpp",
+
+    "C#":
+        "csharp",
+
+    "Java":
+        "java",
+
+    "Go":
+        "go",
+
+    "Rust":
+        "rust",
+
+    "SQL":
+        "sql",
+
+    "Shell":
+        "shell",
+
+    "Markdown":
+        "markdown",
+
+    "XML":
+        "xml"
+
+};
+
+
+/* ---------------------------------------------------------
+   COMPLETION DATABASE
+--------------------------------------------------------- */
+
+const rautaCompletions = {
+
+    lua: [
+
+        "print",
+        "pairs",
+        "ipairs",
+        "next",
+        "type",
+        "tostring",
+        "tonumber",
+        "select",
+        "error",
+        "assert",
+        "pcall",
+        "xpcall",
+        "require",
+
+        "string",
+        "table",
+        "math",
+        "os",
+        "io",
+        "debug",
+        "utf8",
+
+        "coroutine"
+
+    ],
+
+
+    luau: [
+
+        "print",
+        "warn",
+        "error",
+        "assert",
+
+        "type",
+        "typeof",
+
+        "tostring",
+        "tonumber",
+
+        "pairs",
+        "ipairs",
+        "next",
+        "select",
+
+        "pcall",
+        "xpcall",
+        "require",
+
+        "task",
+        "task.wait",
+        "task.spawn",
+        "task.defer",
+        "task.delay",
+        "task.cancel",
+
+        "string",
+        "table",
+        "math",
+        "coroutine",
+        "os",
+        "utf8",
+
+        "game",
+        "workspace",
+        "script",
+
+        "Instance",
+
+        "Vector2",
+        "Vector3",
+        "CFrame",
+
+        "Color3",
+
+        "UDim",
+        "UDim2",
+
+        "Enum",
+
+        "GetService",
+        "FindFirstChild",
+        "WaitForChild",
+        "Destroy",
+        "Clone",
+
+        "Connect",
+        "Fire",
+        "Invoke",
+
+        "RunService",
+        "Players",
+
+        "ReplicatedStorage",
+        "ServerStorage",
+        "ServerScriptService",
+
+        "TweenService",
+
+        "UserInputService",
+
+        "HttpService"
+
+    ],
+
+
+    javascript: [
+
+        "console",
+        "console.log",
+        "console.error",
+        "console.warn",
+
+        "document",
+        "window",
+        "navigator",
+
+        "setTimeout",
+        "setInterval",
+
+        "clearTimeout",
+        "clearInterval",
+
+        "fetch",
+
+        "Promise",
+
+        "async",
+        "await",
+
+        "JSON",
+
+        "Math",
+
+        "Date",
+
+        "Array",
+        "Object",
+        "String",
+        "Number",
+        "Boolean",
+
+        "localStorage",
+        "sessionStorage"
+
+    ],
+
+
+    typescript: [
+
+        "console",
+        "console.log",
+
+        "interface",
+        "type",
+
+        "class",
+        "extends",
+        "implements",
+
+        "public",
+        "private",
+        "protected",
+
+        "readonly",
+
+        "async",
+        "await",
+
+        "Promise",
+
+        "Record",
+        "Partial",
+        "Pick",
+        "Omit"
+
+    ],
+
+
+    python: [
+
+        "print",
+        "input",
+
+        "len",
+        "range",
+        "enumerate",
+        "zip",
+
+        "map",
+        "filter",
+
+        "sorted",
+        "reversed",
+
+        "str",
+        "int",
+        "float",
+        "bool",
+
+        "list",
+        "dict",
+        "tuple",
+        "set",
+
+        "True",
+        "False",
+        "None",
+
+        "import",
+        "from",
+
+        "def",
+        "class",
+
+        "return",
+        "yield",
+
+        "async",
+        "await",
+
+        "self",
+        "super",
+
+        "open",
+
+        "json",
+        "os",
+        "sys",
+        "math",
+        "random",
+        "datetime"
+
+    ],
+
+
+    html: [
+
+        "html",
+        "head",
+        "body",
+        "title",
+
+        "meta",
+        "link",
+
+        "script",
+        "style",
+
+        "div",
+        "span",
+
+        "p",
+
+        "h1",
+        "h2",
+        "h3",
+
+        "a",
+        "img",
+
+        "button",
+        "input",
+        "textarea",
+
+        "select",
+        "option",
+
+        "form",
+        "label",
+
+        "main",
+        "section",
+        "header",
+        "footer",
+        "nav",
+
+        "class",
+        "id",
+
+        "style",
+        "href",
+        "src",
+        "alt"
+
+    ],
+
+
+    css: [
+
+        "display",
+        "position",
+
+        "absolute",
+        "relative",
+        "fixed",
+        "sticky",
+
+        "width",
+        "height",
+
+        "margin",
+        "padding",
+
+        "color",
+
+        "background",
+        "background-color",
+
+        "font-size",
+        "font-family",
+        "font-weight",
+
+        "border",
+        "border-radius",
+
+        "box-shadow",
+
+        "flex",
+        "grid",
+        "gap",
+
+        "transform",
+        "transition",
+        "animation",
+
+        "opacity",
+
+        "overflow",
+
+        "z-index"
+
+    ],
+
+
+    php: [
+
+        "echo",
+        "print",
+
+        "isset",
+        "empty",
+        "count",
+
+        "array",
+
+        "json_encode",
+        "json_decode",
+
+        "function",
+        "class",
+
+        "public",
+        "private",
+        "protected",
+
+        "include",
+        "require",
+        "require_once",
+
+        "$_GET",
+        "$_POST",
+        "$_SESSION",
+        "$_COOKIE",
+        "$_SERVER"
+
+    ],
+
+
+    sql: [
+
+        "SELECT",
+        "FROM",
+        "WHERE",
+
+        "INSERT",
+        "INTO",
+        "VALUES",
+
+        "UPDATE",
+        "SET",
+
+        "DELETE",
+
+        "CREATE",
+        "TABLE",
+
+        "ALTER",
+        "DROP",
+
+        "JOIN",
+        "LEFT JOIN",
+        "RIGHT JOIN",
+        "INNER JOIN",
+
+        "ORDER BY",
+        "GROUP BY",
+
+        "HAVING",
+
+        "LIMIT",
+        "OFFSET",
+
+        "AND",
+        "OR",
+        "NOT",
+
+        "NULL"
+
+    ],
+
+
+    shell: [
+
+        "echo",
+        "cd",
+        "pwd",
+        "ls",
+
+        "mkdir",
+        "rm",
+        "cp",
+        "mv",
+
+        "cat",
+
+        "grep",
+        "find",
+
+        "chmod",
+
+        "curl",
+        "wget",
+
+        "printf"
+
+    ]
+
+};
+
+
+/* ---------------------------------------------------------
+   REGISTER LUA / LUAU
+--------------------------------------------------------- */
+
+function registerRautaLanguages(){
+
+    if(
+        !monaco.languages
+            .getLanguages()
+            .some(
+                language =>
+                    language.id === "luau"
+            )
+    ){
+
+        monaco.languages.register({
+            id:
+                "luau"
+        });
+
+    }
+
+
+    if(
+        !monaco.languages
+            .getLanguages()
+            .some(
+                language =>
+                    language.id === "lua"
+            )
+    ){
+
+        monaco.languages.register({
+            id:
+                "lua"
+        });
+
+    }
+
+
+    const luaKeywords = [
+
+        "and",
+        "break",
+        "do",
+        "else",
+        "elseif",
+        "end",
+
+        "false",
+
+        "for",
+        "function",
+        "if",
+
+        "in",
+
+        "local",
+        "nil",
+
+        "not",
+        "or",
+
+        "repeat",
+        "return",
+
+        "then",
+        "true",
+
+        "until",
+        "while"
+
+    ];
+
+
+    monaco.languages.setMonarchTokensProvider(
+        "lua",
+        {
+
+            keywords:
+                luaKeywords,
+
+            tokenizer: {
+
+                root: [
+
+                    [
+                        /--.*/,
+                        "comment"
+                    ],
+
+                    [
+                        /"(?:[^"\\]|\\.)*"/,
+                        "string"
+                    ],
+
+                    [
+                        /'(?:[^'\\]|\\.)*'/,
+                        "string"
+                    ],
+
+                    [
+                        /\b\d+(?:\.\d+)?\b/,
+                        "number"
+                    ],
+
+                    [
+                        /[a-zA-Z_]\w*/,
+                        {
+                            cases: {
+
+                                "@keywords":
+                                    "keyword",
+
+                                "@default":
+                                    "identifier"
+
+                            }
+                        }
+                    ]
+
+                ]
+
+            }
+
+        }
+    );
+
+
+    monaco.languages.setMonarchTokensProvider(
+        "luau",
+        {
+
+            keywords: [
+
+                ...luaKeywords,
+
+                "continue",
+                "export",
+                "type",
+                "typeof"
+
+            ],
+
+            tokenizer: {
+
+                root: [
+
+                    [
+                        /--.*/,
+                        "comment"
+                    ],
+
+                    [
+                        /"(?:[^"\\]|\\.)*"/,
+                        "string"
+                    ],
+
+                    [
+                        /'(?:[^'\\]|\\.)*'/,
+                        "string"
+                    ],
+
+                    [
+                        /\b\d+(?:\.\d+)?\b/,
+                        "number"
+                    ],
+
+                    [
+                        /[a-zA-Z_]\w*/,
+                        {
+
+                            cases: {
+
+                                "@keywords":
+                                    "keyword",
+
+                                "@default":
+                                    "identifier"
+
+                            }
+
+                        }
+                    ]
+
+                ]
+
+            }
+
+        }
+    );
+
+}
+
+
+/* ---------------------------------------------------------
+   CUSTOM AUTOCOMPLETE
+--------------------------------------------------------- */
+
+function registerRautaCompletions(){
+
+    Object.keys(
+        rautaCompletions
+    )
+    .forEach(
+        language => {
+
+            monaco.languages
+                .registerCompletionItemProvider(
+                    language,
+                    {
+
+                        provideCompletionItems:
+                            function(
+                                model,
+                                position
+                            ){
+
+                                const word =
+                                    model.getWordUntilPosition(
+                                        position
+                                    );
+
+                                const range = {
+
+                                    startLineNumber:
+                                        position.lineNumber,
+
+                                    endLineNumber:
+                                        position.lineNumber,
+
+                                    startColumn:
+                                        word.startColumn,
+
+                                    endColumn:
+                                        word.endColumn
+
+                                };
+
+
+                                const suggestions =
+                                    rautaCompletions[
+                                        language
+                                    ]
+                                    .map(
+                                        item => {
+
+                                            let insertText =
+                                                item;
+
+
+                                            const functionNames = [
+
+                                                "print",
+                                                "warn",
+                                                "error",
+                                                "assert",
+
+                                                "typeof",
+                                                "tostring",
+                                                "tonumber",
+
+                                                "console.log",
+                                                "console.error",
+                                                "console.warn",
+
+                                                "len",
+                                                "input",
+                                                "range",
+
+                                                "echo"
+
+                                            ];
+
+
+                                            if(
+                                                functionNames
+                                                    .includes(
+                                                        item
+                                                    )
+                                            ){
+
+                                                insertText =
+                                                    item +
+                                                    "()";
+
+                                            }
+
+
+                                            return {
+
+                                                label:
+                                                    item,
+
+                                                kind:
+                                                    monaco
+                                                        .languages
+                                                        .CompletionItemKind
+                                                        .Function,
+
+                                                insertText:
+                                                    insertText,
+
+                                                range:
+                                                    range,
+
+                                                detail:
+                                                    "Rauta autocomplete"
+
+                                            };
+
+                                        }
+                                    );
+
+
+                                return {
+
+                                    suggestions:
+                                        suggestions
+
+                                };
+
+                            }
+
+                    }
+                );
+
+        }
+    );
+
+}
+
+
+/* ---------------------------------------------------------
+   START MONACO
+--------------------------------------------------------- */
+
+function startRautaMonaco(){
+
+    if(monacoReady)
+        return;
+
+
+    require.config({
+
+        paths: {
+
+            vs:
+                "https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.52.2/min/vs"
+
+        }
+
+    });
+
+
+    require(
+        [
+            "vs/editor/editor.main"
+        ],
+        function(){
+
+            registerRautaLanguages();
+
+            registerRautaCompletions();
+
+
+            const commonOptions = {
+
+                theme:
+                    "vs-dark",
+
+                automaticLayout:
+                    true,
+
+                minimap: {
+
+                    enabled:
+                        false
+
+                },
+
+                fontSize:
+                    13,
+
+                lineNumbers:
+                    "on",
+
+                roundedSelection:
+                    false,
+
+                scrollBeyondLastLine:
+                    false,
+
+                wordWrap:
+                    "off",
+
+                tabSize:
+                    4,
+
+                insertSpaces:
+                    true,
+
+                suggestOnTriggerCharacters:
+                    true,
+
+                quickSuggestions:
+                    true,
+
+                parameterHints: {
+
+                    enabled:
+                        true
+
+                },
+
+                folding:
+                    true,
+
+                smoothScrolling:
+                    true
+
+            };
+
+
+            /* RAUTAPASTE */
+
+            pasteEditor =
+                monaco.editor.create(
+                    document.getElementById(
+                        "pasteEditor"
+                    ),
+                    {
+
+                        ...commonOptions,
+
+                        language:
+                            "plaintext",
+
+                        value:
+                            ""
+
+                    }
+                );
+
+
+            /* OBFUSCATOR INPUT */
+
+            obfInputEditor =
+                monaco.editor.create(
+                    document.getElementById(
+                        "obfInputEditor"
+                    ),
+                    {
+
+                        ...commonOptions,
+
+                        language:
+                            "luau",
+
+                        value:
+                            ""
+
+                    }
+                );
+
+
+            /* OBFUSCATOR OUTPUT */
+
+            obfOutputEditor =
+                monaco.editor.create(
+                    document.getElementById(
+                        "obfOutputEditor"
+                    ),
+                    {
+
+                        ...commonOptions,
+
+                        language:
+                            "plaintext",
+
+                        value:
+                            "",
+
+                        readOnly:
+                            true
+
+                    }
+                );
+
+
+            monacoReady =
+                true;
+
+
+            updatePasteEditorLanguage();
+
+            updateObfEditorLanguage();
+
+        }
+    );
+
+}
+
+
+/* ---------------------------------------------------------
+   LANGUAGE CHANGES
+--------------------------------------------------------- */
+
+function getPasteLanguage(){
+
+    return document.getElementById(
+        "pasteLanguage"
+    ).value;
+
+}
+
+
+function getObfLanguage(){
+
+    return document.getElementById(
+        "obfLanguage"
+    ).value;
+
+}
+
+
+function updatePasteEditorLanguage(){
+
+    if(
+        !monacoReady ||
+        !pasteEditor
+    )
+        return;
+
+    const language =
+        rautaMonacoLanguages[
+            getPasteLanguage()
+        ] ||
+        "plaintext";
+
+    monaco.editor.setModelLanguage(
+        pasteEditor.getModel(),
+        language
+    );
+
+}
+
+
+function updateObfEditorLanguage(){
+
+    if(
+        !monacoReady ||
+        !obfInputEditor
+    )
+        return;
+
+    const language =
+        rautaMonacoLanguages[
+            getObfLanguage()
+        ] ||
+        "plaintext";
+
+    monaco.editor.setModelLanguage(
+        obfInputEditor.getModel(),
+        language
+    );
+
+}
+
+
+document
+    .getElementById(
+        "pasteLanguage"
+    )
+    .addEventListener(
+        "change",
+        updatePasteEditorLanguage
+    );
+
+
+document
+    .getElementById(
+        "obfLanguage"
+    )
+    .addEventListener(
+        "change",
+        updateObfEditorLanguage
+    );
+
+
+/* ---------------------------------------------------------
+   EDITOR GETTERS / SETTERS
+--------------------------------------------------------- */
+
+function getPasteContent(){
+
+    if(!pasteEditor)
+        return "";
+
+    return pasteEditor.getValue();
+
+}
+
+
+function setPasteContent(text){
+
+    if(!pasteEditor)
+        return;
+
+    pasteEditor.setValue(
+        text || ""
+    );
+
+}
+
+
+function getObfInput(){
+
+    if(!obfInputEditor)
+        return "";
+
+    return obfInputEditor.getValue();
+
+}
+
+
+function setObfInput(text){
+
+    if(!obfInputEditor)
+        return;
+
+    obfInputEditor.setValue(
+        text || ""
+    );
+
+}
+
+
+function getObfOutput(){
+
+    if(!obfOutputEditor)
+        return "";
+
+    return obfOutputEditor.getValue();
+
+}
+
+
+function setObfOutput(text){
+
+    if(!obfOutputEditor)
+        return;
+
+    obfOutputEditor.setValue(
+        text || ""
+    );
+
+}
+
+
+startRautaMonaco();
+
+
+/* =========================================================
+   RAUTA OBFUSCATOR
+========================================================= */
+
+let safeUnlocked =
+    false;
+
+let safeKey =
+    null;
+
 
 const SAFE_STORAGE =
     "rauta_obfuscator_safe_v1";
@@ -3379,7 +6130,7 @@ const SAFE_STORAGE =
 
 function setObfMessage(
     text,
-    type="success"
+    type = "success"
 ){
 
     const box =
@@ -3389,8 +6140,8 @@ function setObfMessage(
 
     box.className =
         type === "error"
-        ? "obf-error"
-        : "obf-success";
+            ? "obf-error"
+            : "obf-success";
 
     box.textContent =
         text;
@@ -3410,7 +6161,9 @@ function updateSafeStatus(){
         status.textContent =
             "🔓 Safe unlocked";
 
-    }else if(
+    }
+
+    else if(
         localStorage.getItem(
             SAFE_STORAGE
         )
@@ -3419,7 +6172,9 @@ function updateSafeStatus(){
         status.textContent =
             "🔒 Safe locked";
 
-    }else{
+    }
+
+    else{
 
         status.textContent =
             "🔒 No Safe";
@@ -3429,18 +6184,23 @@ function updateSafeStatus(){
 }
 
 
-/* ---------- crypto helpers ---------- */
+/* =========================================================
+   CRYPTO HELPERS
+========================================================= */
 
 function bufferToBase64(buffer){
 
-    let binary = "";
+    let binary =
+        "";
 
     const bytes =
-        new Uint8Array(buffer);
+        new Uint8Array(
+            buffer
+        );
 
     for(
-        let i=0;
-        i<bytes.byteLength;
+        let i = 0;
+        i < bytes.byteLength;
         i++
     ){
 
@@ -3451,7 +6211,9 @@ function bufferToBase64(buffer){
 
     }
 
-    return btoa(binary);
+    return btoa(
+        binary
+    );
 
 }
 
@@ -3459,7 +6221,9 @@ function bufferToBase64(buffer){
 function base64ToBuffer(base64){
 
     const binary =
-        atob(base64);
+        atob(
+            base64
+        );
 
     const bytes =
         new Uint8Array(
@@ -3467,8 +6231,8 @@ function base64ToBuffer(base64){
         );
 
     for(
-        let i=0;
-        i<binary.length;
+        let i = 0;
+        i < binary.length;
         i++
     ){
 
@@ -3493,29 +6257,58 @@ async function deriveKey(
     const material =
         await crypto.subtle.importKey(
             "raw",
-            encoder.encode(pin),
+
+            encoder.encode(
+                pin
+            ),
+
             "PBKDF2",
+
             false,
-            ["deriveKey"]
+
+            [
+                "deriveKey"
+            ]
         );
 
+
     return crypto.subtle.deriveKey(
+
         {
-            name:"PBKDF2",
-            salt:salt,
-            iterations:150000,
-            hash:"SHA-256"
+
+            name:
+                "PBKDF2",
+
+            salt:
+                salt,
+
+            iterations:
+                150000,
+
+            hash:
+                "SHA-256"
+
         },
+
         material,
+
         {
-            name:"AES-GCM",
-            length:256
+
+            name:
+                "AES-GCM",
+
+            length:
+                256
+
         },
+
         false,
+
         [
             "encrypt",
             "decrypt"
         ]
+
     );
 
 }
@@ -3547,21 +6340,44 @@ async function encryptSafe(
 
     const encrypted =
         await crypto.subtle.encrypt(
+
             {
-                name:"AES-GCM",
-                iv:iv
+
+                name:
+                    "AES-GCM",
+
+                iv:
+                    iv
+
             },
+
             key,
+
             encoder.encode(
-                JSON.stringify(data)
+                JSON.stringify(
+                    data
+                )
             )
+
         );
+
 
     return {
 
-        salt:bufferToBase64(salt),
-        iv:bufferToBase64(iv),
-        data:bufferToBase64(encrypted)
+        salt:
+            bufferToBase64(
+                salt
+            ),
+
+        iv:
+            bufferToBase64(
+                iv
+            ),
+
+        data:
+            bufferToBase64(
+                encrypted
+            )
 
     };
 
@@ -3600,25 +6416,39 @@ async function decryptSafe(
 
     const decrypted =
         await crypto.subtle.decrypt(
+
             {
-                name:"AES-GCM",
-                iv:iv
+
+                name:
+                    "AES-GCM",
+
+                iv:
+                    iv
+
             },
+
             key,
+
             encrypted
+
         );
+
 
     const decoder =
         new TextDecoder();
 
     return JSON.parse(
-        decoder.decode(decrypted)
+        decoder.decode(
+            decrypted
+        )
     );
 
 }
 
 
-/* ---------- Safe ---------- */
+/* =========================================================
+   SAFE
+========================================================= */
 
 async function createSafe(){
 
@@ -3630,18 +6460,23 @@ async function createSafe(){
     if(existing){
 
         setObfMessage(
+
             "A Safe already exists. Delete it first if you want a new one.",
+
             "error"
+
         );
 
         return;
 
     }
 
+
     const pin =
         document.getElementById(
             "safePin"
         ).value;
+
 
     if(
         !pin ||
@@ -3649,31 +6484,37 @@ async function createSafe(){
     ){
 
         setObfMessage(
+
             "PIN must be at least 4 characters.",
+
             "error"
+
         );
 
         return;
 
     }
 
+
     const payload = {
 
-        version:1,
+        version:
+            1,
 
         created:
             new Date().toISOString(),
 
         language:
-            document.getElementById(
-                "obfLanguage"
-            ).value,
+            getObfLanguage(),
 
-        code:"",
+        code:
+            "",
 
-        obfuscated:""
+        obfuscated:
+            ""
 
     };
+
 
     try{
 
@@ -3684,15 +6525,20 @@ async function createSafe(){
             );
 
         localStorage.setItem(
+
             SAFE_STORAGE,
+
             JSON.stringify(
                 encrypted
             )
+
         );
 
-        safeUnlocked = true;
+        safeUnlocked =
+            true;
 
-        safeKey = pin;
+        safeKey =
+            pin;
 
         updateSafeStatus();
 
@@ -3700,13 +6546,20 @@ async function createSafe(){
             "Safe created and unlocked 🔐"
         );
 
-    }catch(error){
+    }
 
-        console.error(error);
+    catch(error){
+
+        console.error(
+            error
+        );
 
         setObfMessage(
+
             "Could not create Safe.",
+
             "error"
+
         );
 
     }
@@ -3724,34 +6577,45 @@ async function unlockSafe(){
     if(!stored){
 
         setObfMessage(
+
             "There is no Safe yet. Create one first.",
+
             "error"
+
         );
 
         return;
 
     }
+
 
     const pin =
         document.getElementById(
             "safePin"
         ).value;
 
+
     if(!pin){
 
         setObfMessage(
+
             "Enter the Safe PIN first.",
+
             "error"
+
         );
 
         return;
 
     }
 
+
     try{
 
         const payload =
-            JSON.parse(stored);
+            JSON.parse(
+                stored
+            );
 
         const safeData =
             await decryptSafe(
@@ -3759,9 +6623,13 @@ async function unlockSafe(){
                 pin
             );
 
-        safeUnlocked = true;
 
-        safeKey = pin;
+        safeUnlocked =
+            true;
+
+        safeKey =
+            pin;
+
 
         document.getElementById(
             "obfLanguage"
@@ -3769,32 +6637,47 @@ async function unlockSafe(){
             safeData.language ||
             "luau";
 
-        document.getElementById(
-            "obfInput"
-        ).value =
-            safeData.code || "";
 
-        document.getElementById(
-            "obfOutput"
-        ).value =
-            safeData.obfuscated || "";
+        updateObfEditorLanguage();
+
+
+        setObfInput(
+            safeData.code ||
+            ""
+        );
+
+
+        setObfOutput(
+            safeData.obfuscated ||
+            ""
+        );
+
 
         updateSafeStatus();
+
 
         setObfMessage(
             "Correct PIN. Safe unlocked 🔓"
         );
 
-    }catch(error){
+    }
 
-        safeUnlocked = false;
-        safeKey = null;
+    catch(error){
+
+        safeUnlocked =
+            false;
+
+        safeKey =
+            null;
 
         updateSafeStatus();
 
         setObfMessage(
+
             "ERROR: incorrect PIN or corrupted Safe.",
+
             "error"
+
         );
 
     }
@@ -3804,23 +6687,26 @@ async function unlockSafe(){
 
 function lockSafe(){
 
-    safeUnlocked = false;
+    safeUnlocked =
+        false;
 
-    safeKey = null;
+    safeKey =
+        null;
 
-    document.getElementById(
-        "obfInput"
-    ).value = "";
 
-    document.getElementById(
-        "obfOutput"
-    ).value = "";
+    setObfInput("");
+
+    setObfOutput("");
+
 
     document.getElementById(
         "safePin"
-    ).value = "";
+    ).value =
+        "";
+
 
     updateSafeStatus();
+
 
     setObfMessage(
         "Safe locked. You need the PIN to access it."
@@ -3838,22 +6724,26 @@ async function deleteSafe(){
     )
         return;
 
+
     localStorage.removeItem(
         SAFE_STORAGE
     );
 
-    safeUnlocked = false;
-    safeKey = null;
 
-    document.getElementById(
-        "obfInput"
-    ).value = "";
+    safeUnlocked =
+        false;
 
-    document.getElementById(
-        "obfOutput"
-    ).value = "";
+    safeKey =
+        null;
+
+
+    setObfInput("");
+
+    setObfOutput("");
+
 
     updateSafeStatus();
+
 
     setObfMessage(
         "Safe deleted."
@@ -3862,16 +6752,9 @@ async function deleteSafe(){
 }
 
 
-/* ---------- Obfuscation ---------- */
-
-/*
-   This is intentionally a generic source transformer.
-   It does not pretend that every programming language
-   has the same valid obfuscation rules.
-
-   The Safe is what provides the PIN-gated encryption.
-*/
-
+/* =========================================================
+   BASE64
+========================================================= */
 
 function encodeBase64Unicode(text){
 
@@ -3890,53 +6773,68 @@ function decodeBase64Unicode(text){
 
     return decodeURIComponent(
         escape(
-            atob(text)
+            atob(
+                text
+            )
         )
     );
 
 }
 
 
+/* =========================================================
+   OBFUSCATE
+========================================================= */
+
 function obfuscateCode(){
 
     if(!safeUnlocked){
 
         setObfMessage(
+
             "ERROR: unlock your Safe with the PIN before obfuscating.",
+
             "error"
+
         );
 
         return;
 
     }
 
+
     const code =
-        document.getElementById(
-            "obfInput"
-        ).value;
+        getObfInput();
+
 
     if(!code){
 
         setObfMessage(
+
             "Put some code in first.",
+
             "error"
+
         );
 
         return;
 
     }
 
+
     const language =
-        document.getElementById(
-            "obfLanguage"
-        ).value;
+        getObfLanguage();
+
 
     const encoded =
         encodeBase64Unicode(
             code
         );
 
-    let output = "";
+
+    let output =
+        "";
+
 
     switch(language){
 
@@ -3994,17 +6892,32 @@ print("RautaObfuscator payload:", b)`;
 
             break;
 
+
+        default:
+
+            output =
+`/* RautaObfuscator
+   ${language}
+   Encoded source payload:
+   ${encoded}
+*/`;
+
+            break;
+
     }
 
-    document.getElementById(
-        "obfOutput"
-    ).value = output;
+
+    setObfOutput(
+        output
+    );
+
 
     saveCurrentSafe(
         code,
         output,
         language
     );
+
 
     setObfMessage(
         "Code obfuscated and saved inside the unlocked Safe."
@@ -4013,29 +6926,42 @@ print("RautaObfuscator payload:", b)`;
 }
 
 
+/* =========================================================
+   SAVE SAFE
+========================================================= */
+
 async function saveCurrentSafe(
     code,
     obfuscated,
     language
 ){
 
-    if(!safeUnlocked || !safeKey)
+    if(
+        !safeUnlocked ||
+        !safeKey
+    )
         return;
+
 
     const payload = {
 
-        version:1,
+        version:
+            1,
 
         created:
             new Date().toISOString(),
 
-        language:language,
+        language:
+            language,
 
-        code:code,
+        code:
+            code,
 
-        obfuscated:obfuscated
+        obfuscated:
+            obfuscated
 
     };
+
 
     const encrypted =
         await encryptSafe(
@@ -4043,66 +6969,83 @@ async function saveCurrentSafe(
             safeKey
         );
 
+
     localStorage.setItem(
+
         SAFE_STORAGE,
+
         JSON.stringify(
             encrypted
         )
+
     );
 
 }
 
+
+/* =========================================================
+   DEOBFUSCATE
+========================================================= */
 
 function deobfuscateCode(){
 
     if(!safeUnlocked){
 
         setObfMessage(
+
             "ERROR: enter the correct PIN to unlock the Safe before deobfuscating.",
+
             "error"
+
         );
 
         return;
 
     }
 
+
     const output =
-        document.getElementById(
-            "obfOutput"
-        ).value;
+        getObfOutput();
+
 
     if(!output){
 
         setObfMessage(
+
             "There is no obfuscated code.",
+
             "error"
+
         );
 
         return;
 
     }
 
-    const language =
-        document.getElementById(
-            "obfLanguage"
-        ).value;
 
-    let encoded = "";
+    const language =
+        getObfLanguage();
+
+
+    let encoded =
+        "";
+
 
     const match =
         output.match(
             /(?:atob|base64_decode|local b=)["'(]*([A-Za-z0-9+/=]+)/
         );
 
+
     if(match)
-        encoded = match[1];
+        encoded =
+            match[1];
 
-    /*
-       CSS is intentionally treated differently because
-       the generated CSS output is a payload comment.
-    */
 
-    if(language === "css"){
+    if(
+        language ===
+        "css"
+    ){
 
         const cssMatch =
             output.match(
@@ -4110,20 +7053,26 @@ function deobfuscateCode(){
             );
 
         if(cssMatch)
-            encoded = cssMatch[1];
+            encoded =
+                cssMatch[1];
 
     }
+
 
     if(!encoded){
 
         setObfMessage(
+
             "Could not find a RautaObfuscator payload.",
+
             "error"
+
         );
 
         return;
 
     }
+
 
     try{
 
@@ -4132,20 +7081,26 @@ function deobfuscateCode(){
                 encoded
             );
 
-        document.getElementById(
-            "obfInput"
-        ).value =
-            decoded;
+
+        setObfInput(
+            decoded
+        );
+
 
         setObfMessage(
             "Correct Safe PIN confirmed. Code deobfuscated 🔓"
         );
 
-    }catch(error){
+    }
+
+    catch(error){
 
         setObfMessage(
+
             "ERROR: unable to deobfuscate this payload.",
+
             "error"
+
         );
 
     }
@@ -4153,23 +7108,40 @@ function deobfuscateCode(){
 }
 
 
+/* =========================================================
+   COPY OBFUSCATOR
+========================================================= */
+
 async function copyObfOutput(){
 
     const output =
-        document.getElementById(
-            "obfOutput"
-        ).value;
+        getObfOutput();
+
 
     if(!output)
         return;
 
-    await navigator.clipboard.writeText(
-        output
-    );
 
-    setObfMessage(
-        "Output copied."
-    );
+    try{
+
+        await navigator.clipboard.writeText(
+            output
+        );
+
+        setObfMessage(
+            "Output copied."
+        );
+
+    }
+
+    catch(error){
+
+        setObfMessage(
+            "Could not copy output.",
+            "error"
+        );
+
+    }
 
 }
 
@@ -4180,15 +7152,6 @@ updateSafeStatus();
 /* =========================================================
    RAUTAPASTE
 ========================================================= */
-
-function getPasteContent(){
-
-    return document.getElementById(
-        "pasteContent"
-    ).value;
-
-}
-
 
 function pasteStatus(text){
 
@@ -4205,6 +7168,7 @@ async function copyPaste(){
     const content =
         getPasteContent();
 
+
     if(!content){
 
         pasteStatus(
@@ -4215,13 +7179,26 @@ async function copyPaste(){
 
     }
 
-    await navigator.clipboard.writeText(
-        content
-    );
 
-    pasteStatus(
-        "copied!!! :3"
-    );
+    try{
+
+        await navigator.clipboard.writeText(
+            content
+        );
+
+        pasteStatus(
+            "copied!!! :3"
+        );
+
+    }
+
+    catch(error){
+
+        pasteStatus(
+            "couldn't copy :("
+        );
+
+    }
 
 }
 
@@ -4230,6 +7207,7 @@ function makeRaw(){
 
     const content =
         getPasteContent();
+
 
     if(!content){
 
@@ -4241,28 +7219,42 @@ function makeRaw(){
 
     }
 
+
     const blob =
         new Blob(
-            [content],
+
+            [
+                content
+            ],
+
             {
-                type:"text/plain"
+                type:
+                    "text/plain"
             }
+
         );
+
 
     const url =
         URL.createObjectURL(
             blob
         );
 
+
     window.open(
         url,
         "_blank"
     );
 
+
     setTimeout(
-        () => URL.revokeObjectURL(url),
+        () =>
+            URL.revokeObjectURL(
+                url
+            ),
         5000
     );
+
 
     pasteStatus(
         "opened raw paste."
@@ -4276,6 +7268,7 @@ function downloadPaste(){
     const content =
         getPasteContent();
 
+
     if(!content){
 
         pasteStatus(
@@ -4286,28 +7279,82 @@ function downloadPaste(){
 
     }
 
+
     const language =
         document.getElementById(
             "pasteLanguage"
         ).value;
 
+
     const extensions = {
 
-        "Luau":"lua",
-        "Lua":"lua",
-        "HTML":"html",
-        "CSS":"css",
-        "PHP":"php",
-        "Python":"py",
-        "JavaScript":"js",
-        "JSON":"json",
-        "Plain Text":"txt"
+        "Luau":
+            "lua",
+
+        "Lua":
+            "lua",
+
+        "HTML":
+            "html",
+
+        "CSS":
+            "css",
+
+        "PHP":
+            "php",
+
+        "Python":
+            "py",
+
+        "JavaScript":
+            "js",
+
+        "TypeScript":
+            "ts",
+
+        "JSON":
+            "json",
+
+        "C":
+            "c",
+
+        "C++":
+            "cpp",
+
+        "C#":
+            "cs",
+
+        "Java":
+            "java",
+
+        "Go":
+            "go",
+
+        "Rust":
+            "rs",
+
+        "SQL":
+            "sql",
+
+        "Shell":
+            "sh",
+
+        "Markdown":
+            "md",
+
+        "XML":
+            "xml",
+
+        "Plain Text":
+            "txt"
 
     };
+
 
     const ext =
         extensions[language] ||
         "txt";
+
 
     const title =
         document.getElementById(
@@ -4315,32 +7362,52 @@ function downloadPaste(){
         ).value ||
         "rautapuaste";
 
+
     const blob =
         new Blob(
-            [content],
+
+            [
+                content
+            ],
+
             {
-                type:"text/plain"
+                type:
+                    "text/plain"
             }
+
         );
+
 
     const url =
         URL.createObjectURL(
             blob
         );
 
+
     const a =
         document.createElement(
             "a"
         );
 
-    a.href = url;
+
+    a.href =
+        url;
 
     a.download =
         `${title}.${ext}`;
 
+
     a.click();
 
-    URL.revokeObjectURL(url);
+
+    setTimeout(
+        () =>
+            URL.revokeObjectURL(
+                url
+            ),
+        100
+    );
+
 
     pasteStatus(
         "download started :3"
@@ -4354,6 +7421,7 @@ function savePasteLocal(){
     const content =
         getPasteContent();
 
+
     if(!content){
 
         pasteStatus(
@@ -4363,6 +7431,7 @@ function savePasteLocal(){
         return;
 
     }
+
 
     const paste = {
 
@@ -4377,17 +7446,25 @@ function savePasteLocal(){
                 "pasteLanguage"
             ).value,
 
-        content:content,
+        content:
+            content,
 
         created:
             new Date().toISOString()
 
     };
 
+
     localStorage.setItem(
+
         "rauta_paste_last",
-        JSON.stringify(paste)
+
+        JSON.stringify(
+            paste
+        )
+
     );
+
 
     pasteStatus(
         "paste saved locally!"
@@ -4401,33 +7478,125 @@ function savePasteLocal(){
 ========================================================= */
 
 document.addEventListener(
-"mousedown",
-function(e){
+    "mousedown",
+    function(e){
 
-    if(
-        !e.target.closest(".desktop-icon") &&
-        !e.target.closest(".panel") &&
-        !e.target.closest(".navbar") &&
-        !e.target.closest(".time-box")
-    ){
+        if(
 
-        document
-        .querySelectorAll(
-            ".desktop-icon"
-        )
-        .forEach(
-            icon =>
-            icon.classList.remove(
-                "selected"
+            !e.target.closest(
+                ".desktop-icon"
+            ) &&
+
+            !e.target.closest(
+                ".panel"
+            ) &&
+
+            !e.target.closest(
+                ".navbar"
+            ) &&
+
+            !e.target.closest(
+                ".time-box"
             )
+
+        ){
+
+            document
+                .querySelectorAll(
+                    ".desktop-icon"
+                )
+                .forEach(
+                    icon =>
+                        icon.classList.remove(
+                            "selected"
+                        )
+                );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   RESTORE LAST LOCAL PASTE
+========================================================= */
+
+try{
+
+    const savedPaste =
+        localStorage.getItem(
+            "rauta_paste_last"
         );
+
+
+    if(savedPaste){
+
+        const paste =
+            JSON.parse(
+                savedPaste
+            );
+
+
+        document.getElementById(
+            "pasteTitle"
+        ).value =
+            paste.title ||
+            "";
+
+
+        document.getElementById(
+            "pasteLanguage"
+        ).value =
+            paste.language ||
+            "Plain Text";
+
+
+        /*
+            Monaco may still be loading.
+            Wait until it is ready.
+        */
+
+        const restorePaste =
+            setInterval(
+                function(){
+
+                    if(!monacoReady)
+                        return;
+
+                    clearInterval(
+                        restorePaste
+                    );
+
+
+                    setPasteContent(
+                        paste.content ||
+                        ""
+                    );
+
+
+                    updatePasteEditorLanguage();
+
+                },
+                100
+            );
 
     }
 
-});
+}
+
+catch(error){
+
+    console.warn(
+        "Could not restore last paste.",
+        error
+    );
+
+}
 
 
 </script>
 
 </body>
+
 </html>
