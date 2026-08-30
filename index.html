@@ -298,7 +298,7 @@ body {
         blur(18px)
         saturate(140%);
 
-    z-index: 20;
+    z-index: 100;
 
     user-select: none;
 
@@ -307,6 +307,63 @@ body {
 
 .panel.hidden {
     display: none;
+}
+
+
+
+/* =========================================================
+   REAL GLASS WINDOW LAYER
+   Background < icons < panels < navbar < Clippy
+========================================================= */
+
+.panel{
+    isolation: isolate;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.62),
+            rgba(230,220,245,.34) 45%,
+            rgba(80,55,95,.24)
+        ) !important;
+    border:
+        1px solid rgba(255,255,255,.58);
+    box-shadow:
+        0 18px 45px rgba(0,0,0,.48),
+        0 3px 12px rgba(0,0,0,.35),
+        inset 0 1px 0 rgba(255,255,255,.72),
+        inset 0 0 0 1px rgba(255,255,255,.16);
+    backdrop-filter:
+        blur(22px) saturate(155%) brightness(1.06);
+    -webkit-backdrop-filter:
+        blur(22px) saturate(155%) brightness(1.06);
+}
+
+.panel::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    z-index:-1;
+    background:
+        linear-gradient(
+            120deg,
+            rgba(255,255,255,.34),
+            rgba(255,255,255,.08) 28%,
+            transparent 55%
+        );
+}
+
+.panel-content{
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.30),
+            rgba(225,215,235,.16)
+        ) !important;
+    backdrop-filter:
+        blur(10px) saturate(125%);
+    -webkit-backdrop-filter:
+        blur(10px) saturate(125%);
 }
 
 
@@ -903,7 +960,7 @@ a:visited {
 
     cursor: move;
 
-    z-index: 1002;
+    z-index: 10;
 
     user-select: none;
 }
@@ -4001,7 +4058,7 @@ a:visited {
 
         <button
             class="tool-button"
-            onclick="copyImageLink('rautaImageResult')"
+            type="button" onclick="copyImageLink('rautaImageResult')"
         >
             📋 Copy link
         </button>
@@ -4093,7 +4150,7 @@ a:visited {
 
         <button
             class="tool-button"
-            onclick="copyImageLink('rautaTempImageResult')"
+            type="button" onclick="copyImageLink('rautaTempImageResult')"
         >
             📋 Copy link
         </button>
@@ -5901,12 +5958,48 @@ function removeTaskButton(id){
 
 function bringToFront(panel){
 
-    highestZ++;
+    if(!panel)
+        return;
+
+    highestZ =
+        Math.max(
+            highestZ + 1,
+            101
+        );
 
     panel.style.zIndex =
         highestZ;
 
+    document
+        .querySelectorAll(".panel")
+        .forEach(
+            p => p.classList.remove("active-window")
+        );
+
+    panel.classList.add("active-window");
 }
+
+
+
+/* =========================================================
+   WINDOW LAYER SYSTEM
+========================================================= */
+
+document.addEventListener(
+    "pointerdown",
+    function(e){
+        const panel =
+            e.target.closest(".panel");
+
+        if(
+            panel &&
+            !panel.classList.contains("hidden")
+        ){
+            bringToFront(panel);
+        }
+    },
+    true
+);
 
 
 /* =========================================================
@@ -10609,28 +10702,6 @@ function showAllGames(){
 function gameFolderBack(){
     closePanel("gamesFolderPanel");
 }
-
-document
-    .querySelectorAll("#gamesFolderFiles .explorer-game-card")
-    .forEach(
-        card => {
-            card.addEventListener("click", function(){
-                document
-                    .querySelectorAll(
-                        "#gamesFolderFiles .explorer-game-card"
-                    )
-                    .forEach(
-                        item => item.classList.remove("selected")
-                    );
-                card.classList.add("selected");
-            });
-
-            card.addEventListener("dblclick", function(){
-                openGameFromFolder(card);
-            });
-        }
-    );
-
 function gameFolderSearch(){
 
     const term =
