@@ -2490,7 +2490,7 @@ nav {
 ========================================================= */
 
 .panel {
-    border-radius: 8px;
+    border-radius: 8px 8px 0 0;
 }
 
 .panel-title {
@@ -2502,11 +2502,11 @@ nav {
 }
 
 .task-window {
-    border-radius: 3px;
+    border-radius: 3px 3px 0 0;
 }
 
 .clippy-bubble {
-    border-radius: 6px;
+    border-radius: 6px 6px 0 0;
 }
 
 
@@ -2670,40 +2670,12 @@ nav {
     margin: 4px 0;
 }
 
-.tm-network {
-    height: 160px;
-    border: 1px solid rgba(255,255,255,.18);
-    border-radius: 7px;
-    background:
-        linear-gradient(
-            to bottom,
-            transparent 24px,
-            rgba(255,255,255,.10) 25px
-        ),
-        linear-gradient(
-            to right,
-            transparent 24px,
-            rgba(255,255,255,.10) 25px
-        ),
-        rgba(0,0,0,.18);
-    background-size: 25px 25px;
-    padding: 8px;
-    overflow: hidden;
-}
-
-.tm-network-line {
-    height: 2px;
-    width: 100%;
-    margin-top: 85px;
-    background: #20d020;
-    transform-origin: left center;
-}
 
 .tm-statusbar {
     display: flex;
     border-top: 1px solid rgba(255,255,255,.18);
     background: rgba(0,0,0,.10);
-    border-radius: 0 0 8px 8px;
+    border-radius: 0;
 }
 
 .tm-statusbar span {
@@ -2729,6 +2701,29 @@ nav {
     .task-manager-tabs {
         overflow-x: auto;
     }
+}
+
+
+/* XP DESKTOP ICONS */
+.desktop-icon .xp-desktop-icon {
+    width: 48px !important;
+    height: 48px !important;
+    display: block !important;
+    object-fit: contain !important;
+    margin: 0 auto 4px auto !important;
+}
+
+
+.tm-menu-row {
+    display: flex;
+    gap: 18px;
+    padding: 5px 10px 4px;
+    background: rgba(255,255,255,.08);
+    border-bottom: 1px solid rgba(255,255,255,.14);
+    font-size: 11px;
+}
+.tm-menu-row span {
+    cursor: default;
 }
 
 </style>
@@ -5637,19 +5632,7 @@ for(let i = 0; i < 60; i++){
     "
 >
 
-    <div
-        class="app-icon"
-        style="
-            background:
-                linear-gradient(
-                    135deg,
-                    #f6c85f,
-                    #b77b16
-                );
-        "
-    >
-        📁
-    </div>
+    <img class="xp-desktop-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAABPElEQVR4nO2ZUY7DIAxEJ9Xeq9yMOZo5GfsR0Xa1AawCMkTMj/MRKfMYB0cB2NraWlqH9kaS8duHkFQ/Z4hIxha1wHc0jygiX1UziB7mzSB6mh8J8ZMz770HcCAEwfPpOtUD3kcAaIKobgpp9Xut/FUSLaouwIj26VlJlCFGJ9Ba1QAzmN0JWJu9fQLHp+l07ZzLwlkqzRMRBxJA8t/6sTZaACLJywQeiS6EgHPyzldJguQrgX86E7Dv7XzPMwKFXegznhmriPxpo8tdaHaIBJCdAyu10ZIJqACsTWrbKDuJZ4dQAVib1LTRsgmoAKxNlur7PSh8jc4OoQKwNqlpo2UTUAFYm9S0URZgBQgVgLXJnYC1yfKLXAGYHUINMIPZ2yeQ/c9+DgwWIS2V/gvVTg/tDufqsj353NqaRL/1lkv0kr/ZtgAAAABJRU5ErkJggg==" alt="" draggable="false">
 
     <span>
         Games
@@ -5672,19 +5655,7 @@ for(let i = 0; i < 60; i++){
     "
 >
 
-    <div
-        class="app-icon"
-        style="
-            background:
-                linear-gradient(
-                    135deg,
-                    #f6c85f,
-                    #b77b16
-                );
-        "
-    >
-        📁
-    </div>
+    <img class="xp-desktop-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAC5ElEQVR4nO2aa3LkIAyEm629F9wMcTNxMu0PBhtjgWH8iLcqqnKRGcfma7V4OA7wG/0gIiEiuev+f++6MZDgnXP5owAwd/Z3aRCRMLPkYGZBEvH+0OD/GxFq5ovvXi2iBQ+R94s4gn+1iFH4O0ScntbyVGmtBQDEGOGYAe9BIejXAODPNTFGfKba56fYXuaJSARQDyK6zIkh1UTazQm9zHuiPVLRWyC6xAl1Ja6Bvd+ShBCa8Mhls1xSXCsAjEltAOA9XAhgANZaMDOcc+dXbCJIGclqCDPL0YBNpSOpXOpYvi9K6eqBneFL6FH4be3L2pbwS7uOhUtFrNnHTgSQft50VE2RiwMq9ArfcmCTnFkRPfhREYsDUjmwfG7PRnVMi+iVz6gI1YEyquy34L8SMeLAlAhAKGdcEdCDz2PuCH4zXRFBvBfEGGGtQ4zcbY0BmBkA1rnc2nUFJoLHZ8YsW9qvITmYXS/BO2ZVAGAO4b8RAerlMkVec1IS7eacMWbHXCscGgPD5SQiRFiOkcilk0u5LGko5aSuxCOZL1sRB2McmHnJHMcIZrdZxctSaQUzw3v/SbQsLbO+MVQFzMC3RGT4Eegj+BgjKA2AXflc4gCzA3MaZHkQXgWfWm5eN+1AhgXWtt7spXvMwafQ4Nvl0xTQg2/B7n+XUfxNqAvvnPuI2MP3ygcA/mhf9uBTZs2m1QSvUMfw1maheweO7rGJ1kr87fRa7mDrY12JMT11TjuQY3Zwt5woM7/to679iezf5UDtRJ35lgOnttN1BzObvBER2vkkYO1nZCP3qAMj4mZqf9iBJ+BrB04LuKN8Zhz4qnze4sDX2dcceAq+dODr7GsOPFU+2YFT2f95B1LCLhHwhAPlk9oH+vz7ghL4SvgSVgG+9iUH0fnyeRRYEzDrwAHsrcDqA035YqXeXaZz69OY8szy6JsWtbP8fsB7QQimPjd0j6ei+68GIZjXAc/E/QPuN4B/Pe4A0oBp3rYAAAAASUVORK5CYII=" alt="" draggable="false">
 
     <span>
         Confused looking anime girls with interrogation marks on their heads
@@ -5753,19 +5724,7 @@ for(let i = 0; i < 60; i++){
     "
 >
 
-    <div
-        class="app-icon"
-        style="
-            background:
-                linear-gradient(
-                    135deg,
-                    #8B5CF6,
-                    #241238
-                );
-        "
-    >
-        R
-    </div>
+    <img class="xp-desktop-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAACtklEQVR4nO1abY6sIBAsNu9ecjPam+HJen8Ais036jibvEpMx1HYKoqmwSzwx6He+9PE4v5FLsMgBjMD8YVwDeHnfnKdUBB0GQBB/trCewIYmQlsMCriixwIGBPxJQ6sIhr/wnhOfAjkEveUyFSIdRFf6IARse7Ev8cIthByYBdB0UMpooz3BKSrkL8LBS4Wsf+erFtNAUTtRCKaqOiJA/ETKaKMooBA3JiehUDxsIg8+b3DXhHVJHbkFbZtq0ZjuMspSTFuQQTO9zHhABH4IG+xLLoRj3Y93ImQOGAMY10VoifeBW6KyApgZrbWMjM6Yz/SOkDMvDsQD4J/d8DdOfJjMd2NEltrcwKQue8T8BR5Zow4MI4vdKCK4jLaTtxyVIoAWLjq6iLz8RygpA4si4a1PsErIuRynazEYQXatu0CeV89xX6HPLsaWnVHKZXlfRIwkwNEtM9t15r3eX70WUfo7+jhHLum2EwOBPISMflje3yIc+1cDP2UyLPvq1vAiAOBiMSJfDY68o449jhNfsaBY+oQh+1AuHrI9zowLKBOOn8lU2iA/MccOEYpRZ5snXwQUHNgqD7UHMiJi8mMku91YEpAfrVJxYVRbIvIkw+kSw60yBfPA7JIWauR22Jrrb3wFUTGVVK1ihg/PyIAaB1XaOBcoie2RSUH6s6kI9uK8dwvOTC1uSvlQGt1mhGRXyAm537Ngd7iFka2NfI58tKBXvJdORDQ2shprWEM+YFYs9EYgtY6295hcu4HXHHgapxxoCjg0+TjHLh0MpMOfOKEJh24RcBbDlw+F7/rwA0H+3jEnyYvd7Oe+H1fJe6cPhWy9xCXAq6S7yD8DOQB5cYRfgTZzxOeQHb3uSwa65q839333Sh+2NLaAsC+lbYWAE4fn2K89m8CVQei+65234hnE+4/gF8qmY6aEYPAcAAAAABJRU5ErkJggg==" alt="" draggable="false">
 
     <span>
         Rautatify
@@ -5785,19 +5744,7 @@ for(let i = 0; i < 60; i++){
     "
 >
 
-    <div
-        class="app-icon"
-        style="
-            background:
-                linear-gradient(
-                    135deg,
-                    #222,
-                    #777
-                );
-        "
-    >
-        🔐
-    </div>
+    <img class="xp-desktop-icon" src="data:image/png;base64,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" alt="" draggable="false">
 
     <span>
         RautaObfuscator
@@ -5817,19 +5764,7 @@ for(let i = 0; i < 60; i++){
     "
 >
 
-    <div
-        class="app-icon"
-        style="
-            background:
-                linear-gradient(
-                    135deg,
-                    #4f46e5,
-                    #172554
-                );
-        "
-    >
-        📋
-    </div>
+    <img class="xp-desktop-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAACh0lEQVR4nN2aYZarIAyF45y3L9iZYWdhZcwPRCkkgIDYeTmnBzsqfjc3DdYOwB+P7YlJEdFV9j927eFAREdEDhFdGkTkAOAc32bNIsAH2FhEDB+/f5v5jBheyri0/2V0Hl7KvLT/K+FjyNr+V0S0wHOw3DnLRcyEXy5iFL4k5HERM+FnlFN1NUSMJ0LQWoNSqlmwtRYAAJRS4rZ0nta6iZENRHCI8JEZbnUdzXzY7nXip7Rz3x0AbEe2tjMzLdGS+Xibc0IpBc45qInIIs68zwycY2vfb818ui3Nd0tEEJDCt4iYDX9bxGfd5/AlEU/BdwqQ4SURvfBTS6hWPi0iVsJnPRYR3NV9CJTS1dGYfH2424WMaWv3/stcYW2460BvOYV1hltv0jniKLnxIeAOfK2cUlgOOF7Q/DnonLtYWsppyAFJRCm70ouDD9dIBfyThLTUPjfuu/9MAAAQ6WM1b1/BiQj2HQ/O7RytJSCi7HjxQ2ytvQVvTA4T5mkNCR7AiTd3XQ54WA0+IX4MmY7DGBMu2gTvI4cH2IAI2fNEASV4DpZru1p722siQuZ96eXw1hIgagCmYsS70TL8dYd6jbxgrTVbuym8teGY3IHS+VlIXWikvYbOInWbuIN1tU5OQA4w1l5TESn89bfP1nk8Zx2/lR51IIbk4CUHbsE/7UCLuKHyWeFAbRUfKh/JgRXwqQNd2ZccWFE+qQNd2f8WB7qzzzmwCj52oDv7nAOryideJ7rh33fAv6YIWOFA+i3tAB9/Mo04H74AOw88FjBaPg3Az0WPA28Bs89X4t8EuGdERDo9vnnu2SFeJIjYd5c9dGKAX/u3AfErZQhjtq8Cvhvf8Uv6/xy/Q9XQyf2ah7QAAAAASUVORK5CYII=" alt="" draggable="false">
 
     <span>
         RautaPaste
@@ -5849,19 +5784,7 @@ for(let i = 0; i < 60; i++){
     "
 >
 
-    <div
-        class="app-icon"
-        style="
-            background:
-                linear-gradient(
-                    135deg,
-                    #22c55e,
-                    #166534
-                );
-        "
-    >
-        🖼️
-    </div>
+    <img class="xp-desktop-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAC5ElEQVR4nO2aa3LkIAyEm629F9wMcTNxMu0PBhtjgWH8iLcqqnKRGcfma7V4OA7wG/0gIiEiuev+f++6MZDgnXP5owAwd/Z3aRCRMLPkYGZBEvH+0OD/GxFq5ovvXi2iBQ+R94s4gn+1iFH4O0ScntbyVGmtBQDEGOGYAe9BIejXAODPNTFGfKba56fYXuaJSARQDyK6zIkh1UTazQm9zHuiPVLRWyC6xAl1Ja6Bvd+ShBCa8Mhls1xSXCsAjEltAOA9XAhgANZaMDOcc+dXbCJIGclqCDPL0YBNpSOpXOpYvi9K6eqBneFL6FH4be3L2pbwS7uOhUtFrNnHTgSQft50VE2RiwMq9ArfcmCTnFkRPfhREYsDUjmwfG7PRnVMi+iVz6gI1YEyquy34L8SMeLAlAhAKGdcEdCDz2PuCH4zXRFBvBfEGGGtQ4zcbY0BmBkA1rnc2nUFJoLHZ8YsW9qvITmYXS/BO2ZVAGAO4b8RAerlMkVec1IS7eacMWbHXCscGgPD5SQiRFiOkcilk0u5LGko5aSuxCOZL1sRB2McmHnJHMcIZrdZxctSaQUzw3v/SbQsLbO+MVQFzMC3RGT4Eegj+BgjKA2AXflc4gCzA3MaZHkQXgWfWm5eN+1AhgXWtt7spXvMwafQ4Nvl0xTQg2/B7n+XUfxNqAvvnPuI2MP3ygcA/mhf9uBTZs2m1QSvUMfw1maheweO7rGJ1kr87fRa7mDrY12JMT11TjuQY3Zwt5woM7/to679iezf5UDtRJ35lgOnttN1BzObvBER2vkkYO1nZCP3qAMj4mZqf9iBJ+BrB04LuKN8Zhz4qnze4sDX2dcceAq+dODr7GsOPFU+2YFT2f95B1LCLhHwhAPlk9oH+vz7ghL4SvgSVgG+9iUH0fnyeRRYEzDrwAHsrcDqA035YqXeXaZz69OY8szy6JsWtbP8fsB7QQimPjd0j6ei+68GIZjXAc/E/QPuN4B/Pe4A0oBp3rYAAAAASUVORK5CYII=" alt="" draggable="false">
 
     <span>
         RautaImage
@@ -5881,19 +5804,7 @@ for(let i = 0; i < 60; i++){
     "
 >
 
-    <div
-        class="app-icon"
-        style="
-            background:
-                linear-gradient(
-                    135deg,
-                    #06b6d4,
-                    #155e75
-                );
-        "
-    >
-        ⏱️
-    </div>
+    <img class="xp-desktop-icon" src="data:image/png;base64,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" alt="" draggable="false">
 
     <span>
         Temp Image
@@ -5912,19 +5823,7 @@ for(let i = 0; i < 60; i++){
         top:450px;
     "
 >
-    <div
-        class="app-icon"
-        style="
-            background:
-                linear-gradient(
-                    135deg,
-                    #80a2d6,
-                    #34547f
-                );
-        "
-    >
-        XO
-    </div>
+    <img class="xp-desktop-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAABhUlEQVR4nO2YYW6DMAyF3Wn3am6Wl5uZk2U/aFiHWmwnDkWaPwlFggA2jv1MiIIgCIL/zM16A4B6cM38vFMBUI84cu7j/BpPlZnfjpd0Qmv8J5wQ1yyAmlIyP5iZTfMBqOwxI617L4ioHSa+9FNvtCzLtHENwARaBDRrf2QE+iKgyoGcM61fiul+T+JYCjo+1fZGAvS58K2daDG+J+mJ6Pm+Sl4JbSmhIwkPUCu/pqXkFoFSQDnnR2L2gK671A5Iy4eIt7kWDRhz2jECzNjmQl0TQTnbDN6j1gE5Anuq4hhH7YAUgZec0BFNjMA5zI3ACb83EYHDCJzAFB1YRan4WvqGKTpQ62BxNzAlAiPKSrQK4aMvEsuAqp3W9SmaOeK7NhVPKbXu1KWWHUrqrovsPgBUAM8bA/Ol0PufuRmvdUCdAxKj675h3c1wc6CRHprAO3GTDOv9i3N3YCv/6e9pqcW2fvmGuwOc+PX5SRtdLg6U4qu6ll06r37Ru9xde5s+CIIguAw/l1Iy8zfzHOkAAAAASUVORK5CYII=" alt="" draggable="false">
     <span>Tic-Tac-Toe</span>
 </div>
 
@@ -5938,19 +5837,7 @@ for(let i = 0; i < 60; i++){
         top:540px;
     "
 >
-    <div
-        class="app-icon"
-        style="
-            background:
-                linear-gradient(
-                    135deg,
-                    #f3ca4c,
-                    #9d7510
-                );
-        "
-    >
-        🐤
-    </div>
+    <img class="xp-desktop-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAC0klEQVR4nO2ZXZKsIAyFD7dmX8POjDvDlXEf6ECE8Ke2+jCpshinp+FLchJkNLjJiMhn9+autU/bB96zAfBE5HOnXmkaPMAjTjvxcwXkqK3rKu4CN5GJ8nqdrGT0+ecQ/fy6JhuXmoR3zkVI5E54Ob6kNgSEqvt473UnMJGNXQ0QYdhzIjT1SkTw3qu6B0y4DIJf5vNRvDcgIg7EWF2E9caNCF5zuN51ctmIbOSZAKTsmvYv/8W2bQBMd1yWcu487cZwaIXJSPNnRmQEBs45WGt77HLhVGzeY3gU3aWhe+VqaF8W/HAxJ/mMw+dO6F1nFD45wd+9BZ7HYy2zDo8B7Z+WjxwZvpROr2Xq8FP7wNkMcPTrsmEnqAk/LZ2PGSL4ZfHYtg2/vxbb5oZH51zs90Cn6/C2sev7qcUTjUPv9qAzGUCvaGWko7zoE+n9lWTcts/e4wsHjhZu+yHNF6ASOEFRnJM7W22sOnC06/TgW5EMNRTm43pqwYe1L8hACV+2TDmvhM1Hhr8tA/voa90Gh+BHMlDAQzwLjXYfNmPyh0TPAQF3NecsrHXVEYAy9+7RNBtLi4/T/ZZp4RwAkGh55aSj8M45LAvt1gBcFX5dY6vdLzpSA1rnqFlPNkkqenOYkc9QBpyz4tHZVDc0EZJO5C0AUuepZWBdjR59dGqA4dNZQJeYtRbLwrqiLry1tlFfY9ovJKSn9NguzY/Xva6jfS+XT006hQM17ffqo7fhhaut/VYNDDtwNbyWkZG/m4JvZeCKg86RjE3Jp+XElRmYydQ0vCajJ+DzDBxy4En5yAxMwb8xA4cdeEMGpuHzDDwFzxk45cCT8uG1p+GfzoA8JwMnHbgDPj/cC+h58JoD34JVgI9Dtxy4Qg5fBdYcOAI/APsdYGHFa9axc3EY09k42u2vSQ2Q3o2Fo6OJsLm9AVgFYAdyeyNwbvo/d+qf/9mfZfYfwfya20/EkQIAAAAASUVORK5CYII=" alt="" draggable="false">
     <span>Flappy Rauta</span>
 </div>
 
@@ -5964,19 +5851,7 @@ for(let i = 0; i < 60; i++){
         top:540px;
     "
 >
-    <div
-        class="app-icon"
-        style="
-            background:
-                linear-gradient(
-                    135deg,
-                    #c47bd9,
-                    #653578
-                );
-        "
-    >
-        🧠
-    </div>
+    <img class="xp-desktop-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAByklEQVR4nO1Zba6EIAysL+9e68129mblZH0/FKksHw8VkMRJSGMAd4ZpIbJEg2OKdQAkpS8D0u9sBoDkCFbRxcKrkGdmEaHi2FXEWfJdRVxFvouIq8k3FVGLfCsRv0RExhh6vWYyhi+P7/dsf+syEbvt+uiW2Rt2QX6cromMMcPE1QVRDix5W6sWUpEIx2vLL+Ie5IlQPO9LQA8HFvIypgOOvIznwJ78YA58kx/IAU1ehMZywCfvC+juACguPpw2N6oBAAJaYjn5GziAlQkoRZ4C7QYO2NW3AgAo8oiu8DLGCbDzmjsALx+siHCquHm5/iYO6NX/FhBKGff+XH8TBzR5ADsRNbbiSx3Y5f66+1gRuhaizq3tqIjTDujV3/UpF3Lkz4g45UAo9/0WOhcsYZvv+rmpAznysVrwCevnow5s38T2JiF3y8DMuxuCKdA0mHmbn0LpbceGUgf06sdWDp4LNR0oqgGQE2BzOJdmUCJSAqrXQOjQSW2VsfHdakBkyWcd57lsvEtb0OQVCzPT54P6NXAm+i6EnpucA2dF6Jz/Tzpefg7cIUYFjBKtgAkgmWcm5vRBc0cAy8EpuYE3Rv+/dB88ePBgbPwBpkmSQgxF5kQAAAAASUVORK5CYII=" alt="" draggable="false">
     <span>Memory</span>
 </div>
 
@@ -5994,19 +5869,7 @@ for(let i = 0; i < 60; i++){
     "
 >
 
-    <div
-        class="app-icon"
-        style="
-            background:
-                linear-gradient(
-                    135deg,
-                    #f59e0b,
-                    #92400e
-                );
-        "
-    >
-        💼
-    </div>
+    <img class="xp-desktop-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAABl0lEQVR4nO1Yba6EIAwcX969ytG6N2tP5vuhqHRR60eUvHQS02UjONMBigKBQCAQCATeQ3e0AzP3jnsOj/sImLn3wCPycczk0YvIbmxKxFHyT4rYnavM3KeUTj9ARE71u20deef93QDgcu/HL6WDqj4WmQGviE1kB47M/Vpk5uny3Q+3Cy4BV8kvkYVsbwA3CzhDfs745jzvgcYcKKfLOvnmHFiSzu0z5B93wBKvXZb83oL2Cvj1ClEVEKUiighEGLnQqSoSDb9FxfTXop37fD4M5gSRcnxv/XMLsOSHhwzkiWgimYlTFmWY5MpsK7QdH0j3Cqg5AAiIaMruUoglbgXsjf+YAyWJbyF7xNfG9zrgPkrUHGBmdN33mUtVoaogonGdrJPn8cxgx/fiogMDubwgLVG7cGvEc79X1gBRQkoz8TUhNeLLWE+Ol9kOPHUAi+OAiBTtvN/n/2y7qUq8JqRGvKlKvOWIN+NNOLDmCBwZb8qBO6JXgOulHuDLiTiDcaPa5Oh983/rG0+bX/gCgUAgEAj8F/wB8tjawO75YYMAAAAASUVORK5CYII=" alt="" draggable="false">
 
     <span>
         commissions
@@ -6052,11 +5915,20 @@ for(let i = 0; i < 60; i++){
 
 </div>
 
+
+<div class="tm-menu-row">
+    <span>File</span>
+    <span>Options</span>
+    <span>View</span>
+    <span>Windows</span>
+    <span>Shut Down</span>
+    <span>Help</span>
+</div>
+
 <div class="task-manager-tabs">
     <button class="tm-tab active" data-tab="applications">Applications</button>
     <button class="tm-tab" data-tab="processes">Processes</button>
     <button class="tm-tab" data-tab="performance">Performance</button>
-    <button class="tm-tab" data-tab="networking">Networking</button>
     <button class="tm-tab" data-tab="users">Users</button>
 </div>
 
@@ -6177,24 +6049,6 @@ for(let i = 0; i < 60; i++){
             </div>
 
         </div>
-
-    </section>
-
-    <section class="tm-page hidden" data-page="networking">
-
-        <div class="tm-toolbar">
-            <strong>Networking</strong>
-            <span>Local Area Connection</span>
-        </div>
-
-        <div class="tm-network">
-            <div class="tm-network-line"></div>
-            <div class="tm-network-line"></div>
-            <div class="tm-network-line"></div>
-            <div class="tm-network-line"></div>
-        </div>
-
-        <p>Network utilization: <strong id="tmNetwork">4%</strong></p>
 
     </section>
 
