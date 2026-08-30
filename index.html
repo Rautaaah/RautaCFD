@@ -2510,45 +2510,48 @@ nav {
 }
 
 
+
 /* =========================================================
-   TASK MANAGER GUI
+   TASK MANAGER — MATCHES THE EXISTING GUI STYLE
 ========================================================= */
 
 #taskManagerPanel {
-    width: 560px;
-    min-height: 0;
-    background: rgba(212,208,200,.82);
+    width: 520px;
+    max-width: calc(100vw - 30px);
+}
+
+#taskManagerPanel .panel-content {
+    padding: 14px;
 }
 
 .task-manager-tabs {
     display: flex;
-    gap: 2px;
-    padding: 4px 5px 0;
-    background: #d4d0c8;
-    border-bottom: 1px solid #808080;
+    gap: 5px;
+    padding: 8px 12px 0;
+    background: rgba(0, 0, 0, .10);
+    border-bottom: 1px solid rgba(255,255,255,.18);
 }
 
 .tm-tab {
-    padding: 4px 9px;
-    border: 1px solid #999;
+    appearance: none;
+    border: 1px solid rgba(255,255,255,.20);
     border-bottom: 0;
-    background: linear-gradient(#f8f8f8, #d8d4ca);
-    color: #222;
-    font: 11px Tahoma, Arial, sans-serif;
+    border-radius: 6px 6px 0 0;
+    padding: 7px 10px;
+    background: rgba(255,255,255,.10);
+    color: inherit;
+    font: inherit;
     cursor: pointer;
-    border-radius: 4px 4px 0 0;
+    transition: background .15s, transform .15s;
+}
+
+.tm-tab:hover {
+    background: rgba(255,255,255,.17);
 }
 
 .tm-tab.active {
-    background: #eee9d8;
-    position: relative;
-    top: 1px;
-}
-
-.task-manager-content {
-    padding: 10px;
-    background: #eee9d8;
-    min-height: 330px;
+    background: rgba(255,255,255,.20);
+    transform: translateY(1px);
 }
 
 .tm-page.hidden {
@@ -2557,29 +2560,30 @@ nav {
 
 .tm-toolbar {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 6px 8px;
-    margin-bottom: 8px;
-    background: #ddd9cc;
-    border: 1px solid #aaa;
-    border-radius: 4px;
-    color: #222;
-    font: 11px Tahoma, Arial, sans-serif;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+    padding: 8px 10px;
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 7px;
+    background: rgba(0,0,0,.12);
 }
 
 .tm-list {
-    background: #fff;
-    border: 1px solid #888;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 7px;
+    background: rgba(0,0,0,.10);
 }
 
 .tm-row {
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    padding: 6px 8px;
-    border-bottom: 1px solid #ddd;
-    color: #222;
-    font: 11px Tahoma, Arial, sans-serif;
+    gap: 16px;
+    padding: 8px 10px;
+    border-bottom: 1px solid rgba(255,255,255,.12);
 }
 
 .tm-row:last-child {
@@ -2587,42 +2591,41 @@ nav {
 }
 
 .tm-row:hover {
-    background: #dbe8ff;
+    background: rgba(255,255,255,.08);
 }
 
 .tm-performance-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    margin-bottom: 8px;
+    gap: 10px;
+    margin-bottom: 10px;
 }
 
 .tm-meter-box,
 .tm-history-box,
 .tm-stats-grid > div {
-    background: #eee9d8;
-    border: 1px solid #bbb5a7;
-    border-radius: 4px;
-    padding: 7px;
-    color: #222;
-    font: 10px Tahoma, Arial, sans-serif;
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 7px;
+    background: rgba(0,0,0,.10);
+    padding: 9px;
 }
 
 .tm-meter-title {
-    margin-bottom: 5px;
+    margin-bottom: 7px;
 }
 
 .tm-meter {
-    height: 58px;
+    height: 62px;
+    border: 1px solid rgba(255,255,255,.25);
+    border-radius: 4px;
     background:
         repeating-linear-gradient(
             to bottom,
-            #050805 0,
-            #050805 3px,
-            #063406 4px,
-            #050805 5px
+            rgba(0,0,0,.55) 0,
+            rgba(0,0,0,.55) 4px,
+            rgba(0,90,20,.45) 5px,
+            rgba(0,0,0,.55) 6px
         );
-    border: 2px solid #111;
     display: flex;
     align-items: flex-end;
     overflow: hidden;
@@ -2631,70 +2634,60 @@ nav {
 #tmCpuBar,
 #tmPfBar {
     width: 100%;
-    height: 15%;
+    min-height: 4px;
     background:
         repeating-linear-gradient(
             to bottom,
-            #0a0 0,
-            #0a0 2px,
-            #050 3px
+            #21c53a 0,
+            #21c53a 2px,
+            #08751a 3px,
+            #08751a 4px
         );
 }
 
 .tm-history-box {
-    margin-top: 8px;
+    margin-top: 10px;
 }
 
 .tm-history-box canvas {
     width: 100%;
     height: auto;
     display: block;
-    margin-top: 5px;
-    background:
-        linear-gradient(
-            to right,
-            transparent 24px,
-            rgba(0,80,0,.5) 25px
-        ),
-        linear-gradient(
-            to bottom,
-            transparent 24px,
-            rgba(0,80,0,.5) 25px
-        ),
-        #020702;
-    background-size: 25px 25px;
-    border: 1px solid #333;
+    margin-top: 7px;
+    border: 1px solid rgba(255,255,255,.20);
+    border-radius: 4px;
+    background: rgba(0,0,0,.65);
 }
 
 .tm-stats-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    margin-top: 8px;
+    gap: 10px;
+    margin-top: 10px;
 }
 
 .tm-stats-grid p {
-    margin: 3px 0;
+    margin: 4px 0;
 }
 
 .tm-network {
     height: 160px;
-    border: 1px solid #888;
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 7px;
     background:
         linear-gradient(
             to bottom,
             transparent 24px,
-            #c6c6c6 25px
+            rgba(255,255,255,.10) 25px
         ),
         linear-gradient(
             to right,
             transparent 24px,
-            #c6c6c6 25px
+            rgba(255,255,255,.10) 25px
         ),
-        #fff;
+        rgba(0,0,0,.18);
     background-size: 25px 25px;
     padding: 8px;
-    border-radius: 3px;
     overflow: hidden;
 }
 
@@ -2702,28 +2695,30 @@ nav {
     height: 2px;
     width: 100%;
     margin-top: 85px;
-    background: #00a000;
+    background: #20d020;
     transform-origin: left center;
 }
 
 .tm-statusbar {
     display: flex;
-    gap: 0;
-    border-top: 1px solid #888;
-    background: #d4d0c8;
-    color: #222;
-    font: 10px Tahoma, Arial, sans-serif;
+    border-top: 1px solid rgba(255,255,255,.18);
+    background: rgba(0,0,0,.10);
+    border-radius: 0 0 8px 8px;
 }
 
 .tm-statusbar span {
     flex: 1;
-    padding: 4px 7px;
-    border-right: 1px solid #aaa;
+    padding: 6px 8px;
+    border-right: 1px solid rgba(255,255,255,.12);
+}
+
+.tm-statusbar span:last-child {
+    border-right: 0;
 }
 
 @media(max-width:700px) {
     #taskManagerPanel {
-        width: calc(100vw - 20px);
+        width: calc(100vw - 30px);
     }
 
     .tm-performance-grid,
@@ -6332,26 +6327,8 @@ enterButton.addEventListener(
     "click",
     function(){
 
-        intro.style.opacity =
-            "0";
-
-        site.style.opacity =
-            "1";
-
-        const signinAudio =
-            document.getElementById("signinAudio");
-
-        if(signinAudio){
-            signinAudio.currentTime = 0;
-            signinAudio.volume = 1;
-            signinAudio.play().catch(
-                error =>
-                    console.warn(
-                        "Could not play /signin.mp3:",
-                        error
-                    )
-            );
-        }
+        intro.style.opacity = "0";
+        site.style.opacity = "1";
 
         setTimeout(
             function(){
@@ -6359,8 +6336,23 @@ enterButton.addEventListener(
                 intro.style.display =
                     "none";
 
+                const signinAudio =
+                    document.getElementById("signinAudio");
+
+                if(signinAudio){
+                    signinAudio.currentTime = 0;
+                    signinAudio.volume = 1;
+                    signinAudio.play().catch(
+                        error =>
+                            console.warn(
+                                "Could not play /signin.mp3:",
+                                error
+                            )
+                    );
+                }
+
             },
-            1500
+            700
         );
 
     }
