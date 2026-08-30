@@ -2309,8 +2309,7 @@ a:visited {
     #rautaPastePanel,
     #rautaImagePanel,
     #rautaTempImagePanel,
-    #commissionsPanel,
-    #desktopToolsPanel {
+    #commissionsPanel {
 
         width:
             calc(100vw - 20px);
@@ -2484,48 +2483,6 @@ nav {
     outline:3px dashed rgba(243,110,210,.8);
     outline-offset:-5px;
 }
-
-
-body.rauta-party { animation: rautaParty 1s linear infinite; }
-@keyframes rautaParty { 0%{filter:hue-rotate(0deg)} 100%{filter:hue-rotate(360deg)} }
-
-/* =========================================================
-   EXTRA INTERACTIVE DESKTOP TOYS
-========================================================= */
-.desktop-icon > img {
-    width:48px;
-    height:48px;
-    object-fit:contain;
-    margin-bottom:4px;
-    border-radius:7px;
-    filter: drop-shadow(0 3px 4px rgba(0,0,0,.45));
-}
-.desktop-icon.wiggle { animation: desktopWiggle .45s ease-in-out; }
-@keyframes desktopWiggle {
-    0%,100% { transform:rotate(0deg) scale(1); }
-    25% { transform:rotate(-7deg) scale(1.06); }
-    75% { transform:rotate(7deg) scale(1.06); }
-}
-#desktopContextMenu {
-    position:fixed; display:none; min-width:190px; padding:4px; z-index:50000;
-    background:rgba(238,238,238,.96); color:#111; border-top:2px solid white;
-    border-left:2px solid white; border-right:2px solid #555; border-bottom:2px solid #555;
-    box-shadow:4px 4px 12px rgba(0,0,0,.55); font:12px Tahoma,Arial,sans-serif;
-}
-#desktopContextMenu button {
-    width:100%; text-align:left; padding:7px 10px; border:0; background:transparent; cursor:pointer;
-}
-#desktopContextMenu button:hover { background:#316ac5; color:white; }
-.context-sep { border-top:1px solid #aaa; margin:4px 0; }
-#desktopToolsPanel { width:480px; min-height:0; }
-.desktop-tool-row {
-    display:flex; align-items:center; justify-content:space-between; gap:10px; padding:9px;
-    margin-bottom:8px; background:rgba(255,255,255,.62); border:1px solid rgba(80,50,90,.35);
-}
-.desktop-tool-row label { font-weight:bold; }
-.desktop-tool-row input[type=range] { flex:1; }
-.desktop-tool-actions { display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
-.desktop-tool-note { margin-top:10px; font-size:10px; color:#666; }
 
 </style>
 
@@ -3353,7 +3310,7 @@ body.rauta-party { animation: rautaParty 1s linear infinite; }
         <div>
 
             <div class="rautatify-name">
-                My playlist!!
+                Rautatify
             </div>
 
             <div class="rautatify-subtitle">
@@ -3537,7 +3494,7 @@ body.rauta-party { animation: rautaParty 1s linear infinite; }
 
     <p>
         Then refresh the page. The track will use the normal
-        My playlist!! audio player.
+        Rautatify audio player.
     </p>
 
 </div>
@@ -3575,7 +3532,7 @@ body.rauta-party { animation: rautaParty 1s linear infinite; }
 
 <div class="panel-title">
 
-    <span>Obfuscator!!.exe</span>
+    <span>RautaObfuscator.exe</span>
 
     <div class="window-buttons">
 
@@ -3608,7 +3565,7 @@ body.rauta-party { animation: rautaParty 1s linear infinite; }
     <div>
 
         <div class="obf-title">
-            Obfuscator!!
+            RautaObfuscator
         </div>
 
         <div class="obf-subtitle">
@@ -3848,7 +3805,7 @@ body.rauta-party { animation: rautaParty 1s linear infinite; }
 <div class="obf-tutorial">
 
     <h3>
-        📖 Obfuscator!! tutorial
+        📖 RautaObfuscator tutorial
     </h3>
 
     <ol>
@@ -3866,7 +3823,7 @@ body.rauta-party { animation: rautaParty 1s linear infinite; }
 
         <li>
             Type your code into the editor.
-            Obfuscator!! uses Monaco Editor,
+            RautaObfuscator uses Monaco Editor,
             so you get syntax highlighting and
             autocomplete.
         </li>
@@ -3957,7 +3914,7 @@ body.rauta-party { animation: rautaParty 1s linear infinite; }
 
 <div class="panel-title">
 
-    <span>Paste stuff or smth.exe</span>
+    <span>RautaPaste.exe</span>
 
     <div class="window-buttons">
 
@@ -3985,7 +3942,7 @@ body.rauta-party { animation: rautaParty 1s linear infinite; }
 <div class="paste-wrap">
 
     <h2>
-        Paste stuff or smth
+        RautaPaste
     </h2>
 
     <p>
@@ -4164,7 +4121,7 @@ body.rauta-party { animation: rautaParty 1s linear infinite; }
 
 <div class="panel-title">
 
-    <span>Upload images.exe</span>
+    <span>RautaImage.exe</span>
 
     <div class="window-buttons">
 
@@ -4188,7 +4145,7 @@ body.rauta-party { animation: rautaParty 1s linear infinite; }
 
 <div class="panel-content">
 
-    <h2>Upload images</h2>
+    <h2>RautaImage</h2>
 
     <p>
         upload an image and get a direct link for embeds,
@@ -4257,7 +4214,7 @@ body.rauta-party { animation: rautaParty 1s linear infinite; }
 
 <div class="panel-title">
 
-    <span>Temporary images.exe</span>
+    <span>RautaTempImage.exe</span>
 
     <div class="window-buttons">
 
@@ -4281,7 +4238,7 @@ body.rauta-party { animation: rautaParty 1s linear infinite; }
 
 <div class="panel-content">
 
-    <h2>Temporary images</h2>
+    <h2>RautaTempImage</h2>
 
     <p>
         same thing, except the uploaded image expires automatically.
@@ -4582,7 +4539,7 @@ body.rauta-party { animation: rautaParty 1s linear infinite; }
 </div>
 
 <div class="panel-content game-content">
-    <h2>Flappy Bird</h2>
+    <h2>Flappy Rauta</h2>
     <p>press Space / click to flap.</p>
 
     <canvas
@@ -5035,8 +4992,8 @@ body.rauta-party { animation: rautaParty 1s linear infinite; }
 
     <p>
 
-        added Monaco Editor to Paste stuff or smth
-        and Obfuscator!!!!!
+        added Monaco Editor to RautaPaste
+        and RautaObfuscator!!!
 
         <br><br>
 
@@ -5169,7 +5126,7 @@ body.rauta-party { animation: rautaParty 1s linear infinite; }
             return false;
         "
     >
-        My playlist!!
+        Rautatify
     </a>
 
 </li>
@@ -5184,7 +5141,7 @@ body.rauta-party { animation: rautaParty 1s linear infinite; }
             return false;
         "
     >
-        Obfuscator!!
+        RautaObfuscator
     </a>
 
 </li>
@@ -5199,7 +5156,7 @@ body.rauta-party { animation: rautaParty 1s linear infinite; }
             return false;
         "
     >
-        Paste stuff or smth
+        RautaPaste
     </a>
 
 </li>
@@ -5214,7 +5171,7 @@ body.rauta-party { animation: rautaParty 1s linear infinite; }
             return false;
         "
     >
-        Upload images
+        RautaImage
     </a>
 
 </li>
@@ -5400,11 +5357,27 @@ for(let i = 0; i < 60; i++){
 <div
     class="desktop-icon"
     data-panel="gamesFolderPanel"
-    style="left:425px; top:450px;"
+    style="
+        left:425px;
+        top:450px;
+    "
 >
-    <img src="https://cdn-icons-png.flaticon.com/512/7613/7613183.png" alt="Games folder">
-    <span>Games</span>
+
+    <img
+        class="xp-desktop-icon"
+        src="xp-icons/Open Folder.ico"
+        alt=""
+        draggable="false"
+    >
+
+    <span>
+        Games
+    </span>
+
 </div>
+
+
+
 
 
 <!-- CONFUSED GIRLS FOLDER -->
@@ -5412,11 +5385,27 @@ for(let i = 0; i < 60; i++){
 <div
     class="desktop-icon"
     data-panel="confusedGirlsPanel"
-    style="left:325px; top:450px;"
+    style="
+        left:325px;
+        top:450px;
+    "
 >
-    <img src="https://cdn-icons-png.flaticon.com/512/4192/4192698.png" alt="Confused girls folder">
-    <span>Confused girls</span>
+
+    <img
+        class="xp-desktop-icon"
+        src="xp-icons/My Pictures.ico"
+        alt=""
+        draggable="false"
+    >
+
+    <span>
+        Confused looking anime girls with interrogation marks on their heads
+    </span>
+
 </div>
+
+
+
 
 
 <!-- ALIEN -->
@@ -5454,12 +5443,12 @@ for(let i = 0; i < 60; i++){
 >
 
     <img
-        src="https://tse4.mm.bing.net/th/id/OIP.Ll8QgVrVhpE7F3YFArp-BQHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
-        alt="Changelogs"
+        src="changelog.png"
+        alt="Changelog"
     >
 
     <span>
-        Updates & changelogs
+        changelogs!!!
     </span>
 
 </div>
@@ -5470,10 +5459,23 @@ for(let i = 0; i < 60; i++){
 <div
     class="desktop-icon"
     data-panel="rautatifyPanel"
-    style="left:25px; top:270px;"
+    style="
+        left:25px;
+        top:270px;
+    "
 >
-    <img src="https://static.vecteezy.com/system/resources/previews/016/716/458/original/spotify-icon-free-png.png" alt="My playlist">
-    <span>My playlist!!</span>
+
+    <img
+        class="xp-desktop-icon"
+        src="xp-icons/My Music.ico"
+        alt=""
+        draggable="false"
+    >
+
+    <span>
+        Rautatify
+    </span>
+
 </div>
 
 
@@ -5482,10 +5484,23 @@ for(let i = 0; i < 60; i++){
 <div
     class="desktop-icon"
     data-panel="obfuscatorPanel"
-    style="left:25px; top:360px;"
+    style="
+        left:25px;
+        top:360px;
+    "
 >
-    <img src="https://static.vecteezy.com/system/resources/previews/022/394/684/original/security-lock-icon-clip-art-for-business-and-website-icon-vector.jpg" alt="Obfuscator">
-    <span>Obfuscator!!</span>
+
+    <img
+        class="xp-desktop-icon"
+        src="xp-icons/Folder Conflict.ico"
+        alt=""
+        draggable="false"
+    >
+
+    <span>
+        RautaObfuscator
+    </span>
+
 </div>
 
 
@@ -5494,10 +5509,23 @@ for(let i = 0; i < 60; i++){
 <div
     class="desktop-icon"
     data-panel="rautaPastePanel"
-    style="left:25px; top:450px;"
+    style="
+        left:25px;
+        top:450px;
+    "
 >
-    <img src="https://tse4.mm.bing.net/th/id/OIP.Gbeesw-C1uoFlgo82nfvPgHaHw?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Paste stuff">
-    <span>Paste stuff or smth</span>
+
+    <img
+        class="xp-desktop-icon"
+        src="xp-icons/My Documents.ico"
+        alt=""
+        draggable="false"
+    >
+
+    <span>
+        RautaPaste
+    </span>
+
 </div>
 
 
@@ -5506,10 +5534,23 @@ for(let i = 0; i < 60; i++){
 <div
     class="desktop-icon"
     data-panel="rautaImagePanel"
-    style="left:125px; top:450px;"
+    style="
+        left:125px;
+        top:450px;
+    "
 >
-    <img src="https://tse2.mm.bing.net/th/id/OIP.HGwGqH0hwUuKQqWn40hjOgHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Upload images">
-    <span>Upload images</span>
+
+    <img
+        class="xp-desktop-icon"
+        src="xp-icons/My Pictures.ico"
+        alt=""
+        draggable="false"
+    >
+
+    <span>
+        RautaImage
+    </span>
+
 </div>
 
 
@@ -5518,30 +5559,80 @@ for(let i = 0; i < 60; i++){
 <div
     class="desktop-icon"
     data-panel="rautaTempImagePanel"
-    style="left:225px; top:450px;"
+    style="
+        left:225px;
+        top:450px;
+    "
 >
-    <img src="https://img.icons8.com/external-dashed-line-kawalan-studio/1200/external-time-user-interface-dashed-line-kawalan-studio.jpg" alt="Temporary images">
-    <span>Temporary images</span>
+
+    <img
+        class="xp-desktop-icon"
+        src="xp-icons/New Folder.ico"
+        alt=""
+        draggable="false"
+    >
+
+    <span>
+        Temp Image
+    </span>
+
 </div>
 
 
+
 <!-- TIC TAC TOE -->
-<div class="desktop-icon" data-panel="tictactoePanel" style="left:625px; top:450px;">
-    <img src="https://cdn-icons-png.flaticon.com/512/5791/5791753.png" alt="Tic-Tac-Toe">
+<div
+    class="desktop-icon"
+    data-panel="tictactoePanel"
+    style="
+        left:625px;
+        top:450px;
+    "
+>
+    <img
+        class="xp-desktop-icon"
+        src="xp-icons/Computer Folder.ico"
+        alt=""
+        draggable="false"
+    >
     <span>Tic-Tac-Toe</span>
 </div>
 
 
 <!-- FLAPPY -->
-<div class="desktop-icon" data-panel="flappyPanel" style="left:625px; top:540px;">
-    <img src="https://toppng.com/uploads/preview/flappy-bird-bird-PNG-free-PNG-Images-88982.png" alt="Flappy Bird">
-    <span>Flappy Bird</span>
+<div
+    class="desktop-icon"
+    data-panel="flappyPanel"
+    style="
+        left:625px;
+        top:540px;
+    "
+>
+    <img
+        class="xp-desktop-icon"
+        src="xp-icons/My Pictures.ico"
+        alt=""
+        draggable="false"
+    >
+    <span>Flappy Rauta</span>
 </div>
 
 
 <!-- MEMORY -->
-<div class="desktop-icon" data-panel="memoryPanel" style="left:725px; top:540px;">
-    <img src="https://cdn-icons-png.flaticon.com/512/14189/14189533.png" alt="Memory">
+<div
+    class="desktop-icon"
+    data-panel="memoryPanel"
+    style="
+        left:725px;
+        top:540px;
+    "
+>
+    <img
+        class="xp-desktop-icon"
+        src="xp-icons/Fonts.ico"
+        alt=""
+        draggable="false"
+    >
     <span>Memory</span>
 </div>
 
@@ -5553,59 +5644,28 @@ for(let i = 0; i < 60; i++){
 <div
     class="desktop-icon"
     data-panel="commissionsPanel"
-    style="left:25px; top:540px;"
+    style="
+        left:25px;
+        top:540px;
+    "
 >
-    <img src="https://cdn-icons-png.flaticon.com/512/11131/11131863.png" alt="Commissions">
-    <span>Commissions</span>
+
+    <img
+        class="xp-desktop-icon"
+        src="xp-icons/Printer Folder.ico"
+        alt=""
+        draggable="false"
+    >
+
+    <span>
+        commissions
+    </span>
+
 </div>
 
 
 </div>
 
-
-</div>
-
-
-<!-- DESKTOP CONTEXT MENU -->
-<div id="desktopContextMenu" role="menu">
-    <button type="button" onclick="desktopContextAction('tools')">🛠 Desktop toys</button>
-    <button type="button" onclick="desktopContextAction('shuffle')">🎲 Shuffle icons</button>
-    <button type="button" onclick="desktopContextAction('games')">🎮 Open Games</button>
-    <div class="context-sep"></div>
-    <button type="button" onclick="desktopContextAction('close')">✕ Close all windows</button>
-    <button type="button" onclick="desktopContextAction('reset')">↩ Reset icon positions</button>
-</div>
-
-<!-- DESKTOP TOYS -->
-<div class="panel hidden" id="desktopToolsPanel">
-    <div class="panel-title">
-        <span>desktop toys.exe</span>
-        <div class="window-buttons">
-            <button class="window-button" onclick="minimizePanel('desktopToolsPanel')">−</button>
-            <button class="window-button close" onclick="closePanel('desktopToolsPanel')">×</button>
-        </div>
-    </div>
-    <div class="panel-content">
-        <h2>desktop toys :3</h2>
-        <p>mess with the desktop without breaking anything (hopefully).</p>
-        <div class="desktop-tool-row">
-            <label for="desktopDim">background dim</label>
-            <input id="desktopDim" type="range" min="0" max="65" value="25" oninput="setDesktopDim(this.value)">
-            <span id="desktopDimValue">25%</span>
-        </div>
-        <div class="desktop-tool-row">
-            <label for="wiggleToggle">wiggly icons</label>
-            <input id="wiggleToggle" type="checkbox" checked onchange="toggleIconWiggle(this.checked)">
-        </div>
-        <div class="desktop-tool-actions">
-            <button class="xp-button" onclick="shuffleDesktopIcons()">🎲 shuffle icons</button>
-            <button class="xp-button" onclick="resetDesktopIconPositions()">↩ reset positions</button>
-            <button class="xp-button" onclick="partyDesktop()">🌈 party mode</button>
-            <button class="xp-button" onclick="closeAllPanels()">✕ close windows</button>
-        </div>
-        <div class="desktop-tool-note">Tip: right-click the desktop for this menu. Your icon positions are saved locally.</div>
-    </div>
-</div>
 
 <!-- =========================================================
      RALSEI CLIPPY
@@ -5775,29 +5835,25 @@ const panelNames = {
         "changelog.exe",
 
     rautatifyPanel:
-        "My playlist!!.exe",
+        "Rautatify.exe",
 
     obfuscatorPanel:
-        "Obfuscator!!.exe",
+        "RautaObfuscator.exe",
 
     rautaPastePanel:
-        "Paste stuff or smth.exe",
+        "RautaPaste.exe",
 
     rautaImagePanel:
-        "Upload images.exe",
+        "RautaImage.exe",
 
     rautaTempImagePanel:
-        "Temporary images.exe",
+        "RautaTempImage.exe",
 
     commissionsPanel:
         "commissions.exe",
 
     confusedGirlsPanel:
-        "Confused girls"
-        ,
-
-    desktopToolsPanel:
-        "desktop toys.exe"
+        "ConfusedGirls"
 
 };
 
@@ -6456,7 +6512,6 @@ document
 
                     down =
                         false;
-                    saveDesktopIconPositions();
 
                 }
             );
@@ -8582,7 +8637,7 @@ async function deleteSafe(){
 
     if(
         !confirm(
-            "Delete the local Obfuscator!! Safe?"
+            "Delete the local RautaObfuscator Safe?"
         )
     )
         return;
@@ -8704,7 +8759,7 @@ function obfuscateCode(){
         case "html":
 
             output =
-`<!-- Obfuscator!! -->
+`<!-- RautaObfuscator -->
 <script>
 document.write(decodeURIComponent(escape(atob("${encoded}"))));
 <\/script>`;
@@ -8715,7 +8770,7 @@ document.write(decodeURIComponent(escape(atob("${encoded}"))));
         case "css":
 
             output =
-`/* Obfuscator!!
+`/* RautaObfuscator
    Encoded CSS payload:
    ${encoded}
 */`;
@@ -8726,7 +8781,7 @@ document.write(decodeURIComponent(escape(atob("${encoded}"))));
         case "python":
 
             output =
-`# Obfuscator!!
+`# RautaObfuscator
 import base64
 exec(compile(base64.b64decode("${encoded}"), "<rauta>", "exec"))`;
 
@@ -8737,7 +8792,7 @@ exec(compile(base64.b64decode("${encoded}"), "<rauta>", "exec"))`;
 
             output =
 `<?php
-/* Obfuscator!! */
+/* RautaObfuscator */
 eval("?>".base64_decode("${encoded}"));
 ?>`;
 
@@ -8748,10 +8803,10 @@ eval("?>".base64_decode("${encoded}"));
         case "luau":
 
             output =
-`-- Obfuscator!!
+`-- RautaObfuscator
 local b="${encoded}"
 -- encoded source payload
-print("Obfuscator!! payload:", b)`;
+print("RautaObfuscator payload:", b)`;
 
             break;
 
@@ -8759,7 +8814,7 @@ print("Obfuscator!! payload:", b)`;
         default:
 
             output =
-`/* Obfuscator!!
+`/* RautaObfuscator
    ${language}
    Encoded source payload:
    ${encoded}
@@ -8926,7 +8981,7 @@ function deobfuscateCode(){
 
         setObfMessage(
 
-            "Could not find a Obfuscator!! payload.",
+            "Could not find a RautaObfuscator payload.",
 
             "error"
 
@@ -9575,7 +9630,7 @@ function renderHostedImageResult(
     title.textContent =
         temporary
             ? "temporary image uploaded! :3"
-            : "Upload images uploaded! :3";
+            : "RautaImage uploaded! :3";
 
     result.appendChild(title);
 
@@ -9728,7 +9783,7 @@ function renderLocalImageResult(
     title.textContent =
         temporary
             ? "temporary image ready locally :3"
-            : "Upload images ready locally :3";
+            : "RautaImage ready locally :3";
 
     result.appendChild(title);
 
@@ -10609,7 +10664,7 @@ function finishTicTacToe(winner){
 resetTicTacToe();
 
 
-/* ---------- Flappy Bird ---------- */
+/* ---------- Flappy Rauta ---------- */
 
 const flappyCanvas =
     document.getElementById(
@@ -11843,127 +11898,6 @@ catch(error){
 
 }
 
-
-
-
-/* =========================================================
-   DESKTOP TOYS / CONTEXT MENU
-========================================================= */
-const desktopContextMenu = document.getElementById("desktopContextMenu");
-const desktopIconDefaults = {};
-let iconWiggleEnabled = true;
-
-document.querySelectorAll(".desktop-icon").forEach(icon => {
-    desktopIconDefaults[icon.dataset.panel || Math.random()] = {
-        left: icon.style.left,
-        top: icon.style.top
-    };
-});
-
-function hideDesktopContextMenu(){
-    if(desktopContextMenu) desktopContextMenu.style.display = "none";
-}
-
-document.addEventListener("contextmenu", function(e){
-    if(e.target.closest(".panel, .navbar, .time-box, #intro")) return;
-    e.preventDefault();
-    desktopContextMenu.style.left = Math.min(e.clientX, window.innerWidth - 200) + "px";
-    desktopContextMenu.style.top = Math.min(e.clientY, window.innerHeight - 190) + "px";
-    desktopContextMenu.style.display = "block";
-});
-
-document.addEventListener("click", function(e){
-    if(!e.target.closest("#desktopContextMenu")) hideDesktopContextMenu();
-});
-
-function desktopContextAction(action){
-    hideDesktopContextMenu();
-    if(action === "tools") openPanel("desktopToolsPanel");
-    if(action === "shuffle") shuffleDesktopIcons();
-    if(action === "games") openPanel("gamesFolderPanel");
-    if(action === "close") closeAllPanels();
-    if(action === "reset") resetDesktopIconPositions();
-}
-
-function saveDesktopIconPositions(){
-    const positions = {};
-    document.querySelectorAll(".desktop-icon").forEach((icon,i) => {
-        positions[i] = {left:icon.style.left, top:icon.style.top};
-    });
-    localStorage.setItem("rauta_desktop_icon_positions", JSON.stringify(positions));
-}
-
-function restoreDesktopIconPositions(){
-    try{
-        const positions = JSON.parse(localStorage.getItem("rauta_desktop_icon_positions") || "null");
-        if(!positions) return;
-        document.querySelectorAll(".desktop-icon").forEach((icon,i) => {
-            if(positions[i]){ icon.style.left = positions[i].left; icon.style.top = positions[i].top; }
-        });
-    }catch(e){}
-}
-
-function resetDesktopIconPositions(){
-    document.querySelectorAll(".desktop-icon").forEach((icon,i) => {
-        const key = icon.dataset.panel || i;
-        const d = desktopIconDefaults[key];
-        if(d){ icon.style.left = d.left; icon.style.top = d.top; }
-    });
-    localStorage.removeItem("rauta_desktop_icon_positions");
-    if(iconWiggleEnabled) wiggleIcons();
-}
-
-function shuffleDesktopIcons(){
-    const icons = [...document.querySelectorAll(".desktop-icon")];
-    const maxX = Math.max(90, window.innerWidth - 100);
-    const maxY = Math.max(120, window.innerHeight - 100);
-    icons.forEach((icon,i) => {
-        icon.style.left = (20 + Math.random() * Math.max(40,maxX - 20)) + "px";
-        icon.style.top = (50 + Math.random() * Math.max(40,maxY - 70)) + "px";
-        icon.style.zIndex = 10 + i;
-    });
-    saveDesktopIconPositions();
-    if(iconWiggleEnabled) wiggleIcons();
-}
-
-function wiggleIcons(){
-    document.querySelectorAll(".desktop-icon").forEach((icon,i) => {
-        icon.classList.remove("wiggle");
-        setTimeout(() => icon.classList.add("wiggle"), i * 25);
-        setTimeout(() => icon.classList.remove("wiggle"), 500 + i * 25);
-    });
-}
-
-function toggleIconWiggle(enabled){
-    iconWiggleEnabled = enabled;
-    if(enabled) wiggleIcons();
-}
-
-function setDesktopDim(value){
-    const overlay = document.querySelector(".background .overlay");
-    if(overlay) overlay.style.background = `rgba(0,0,0,${Number(value)/100})`;
-    const label = document.getElementById("desktopDimValue");
-    if(label) label.textContent = value + "%";
-    localStorage.setItem("rauta_desktop_dim", value);
-}
-
-function partyDesktop(){
-    document.body.classList.add("rauta-party");
-    wiggleIcons();
-    setTimeout(() => document.body.classList.remove("rauta-party"), 7000);
-}
-
-function closeAllPanels(){
-    document.querySelectorAll(".panel:not(.hidden)").forEach(panel => closePanel(panel.id));
-}
-
-restoreDesktopIconPositions();
-const savedDim = localStorage.getItem("rauta_desktop_dim");
-if(savedDim !== null){
-    const slider = document.getElementById("desktopDim");
-    if(slider) slider.value = savedDim;
-    setDesktopDim(savedDim);
-}
 
 </script>
 
