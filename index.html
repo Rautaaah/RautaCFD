@@ -367,85 +367,50 @@ body {
    ANALOG CLOCK
 ========================= */
 
+/* =========================
+   CLOCK CONTAINER
+   INVISIBLE
+========================= */
+
 .time-box {
     position: absolute;
 
     right: 15px;
     top: 15px;
 
-    width: 145px;
-    height: 55px;
+    width: 125px;
+    height: auto;
 
-    padding: 6px 10px;
+    padding: 0;
 
     color: white;
 
-    background: rgba(255,255,255,0.10);
+    /* Completely invisible container */
+    background: transparent;
+    border: none;
+    box-shadow: none;
 
-    backdrop-filter:
-        blur(14px)
-        saturate(150%);
-
-    -webkit-backdrop-filter:
-        blur(14px)
-        saturate(150%);
-
-    border: 1px solid rgba(255,255,255,0.28);
-    border-radius: 6px;
-
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.22),
-        inset 0 -1px 0 rgba(255,255,255,0.05),
-        0 4px 16px rgba(0,0,0,0.25);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
 
     text-align: center;
-
     font-family: Tahoma, Arial, sans-serif;
 
     cursor: move;
 
-    resize: both;
-    overflow: auto;
-
-    min-width: 110px;
-    min-height: 45px;
-
     z-index: 1002;
-}
-
-#currentTime {
-    margin-top: 8px;
-
-    color: white;
-
-    font-size: 18px;
-    font-weight: bold;
-
-    text-shadow:
-        1px 1px 3px black,
-        -1px -1px 3px black;
-}
-
-.time-label {
-    margin-top: 2px;
-
-    color: #e0e0e0;
-
-    font-size: 10px;
-
-    text-shadow: 1px 1px 3px black;
 }
 
 
 /* =========================
-   ANALOG CLOCK
+   SMALLER ANALOG CLOCK
 ========================= */
 
 .analog-clock {
     position: relative;
 
-    width: 210px;
-    height: 210px;
+    width: 120px;
+    height: 120px;
 
     margin: 0 auto;
 
@@ -459,73 +424,18 @@ body {
             #d8d8d8 100%
         );
 
-    border: 8px solid #383838;
+    border: 5px solid #383838;
 
     box-shadow:
         inset 0 0 0 2px rgba(255,255,255,0.8),
-        inset 0 0 18px rgba(0,0,0,0.18),
-        0 7px 14px rgba(0,0,0,0.6);
-
-    border-radius: 50%;
+        inset 0 0 12px rgba(0,0,0,0.18),
+        0 5px 10px rgba(0,0,0,0.6);
 }
 
-.clock-center {
-    position: absolute;
 
-    width: 12px;
-    height: 12px;
-
-    left: 50%;
-    top: 50%;
-
-    transform: translate(-50%, -50%);
-
-    border-radius: 50%;
-
-    background: #222;
-
-    border: 2px solid #888;
-
-    z-index: 20;
-}
-
-.hand {
-    position: absolute;
-
-    left: 50%;
-    bottom: 50%;
-
-    transform-origin: bottom center;
-
-    background: #1d1d1d;
-
-    border-radius: 10px;
-
-    z-index: 10;
-}
-
-.hour-hand {
-    width: 7px;
-    height: 52px;
-
-    margin-left: -3.5px;
-}
-
-.minute-hand {
-    width: 5px;
-    height: 75px;
-
-    margin-left: -2.5px;
-}
-
-.second-hand {
-    width: 2px;
-    height: 84px;
-
-    margin-left: -1px;
-
-    background: #4c8c75;
-}
+/* =========================
+   CLOCK NUMBERS
+========================= */
 
 .clock-number {
     position: absolute;
@@ -533,11 +443,11 @@ body {
     left: 50%;
     top: 50%;
 
-    width: 28px;
-    height: 28px;
+    width: 20px;
+    height: 20px;
 
-    margin-left: -14px;
-    margin-top: -14px;
+    margin-left: -10px;
+    margin-top: -10px;
 
     display: flex;
     align-items: center;
@@ -546,48 +456,113 @@ body {
     color: #202020;
 
     font-family: Arial, sans-serif;
-    font-size: 24px;
+    font-size: 14px;
 }
 
-.n1  { transform: rotate(30deg) translateY(-80px) rotate(-30deg); }
-.n2  { transform: rotate(60deg) translateY(-80px) rotate(-60deg); }
-.n3  { transform: rotate(90deg) translateY(-80px) rotate(-90deg); }
-.n4  { transform: rotate(120deg) translateY(-80px) rotate(-120deg); }
-.n5  { transform: rotate(150deg) translateY(-80px) rotate(-150deg); }
-.n6  { transform: rotate(180deg) translateY(-80px) rotate(-180deg); }
-.n7  { transform: rotate(210deg) translateY(-80px) rotate(-210deg); }
-.n8  { transform: rotate(240deg) translateY(-80px) rotate(-240deg); }
-.n9  { transform: rotate(270deg) translateY(-80px) rotate(-270deg); }
-.n10 { transform: rotate(300deg) translateY(-80px) rotate(-300deg); }
-.n11 { transform: rotate(330deg) translateY(-80px) rotate(-330deg); }
-.n12 { transform: rotate(360deg) translateY(-80px) rotate(-360deg); }
 
-.clock-mark {
-    position: absolute;
+/* Smaller number positions */
 
+.n1  { transform: rotate(30deg) translateY(-45px) rotate(-30deg); }
+.n2  { transform: rotate(60deg) translateY(-45px) rotate(-60deg); }
+.n3  { transform: rotate(90deg) translateY(-45px) rotate(-90deg); }
+.n4  { transform: rotate(120deg) translateY(-45px) rotate(-120deg); }
+.n5  { transform: rotate(150deg) translateY(-45px) rotate(-150deg); }
+.n6  { transform: rotate(180deg) translateY(-45px) rotate(-180deg); }
+.n7  { transform: rotate(210deg) translateY(-45px) rotate(-210deg); }
+.n8  { transform: rotate(240deg) translateY(-45px) rotate(-240deg); }
+.n9  { transform: rotate(270deg) translateY(-45px) rotate(-270deg); }
+.n10 { transform: rotate(300deg) translateY(-45px) rotate(-300deg); }
+.n11 { transform: rotate(330deg) translateY(-45px) rotate(-330deg); }
+.n12 { transform: rotate(360deg) translateY(-45px) rotate(-360deg); }
+
+
+/* =========================
+   CLOCK HANDS
+========================= */
+
+.hour-hand {
+    width: 5px;
+    height: 30px;
+
+    margin-left: -2.5px;
+}
+
+.minute-hand {
+    width: 4px;
+    height: 43px;
+
+    margin-left: -2px;
+}
+
+.second-hand {
     width: 2px;
-    height: 7px;
-
-    left: 50%;
-    top: 6px;
+    height: 48px;
 
     margin-left: -1px;
 
-    background: #666;
+    background: #4c8c75;
+}
 
-    transform-origin: 1px 99px;
+
+/* Clock center */
+
+.clock-center {
+    width: 8px;
+    height: 8px;
+
+    border: 1px solid #888;
+}
+
+
+/* =========================
+   SMALLER MINUTE MARKS
+========================= */
+
+.clock-mark {
+    width: 2px;
+    height: 5px;
+
+    top: 4px;
+
+    margin-left: -1px;
+
+    transform-origin: 1px 56px;
 }
 
 .clock-mark.big {
-    width: 3px;
-    height: 10px;
+    width: 2px;
+    height: 7px;
 
-    margin-left: -1.5px;
-
-    background: #356f5b;
+    margin-left: -1px;
 }
 
 
+/* =========================
+   DIGITAL TIME
+========================= */
+
+#currentTime {
+    margin-top: 5px;
+
+    color: white;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    text-shadow:
+        1px 1px 3px black,
+        -1px -1px 3px black;
+}
+
+.time-label {
+    margin-top: 1px;
+
+    color: #e0e0e0;
+
+    font-size: 8px;
+
+    text-shadow: 1px 1px 3px black;
+}
 /* =========================
    MUSIC BUTTON
 ========================= */
