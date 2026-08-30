@@ -2497,6 +2497,17 @@ nav {
 </style>
 
 <audio id="signinAudio" src="/signin.mp3" preload="auto"></audio>
+
+<style>
+.clippy-bubble-active {
+    animation: ralseiBubblePop 0.18s ease-out;
+}
+@keyframes ralseiBubblePop {
+    0% { transform: scale(0.92); opacity: 0.5; }
+    100% { transform: scale(1); opacity: 1; }
+}
+</style>
+
 </head>
 
 
@@ -11854,6 +11865,114 @@ catch(error){
 }
 
 
+</script>
+
+
+<script>
+/* =========================================================
+   RALSEI CLIPPY REACTIONS
+   ========================================================= */
+
+(function () {
+    const ralseiMessages = {
+        gamesFolderPanel: [
+            "hey! looking for something fun?",
+            "it looks like you're trying to play a game.",
+            "please don't ragequit, okay?"
+        ],
+        game1Panel: [
+            "oh! you're playing this one!",
+            "good luck!",
+            "i'll be cheering for you!"
+        ],
+        snakePanel: [
+            "watch out for the walls!",
+            "you've got this!"
+        ],
+        pongPanel: [
+            "boop the ball!",
+            "very serious gaming happening here."
+        ],
+        minesweeperPanel: [
+            "please don't click the suspicious squares.",
+            "hmm... that one looks safe. probably."
+        ],
+        rautaPastePanel: [
+            "pasting things?",
+            "careful with that clipboard."
+        ],
+        rautaImagePanel: [
+            "pictures!",
+            "that's a nice image."
+        ],
+        rautaTempImagePanel: [
+            "temporary things are still important.",
+            "i'll keep an eye on it."
+        ],
+        tictactoePanel: [
+            "X or O?",
+            "don't let the computer win."
+        ],
+        flappyPanel: [
+            "flap flap!",
+            "this bird has places to be."
+        ],
+        memoryPanel: [
+            "remember where everything is!",
+            "your memory is being tested."
+        ],
+        commissionsPanel: [
+            "oh! someone wants a commission?",
+            "i hope you get a cool project."
+        ]
+    };
+
+    let lastPanel = null;
+    let messageTimer = null;
+
+    function ralseiSay(message, duration) {
+        const bubble = document.getElementById("clippyBubble");
+        if (!bubble) return;
+
+        bubble.textContent = message;
+        bubble.style.display = "block";
+        bubble.classList.add("clippy-bubble-active");
+
+        clearTimeout(messageTimer);
+        messageTimer = setTimeout(function () {
+            bubble.classList.remove("clippy-bubble-active");
+        }, duration || 5000);
+    }
+
+    function reactToPanel(panelId) {
+        const messages = ralseiMessages[panelId];
+        if (!messages || panelId === lastPanel) return;
+
+        lastPanel = panelId;
+        const message = messages[Math.floor(Math.random() * messages.length)];
+        ralseiSay(message);
+    }
+
+    // Hook the site's existing openPanel without replacing its behavior.
+    const originalOpenPanel = window.openPanel;
+
+    if (typeof originalOpenPanel === "function") {
+        window.openPanel = function (panelId) {
+            const result = originalOpenPanel.apply(this, arguments);
+            setTimeout(function () {
+                reactToPanel(panelId);
+            }, 80);
+            return result;
+        };
+    }
+
+    // Initial greeting.
+    window.addEventListener("load", function () {
+        setTimeout(function () {
+            ralseiSay("hey :3", 4500);
+        }, 900);
+    });
+})();
 </script>
 
 </body>
