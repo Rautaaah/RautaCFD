@@ -1,12 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 
 <title>R</title>
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <meta property="og:title" content="rautatientorii">
 <meta property="og:description" content="hhi guys im rauta andd this is my websssite">
@@ -20,7 +17,7 @@
 <style>
 
 /* =========================================================
-   RESET
+   GLOBAL
 ========================================================= */
 
 * {
@@ -68,9 +65,9 @@ body {
 
     background: linear-gradient(
         to bottom,
-        rgb(243, 110, 210),
-        rgb(122, 56, 105) 50%,
-        rgb(51, 24, 44)
+        rgb(243,110,210),
+        rgb(122,56,105) 50%,
+        rgb(51,24,44)
     );
 
     border: 1px solid #a77ce8;
@@ -86,12 +83,12 @@ body {
     text-shadow: 1px 1px #222;
 
     box-shadow:
-        inset 0 1px rgba(255,255,255,0.35),
-        0 3px 10px rgba(0,0,0,0.8);
+        inset 0 1px rgba(255,255,255,.35),
+        0 3px 10px rgba(0,0,0,.8);
 }
 
 #enterButton:hover {
-    filter: brightness(1.1);
+    filter: brightness(1.12);
 }
 
 #enterButton:active {
@@ -106,12 +103,8 @@ body {
 #site {
     position: fixed;
     inset: 0;
-
     opacity: 0;
-
     transition: opacity 1.5s ease;
-
-    isolation: isolate;
 }
 
 
@@ -122,37 +115,18 @@ body {
 .background {
     position: absolute;
     inset: 0;
-
-    overflow: hidden;
-
-    z-index: 0;
 }
 
 .background img {
-    position: absolute;
-    inset: 0;
-
     width: 100%;
     height: 100%;
-
     object-fit: cover;
-
-    z-index: 0;
 }
 
 .overlay {
     position: absolute;
     inset: 0;
-
-    background:
-        linear-gradient(
-            rgba(0,0,0,0.20),
-            rgba(0,0,0,0.28)
-        );
-
-    z-index: 1;
-
-    pointer-events: none;
+    background: rgba(0,0,0,.25);
 }
 
 
@@ -167,13 +141,13 @@ body {
 
     pointer-events: none;
 
-    background: rgba(40,150,255,0.12);
+    background: rgba(40,150,255,.20);
 
-    border: 1px solid rgba(0,255,255,0.95);
+    border: 1px solid rgba(0,255,255,.95);
 
     box-shadow:
-        inset 0 0 8px rgba(0,220,255,0.18),
-        0 0 4px rgba(0,220,255,0.4);
+        inset 0 0 8px rgba(0,220,255,.18),
+        0 0 4px rgba(0,220,255,.4);
 
     z-index: 999999;
 }
@@ -192,36 +166,27 @@ body {
     top: 50%;
     left: 50%;
 
-    transform: translate(-50%, -50%);
+    transform: translate(-50%,-50%);
 
-    /*
-       IMPORTANT:
-       This is kept translucent so backdrop-filter
-       can actually see the GIF behind the window.
-    */
-    background: rgba(212,208,200,0.42);
+    background: rgba(212,208,200,.72);
 
-    border-top: 2px solid rgba(255,255,255,0.88);
-    border-left: 2px solid rgba(255,255,255,0.88);
-    border-right: 2px solid rgba(55,55,55,0.80);
-    border-bottom: 2px solid rgba(55,55,55,0.80);
+    border-top: 2px solid rgba(255,255,255,.9);
+    border-left: 2px solid rgba(255,255,255,.9);
+    border-right: 2px solid rgba(64,64,64,.85);
+    border-bottom: 2px solid rgba(64,64,64,.85);
 
     box-shadow:
-        5px 5px 18px rgba(0,0,0,0.65),
-        inset 0 0 25px rgba(255,255,255,0.08);
+        5px 5px 15px rgba(0,0,0,.7);
 
     /*
-       The old setup could make the glass look flat.
-       These make the backdrop effect much more reliable.
+       FIXED GLASS EFFECT
     */
-    backdrop-filter: blur(14px) saturate(115%);
-    -webkit-backdrop-filter: blur(14px) saturate(115%);
+    backdrop-filter: blur(14px) saturate(125%);
+    -webkit-backdrop-filter: blur(14px) saturate(125%);
 
     z-index: 20;
 
     user-select: none;
-
-    overflow: hidden;
 }
 
 .panel.hidden {
@@ -241,13 +206,13 @@ body {
     background:
         linear-gradient(
             to right,
-            rgba(243,110,210,0.90),
-            rgba(122,56,105,0.90) 50%,
-            rgba(51,24,44,0.92)
+            rgba(243,110,210,.88),
+            rgba(122,56,105,.88) 50%,
+            rgba(51,24,44,.88)
         );
 
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 
     font-size: 12px;
     font-weight: bold;
@@ -255,18 +220,11 @@ body {
     text-shadow: 1px 1px #222;
 
     cursor: move;
-
-    user-select: none;
-}
-
-.panel-title:active {
-    cursor: grabbing;
 }
 
 .window-buttons {
     display: flex;
     gap: 2px;
-
     margin-left: auto;
 }
 
@@ -290,11 +248,8 @@ body {
     border-right: 1px solid #24104f;
     border-bottom: 1px solid #24104f;
 
-    font-family: Arial, sans-serif;
     font-size: 13px;
     font-weight: bold;
-
-    line-height: 17px;
 
     cursor: pointer;
 }
@@ -310,11 +265,6 @@ body {
             #ef6666,
             #a80000
         );
-
-    border-top-color: #ff9b9b;
-    border-left-color: #ff9b9b;
-    border-right-color: #650000;
-    border-bottom-color: #650000;
 }
 
 .window-button.close:hover {
@@ -331,13 +281,14 @@ body {
     min-height: 170px;
 
     /*
-       Separate translucent layer instead of making
-       the whole panel opaque.
+       Don't put a second giant backdrop-filter here.
+       This was one of the things making the old glass
+       effect look muddy.
     */
-    background: rgba(238,235,228,0.48);
+    background: rgba(212,208,200,.45);
 
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(7px) saturate(110%);
+    -webkit-backdrop-filter: blur(7px) saturate(110%);
 
     user-select: text;
 }
@@ -357,11 +308,64 @@ body {
 
 .panel-content hr {
     border: 0;
-
-    border-top: 1px solid rgba(128,128,128,0.7);
-    border-bottom: 1px solid rgba(255,255,255,0.8);
-
+    border-top: 1px solid rgba(128,128,128,.8);
+    border-bottom: 1px solid rgba(255,255,255,.8);
     margin: 12px 0;
+}
+
+
+/* =========================================================
+   BUTTONS / INPUTS
+========================================================= */
+
+.xp-button,
+.tool-button,
+.paste-button {
+    padding: 6px 14px;
+
+    background: rgba(212,208,200,.85);
+
+    border-top: 2px solid white;
+    border-left: 2px solid white;
+    border-right: 2px solid #404040;
+    border-bottom: 2px solid #404040;
+
+    font-family: Tahoma, Arial, sans-serif;
+    font-size: 12px;
+
+    cursor: pointer;
+}
+
+.xp-button:active,
+.tool-button:active,
+.paste-button:active {
+    border-top-color: #404040;
+    border-left-color: #404040;
+    border-right-color: white;
+    border-bottom-color: white;
+}
+
+input,
+select,
+textarea {
+    font-family: Tahoma, Arial, sans-serif;
+    font-size: 12px;
+
+    background: rgba(255,255,255,.82);
+
+    border-top: 2px solid #777;
+    border-left: 2px solid #777;
+    border-right: 2px solid white;
+    border-bottom: 2px solid white;
+
+    padding: 6px;
+}
+
+textarea {
+    width: 100%;
+    min-height: 180px;
+    resize: vertical;
+    font-family: "Courier New", monospace;
 }
 
 
@@ -375,671 +379,6 @@ a {
 
 a:visited {
     color: #551a8b;
-}
-
-a:hover {
-    color: #000099;
-}
-
-
-/* =========================================================
-   PANEL SIZES
-========================================================= */
-
-#homePanel {
-    width: 440px;
-}
-
-#aboutPanel {
-    width: 440px;
-}
-
-#projectsPanel {
-    width: 500px;
-}
-
-#contactPanel {
-    width: 420px;
-}
-
-#catsPanel {
-    width: 591px;
-    height: 415px;
-}
-
-#changelogPanel {
-    width: 591px;
-    height: 392px;
-}
-
-#chatroomPanel {
-    width: 591px;
-    height: 415px;
-}
-
-#friendsPanel {
-    width: 500px;
-}
-
-#newsletterPanel {
-    width: 440px;
-}
-
-#rautatifyPanel {
-    width: 570px;
-    min-height: 400px;
-}
-
-#toolsPanel {
-    width: 620px;
-    min-height: 420px;
-}
-
-#commissionsPanel {
-    width: 500px;
-    min-height: 350px;
-}
-
-
-/* =========================================================
-   RAUTATIFY
-========================================================= */
-
-.rautatify-content {
-    background:
-        rgba(248,248,248,0.78);
-
-    color: #111;
-}
-
-.rautatify-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    margin-bottom: 14px;
-}
-
-.rautatify-logo {
-    font-size: 28px;
-    font-weight: bold;
-
-    color: #8B5CF6;
-
-    text-shadow:
-        1px 1px 0 #ddd;
-}
-
-.rautatify-subtitle {
-    color: #666;
-    margin-top: 2px;
-}
-
-.rautatify-controls {
-    display: flex;
-    gap: 5px;
-}
-
-.music-control {
-    width: 30px;
-    height: 27px;
-
-    border: 1px solid #aaa;
-
-    background:
-        linear-gradient(
-            #fff,
-            #ddd
-        );
-
-    cursor: pointer;
-
-    font-size: 13px;
-}
-
-.music-control:hover {
-    background: #eee;
-}
-
-.music-control.active {
-    background: #d9c9ff;
-    border-color: #8B5CF6;
-}
-
-.playlist-box {
-    border: 1px solid #bbb;
-
-    background: rgba(255,255,255,0.82);
-
-    padding: 11px;
-
-    margin-bottom: 9px;
-
-    box-shadow:
-        0 2px 5px rgba(0,0,0,0.12);
-}
-
-.playlist-header {
-    display: flex;
-    align-items: center;
-
-    gap: 10px;
-
-    margin-bottom: 10px;
-}
-
-.playlist-cover {
-    width: 52px;
-    height: 52px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    flex-shrink: 0;
-
-    background:
-        linear-gradient(
-            135deg,
-            #8B5CF6,
-            #241238
-        );
-
-    color: white;
-
-    font-size: 22px;
-    font-weight: bold;
-
-    border-radius: 5px;
-
-    box-shadow:
-        0 2px 5px rgba(0,0,0,0.25);
-}
-
-.playlist-info {
-    flex: 1;
-}
-
-.playlist-info h3 {
-    font-size: 14px;
-    margin-bottom: 3px;
-}
-
-.playlist-info p {
-    color: #777;
-    margin: 0;
-}
-
-.track {
-    display: flex;
-    align-items: center;
-
-    gap: 9px;
-
-    padding: 7px;
-
-    border-top: 1px solid #ddd;
-
-    cursor: pointer;
-}
-
-.track:hover {
-    background: #f2f2f2;
-}
-
-.track-number {
-    width: 20px;
-    color: #777;
-    text-align: center;
-}
-
-.track-name {
-    flex: 1;
-}
-
-.track-name strong {
-    display: block;
-    font-size: 12px;
-}
-
-.track-name small {
-    color: #888;
-}
-
-.track-play {
-    width: 25px;
-    height: 25px;
-
-    border: 1px solid #aaa;
-
-    background: white;
-
-    cursor: pointer;
-}
-
-.track-play:hover {
-    background: #e9e9e9;
-}
-
-.player {
-    margin-top: 13px;
-
-    padding: 10px;
-
-    border: 1px solid #aaa;
-
-    background: #eee;
-}
-
-.now-playing {
-    font-weight: bold;
-    margin-bottom: 7px;
-}
-
-.progress {
-    width: 100%;
-    height: 7px;
-
-    appearance: none;
-    -webkit-appearance: none;
-
-    cursor: pointer;
-}
-
-.player-row {
-    display: flex;
-    align-items: center;
-
-    gap: 8px;
-
-    margin-top: 7px;
-}
-
-.player-row button {
-    border: 1px solid #aaa;
-
-    background: white;
-
-    padding: 4px 8px;
-
-    cursor: pointer;
-}
-
-.player-row button:hover {
-    background: #ddd;
-}
-
-.volume {
-    width: 100px;
-}
-
-
-/* =========================================================
-   RAUTA TOOLS
-========================================================= */
-
-.tool-tabs {
-    display: flex;
-    gap: 4px;
-
-    margin-bottom: 12px;
-}
-
-.tool-tab {
-    padding: 6px 12px;
-
-    border: 1px solid #999;
-
-    background:
-        linear-gradient(#fff,#ddd);
-
-    cursor: pointer;
-}
-
-.tool-tab.active {
-    background: #d9c9ff;
-    border-color: #8B5CF6;
-}
-
-.tool-section {
-    display: none;
-}
-
-.tool-section.active {
-    display: block;
-}
-
-.tool-label {
-    display: block;
-
-    margin-bottom: 5px;
-
-    font-weight: bold;
-}
-
-.code-box {
-    width: 100%;
-    min-height: 130px;
-
-    resize: vertical;
-
-    padding: 8px;
-
-    border: 1px solid #888;
-
-    background: #fff;
-
-    color: #111;
-
-    font-family:
-        "Courier New",
-        monospace;
-
-    font-size: 12px;
-}
-
-.tool-buttons {
-    display: flex;
-    flex-wrap: wrap;
-
-    gap: 6px;
-
-    margin: 10px 0;
-}
-
-.tool-button {
-    padding: 6px 12px;
-
-    border-top: 2px solid white;
-    border-left: 2px solid white;
-    border-right: 2px solid #555;
-    border-bottom: 2px solid #555;
-
-    background: #d4d0c8;
-
-    font-family: Tahoma, Arial, sans-serif;
-
-    cursor: pointer;
-}
-
-.tool-button:active {
-    border-top-color: #555;
-    border-left-color: #555;
-    border-right-color: white;
-    border-bottom-color: white;
-}
-
-.tool-status {
-    min-height: 18px;
-
-    margin-top: 6px;
-
-    color: #444;
-
-    font-size: 11px;
-}
-
-.safe-box {
-    padding: 12px;
-
-    border: 1px solid #999;
-
-    background: rgba(255,255,255,0.75);
-
-    margin-top: 10px;
-}
-
-.pin-input {
-    width: 160px;
-
-    padding: 6px;
-
-    border: 1px solid #888;
-}
-
-
-/* =========================================================
-   COMMISSIONS
-========================================================= */
-
-.commission-card {
-    border: 1px solid #aaa;
-
-    background: rgba(255,255,255,0.72);
-
-    padding: 12px;
-
-    margin-bottom: 10px;
-}
-
-.commission-card h3 {
-    margin-bottom: 5px;
-    font-size: 14px;
-}
-
-.commission-list {
-    padding-left: 20px;
-    margin-bottom: 12px;
-}
-
-.commission-list li {
-    margin-bottom: 5px;
-}
-
-.commission-status {
-    display: inline-block;
-
-    padding: 4px 8px;
-
-    background: #d9c9ff;
-
-    border: 1px solid #8B5CF6;
-
-    color: #402080;
-
-    font-weight: bold;
-}
-
-
-/* =========================================================
-   TIME BOX
-========================================================= */
-
-.time-box {
-    position: absolute;
-
-    right: 15px;
-    top: 15px;
-
-    width: 130px;
-
-    color: white;
-
-    text-align: center;
-
-    font-family: Tahoma, Arial, sans-serif;
-
-    cursor: move;
-
-    z-index: 1002;
-
-    user-select: none;
-}
-
-.analog-clock {
-    position: relative;
-
-    width: 120px;
-    height: 120px;
-
-    margin: 0 auto;
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle at 50% 50%,
-            #f8f8f8 0%,
-            #eeeeee 68%,
-            #d8d8d8 100%
-        );
-
-    border: 5px solid #383838;
-
-    box-shadow:
-        inset 0 0 0 2px rgba(255,255,255,0.8),
-        inset 0 0 12px rgba(0,0,0,0.18),
-        0 5px 10px rgba(0,0,0,0.6);
-
-    overflow: visible;
-}
-
-.clock-number {
-    position: absolute;
-
-    left: 50%;
-    top: 50%;
-
-    width: 20px;
-    height: 20px;
-
-    margin-left: -10px;
-    margin-top: -10px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    color: #202020;
-
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-
-    z-index: 3;
-}
-
-.n1  { transform: rotate(30deg) translateY(-45px) rotate(-30deg); }
-.n2  { transform: rotate(60deg) translateY(-45px) rotate(-60deg); }
-.n3  { transform: rotate(90deg) translateY(-45px) rotate(-90deg); }
-.n4  { transform: rotate(120deg) translateY(-45px) rotate(-120deg); }
-.n5  { transform: rotate(150deg) translateY(-45px) rotate(-150deg); }
-.n6  { transform: rotate(180deg) translateY(-45px) rotate(-180deg); }
-.n7  { transform: rotate(210deg) translateY(-45px) rotate(-210deg); }
-.n8  { transform: rotate(240deg) translateY(-45px) rotate(-240deg); }
-.n9  { transform: rotate(270deg) translateY(-45px) rotate(-270deg); }
-.n10 { transform: rotate(300deg) translateY(-45px) rotate(-300deg); }
-.n11 { transform: rotate(330deg) translateY(-45px) rotate(-330deg); }
-.n12 { transform: rotate(360deg) translateY(-45px) rotate(-360deg); }
-
-.clock-mark {
-    position: absolute;
-
-    width: 2px;
-    height: 5px;
-
-    left: 50%;
-    top: 4px;
-
-    margin-left: -1px;
-
-    background: #666;
-
-    transform-origin: 1px 56px;
-
-    z-index: 2;
-}
-
-.clock-mark.big {
-    width: 3px;
-    height: 8px;
-
-    margin-left: -1.5px;
-
-    background: #356f5b;
-}
-
-.hand {
-    position: absolute;
-
-    left: 50%;
-    bottom: 50%;
-
-    transform-origin: bottom center;
-
-    border-radius: 10px;
-
-    z-index: 10;
-}
-
-.hour-hand {
-    width: 5px;
-    height: 30px;
-
-    margin-left: -2.5px;
-
-    background: #1d1d1d;
-}
-
-.minute-hand {
-    width: 4px;
-    height: 43px;
-
-    margin-left: -2px;
-
-    background: #1d1d1d;
-}
-
-.second-hand {
-    width: 2px;
-    height: 48px;
-
-    margin-left: -1px;
-
-    background: #4c8c75;
-}
-
-.clock-center {
-    position: absolute;
-
-    width: 9px;
-    height: 9px;
-
-    left: 50%;
-    top: 50%;
-
-    transform: translate(-50%, -50%);
-
-    border-radius: 50%;
-
-    background: #222;
-
-    border: 2px solid #888;
-
-    z-index: 20;
-}
-
-#currentTime {
-    margin-top: 5px;
-
-    color: white;
-
-    font-size: 14px;
-    font-weight: bold;
-
-    text-shadow:
-        1px 1px 3px black,
-        -1px -1px 3px black;
-}
-
-.time-label {
-    margin-top: 1px;
-
-    color: #e0e0e0;
-
-    font-size: 8px;
-
-    text-shadow: 1px 1px 3px black;
 }
 
 
@@ -1064,27 +403,26 @@ a:hover {
     background:
         linear-gradient(
             to bottom,
-            rgba(243,110,210,0.72),
-            rgba(122,56,105,0.72) 50%,
-            rgba(51,24,44,0.78)
+            rgba(243,110,210,.72),
+            rgba(122,56,105,.72) 50%,
+            rgba(51,24,44,.78)
         );
 
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px) saturate(125%);
+    -webkit-backdrop-filter: blur(12px) saturate(125%);
 
-    border-top: 2px solid rgba(220,170,255,0.7);
+    border-top: 2px solid rgba(220,170,255,.7);
 
     box-shadow:
-        0 -2px 6px rgba(0,0,0,0.6);
+        0 -2px 6px rgba(0,0,0,.6);
 
-    z-index: 5000;
+    z-index: 1000;
 }
 
 .logo {
     display: block;
 
-    color: #111 !important;
-
+    color: #111;
     text-decoration: none;
 
     font-size: 14px;
@@ -1104,21 +442,7 @@ a:hover {
 
     border-radius: 0 9px 9px 0;
 
-    box-shadow:
-        inset 0 1px rgba(255,255,255,0.8),
-        1px 0 4px rgba(0,0,0,0.5);
-
     margin-right: 7px;
-}
-
-.logo:hover {
-    background:
-        linear-gradient(
-            to bottom,
-            #fff98c,
-            #ffe34d,
-            #f0b900
-        );
 }
 
 .nav-links {
@@ -1134,7 +458,7 @@ a:hover {
 .nav-button {
     display: block;
 
-    color: white !important;
+    color: white;
 
     text-decoration: none;
 
@@ -1145,11 +469,9 @@ a:hover {
     border: 1px solid transparent;
     border-radius: 3px;
 
-    text-shadow: 1px 1px rgba(0,0,0,0.5);
+    text-shadow: 1px 1px rgba(0,0,0,.5);
 
     cursor: pointer;
-
-    transition: 0.15s;
 }
 
 .nav-links a:hover,
@@ -1157,73 +479,54 @@ a:hover {
     background:
         linear-gradient(
             to bottom,
-            rgba(130,75,200,0.8),
-            rgba(55,20,90,0.9)
+            rgba(130,75,200,.8),
+            rgba(55,20,90,.9)
         );
 
-    border-color: rgba(200,160,255,0.7);
+    border-color: rgba(200,160,255,.7);
 }
 
 .task-buttons {
     display: flex;
-
     align-items: center;
-
     gap: 3px;
-
     margin-left: 5px;
-
     height: 100%;
-
-    min-width: 0;
-
-    overflow: hidden;
 }
 
 .task-window {
-    display: block;
-
     width: 120px;
     max-width: 120px;
 
     overflow: hidden;
-
     white-space: nowrap;
-
     text-overflow: ellipsis;
 
     color: white;
 
-    background: rgba(25,10,40,0.5);
+    background: rgba(25,10,40,.5);
 
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-
-    border-top: 1px solid rgba(200,160,255,0.45);
-    border-left: 1px solid rgba(200,160,255,0.45);
-    border-right: 1px solid rgba(20,5,30,0.8);
-    border-bottom: 1px solid rgba(20,5,30,0.8);
+    border-top: 1px solid rgba(200,160,255,.45);
+    border-left: 1px solid rgba(200,160,255,.45);
+    border-right: 1px solid rgba(20,5,30,.8);
+    border-bottom: 1px solid rgba(20,5,30,.8);
 
     padding: 5px 10px;
 
-    font-family: Tahoma, Arial, sans-serif;
     font-size: 11px;
 
     cursor: pointer;
-
-    text-shadow: 1px 1px rgba(0,0,0,0.5);
 }
 
-.task-window:hover {
-    background: rgba(120,70,190,0.7);
+.task-window:hover,
+.task-window.active {
+    background: rgba(120,70,190,.7);
 }
 
 .nav-right {
     margin-left: auto;
-
     padding-left: 8px;
-
-    border-left: 1px solid rgba(0,0,0,0.5);
+    border-left: 1px solid rgba(0,0,0,.5);
 }
 
 
@@ -1235,7 +538,7 @@ a:hover {
     position: absolute;
     inset: 0;
 
-    z-index: 4500;
+    z-index: 1001;
 
     pointer-events: none;
 }
@@ -1254,10 +557,11 @@ a:hover {
     font-size: 11px;
 
     text-align: center;
-
     user-select: none;
 
     pointer-events: auto;
+
+    cursor: default;
 }
 
 .desktop-icon img {
@@ -1287,90 +591,196 @@ a:hover {
 }
 
 .desktop-icon.selected img {
-    filter: brightness(0.8);
-}
-
-.desktop-icon.dragging {
-    cursor: grabbing;
+    filter: brightness(.8);
 }
 
 
 /* =========================================================
-   ICON APP STYLE
+   CLOCK
 ========================================================= */
 
-.app-icon {
-    width: 48px;
-    height: 48px;
+.time-box {
+    position: absolute;
+
+    right: 15px;
+    top: 15px;
+
+    width: 130px;
+
+    color: white;
+
+    text-align: center;
+
+    cursor: move;
+
+    z-index: 1002;
+
+    user-select: none;
+}
+
+.analog-clock {
+    position: relative;
+
+    width: 120px;
+    height: 120px;
+
+    margin: 0 auto;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            #f8f8f8,
+            #eeeeee 68%,
+            #d8d8d8
+        );
+
+    border: 5px solid #383838;
+
+    box-shadow:
+        inset 0 0 0 2px rgba(255,255,255,.8),
+        inset 0 0 12px rgba(0,0,0,.18),
+        0 5px 10px rgba(0,0,0,.6);
+}
+
+.clock-number {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 20px;
+    height: 20px;
+
+    margin-left: -10px;
+    margin-top: -10px;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    border-radius: 8px;
+    color: #202020;
+
+    font-size: 14px;
+}
+
+.n1  { transform: rotate(30deg) translateY(-45px) rotate(-30deg); }
+.n2  { transform: rotate(60deg) translateY(-45px) rotate(-60deg); }
+.n3  { transform: rotate(90deg) translateY(-45px) rotate(-90deg); }
+.n4  { transform: rotate(120deg) translateY(-45px) rotate(-120deg); }
+.n5  { transform: rotate(150deg) translateY(-45px) rotate(-150deg); }
+.n6  { transform: rotate(180deg) translateY(-45px) rotate(-180deg); }
+.n7  { transform: rotate(210deg) translateY(-45px) rotate(-210deg); }
+.n8  { transform: rotate(240deg) translateY(-45px) rotate(-240deg); }
+.n9  { transform: rotate(270deg) translateY(-45px) rotate(-270deg); }
+.n10 { transform: rotate(300deg) translateY(-45px) rotate(-300deg); }
+.n11 { transform: rotate(330deg) translateY(-45px) rotate(-330deg); }
+.n12 { transform: rotate(360deg) translateY(-45px) rotate(-360deg); }
+
+.clock-mark {
+    position: absolute;
+
+    width: 2px;
+    height: 5px;
+
+    left: 50%;
+    top: 4px;
+
+    margin-left: -1px;
+
+    background: #666;
+
+    transform-origin: 1px 56px;
+}
+
+.clock-mark.big {
+    width: 3px;
+    height: 8px;
+
+    margin-left: -1.5px;
+
+    background: #356f5b;
+}
+
+.hand {
+    position: absolute;
+
+    left: 50%;
+    bottom: 50%;
+
+    transform-origin: bottom center;
+
+    border-radius: 10px;
+
+    z-index: 10;
+}
+
+.hour-hand {
+    width: 5px;
+    height: 30px;
+    margin-left: -2.5px;
+    background: #1d1d1d;
+}
+
+.minute-hand {
+    width: 4px;
+    height: 43px;
+    margin-left: -2px;
+    background: #1d1d1d;
+}
+
+.second-hand {
+    width: 2px;
+    height: 48px;
+    margin-left: -1px;
+    background: #4c8c75;
+}
+
+.clock-center {
+    position: absolute;
+
+    width: 9px;
+    height: 9px;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%,-50%);
+
+    border-radius: 50%;
+
+    background: #222;
+
+    border: 2px solid #888;
+}
+
+#currentTime {
+    margin-top: 5px;
 
     color: white;
 
-    font-size: 26px;
+    font-size: 14px;
     font-weight: bold;
 
-    box-shadow:
-        0 3px 8px rgba(0,0,0,0.6);
-
-    border: 2px solid rgba(255,255,255,0.7);
+    text-shadow:
+        1px 1px 3px black,
+        -1px -1px 3px black;
 }
 
-.rautatify-icon {
-    background:
-        linear-gradient(
-            135deg,
-            #8B5CF6,
-            #241238
-        );
-}
+.time-label {
+    margin-top: 1px;
 
-.tools-icon {
-    background:
-        linear-gradient(
-            135deg,
-            #4f8cff,
-            #14244d
-        );
-}
+    color: #e0e0e0;
 
-.commission-icon {
-    background:
-        linear-gradient(
-            135deg,
-            #ff8acb,
-            #64204d
-        );
+    font-size: 8px;
+
+    text-shadow: 1px 1px 3px black;
 }
 
 
 /* =========================================================
-   XP BUTTON
-========================================================= */
-
-.xp-button {
-    padding: 5px 20px;
-
-    background: rgba(212,208,200,0.8);
-
-    border-top: 2px solid white;
-    border-left: 2px solid white;
-    border-right: 2px solid #404040;
-    border-bottom: 2px solid #404040;
-
-    font-family: Tahoma, Arial, sans-serif;
-    font-size: 12px;
-
-    cursor: pointer;
-}
-
-
-/* =========================================================
-   RALSEI CLIPPY
+   CLIPPY
 ========================================================= */
 
 .ralsei-clippy {
@@ -1388,16 +798,11 @@ a:hover {
     cursor: grab;
 }
 
-.ralsei-clippy:active {
-    cursor: grabbing;
-}
-
 .clippy-image {
     width: 200px;
     height: auto;
 
     display: block;
-
     margin: 0 auto;
 
     image-rendering: pixelated;
@@ -1407,7 +812,6 @@ a:hover {
     position: relative;
 
     background: #000;
-
     color: #fff;
 
     border: 3px solid #fff;
@@ -1417,12 +821,8 @@ a:hover {
     margin-bottom: 8px;
 
     font-family: "Courier New", monospace;
-
     font-size: 13px;
-
     line-height: 1.35;
-
-    letter-spacing: 0.2px;
 }
 
 .clippy-bubble::after {
@@ -1442,26 +842,6 @@ a:hover {
     border-bottom: 3px solid #fff;
 
     transform: rotate(45deg);
-}
-
-.clippy-close {
-    position: absolute;
-
-    right: 5px;
-    top: 5px;
-
-    width: 18px;
-    height: 18px;
-
-    border: 0;
-
-    background: transparent;
-
-    color: #fff;
-
-    font-family: "Courier New", monospace;
-
-    cursor: pointer;
 }
 
 
@@ -1484,8 +864,365 @@ a:hover {
 
 
 /* =========================================================
-   CHANGELOG
+   RAUTATIFY
 ========================================================= */
+
+#rautatifyPanel {
+    width: 570px;
+    min-height: 400px;
+}
+
+.rautatify {
+    color: #171717;
+    background: #f5f5f7;
+    margin: -18px;
+    padding: 18px;
+    min-height: 360px;
+}
+
+.rautatify-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.rautatify-icon {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #8B5CF6,
+            #5b21b6
+        );
+
+    color: white;
+
+    font-size: 26px;
+    font-weight: bold;
+
+    box-shadow: 0 3px 8px rgba(0,0,0,.25);
+}
+
+.rautatify-name {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.rautatify-subtitle {
+    color: #777;
+    font-size: 11px;
+}
+
+.playlist {
+    background: white;
+
+    border: 1px solid #d4d4d4;
+    border-radius: 8px;
+
+    padding: 12px;
+
+    box-shadow: 0 2px 6px rgba(0,0,0,.08);
+}
+
+.playlist-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 10px;
+}
+
+.playlist-title {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.track {
+    display: flex;
+    align-items: center;
+
+    padding: 9px 6px;
+
+    border-top: 1px solid #eee;
+
+    cursor: pointer;
+}
+
+.track:hover {
+    background: #f0eafd;
+}
+
+.track-number {
+    width: 28px;
+    color: #888;
+}
+
+.track-info {
+    flex: 1;
+}
+
+.track-name {
+    font-weight: bold;
+}
+
+.track-artist {
+    color: #888;
+    font-size: 10px;
+}
+
+.play-button {
+    width: 32px;
+    height: 32px;
+
+    border: 0;
+    border-radius: 50%;
+
+    background: #8B5CF6;
+    color: white;
+
+    cursor: pointer;
+}
+
+.player {
+    margin-top: 12px;
+
+    background: #222;
+    color: white;
+
+    padding: 10px;
+
+    border-radius: 6px;
+}
+
+.player audio {
+    width: 100%;
+}
+
+
+/* =========================================================
+   OBFUSCATOR
+========================================================= */
+
+#obfuscatorPanel {
+    width: 700px;
+    min-height: 560px;
+}
+
+.obfuscator-wrap {
+    margin: -18px;
+    padding: 18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(248,248,248,.96),
+            rgba(225,225,225,.92)
+        );
+
+    min-height: 520px;
+}
+
+.obf-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 14px;
+}
+
+.obf-title {
+    font-size: 21px;
+    font-weight: bold;
+}
+
+.obf-subtitle {
+    color: #666;
+    font-size: 11px;
+}
+
+.safe-status {
+    padding: 6px 9px;
+
+    background: #eee;
+
+    border: 1px solid #bbb;
+
+    font-size: 11px;
+}
+
+.obf-grid {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+
+    margin-bottom: 10px;
+}
+
+.obf-box {
+    background: rgba(255,255,255,.85);
+
+    border: 1px solid #bbb;
+
+    padding: 10px;
+}
+
+.obf-box label {
+    display: block;
+
+    font-weight: bold;
+
+    margin-bottom: 5px;
+}
+
+.obf-actions {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 6px;
+
+    margin-top: 10px;
+}
+
+.obf-output {
+    margin-top: 10px;
+}
+
+.obf-error {
+    margin-top: 8px;
+
+    padding: 8px;
+
+    background: #ffdede;
+
+    border: 1px solid #d66;
+
+    color: #800;
+}
+
+.obf-success {
+    margin-top: 8px;
+
+    padding: 8px;
+
+    background: #def7de;
+
+    border: 1px solid #75b875;
+
+    color: #174d17;
+}
+
+.pin-display {
+    font-family: "Courier New", monospace;
+    letter-spacing: 4px;
+}
+
+
+/* =========================================================
+   RAUTAPASTE
+========================================================= */
+
+#rautaPastePanel {
+    width: 650px;
+    min-height: 500px;
+}
+
+.paste-wrap {
+    margin: -18px;
+    padding: 18px;
+
+    background: #f3f3f3;
+
+    min-height: 460px;
+}
+
+.paste-meta {
+    display: grid;
+
+    grid-template-columns: 1fr 160px;
+
+    gap: 8px;
+
+    margin-bottom: 8px;
+}
+
+.paste-actions {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 6px;
+
+    margin-top: 8px;
+}
+
+.paste-output {
+    margin-top: 10px;
+
+    padding: 8px;
+
+    background: white;
+
+    border: 1px solid #aaa;
+}
+
+
+/* =========================================================
+   COMMISSIONS
+========================================================= */
+
+#commissionsPanel {
+    width: 500px;
+}
+
+.commission-card {
+    padding: 12px;
+
+    margin-bottom: 10px;
+
+    background: rgba(255,255,255,.7);
+
+    border-top: 2px solid white;
+    border-left: 2px solid white;
+    border-right: 2px solid #777;
+    border-bottom: 2px solid #777;
+}
+
+.commission-card h3 {
+    margin-bottom: 6px;
+}
+
+
+/* =========================================================
+   OTHER PANELS
+========================================================= */
+
+#projectsPanel {
+    width: 500px;
+}
+
+#catsPanel,
+#changelogPanel,
+#chatroomPanel {
+    width: 591px;
+}
+
+#friendsPanel {
+    width: 500px;
+}
+
+#newsletterPanel {
+    width: 440px;
+}
 
 .changelog-content {
     max-height: 320px;
@@ -1497,7 +1234,7 @@ a:hover {
    MOBILE
 ========================================================= */
 
-@media (max-width: 700px) {
+@media (max-width:700px) {
 
     .nav-links {
         display: none;
@@ -1511,44 +1248,37 @@ a:hover {
         max-width: calc(100vw - 20px);
     }
 
+    .panel,
     #homePanel,
     #aboutPanel,
+    #projectsPanel,
     #contactPanel,
+    #catsPanel,
+    #changelogPanel,
+    #chatroomPanel,
+    #friendsPanel,
     #newsletterPanel,
+    #rautatifyPanel,
+    #obfuscatorPanel,
+    #rautaPastePanel,
     #commissionsPanel {
         width: calc(100vw - 20px);
     }
 
-    #projectsPanel,
-    #friendsPanel,
-    #rautatifyPanel,
-    #toolsPanel {
-        width: calc(100vw - 20px);
-    }
-
-    #catsPanel,
-    #changelogPanel,
-    #chatroomPanel {
-        width: calc(100vw - 20px);
+    .obf-grid {
+        grid-template-columns: 1fr;
     }
 
     .ralsei-clippy {
-        transform: scale(0.8);
+        transform: scale(.8);
         transform-origin: bottom right;
-
         right: 5px;
     }
-
-    .time-box {
-        transform: scale(0.8);
-        transform-origin: top right;
-    }
-
 }
 
 
 /* =========================================================
-   SCROLLBARS
+   SCROLLBAR
 ========================================================= */
 
 ::-webkit-scrollbar {
@@ -1605,1541 +1335,922 @@ a:hover {
 
 <div id="site">
 
-    <div class="background">
+<div class="background">
 
-        <img src="background.gif" alt="">
+<img src="background.gif" alt="">
 
-        <div class="overlay"></div>
+<div class="overlay"></div>
 
-    </div>
 
+<!-- =========================================================
+     HOME
+========================================================= -->
 
-    <!-- =====================================================
-         HOME
-    ====================================================== -->
+<div class="panel" id="homePanel">
 
-    <div class="panel" id="homePanel">
+<div class="panel-title">
 
-        <div class="panel-title">
+<span>meow.exe</span>
 
-            <span>meow.exe</span>
+<div class="window-buttons">
 
-            <div class="window-buttons">
+<button class="window-button"
+onclick="minimizePanel('homePanel')">−</button>
 
-                <button
-                    class="window-button"
-                    onclick="minimizePanel('homePanel')">
-                    −
-                </button>
+<button class="window-button close"
+onclick="closePanel('homePanel')">×</button>
 
-                <button
-                    class="window-button close"
-                    onclick="closePanel('homePanel')">
-                    ×
-                </button>
+</div>
+</div>
 
-            </div>
+<div class="panel-content">
 
-        </div>
+<h2>hai :3</h2>
 
-        <div class="panel-content">
+<p>welcome to rauta.cfd!!!</p>
 
-            <h2>hai :3</h2>
+<hr>
 
-            <p>
-                welcome to rauta.cfd!!!
-            </p>
+<p>
+WELCOME TO rauta.cfd!!!! HAHAHAHAH
+</p>
 
-            <hr>
+<p>
+TTHANKJ U TO MY FRIEND FOR THE DOMAIN :P
+(his site: ralsei.cfd)
+<br>
+(I BASED IT OFF
+<a href="https://youtube.com/@rautatientorii"
+target="_blank">MY USERNAME</a>)
+</p>
 
-            <p>
-                WELCOME TO rauta.cfd!!!! HAHAHAHAH
-            </p>
+<p>
+i made this site for jokes and funs lowkey
+but i hope u enjoyed ur time here :P
+</p>
 
-            <p>
-                TTHANKJ U TO MY FRIEND FOR THE DOMAIN :P
-                (his site: ralsei.cfd)
-                <br>
-                (I BASED IT OFF
-                <a
-                    href="https://youtube.com/@rautatientorii"
-                    target="_blank"
-                    rel="noopener noreferrer">
-                    MY USERNAME
-                </a>)
-            </p>
+<p>
+i upload WHATEVER here and i make blogs
+and all that yada yada
+</p>
 
-            <p>
-                i made this site for jokes and funs lowkey
-                but i hope u enjoyed ur time here :P
-                (also this is a fork of ralsei.cfd)
-            </p>
+<p>
+btw!!!! i have a mc server!!! its coming soon!
+</p>
 
-            <p>
-                i upload WHATEVER here and i make blogs
-                and all that yada yada
-            </p>
+<p>
+hhope u like my site :P
+</p>
 
-            <p>
-                btw!!!! i have a mc server!!! its coming soon!
-                <br>
-                u should see its site at:
-                <a
-                    href="https://ralseismp.xo.je"
-                    target="_blank"
-                    rel="noopener noreferrer">
-                    HERE
-                </a>
-                <br>
-                (COMING SOON)
-            </p>
+<p>- rautaaaaaa :3</p>
 
-            <p>
-                hhope u like my site :P
-            </p>
+<button class="xp-button"
+onclick="alert('meow :3')">
+meow
+</button>
 
-            <p>
-                - rautaaaaaa :3
-            </p>
-
-            <button
-                class="xp-button"
-                onclick="alert('meow :3')">
-                meow
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <!-- =====================================================
-         ABOUT
-    ====================================================== -->
-
-    <div class="panel hidden" id="aboutPanel">
-
-        <div class="panel-title">
-
-            <span>who is this chud.exe</span>
-
-            <div class="window-buttons">
-
-                <button
-                    class="window-button"
-                    onclick="minimizePanel('aboutPanel')">
-                    −
-                </button>
-
-                <button
-                    class="window-button close"
-                    onclick="closePanel('aboutPanel')">
-                    ×
-                </button>
-
-            </div>
-
-        </div>
-
-        <div class="panel-content">
-
-            <h2>about me</h2>
-
-            <p>
-                i'm rautatientoriiRR :3
-            </p>
-
-            <p>
-                i'm a video game creator, and i like to write
-                stories and i make ALOT OF MUSIC and a bunch
-                of internet shit.
-            </p>
-
-            <hr>
-
-            <p>
-                i wanted to make alot of stuff when i started
-                using the internet, like "what if this existed?"
-                and "what if i made that?", i love to create
-                and DESTROY.
-            </p>
-
-            <hr>
-
-            <p>
-                i got alot of hate so i don't like to do music
-                as much as i wanted to do but i learn everyday!!!!!!
-            </p>
-
-        </div>
-
-    </div>
-
-
-    <!-- =====================================================
-         PROJECTS
-    ====================================================== -->
-
-    <div class="panel hidden" id="projectsPanel">
-
-        <div class="panel-title">
-
-            <span>my stuff.exe</span>
-
-            <div class="window-buttons">
-
-                <button
-                    class="window-button"
-                    onclick="minimizePanel('projectsPanel')">
-                    −
-                </button>
-
-                <button
-                    class="window-button close"
-                    onclick="closePanel('projectsPanel')">
-                    ×
-                </button>
-
-            </div>
-
-        </div>
-
-        <div class="panel-content">
-
-            <h2>my stuff</h2>
-
-            <p>
-                these are my cool and very great projects:
-            </p>
-
-            <hr>
-
-            <p>
-                <strong>redium.xyz</strong> -
-                a 2017 Roblox revival i created with my best friend
-                @pokltyy after his first revival failed.
-            </p>
-
-            <p>
-                <strong>mycontact</strong>
-                (<a
-                    href="http://mycontact.reblox.vip"
-                    target="_blank">
-                    mycontact.reblox.vip
-                </a>):
-                a Facebook 2009 type social media that i'm admin on
-                AND i help develop!
-            </p>
-
-            <p>
-                <strong>MiraOS</strong> -
-                a psychological horror game where you find
-                a 2000's computer for the first time in decades,
-                but you're not alone.
-            </p>
-
-            <p>
-                <strong>RalseiSMP</strong>
-                (aka. mc.rauta.cfd) -
-                a Minecraft server i made that's the best SMP
-                for new players!
-            </p>
-
-        </div>
-
-    </div>
-
-
-    <!-- =====================================================
-         CONTACT
-    ====================================================== -->
-
-    <div class="panel hidden" id="contactPanel">
-
-        <div class="panel-title">
-
-            <span>talk to me :P</span>
-
-            <div class="window-buttons">
-
-                <button
-                    class="window-button"
-                    onclick="minimizePanel('contactPanel')">
-                    −
-                </button>
-
-                <button
-                    class="window-button close"
-                    onclick="closePanel('contactPanel')">
-                    ×
-                </button>
-
-            </div>
-
-        </div>
-
-        <div class="panel-content">
-
-            <h2>contact</h2>
-
-            <p>
-                wow...you wanna talk to me?!
-                ahem ahem..
-            </p>
-
-            <hr>
-
-            <p>
-                discord: @strawberry.wave -
-                the fastest i can respond to
-            </p>
-
-            <p>
-                email contact: rauta@rauta.cfd
-            </p>
-
-            <hr>
-
-            <h2>socials</h2>
-
-            <p>
-                catch me up here:
-            </p>
-
-            <hr>
-
-            <p>
-                tiktok: @rautatientorii
-            </p>
-
-            <p>
-                YOUTUBEEEE: @rautatientorii
-            </p>
-
-        </div>
-
-    </div>
-
-
-    <!-- =====================================================
-         CATS
-    ====================================================== -->
-
-    <div class="panel hidden" id="catsPanel">
-
-        <div class="panel-title">
-
-            <span>cats :3.exe</span>
-
-            <div class="window-buttons">
-
-                <button
-                    class="window-button"
-                    onclick="minimizePanel('catsPanel')">
-                    −
-                </button>
-
-                <button
-                    class="window-button close"
-                    onclick="closePanel('catsPanel')">
-                    ×
-                </button>
-
-            </div>
-
-        </div>
-
-        <div class="panel-content">
-
-            <iframe
-                src="http://mycontact.reblox.vip/dashboard/embed.php?id=38&withplayer=1"
-                width="560"
-                height="315"
-                frameborder="0"
-                allowfullscreen>
-            </iframe>
-
-            <p>
-                powered by
-                <a
-                    href="http://mycontact.reblox.vip"
-                    target="_blank">
-                    MyContact
-                </a>
-            </p>
-
-            <p>
-                want more cats?
-                <a href="https://rauta.cfd/cats">
-                    go here
-                </a>
-            </p>
-
-        </div>
-
-    </div>
-
-
-    <!-- =====================================================
-         RAUTATIFY
-    ====================================================== -->
-
-    <div class="panel hidden" id="rautatifyPanel">
-
-        <div class="panel-title">
-
-            <span>rautatify.exe</span>
-
-            <div class="window-buttons">
-
-                <button
-                    class="window-button"
-                    onclick="minimizePanel('rautatifyPanel')">
-                    −
-                </button>
-
-                <button
-                    class="window-button close"
-                    onclick="closePanel('rautatifyPanel')">
-                    ×
-                </button>
-
-            </div>
-
-        </div>
-
-        <div class="panel-content rautatify-content">
-
-            <div class="rautatify-header">
-
-                <div>
-
-                    <div class="rautatify-logo">
-                        Rautatify
-                    </div>
-
-                    <div class="rautatify-subtitle">
-                        music by rauta :3
-                    </div>
-
-                </div>
-
-                <div class="rautatify-controls">
-
-                    <button
-                        class="music-control"
-                        id="shuffleButton"
-                        title="Shuffle">
-                        🔀
-                    </button>
-
-                    <button
-                        class="music-control active"
-                        id="repeatButton"
-                        title="Repeat playlist">
-                        🔁
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <!--
-                =================================================
-                PLAYLIST
-
-                Replace the empty src values with your own
-                MP3/OGG URLs when your music is ready.
-                =================================================
-            -->
-
-            <div class="playlist-box">
-
-                <div class="playlist-header">
-
-                    <div class="playlist-cover">
-                        R
-                    </div>
-
-                    <div class="playlist-info">
-
-                        <h3>
-                            rauta's collection
-                        </h3>
-
-                        <p>
-                            random music from the silly website
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <div
-                    class="track"
-                    data-src=""
-                    data-title="track one">
-
-                    <div class="track-number">
-                        1
-                    </div>
-
-                    <div class="track-name">
-
-                        <strong>
-                            track one
-                        </strong>
-
-                        <small>
-                            coming soon...
-                        </small>
-
-                    </div>
-
-                    <button class="track-play">
-                        ▶
-                    </button>
-
-                </div>
-
-
-                <div
-                    class="track"
-                    data-src=""
-                    data-title="track two">
-
-                    <div class="track-number">
-                        2
-                    </div>
-
-                    <div class="track-name">
-
-                        <strong>
-                            track two
-                        </strong>
-
-                        <small>
-                            coming soon...
-                        </small>
-
-                    </div>
-
-                    <button class="track-play">
-                        ▶
-                    </button>
-
-                </div>
-
-
-                <div
-                    class="track"
-                    data-src=""
-                    data-title="track three">
-
-                    <div class="track-number">
-                        3
-                    </div>
-
-                    <div class="track-name">
-
-                        <strong>
-                            track three
-                        </strong>
-
-                        <small>
-                            rauta is cooking...
-                        </small>
-
-                    </div>
-
-                    <button class="track-play">
-                        ▶
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <div class="player">
-
-                <div
-                    class="now-playing"
-                    id="nowPlaying">
-                    nothing playing :(
-                </div>
-
-                <input
-                    type="range"
-                    id="progressBar"
-                    class="progress"
-                    min="0"
-                    max="100"
-                    value="0">
-
-                <div class="player-row">
-
-                    <button id="previousButton">
-                        ⏮
-                    </button>
-
-                    <button id="mainPlayButton">
-                        ▶
-                    </button>
-
-                    <button id="nextButton">
-                        ⏭
-                    </button>
-
-                    <span style="margin-left:auto;">
-                        🔊
-                    </span>
-
-                    <input
-                        type="range"
-                        id="volumeControl"
-                        class="volume"
-                        min="0"
-                        max="1"
-                        step="0.01"
-                        value="0.7">
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- =====================================================
-         RAUTA TOOLS
-    ====================================================== -->
-
-    <div class="panel hidden" id="toolsPanel">
-
-        <div class="panel-title">
-
-            <span>rautatools.exe</span>
-
-            <div class="window-buttons">
-
-                <button
-                    class="window-button"
-                    onclick="minimizePanel('toolsPanel')">
-                    −
-                </button>
-
-                <button
-                    class="window-button close"
-                    onclick="closePanel('toolsPanel')">
-                    ×
-                </button>
-
-            </div>
-
-        </div>
-
-        <div class="panel-content">
-
-            <h2>
-                RautaTools
-            </h2>
-
-            <p>
-                stupid little tools made for rauta.cfd :P
-            </p>
-
-            <hr>
-
-
-            <div class="tool-tabs">
-
-                <button
-                    class="tool-tab active"
-                    data-tool="obfuscator">
-                    RautaObfuscator
-                </button>
-
-                <button
-                    class="tool-tab"
-                    data-tool="safe">
-                    RautaSafe
-                </button>
-
-            </div>
-
-
-            <!-- =================================================
-                 OBFUSCATOR
-            ================================================== -->
-
-            <div
-                class="tool-section active"
-                id="obfuscatorTool">
-
-                <label class="tool-label">
-                    code input
-                </label>
-
-                <textarea
-                    id="obfuscatorInput"
-                    class="code-box"
-                    placeholder="// paste your code here..."></textarea>
-
-
-                <div class="tool-buttons">
-
-                    <button
-                        class="tool-button"
-                        id="obfuscateButton">
-                        obfuscate
-                    </button>
-
-                    <button
-                        class="tool-button"
-                        id="decodeButton">
-                        deobfuscate
-                    </button>
-
-                    <button
-                        class="tool-button"
-                        id="copyOutputButton">
-                        copy output
-                    </button>
-
-                    <button
-                        class="tool-button"
-                        id="clearToolButton">
-                        clear
-                    </button>
-
-                </div>
-
-
-                <label class="tool-label">
-                    output
-                </label>
-
-                <textarea
-                    id="obfuscatorOutput"
-                    class="code-box"
-                    placeholder="output appears here..."
-                    readonly></textarea>
-
-                <div
-                    class="tool-status"
-                    id="obfuscatorStatus">
-                </div>
-
-            </div>
-
-
-            <!-- =================================================
-                 SAFE
-            ================================================== -->
-
-            <div
-                class="tool-section"
-                id="safeTool">
-
-                <p>
-                    RautaSafe encrypts a piece of text locally
-                    using AES-GCM. Your PIN is used to derive
-                    the encryption key.
-                </p>
-
-                <div class="safe-box">
-
-                    <label class="tool-label">
-                        PIN
-                    </label>
-
-                    <input
-                        type="password"
-                        id="safePin"
-                        class="pin-input"
-                        inputmode="numeric"
-                        placeholder="enter PIN">
-
-                    <div class="tool-buttons">
-
-                        <button
-                            class="tool-button"
-                            id="safeEncryptButton">
-                            lock it up
-                        </button>
-
-                        <button
-                            class="tool-button"
-                            id="safeDecryptButton">
-                            unlock it
-                        </button>
-
-                    </div>
-
-                </div>
-
-
-                <label class="tool-label">
-                    safe contents
-                </label>
-
-                <textarea
-                    id="safeInput"
-                    class="code-box"
-                    placeholder="put your code/text here..."></textarea>
-
-
-                <label
-                    class="tool-label"
-                    style="margin-top:10px;">
-                    encrypted output
-                </label>
-
-                <textarea
-                    id="safeOutput"
-                    class="code-box"
-                    placeholder="encrypted data appears here..."></textarea>
-
-                <div
-                    class="tool-status"
-                    id="safeStatus">
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- =====================================================
-         COMMISSIONS
-    ====================================================== -->
-
-    <div class="panel hidden" id="commissionsPanel">
-
-        <div class="panel-title">
-
-            <span>commissions.exe</span>
-
-            <div class="window-buttons">
-
-                <button
-                    class="window-button"
-                    onclick="minimizePanel('commissionsPanel')">
-                    −
-                </button>
-
-                <button
-                    class="window-button close"
-                    onclick="closePanel('commissionsPanel')">
-                    ×
-                </button>
-
-            </div>
-
-        </div>
-
-        <div class="panel-content">
-
-            <h2>
-                commissions :3
-            </h2>
-
-            <p>
-                yo!!! i do commissions sometimes!!!
-            </p>
-
-            <div class="commission-card">
-
-                <h3>
-                    🌐 websites
-                </h3>
-
-                <p>
-                    want a silly personal website, portfolio,
-                    retro page, or something completely cursed?
-                    i can make one.
-                </p>
-
-            </div>
-
-            <div class="commission-card">
-
-                <h3>
-                    🎮 game / project stuff
-                </h3>
-
-                <p>
-                    i can help with little web games,
-                    interactive projects, prototypes and
-                    other internet nonsense.
-                </p>
-
-            </div>
-
-            <div class="commission-card">
-
-                <h3>
-                    🎨 other stuff
-                </h3>
-
-                <ul class="commission-list">
-
-                    <li>
-                        custom web pages
-                    </li>
-
-                    <li>
-                        UI / retro interfaces
-                    </li>
-
-                    <li>
-                        small interactive projects
-                    </li>
-
-                    <li>
-                        silly experimental stuff
-                    </li>
-
-                </ul>
-
-            </div>
-
-            <span class="commission-status">
-                commissions: ask me first :3
-            </span>
-
-            <hr>
-
-            <p>
-                contact me through the contact page if
-                you're interested!
-            </p>
-
-        </div>
-
-    </div>
-
-
-    <!-- =====================================================
-         ALIEN DESTROYER
-    ====================================================== -->
-
-    <div class="panel hidden" id="game1Panel">
-
-        <div class="panel-title">
-
-            <span>
-                alien destroyer.exe
-            </span>
-
-            <div class="window-buttons">
-
-                <button
-                    class="window-button"
-                    onclick="minimizePanel('game1Panel')">
-                    −
-                </button>
-
-                <button
-                    class="window-button close"
-                    onclick="closePanel('game1Panel')">
-                    ×
-                </button>
-
-            </div>
-
-        </div>
-
-        <div class="panel-content">
-
-            <iframe
-                src="https://scratch.mit.edu/projects/1376240877/embed"
-                width="315"
-                height="315"
-                frameborder="0"
-                allowfullscreen>
-            </iframe>
-
-        </div>
-
-    </div>
-
-
-    <!-- =====================================================
-         CHANGELOG
-    ====================================================== -->
-
-    <div class="panel hidden" id="changelogPanel">
-
-        <div class="panel-title">
-
-            <span>
-                changelog.exe
-            </span>
-
-            <div class="window-buttons">
-
-                <button
-                    class="window-button"
-                    onclick="minimizePanel('changelogPanel')">
-                    −
-                </button>
-
-                <button
-                    class="window-button close"
-                    onclick="closePanel('changelogPanel')">
-                    ×
-                </button>
-
-            </div>
-
-        </div>
-
-        <div class="panel-content changelog-content">
-
-            <h2>
-                rauta.cfd updates
-            </h2>
-
-            <hr>
-
-            <h3>
-                8/9/26 v1.0 - main
-            </h3>
-
-            <p>
-                I MADE IT!!!
-            </p>
-
-            <p>
-                yeah i made the site YIPPYY<br>
-                everything u see now<br>
-                and a bunch of random shit :P
-            </p>
-
-            <hr>
-
-            <h3>
-                8/10/26 v1.1 - games
-            </h3>
-
-            <p>
-                added the games section!!
-            </p>
-
-            <p>
-                alien destroyer.exe is now playable<br>
-                made in scratch but that's okie :3
-            </p>
-
-            <hr>
-
-            <h3>
-                8/10/26 v1.1.1 - cats!!!
-            </h3>
-
-            <p>
-                added the cats page
-                (u can go there from the cats button!!!)
-            </p>
-
-            <hr>
-
-            <h3>
-                8/10/26 v1.1.2 - MORE CATS
-            </h3>
-
-            <p>
-                added oneko that chases u around,
-                also u can pet it :P<br>
-                BEST FEATURE IN rauta.cfd TOPS<br>
-                also added trello board so u can see my progress meow
-            </p>
-
-            <hr>
-
-            <h3>
-                8/10/26 v1.1.2.1 - add the 1's update
-            </h3>
-
-            <p>
-                RALLIPY HAS BEEN ADDED!
-                he's a goober who speaks now<br>
-                changed the sign in song<br>
-                ralseismp landing DONE!
-            </p>
-
-            <hr>
-
-            <h3>
-                coming soon...
-            </h3>
-
-            <p>
-                who knows what i'll add next :P
-            </p>
-
-            <p>
-                probably something stupid.
-            </p>
-
-            <hr>
-
-            <p>
-                - rautaaaaaa :3
-            </p>
-
-        </div>
-
-    </div>
-
-
-    <!-- =====================================================
-         CHATROOM
-    ====================================================== -->
-
-    <div class="panel hidden" id="chatroomPanel">
-
-        <div class="panel-title">
-
-            <span>
-                chatroom.exe
-            </span>
-
-            <div class="window-buttons">
-
-                <button
-                    class="window-button"
-                    onclick="minimizePanel('chatroomPanel')">
-                    −
-                </button>
-
-                <button
-                    class="window-button close"
-                    onclick="closePanel('chatroomPanel')">
-                    ×
-                </button>
-
-            </div>
-
-        </div>
-
-        <div class="panel-content">
-
-            <iframe
-                src="https://chat.rauta.cfd"
-                width="560"
-                height="315"
-                frameborder="0"
-                allowfullscreen>
-            </iframe>
-
-        </div>
-
-    </div>
-
-
-    <!-- =====================================================
-         FRIENDS
-    ====================================================== -->
-
-    <div class="panel hidden" id="friendsPanel">
-
-        <div class="panel-title">
-
-            <span>
-                friends.exe
-            </span>
-
-            <div class="window-buttons">
-
-                <button
-                    class="window-button"
-                    onclick="minimizePanel('friendsPanel')">
-                    −
-                </button>
-
-                <button
-                    class="window-button close"
-                    onclick="closePanel('friendsPanel')">
-                    ×
-                </button>
-
-            </div>
-
-        </div>
-
-        <div class="panel-content">
-
-            <h1>
-                friends
-            </h1>
-
-            <div class="friend-grid">
-
-                <a
-                    class="friend"
-                    href="#">
-
-                    <img
-                        src="https://rauta.cfd/rautabadge.png"
-                        alt="rauta">
-
-                </a>
-
-                <a
-                    class="friend"
-                    href="http://mycontact.reblox.vip">
-
-                    <img
-                        src="poklty.png"
-                        alt="poklty">
-
-                </a>
-
-                <a
-                    class="friend"
-                    href="https://rauta.rauta.cfd">
-
-                    <img
-                        src="YOUR-IMAGE-URL.png"
-                        alt="rautatientori">
-
-                </a>
-
-                <a
-                    class="friend"
-                    href="https://toxicchemical.xyz">
-
-                    <img
-                        src="YOUR-IMAGE-URL.png"
-                        alt="quivering iirc">
-
-                </a>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- =====================================================
-         NEWSLETTER
-    ====================================================== -->
-
-    <div class="panel hidden" id="newsletterPanel">
-
-        <div class="panel-title">
-
-            <span>
-                newsletter.exe
-            </span>
-
-            <div class="window-buttons">
-
-                <button
-                    class="window-button"
-                    onclick="minimizePanel('newsletterPanel')">
-                    −
-                </button>
-
-                <button
-                    class="window-button close"
-                    onclick="closePanel('newsletterPanel')">
-                    ×
-                </button>
-
-            </div>
-
-        </div>
-
-        <div class="panel-content">
-
-            <h2>
-                rauta.cfd newsletters
-            </h2>
-
-            <p>
-                sign up for updates about anything!
-                blogs, projects...zzz i fell asleep
-            </p>
-
-            <form
-                action="https://assets.mailerlite.com/jsonp/2568621/forms/195466784979027416/subscribe"
-                method="post"
-                target="_blank">
-
-                <input
-                    type="email"
-                    name="fields[email]"
-                    placeholder="my email"
-                    required>
-
-                <input
-                    type="hidden"
-                    name="ml-submit"
-                    value="1">
-
-                <input
-                    type="hidden"
-                    name="anticsrf"
-                    value="true">
-
-                <button type="submit">
-                    pls sub :3
-                </button>
-
-            </form>
-
-        </div>
-
-    </div>
-
-
-    <!-- =====================================================
-         NAVBAR
-    ====================================================== -->
-
-    <nav class="navbar">
-
-        <a
-            href="#"
-            class="logo"
-            onclick="openPanel('homePanel'); return false;">
-            rautatientori :P
-        </a>
-
-        <ul class="nav-links">
-
-            <li>
-                <a
-                    href="#"
-                    onclick="openPanel('homePanel'); return false;">
-                    meow
-                </a>
-            </li>
-
-            <li>
-                <a
-                    href="#"
-                    onclick="openPanel('aboutPanel'); return false;">
-                    who is this chud
-                </a>
-            </li>
-
-            <li>
-                <a
-                    href="#"
-                    onclick="openPanel('projectsPanel'); return false;">
-                    my stuff
-                </a>
-            </li>
-
-            <li>
-                <a
-                    href="#"
-                    onclick="openPanel('contactPanel'); return false;">
-                    talk to me :P
-                </a>
-            </li>
-
-            <li>
-                <a
-                    href="#"
-                    onclick="openPanel('commissionsPanel'); return false;">
-                    commissions
-                </a>
-            </li>
-
-            <li>
-                <a
-                    href="#"
-                    onclick="openPanel('toolsPanel'); return false;">
-                    tools
-                </a>
-            </li>
-
-            <li>
-                <a
-                    href="#"
-                    onclick="openPanel('rautatifyPanel'); return false;">
-                    Rautatify
-                </a>
-            </li>
-
-            <li>
-                <a
-                    href="https://trello.com/invite/b/6a7a1ae204aae58603254c44/ATTI593854f1e5dd15ad289d1fba04fa8aebE1E7E2EB/ralseifit"
-                    target="_blank"
-                    rel="noopener noreferrer">
-                    trello
-                </a>
-            </li>
-
-            <li>
-                <a
-                    href="https://dsc.gg/clowzer"
-                    target="_blank"
-                    rel="noopener noreferrer">
-                    discord :P
-                </a>
-            </li>
-
-            <li>
-                <a
-                    href="#"
-                    onclick="openPanel('friendsPanel'); return false;">
-                    my friends
-                </a>
-            </li>
-
-            <li>
-                <a
-                    href="#"
-                    onclick="openPanel('newsletterPanel'); return false;">
-                    newsletters :333
-                </a>
-            </li>
-
-        </ul>
-
-        <div
-            class="task-buttons"
-            id="taskButtons">
-        </div>
-
-        <div class="nav-right">
-
-            <a
-                href="#"
-                class="nav-button"
-                onclick="openPanel('catsPanel'); return false;">
-                cats :3
-            </a>
-
-        </div>
-
-    </nav>
-
+</div>
 </div>
 
 
 <!-- =========================================================
-     ANALOG CLOCK
+     ABOUT
+========================================================= -->
+
+<div class="panel hidden" id="aboutPanel">
+
+<div class="panel-title">
+
+<span>who is this chud.exe</span>
+
+<div class="window-buttons">
+
+<button class="window-button"
+onclick="minimizePanel('aboutPanel')">−</button>
+
+<button class="window-button close"
+onclick="closePanel('aboutPanel')">×</button>
+
+</div>
+</div>
+
+<div class="panel-content">
+
+<h2>about me</h2>
+
+<p>i'm rautatientoriiRR :3</p>
+
+<p>
+i'm a video game creator, and i like to write
+stories and i make ALOT OF MUSIC and a bunch
+of internet shit.
+</p>
+
+<hr>
+
+<p>
+i wanted to make alot of stuff when i started
+using the internet, like "what if this existed?"
+and "what if i made that?"
+</p>
+
+<hr>
+
+<p>
+i love to create and DESTROY.
+</p>
+
+</div>
+</div>
+
+
+<!-- =========================================================
+     PROJECTS
+========================================================= -->
+
+<div class="panel hidden" id="projectsPanel">
+
+<div class="panel-title">
+
+<span>my stuff.exe</span>
+
+<div class="window-buttons">
+
+<button class="window-button"
+onclick="minimizePanel('projectsPanel')">−</button>
+
+<button class="window-button close"
+onclick="closePanel('projectsPanel')">×</button>
+
+</div>
+</div>
+
+<div class="panel-content">
+
+<h2>my stuff</h2>
+
+<p>these are my cool and very great projects:</p>
+
+<hr>
+
+<p>
+<strong>redium.xyz</strong> -
+a 2017 Roblox revival i created with my best friend.
+</p>
+
+<p>
+<strong>mycontact</strong> -
+a Facebook 2009 type social media that i'm admin on
+AND i help develop!
+</p>
+
+<p>
+<strong>MiraOS</strong> -
+a psychological horror game where you find
+a 2000's computer for the first time in decades.
+</p>
+
+<p>
+<strong>RalseiSMP</strong> -
+a Minecraft server i made.
+</p>
+
+</div>
+</div>
+
+
+<!-- =========================================================
+     CONTACT
+========================================================= -->
+
+<div class="panel hidden" id="contactPanel">
+
+<div class="panel-title">
+
+<span>talk to me :P</span>
+
+<div class="window-buttons">
+
+<button class="window-button"
+onclick="minimizePanel('contactPanel')">−</button>
+
+<button class="window-button close"
+onclick="closePanel('contactPanel')">×</button>
+
+</div>
+</div>
+
+<div class="panel-content">
+
+<h2>contact</h2>
+
+<p>wow...you wanna talk to me?!</p>
+
+<hr>
+
+<p>discord: @strawberry.wave</p>
+
+<p>email contact: rauta@rauta.cfd</p>
+
+<hr>
+
+<h2>socials</h2>
+
+<p>tiktok: @rautatientorii</p>
+
+<p>YOUTUBEEEE: @rautatientorii</p>
+
+</div>
+</div>
+
+
+<!-- =========================================================
+     CATS
+========================================================= -->
+
+<div class="panel hidden" id="catsPanel">
+
+<div class="panel-title">
+
+<span>cats :3.exe</span>
+
+<div class="window-buttons">
+
+<button class="window-button"
+onclick="minimizePanel('catsPanel')">−</button>
+
+<button class="window-button close"
+onclick="closePanel('catsPanel')">×</button>
+
+</div>
+</div>
+
+<div class="panel-content">
+
+<iframe
+src="http://mycontact.reblox.vip/dashboard/embed.php?id=38&withplayer=1"
+width="560"
+height="315"
+frameborder="0"
+allowfullscreen>
+</iframe>
+
+<p style="text-align:center;margin-top:8px;">
+powered by
+<a href="http://mycontact.reblox.vip"
+target="_blank">MyContact</a>
+</p>
+
+</div>
+</div>
+
+
+<!-- =========================================================
+     RAUTATIFY
+========================================================= -->
+
+<div class="panel hidden" id="rautatifyPanel">
+
+<div class="panel-title">
+
+<span>rautatify.exe</span>
+
+<div class="window-buttons">
+
+<button class="window-button"
+onclick="minimizePanel('rautatifyPanel')">−</button>
+
+<button class="window-button close"
+onclick="closePanel('rautatifyPanel')">×</button>
+
+</div>
+</div>
+
+
+<div class="panel-content">
+
+<div class="rautatify">
+
+<div class="rautatify-top">
+
+<div class="rautatify-icon">
+R
+</div>
+
+<div>
+
+<div class="rautatify-name">
+Rautatify
+</div>
+
+<div class="rautatify-subtitle">
+music by rauta :3
+</div>
+
+</div>
+
+</div>
+
+
+<div class="playlist">
+
+<div class="playlist-header">
+
+<div class="playlist-title">
+rauta playlist
+</div>
+
+<button class="play-button"
+onclick="playCurrentTrack()">
+▶
+</button>
+
+</div>
+
+
+<div class="track"
+onclick="playTrack(0)">
+
+<div class="track-number">1</div>
+
+<div class="track-info">
+
+<div class="track-name">
+Coming soon...
+</div>
+
+<div class="track-artist">
+rauta
+</div>
+
+</div>
+
+</div>
+
+
+<div class="track"
+onclick="playTrack(1)">
+
+<div class="track-number">2</div>
+
+<div class="track-info">
+
+<div class="track-name">
+Another rauta song
+</div>
+
+<div class="track-artist">
+rauta
+</div>
+
+</div>
+
+</div>
+
+
+<div class="track"
+onclick="playTrack(2)">
+
+<div class="track-number">3</div>
+
+<div class="track-info">
+
+<div class="track-name">
+secret track???
+</div>
+
+<div class="track-artist">
+rauta
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="player">
+
+<div id="rautatifyNowPlaying">
+nothing playing :(
+</div>
+
+<audio id="rautatifyAudio"
+controls
+preload="metadata">
+</audio>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+
+<!-- =========================================================
+     RAUTA OBFUSCATOR
+========================================================= -->
+
+<div class="panel hidden" id="obfuscatorPanel">
+
+<div class="panel-title">
+
+<span>RautaObfuscator.exe</span>
+
+<div class="window-buttons">
+
+<button class="window-button"
+onclick="minimizePanel('obfuscatorPanel')">−</button>
+
+<button class="window-button close"
+onclick="closePanel('obfuscatorPanel')">×</button>
+
+</div>
+</div>
+
+
+<div class="panel-content">
+
+<div class="obfuscator-wrap">
+
+<div class="obf-header">
+
+<div>
+
+<div class="obf-title">
+RautaObfuscator
+</div>
+
+<div class="obf-subtitle">
+protect your code inside a PIN-locked Safe
+</div>
+
+</div>
+
+<div class="safe-status"
+id="safeStatus">
+🔒 No Safe
+</div>
+
+</div>
+
+
+<div class="obf-grid">
+
+<div class="obf-box">
+
+<label>language</label>
+
+<select id="obfLanguage">
+
+<option value="luau">Luau</option>
+<option value="lua">Lua</option>
+<option value="html">HTML</option>
+<option value="css">CSS</option>
+<option value="php">PHP</option>
+<option value="python">Python</option>
+
+</select>
+
+</div>
+
+
+<div class="obf-box">
+
+<label>Safe PIN</label>
+
+<input
+type="password"
+id="safePin"
+placeholder="PIN"
+autocomplete="off">
+
+</div>
+
+</div>
+
+
+<div class="obf-actions">
+
+<button class="tool-button"
+onclick="createSafe()">
+🔐 Create Safe
+</button>
+
+<button class="tool-button"
+onclick="unlockSafe()">
+🔓 Unlock Safe
+</button>
+
+<button class="tool-button"
+onclick="lockSafe()">
+🔒 Lock Safe
+</button>
+
+<button class="tool-button"
+onclick="deleteSafe()">
+🗑 Delete Safe
+</button>
+
+</div>
+
+
+<hr>
+
+
+<label>
+<strong>code</strong>
+</label>
+
+<textarea
+id="obfInput"
+placeholder="paste your code here..."></textarea>
+
+
+<div class="obf-actions">
+
+<button class="tool-button"
+onclick="obfuscateCode()">
+⚙ Obfuscate
+</button>
+
+<button class="tool-button"
+onclick="deobfuscateCode()">
+🔓 Deobfuscate
+</button>
+
+<button class="tool-button"
+onclick="copyObfOutput()">
+📋 Copy
+</button>
+
+</div>
+
+
+<div class="obf-output">
+
+<label>
+<strong>output</strong>
+</label>
+
+<textarea
+id="obfOutput"
+readonly
+placeholder="output will appear here..."></textarea>
+
+</div>
+
+
+<div id="obfMessage"></div>
+
+</div>
+
+</div>
+</div>
+
+
+<!-- =========================================================
+     RAUTAPASTE
+========================================================= -->
+
+<div class="panel hidden" id="rautaPastePanel">
+
+<div class="panel-title">
+
+<span>RautaPaste.exe</span>
+
+<div class="window-buttons">
+
+<button class="window-button"
+onclick="minimizePanel('rautaPastePanel')">−</button>
+
+<button class="window-button close"
+onclick="closePanel('rautaPastePanel')">×</button>
+
+</div>
+</div>
+
+
+<div class="panel-content">
+
+<div class="paste-wrap">
+
+<h2>RautaPaste</h2>
+
+<p>
+paste literally anything :3
+</p>
+
+<div class="paste-meta">
+
+<input
+id="pasteTitle"
+placeholder="paste title">
+
+<select id="pasteLanguage">
+
+<option>Plain Text</option>
+<option>Luau</option>
+<option>Lua</option>
+<option>HTML</option>
+<option>CSS</option>
+<option>PHP</option>
+<option>Python</option>
+<option>JavaScript</option>
+<option>JSON</option>
+</select>
+
+</div>
+
+
+<textarea
+id="pasteContent"
+placeholder="paste anything here..."></textarea>
+
+
+<div class="paste-actions">
+
+<button class="paste-button"
+onclick="copyPaste()">
+📋 Copy
+</button>
+
+<button class="paste-button"
+onclick="makeRaw()">
+📄 Raw
+</button>
+
+<button class="paste-button"
+onclick="downloadPaste()">
+⬇ Download
+</button>
+
+<button class="paste-button"
+onclick="savePasteLocal()">
+💾 Save Paste
+</button>
+
+</div>
+
+
+<div class="paste-output"
+id="pasteStatus">
+ready :3
+</div>
+
+</div>
+
+</div>
+</div>
+
+
+<!-- =========================================================
+     COMMISSIONS
+========================================================= -->
+
+<div class="panel hidden" id="commissionsPanel">
+
+<div class="panel-title">
+
+<span>commissions.exe</span>
+
+<div class="window-buttons">
+
+<button class="window-button"
+onclick="minimizePanel('commissionsPanel')">−</button>
+
+<button class="window-button close"
+onclick="closePanel('commissionsPanel')">×</button>
+
+</div>
+</div>
+
+
+<div class="panel-content">
+
+<h2>commissions :3</h2>
+
+<p>
+yes!!!! i do commissions and stuff
+</p>
+
+<hr>
+
+
+<div class="commission-card">
+
+<h3>💻 websites</h3>
+
+<p>
+need a silly website, portfolio, landing page,
+personal site, or something completely stupid?
+i can make it.
+</p>
+
+</div>
+
+
+<div class="commission-card">
+
+<h3>🎮 games / prototypes</h3>
+
+<p>
+i can also work on game ideas, prototypes,
+web games and interactive projects.
+</p>
+
+</div>
+
+
+<div class="commission-card">
+
+<h3>🎵 music</h3>
+
+<p>
+music commissions may be available too.
+ask me about what you're looking for!
+</p>
+
+</div>
+
+
+<div class="commission-card">
+
+<h3>🛠️ custom tools</h3>
+
+<p>
+custom little web tools, utilities,
+interfaces and random internet projects.
+</p>
+
+</div>
+
+
+<hr>
+
+<p>
+<strong>want a commission?</strong>
+</p>
+
+<p>
+contact me through Discord or email.
+</p>
+
+<p>
+discord: @strawberry.wave
+<br>
+email: rauta@rauta.cfd
+</p>
+
+</div>
+</div>
+
+
+<!-- =========================================================
+     NAVBAR
+========================================================= -->
+
+<nav class="navbar">
+
+<a
+href="#"
+class="logo"
+onclick="openPanel('homePanel');return false;">
+rautatientori :P
+</a>
+
+
+<ul class="nav-links">
+
+<li>
+<a href="#"
+onclick="openPanel('homePanel');return false;">
+meow
+</a>
+</li>
+
+<li>
+<a href="#"
+onclick="openPanel('aboutPanel');return false;">
+who is this chud
+</a>
+</li>
+
+<li>
+<a href="#"
+onclick="openPanel('projectsPanel');return false;">
+my stuff
+</a>
+</li>
+
+<li>
+<a href="#"
+onclick="openPanel('contactPanel');return false;">
+talk to me :P
+</a>
+</li>
+
+<li>
+<a href="#"
+onclick="openPanel('rautatifyPanel');return false;">
+Rautatify
+</a>
+</li>
+
+<li>
+<a href="#"
+onclick="openPanel('obfuscatorPanel');return false;">
+RautaObfuscator
+</a>
+</li>
+
+<li>
+<a href="#"
+onclick="openPanel('rautaPastePanel');return false;">
+RautaPaste
+</a>
+</li>
+
+<li>
+<a href="#"
+onclick="openPanel('commissionsPanel');return false;">
+commissions
+</a>
+</li>
+
+</ul>
+
+
+<div
+class="task-buttons"
+id="taskButtons">
+</div>
+
+
+<div class="nav-right">
+
+<a
+href="#"
+class="nav-button"
+onclick="openPanel('catsPanel');return false;">
+cats :3
+</a>
+
+</div>
+
+</nav>
+
+</div>
+</div>
+
+
+<!-- =========================================================
+     CLOCK
 ========================================================= -->
 
 <div class="time-box" id="timeBox">
 
-    <div class="analog-clock">
+<div class="analog-clock">
 
-        <div class="clock-number n12">12</div>
-        <div class="clock-number n1">1</div>
-        <div class="clock-number n2">2</div>
-        <div class="clock-number n3">3</div>
-        <div class="clock-number n4">4</div>
-        <div class="clock-number n5">5</div>
-        <div class="clock-number n6">6</div>
-        <div class="clock-number n7">7</div>
-        <div class="clock-number n8">8</div>
-        <div class="clock-number n9">9</div>
-        <div class="clock-number n10">10</div>
-        <div class="clock-number n11">11</div>
+<div class="clock-number n12">12</div>
+<div class="clock-number n1">1</div>
+<div class="clock-number n2">2</div>
+<div class="clock-number n3">3</div>
+<div class="clock-number n4">4</div>
+<div class="clock-number n5">5</div>
+<div class="clock-number n6">6</div>
+<div class="clock-number n7">7</div>
+<div class="clock-number n8">8</div>
+<div class="clock-number n9">9</div>
+<div class="clock-number n10">10</div>
+<div class="clock-number n11">11</div>
 
-        <div class="clock-mark big" style="transform:rotate(0deg)"></div>
-        <div class="clock-mark" style="transform:rotate(6deg)"></div>
-        <div class="clock-mark" style="transform:rotate(12deg)"></div>
-        <div class="clock-mark" style="transform:rotate(18deg)"></div>
-        <div class="clock-mark" style="transform:rotate(24deg)"></div>
+<script>
+for(let i=0;i<60;i++){
+    document.write(
+        `<div class="clock-mark ${i%5===0?'big':''}"
+        style="transform:rotate(${i*6}deg)"></div>`
+    );
+}
+</script>
 
-        <div class="clock-mark big" style="transform:rotate(30deg)"></div>
-        <div class="clock-mark" style="transform:rotate(36deg)"></div>
-        <div class="clock-mark" style="transform:rotate(42deg)"></div>
-        <div class="clock-mark" style="transform:rotate(48deg)"></div>
-        <div class="clock-mark" style="transform:rotate(54deg)"></div>
+<div class="hand hour-hand" id="hourHand"></div>
+<div class="hand minute-hand" id="minuteHand"></div>
+<div class="hand second-hand" id="secondHand"></div>
 
-        <div class="clock-mark big" style="transform:rotate(60deg)"></div>
-        <div class="clock-mark" style="transform:rotate(66deg)"></div>
-        <div class="clock-mark" style="transform:rotate(72deg)"></div>
-        <div class="clock-mark" style="transform:rotate(78deg)"></div>
-        <div class="clock-mark" style="transform:rotate(84deg)"></div>
+<div class="clock-center"></div>
 
-        <div class="clock-mark big" style="transform:rotate(90deg)"></div>
-        <div class="clock-mark" style="transform:rotate(96deg)"></div>
-        <div class="clock-mark" style="transform:rotate(102deg)"></div>
-        <div class="clock-mark" style="transform:rotate(108deg)"></div>
-        <div class="clock-mark" style="transform:rotate(114deg)"></div>
+</div>
 
-        <div class="clock-mark big" style="transform:rotate(120deg)"></div>
-        <div class="clock-mark" style="transform:rotate(126deg)"></div>
-        <div class="clock-mark" style="transform:rotate(132deg)"></div>
-        <div class="clock-mark" style="transform:rotate(138deg)"></div>
-        <div class="clock-mark" style="transform:rotate(144deg)"></div>
+<div id="currentTime">
+00:00:00
+</div>
 
-        <div class="clock-mark big" style="transform:rotate(150deg)"></div>
-        <div class="clock-mark" style="transform:rotate(156deg)"></div>
-        <div class="clock-mark" style="transform:rotate(162deg)"></div>
-        <div class="clock-mark" style="transform:rotate(168deg)"></div>
-        <div class="clock-mark" style="transform:rotate(174deg)"></div>
-
-        <div class="clock-mark big" style="transform:rotate(180deg)"></div>
-        <div class="clock-mark" style="transform:rotate(186deg)"></div>
-        <div class="clock-mark" style="transform:rotate(192deg)"></div>
-        <div class="clock-mark" style="transform:rotate(198deg)"></div>
-        <div class="clock-mark" style="transform:rotate(204deg)"></div>
-
-        <div class="clock-mark big" style="transform:rotate(210deg)"></div>
-        <div class="clock-mark" style="transform:rotate(216deg)"></div>
-        <div class="clock-mark" style="transform:rotate(222deg)"></div>
-        <div class="clock-mark" style="transform:rotate(228deg)"></div>
-        <div class="clock-mark" style="transform:rotate(234deg)"></div>
-
-        <div class="clock-mark big" style="transform:rotate(240deg)"></div>
-        <div class="clock-mark" style="transform:rotate(246deg)"></div>
-        <div class="clock-mark" style="transform:rotate(252deg)"></div>
-        <div class="clock-mark" style="transform:rotate(258deg)"></div>
-        <div class="clock-mark" style="transform:rotate(264deg)"></div>
-
-        <div class="clock-mark big" style="transform:rotate(270deg)"></div>
-        <div class="clock-mark" style="transform:rotate(276deg)"></div>
-        <div class="clock-mark" style="transform:rotate(282deg)"></div>
-        <div class="clock-mark" style="transform:rotate(288deg)"></div>
-        <div class="clock-mark" style="transform:rotate(294deg)"></div>
-
-        <div class="clock-mark big" style="transform:rotate(300deg)"></div>
-        <div class="clock-mark" style="transform:rotate(306deg)"></div>
-        <div class="clock-mark" style="transform:rotate(312deg)"></div>
-        <div class="clock-mark" style="transform:rotate(318deg)"></div>
-        <div class="clock-mark" style="transform:rotate(324deg)"></div>
-
-        <div class="clock-mark big" style="transform:rotate(330deg)"></div>
-        <div class="clock-mark" style="transform:rotate(336deg)"></div>
-        <div class="clock-mark" style="transform:rotate(342deg)"></div>
-        <div class="clock-mark" style="transform:rotate(348deg)"></div>
-        <div class="clock-mark" style="transform:rotate(354deg)"></div>
-
-        <div class="hand hour-hand" id="hourHand"></div>
-        <div class="hand minute-hand" id="minuteHand"></div>
-        <div class="hand second-hand" id="secondHand"></div>
-
-        <div class="clock-center"></div>
-
-    </div>
-
-    <div id="currentTime">
-        00:00:00
-    </div>
-
-    <div class="time-label">
-        time for me
-    </div>
+<div class="time-label">
+time for me
+</div>
 
 </div>
 
@@ -3150,99 +2261,237 @@ a:hover {
 
 <div class="desktop-icons">
 
-    <div
-        class="desktop-icon"
-        data-panel="game1Panel"
-        style="left:25px;top:90px;">
 
-        <img
-            src="aliendestroyers.png"
-            alt="Alien Destroyer">
+<div
+class="desktop-icon"
+data-panel="game1Panel"
+style="left:25px;top:90px;">
 
-        <span>
-            alien destroyer
-        </span>
+<img src="aliendestroyers.png"
+alt="Alien Destroyer">
 
-    </div>
+<span>
+alien destroyer
+</span>
 
-
-    <div
-        class="desktop-icon"
-        data-panel="changelogPanel"
-        style="left:25px;top:180px;">
-
-        <img
-            src="changelog.png"
-            alt="Changelog">
-
-        <span>
-            changelogs!!!
-        </span>
-
-    </div>
+</div>
 
 
-    <!-- RAUTATIFY -->
+<div
+class="desktop-icon"
+data-panel="changelogPanel"
+style="left:25px;top:180px;">
 
-    <div
-        class="desktop-icon"
-        data-panel="rautatifyPanel"
-        style="left:25px;top:270px;">
+<img src="changelog.png"
+alt="Changelog">
 
-        <div class="app-icon rautatify-icon">
-            R
-        </div>
+<span>
+changelogs!!!
+</span>
 
-        <span>
-            Rautatify
-        </span>
-
-    </div>
+</div>
 
 
-    <!-- TOOLS -->
+<div
+class="desktop-icon"
+data-panel="rautatifyPanel"
+style="left:25px;top:270px;">
 
-    <div
-        class="desktop-icon"
-        data-panel="toolsPanel"
-        style="left:25px;top:360px;">
+<div
+style="
+width:48px;
+height:48px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:8px;
+background:linear-gradient(135deg,#8B5CF6,#241238);
+border:2px solid rgba(255,255,255,.7);
+color:white;
+font-size:27px;
+font-weight:bold;
+box-shadow:0 3px 8px rgba(0,0,0,.6);
+">
+R
+</div>
 
-        <div class="app-icon tools-icon">
-            ⚙
-        </div>
+<span>
+Rautatify
+</span>
 
-        <span>
-            RautaTools
-        </span>
-
-    </div>
+</div>
 
 
-    <!-- COMMISSIONS -->
+<div
+class="desktop-icon"
+data-panel="obfuscatorPanel"
+style="left:25px;top:360px;">
 
-    <div
-        class="desktop-icon"
-        data-panel="commissionsPanel"
-        style="left:25px;top:450px;">
+<div
+style="
+width:48px;
+height:48px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:8px;
+background:linear-gradient(135deg,#222,#777);
+border:2px solid rgba(255,255,255,.7);
+color:white;
+font-size:23px;
+font-weight:bold;
+box-shadow:0 3px 8px rgba(0,0,0,.6);
+">
+🔐
+</div>
 
-        <div class="app-icon commission-icon">
-            $
-        </div>
+<span>
+RautaObfuscator
+</span>
 
-        <span>
-            commissions
-        </span>
+</div>
 
-    </div>
+
+<div
+class="desktop-icon"
+data-panel="rautaPastePanel"
+style="left:25px;top:450px;">
+
+<div
+style="
+width:48px;
+height:48px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:8px;
+background:linear-gradient(135deg,#4f46e5,#172554);
+border:2px solid rgba(255,255,255,.7);
+color:white;
+font-size:22px;
+box-shadow:0 3px 8px rgba(0,0,0,.6);
+">
+📋
+</div>
+
+<span>
+RautaPaste
+</span>
+
+</div>
+
 
 </div>
 
 
 <!-- =========================================================
-     ONeko
+     ALIEN DESTROYER
 ========================================================= -->
 
-<script src="/oneko.js"></script>
+<div class="panel hidden" id="game1Panel">
+
+<div class="panel-title">
+
+<span>alien destroyer.exe</span>
+
+<div class="window-buttons">
+
+<button class="window-button"
+onclick="minimizePanel('game1Panel')">−</button>
+
+<button class="window-button close"
+onclick="closePanel('game1Panel')">×</button>
+
+</div>
+</div>
+
+<div class="panel-content">
+
+<iframe
+src="https://scratch.mit.edu/projects/1376240877/embed"
+width="315"
+height="315"
+frameborder="0"
+allowfullscreen>
+</iframe>
+
+</div>
+</div>
+
+
+<!-- =========================================================
+     CHANGELOG
+========================================================= -->
+
+<div class="panel hidden" id="changelogPanel">
+
+<div class="panel-title">
+
+<span>changelog.exe</span>
+
+<div class="window-buttons">
+
+<button class="window-button"
+onclick="minimizePanel('changelogPanel')">−</button>
+
+<button class="window-button close"
+onclick="closePanel('changelogPanel')">×</button>
+
+</div>
+</div>
+
+<div class="panel-content changelog-content">
+
+<h2>rauta.cfd updates</h2>
+
+<hr>
+
+<h3>8/9/26 v1.0 - main</h3>
+
+<p>I MADE IT!!!</p>
+
+<p>
+yeah i made the site YIPPYY<br>
+everything u see now<br>
+and a bunch of random shit :P
+</p>
+
+<hr>
+
+<h3>8/10/26 - games</h3>
+
+<p>
+added the games section!!
+</p>
+
+<hr>
+
+<h3>8/10/26 - cats!!!</h3>
+
+<p>
+added the cats page.
+</p>
+
+<hr>
+
+<h3>coming soon...</h3>
+
+<p>
+who knows what i'll add next :P
+</p>
+
+<p>
+probably something stupid.
+</p>
+
+<hr>
+
+<p>
+- rautaaaaaa :3
+</p>
+
+</div>
+</div>
 
 
 <!-- =========================================================
@@ -3250,21 +2499,24 @@ a:hover {
 ========================================================= -->
 
 <div
-    id="ralseiClippy"
-    class="ralsei-clippy">
+id="ralseiClippy"
+class="ralsei-clippy">
 
-    <div
-        class="clippy-bubble"
-        id="clippyBubble">
-        hey :3
-    </div>
+<div
+class="clippy-bubble"
+id="clippyBubble">
+hey :3
+</div>
 
-    <img
-        src="/ralsei-clippy.png"
-        alt="Ralsei Clippy"
-        class="clippy-image">
+<img
+src="/ralsei-clippy.png"
+alt="Ralsei Clippy"
+class="clippy-image">
 
 </div>
+
+
+<script src="/oneko.js"></script>
 
 
 <!-- =========================================================
@@ -3272,7 +2524,6 @@ a:hover {
 ========================================================= -->
 
 <script>
-
 
 /* =========================================================
    TITLE ANIMATION
@@ -3285,19 +2536,18 @@ let titleIndex = 0;
 function animateTitle() {
 
     document.title =
-        titleText.substring(0, titleIndex);
+        titleText.substring(0,titleIndex);
 
     titleIndex++;
 
-    if (titleIndex > titleText.length) {
+    if(titleIndex > titleText.length){
 
         setTimeout(() => {
 
             titleIndex = 0;
-
             animateTitle();
 
-        }, 1000);
+        },1000);
 
         return;
     }
@@ -3316,44 +2566,36 @@ animateTitle();
 ========================================================= */
 
 const intro =
-    document.getElementById("intro");
+document.getElementById("intro");
 
 const site =
-    document.getElementById("site");
+document.getElementById("site");
 
 const enterButton =
-    document.getElementById("enterButton");
-
+document.getElementById("enterButton");
 
 enterButton.addEventListener(
-    "click",
-    function() {
+"click",
+function(){
 
-        intro.style.opacity = "0";
+    intro.style.opacity = "0";
 
-        site.style.opacity = "1";
+    site.style.opacity = "1";
 
-        setTimeout(
-            function() {
+    /*
+       Start Rautatify after the user has
+       interacted with the page.
+    */
+    playTrack(0);
 
-                intro.style.display = "none";
+    setTimeout(
+        function(){
+            intro.style.display = "none";
+        },
+        1500
+    );
 
-            },
-            1500
-        );
-
-        /*
-            If you add music later, THIS is where it
-            should start. Browsers allow audio after
-            a real user click.
-
-            Example:
-
-            myAudio.play();
-        */
-
-    }
-);
+});
 
 
 /* =========================================================
@@ -3364,54 +2606,27 @@ let highestZ = 20;
 
 const panelNames = {
 
-    homePanel:
-        "meow.exe",
-
-    aboutPanel:
-        "about.exe",
-
-    projectsPanel:
-        "my stuff.exe",
-
-    contactPanel:
-        "contact.exe",
-
-    catsPanel:
-        "cats :3",
-
-    game1Panel:
-        "alien destroyer.exe",
-
-    changelogPanel:
-        "changelog.exe",
-
-    chatroomPanel:
-        "chatroom.exe",
-
-    friendsPanel:
-        "friends.exe",
-
-    newsletterPanel:
-        "newsletter.exe",
-
-    rautatifyPanel:
-        "Rautatify.exe",
-
-    toolsPanel:
-        "RautaTools.exe",
-
-    commissionsPanel:
-        "commissions.exe"
+    homePanel:"meow.exe",
+    aboutPanel:"about.exe",
+    projectsPanel:"my stuff.exe",
+    contactPanel:"contact.exe",
+    catsPanel:"cats :3",
+    game1Panel:"alien destroyer.exe",
+    changelogPanel:"changelog.exe",
+    rautatifyPanel:"Rautatify.exe",
+    obfuscatorPanel:"RautaObfuscator.exe",
+    rautaPastePanel:"RautaPaste.exe",
+    commissionsPanel:"commissions.exe"
 
 };
 
 
-function openPanel(id) {
+function openPanel(id){
 
     const panel =
-        document.getElementById(id);
+    document.getElementById(id);
 
-    if (!panel) return;
+    if(!panel) return;
 
     panel.classList.remove("hidden");
 
@@ -3420,51 +2635,53 @@ function openPanel(id) {
     removeTaskButton(id);
 
     bringToFront(panel);
+
 }
 
 
-function minimizePanel(id) {
+function minimizePanel(id){
 
     const panel =
-        document.getElementById(id);
+    document.getElementById(id);
 
-    if (!panel) return;
+    if(!panel) return;
 
     panel.style.display = "none";
 
     addTaskButton(id);
+
 }
 
 
-function closePanel(id) {
+function closePanel(id){
 
     const panel =
-        document.getElementById(id);
+    document.getElementById(id);
 
-    if (!panel) return;
+    if(!panel) return;
 
     panel.style.display = "none";
 
     panel.classList.add("hidden");
 
     removeTaskButton(id);
+
 }
 
 
-function addTaskButton(id) {
+function addTaskButton(id){
 
-    const existing =
+    if(
         document.getElementById(
-            "task-" + id
-        );
-
-    if (existing) return;
+            "task-"+id
+        )
+    ) return;
 
     const button =
-        document.createElement("button");
+    document.createElement("button");
 
     button.id =
-        "task-" + id;
+        "task-"+id;
 
     button.className =
         "task-window";
@@ -3473,31 +2690,20 @@ function addTaskButton(id) {
         panelNames[id] || id;
 
     button.onclick =
-        function() {
+    function(){
 
-            const panel =
-                document.getElementById(id);
+        const panel =
+        document.getElementById(id);
 
-            if (!panel) return;
+        if(!panel) return;
 
-            if (
-                panel.style.display === "none"
-            ) {
+        panel.style.display = "block";
 
-                panel.style.display =
-                    "block";
+        panel.classList.remove("hidden");
 
-                panel.classList.remove(
-                    "hidden"
-                );
+        bringToFront(panel);
 
-            }
-
-            removeTaskButton(id);
-
-            bringToFront(panel);
-
-        };
+    };
 
     document
         .getElementById("taskButtons")
@@ -3506,28 +2712,26 @@ function addTaskButton(id) {
 }
 
 
-function removeTaskButton(id) {
+function removeTaskButton(id){
 
     const button =
-        document.getElementById(
-            "task-" + id
-        );
+    document.getElementById(
+        "task-"+id
+    );
 
-    if (button) {
-
+    if(button)
         button.remove();
-
-    }
 
 }
 
 
-function bringToFront(panel) {
+function bringToFront(panel){
 
     highestZ++;
 
     panel.style.zIndex =
         highestZ;
+
 }
 
 
@@ -3536,7 +2740,7 @@ function bringToFront(panel) {
 ========================================================= */
 
 const dragBox =
-    document.getElementById("dragBox");
+document.getElementById("dragBox");
 
 let draggingPanel = null;
 
@@ -3545,130 +2749,126 @@ let panelDragOffsetY = 0;
 
 
 document
-    .querySelectorAll(".panel-title")
-    .forEach(
-        function(title) {
+.querySelectorAll(".panel-title")
+.forEach(title => {
 
-            const panel =
-                title.closest(".panel");
+    const panel =
+    title.closest(".panel");
 
-            title.addEventListener(
-                "mousedown",
-                function(e) {
+    title.addEventListener(
+    "mousedown",
+    function(e){
 
-                    if (
-                        e.target.closest(
-                            ".window-buttons"
-                        )
-                    ) {
-                        return;
-                    }
+        if(
+            e.target.closest(
+                ".window-buttons"
+            )
+        )
+            return;
 
-                    if (e.button !== 0) {
-                        return;
-                    }
-
-                    const rect =
-                        panel.getBoundingClientRect();
-
-                    draggingPanel =
-                        panel;
-
-                    panelDragOffsetX =
-                        e.clientX - rect.left;
-
-                    panelDragOffsetY =
-                        e.clientY - rect.top;
-
-                    panel.style.transform =
-                        "none";
-
-                    panel.style.left =
-                        rect.left + "px";
-
-                    panel.style.top =
-                        rect.top + "px";
-
-                    bringToFront(panel);
-
-                    dragBox.style.display =
-                        "block";
-
-                    dragBox.style.left =
-                        rect.left + "px";
-
-                    dragBox.style.top =
-                        rect.top + "px";
-
-                    dragBox.style.width =
-                        rect.width + "px";
-
-                    dragBox.style.height =
-                        rect.height + "px";
-
-                    document.body.style.cursor =
-                        "move";
-
-                    e.preventDefault();
-
-                }
-            );
-
-        }
-    );
-
-
-document.addEventListener(
-    "mousemove",
-    function(e) {
-
-        if (!draggingPanel) return;
-
-        const newLeft =
-            e.clientX - panelDragOffsetX;
-
-        const newTop =
-            e.clientY - panelDragOffsetY;
-
-        draggingPanel.style.left =
-            newLeft + "px";
-
-        draggingPanel.style.top =
-            newTop + "px";
+        if(e.button !== 0)
+            return;
 
         const rect =
-            draggingPanel.getBoundingClientRect();
+        panel.getBoundingClientRect();
+
+        panelDragOffsetX =
+            e.clientX - rect.left;
+
+        panelDragOffsetY =
+            e.clientY - rect.top;
+
+        panel.style.transform =
+            "none";
+
+        panel.style.left =
+            rect.left+"px";
+
+        panel.style.top =
+            rect.top+"px";
+
+        draggingPanel =
+            panel;
+
+        bringToFront(panel);
+
+        dragBox.style.display =
+            "block";
 
         dragBox.style.left =
-            newLeft + "px";
+            rect.left+"px";
 
         dragBox.style.top =
-            newTop + "px";
+            rect.top+"px";
 
         dragBox.style.width =
-            rect.width + "px";
+            rect.width+"px";
 
         dragBox.style.height =
-            rect.height + "px";
+            rect.height+"px";
 
-    }
-);
+        document.body.style.cursor =
+            "move";
+
+        e.preventDefault();
+
+    });
+
+});
 
 
 document.addEventListener(
-    "mouseup",
-    function() {
+"mousemove",
+function(e){
 
-        draggingPanel = null;
+    if(!draggingPanel)
+        return;
 
-        dragBox.style.display =
-            "none";
+    const left =
+        e.clientX -
+        panelDragOffsetX;
 
-        document.body.style.cursor =
-            "";
+    const top =
+        e.clientY -
+        panelDragOffsetY;
 
-    }
-);
+    draggingPanel.style.left =
+        left+"px";
+
+    draggingPanel.style.top =
+        top+"px";
+
+    const rect =
+        draggingPanel.getBoundingClientRect();
+
+    dragBox.style.left =
+        left+"px";
+
+    dragBox.style.top =
+        top+"px";
+
+    dragBox.style.width =
+        rect.width+"px";
+
+    dragBox.style.height =
+        rect.height+"px";
+
+});
+
+
+document.addEventListener(
+"mouseup",
+function(){
+
+    draggingPanel = null;
+
+    dragBox.style.display =
+        "none";
+
+    document.body.style.cursor =
+        "";
+
+});
 
 
 /* =========================================================
@@ -3676,60 +2876,45 @@ document.addEventListener(
 ========================================================= */
 
 const hourHand =
-    document.getElementById("hourHand");
+document.getElementById("hourHand");
 
 const minuteHand =
-    document.getElementById("minuteHand");
+document.getElementById("minuteHand");
 
 const secondHand =
-    document.getElementById("secondHand");
+document.getElementById("secondHand");
 
 const currentTime =
-    document.getElementById("currentTime");
+document.getElementById("currentTime");
 
 
-function updateClock() {
+function updateClock(){
 
     const now =
         new Date();
 
-    const hours =
+    const h =
         now.getHours();
 
-    const minutes =
+    const m =
         now.getMinutes();
 
-    const seconds =
+    const s =
         now.getSeconds();
 
-    const hourDegrees =
-        ((hours % 12) * 30)
-        +
-        (minutes * 0.5);
-
-    const minuteDegrees =
-        (minutes * 6)
-        +
-        (seconds * 0.1);
-
-    const secondDegrees =
-        seconds * 6;
-
     hourHand.style.transform =
-        `rotate(${hourDegrees}deg)`;
+        `rotate(${((h%12)*30)+(m*.5)}deg)`;
 
     minuteHand.style.transform =
-        `rotate(${minuteDegrees}deg)`;
+        `rotate(${(m*6)+(s*.1)}deg)`;
 
     secondHand.style.transform =
-        `rotate(${secondDegrees}deg)`;
+        `rotate(${s*6}deg)`;
 
     currentTime.textContent =
-        [
-            String(hours).padStart(2,"0"),
-            String(minutes).padStart(2,"0"),
-            String(seconds).padStart(2,"0")
-        ].join(":");
+        `${String(h).padStart(2,"0")}:`+
+        `${String(m).padStart(2,"0")}:`+
+        `${String(s).padStart(2,"0")}`;
 
 }
 
@@ -3742,77 +2927,73 @@ setInterval(
 
 
 /* =========================================================
-   DRAG CLOCK
+   CLOCK DRAG
 ========================================================= */
 
 const timeBox =
-    document.getElementById("timeBox");
+document.getElementById("timeBox");
 
 let draggingTime = false;
 
 let timeOffsetX = 0;
 let timeOffsetY = 0;
 
-
 timeBox.addEventListener(
-    "mousedown",
-    function(e) {
+"mousedown",
+function(e){
 
-        if (e.button !== 0) return;
+    if(e.button !== 0)
+        return;
 
-        draggingTime = true;
+    const rect =
+        timeBox.getBoundingClientRect();
 
-        const rect =
-            timeBox.getBoundingClientRect();
+    timeOffsetX =
+        e.clientX - rect.left;
 
-        timeOffsetX =
-            e.clientX - rect.left;
+    timeOffsetY =
+        e.clientY - rect.top;
 
-        timeOffsetY =
-            e.clientY - rect.top;
+    timeBox.style.right =
+        "auto";
 
-        timeBox.style.right =
-            "auto";
+    timeBox.style.bottom =
+        "auto";
 
-        timeBox.style.bottom =
-            "auto";
+    timeBox.style.left =
+        rect.left+"px";
 
-        timeBox.style.left =
-            rect.left + "px";
+    timeBox.style.top =
+        rect.top+"px";
 
-        timeBox.style.top =
-            rect.top + "px";
+    draggingTime = true;
 
-        e.preventDefault();
+    e.preventDefault();
 
-    }
-);
-
-
-document.addEventListener(
-    "mousemove",
-    function(e) {
-
-        if (!draggingTime) return;
-
-        timeBox.style.left =
-            (e.clientX - timeOffsetX) + "px";
-
-        timeBox.style.top =
-            (e.clientY - timeOffsetY) + "px";
-
-    }
-);
+});
 
 
 document.addEventListener(
-    "mouseup",
-    function() {
+"mousemove",
+function(e){
 
-        draggingTime = false;
+    if(!draggingTime)
+        return;
 
-    }
-);
+    timeBox.style.left =
+        (e.clientX-timeOffsetX)+"px";
+
+    timeBox.style.top =
+        (e.clientY-timeOffsetY)+"px";
+
+});
+
+
+document.addEventListener(
+"mouseup",
+function(){
+    draggingTime = false;
+});
 
 
 /* =========================================================
@@ -3820,194 +3001,113 @@ document.addEventListener(
 ========================================================= */
 
 document
-    .querySelectorAll(".desktop-icon")
-    .forEach(
-        icon => {
+.querySelectorAll(".desktop-icon")
+.forEach(icon => {
 
-            let moved = false;
+    let down = false;
+    let moved = false;
 
-            let startX = 0;
-            let startY = 0;
+    let startX = 0;
+    let startY = 0;
 
-            let offsetX = 0;
-            let offsetY = 0;
+    let offsetX = 0;
+    let offsetY = 0;
 
-            let isMouseDown = false;
-
-
-            icon.addEventListener(
-                "mousedown",
-                function(e) {
-
-                    if (e.button !== 0) return;
-
-                    const rect =
-                        icon.getBoundingClientRect();
-
-                    startX =
-                        e.clientX;
-
-                    startY =
-                        e.clientY;
-
-                    offsetX =
-                        e.clientX - rect.left;
-
-                    offsetY =
-                        e.clientY - rect.top;
-
-                    moved = false;
-
-                    isMouseDown = true;
-
-                    document
-                        .querySelectorAll(
-                            ".desktop-icon"
-                        )
-                        .forEach(
-                            other => {
-
-                                other.classList.remove(
-                                    "selected"
-                                );
-
-                            }
-                        );
-
-                    icon.classList.add(
-                        "selected"
-                    );
-
-                    e.preventDefault();
-
-                }
-            );
-
-
-            icon.addEventListener(
-                "dragstart",
-                function(e) {
-
-                    e.preventDefault();
-
-                }
-            );
-
-
-            document.addEventListener(
-                "mousemove",
-                function(e) {
-
-                    if (!isMouseDown) return;
-
-                    const distanceX =
-                        Math.abs(
-                            e.clientX - startX
-                        );
-
-                    const distanceY =
-                        Math.abs(
-                            e.clientY - startY
-                        );
-
-                    if (
-                        distanceX > 5 ||
-                        distanceY > 5
-                    ) {
-
-                        moved = true;
-
-                        icon.classList.add(
-                            "dragging"
-                        );
-
-                        icon.style.left =
-                            (
-                                e.clientX -
-                                offsetX
-                            ) + "px";
-
-                        icon.style.top =
-                            (
-                                e.clientY -
-                                offsetY
-                            ) + "px";
-
-                    }
-
-                }
-            );
-
-
-            document.addEventListener(
-                "mouseup",
-                function() {
-
-                    isMouseDown = false;
-
-                    icon.classList.remove(
-                        "dragging"
-                    );
-
-                }
-            );
-
-
-            icon.addEventListener(
-                "dblclick",
-                function() {
-
-                    if (moved) return;
-
-                    const panel =
-                        icon.dataset.panel;
-
-                    if (panel) {
-
-                        openPanel(panel);
-
-                    }
-
-                }
-            );
-
-        }
-    );
-
-
-/* =========================================================
-   DESELECT ICONS
-========================================================= */
-
-document.addEventListener(
+    icon.addEventListener(
     "mousedown",
-    function(e) {
+    function(e){
 
-        if (
-            !e.target.closest(".desktop-icon") &&
-            !e.target.closest(".panel") &&
-            !e.target.closest(".navbar") &&
-            !e.target.closest(".time-box")
-        ) {
+        if(e.button !== 0)
+            return;
 
-            document
-                .querySelectorAll(
-                    ".desktop-icon"
-                )
-                .forEach(
-                    icon => {
+        const rect =
+            icon.getBoundingClientRect();
 
-                        icon.classList.remove(
-                            "selected"
-                        );
+        startX =
+            e.clientX;
 
-                    }
-                );
+        startY =
+            e.clientY;
+
+        offsetX =
+            e.clientX -
+            rect.left;
+
+        offsetY =
+            e.clientY -
+            rect.top;
+
+        moved = false;
+        down = true;
+
+        document
+        .querySelectorAll(".desktop-icon")
+        .forEach(
+            other =>
+            other.classList.remove(
+                "selected"
+            )
+        );
+
+        icon.classList.add(
+            "selected"
+        );
+
+        e.preventDefault();
+
+    });
+
+
+    document.addEventListener(
+    "mousemove",
+    function(e){
+
+        if(!down)
+            return;
+
+        if(
+            Math.abs(e.clientX-startX)>5 ||
+            Math.abs(e.clientY-startY)>5
+        ){
+
+            moved = true;
+
+            icon.style.left =
+                (e.clientX-offsetX)+"px";
+
+            icon.style.top =
+                (e.clientY-offsetY)+"px";
 
         }
 
-    }
-);
+    });
+
+
+    document.addEventListener(
+    "mouseup",
+    function(){
+
+        down = false;
+
+    });
+
+
+    icon.addEventListener(
+    "dblclick",
+    function(){
+
+        if(moved)
+            return;
+
+        const panel =
+            icon.dataset.panel;
+
+        if(panel)
+            openPanel(panel);
+
+    });
+
+});
 
 
 /* =========================================================
@@ -4029,935 +3129,371 @@ const clippyLines = [
     ":3",
     ":P",
     "RAUTATIFY SOON????",
-    "RAUTATOOLS???",
-    "who let rauta cook",
-    "this website has too many windows"
+    "RAUTAOBF????",
+    "RAUTAPASTE????"
 
 ];
 
 const clippyBubble =
-    document.getElementById(
-        "clippyBubble"
-    );
+document.getElementById(
+    "clippyBubble"
+);
 
+setInterval(
+function(){
 
-function clippyTalk() {
-
-    const line =
+    clippyBubble.textContent =
         clippyLines[
             Math.floor(
-                Math.random() *
+                Math.random()*
                 clippyLines.length
             )
         ];
 
-    clippyBubble.textContent =
-        line;
-
-}
-
-setInterval(
-    clippyTalk,
-    15000
+},
+15000
 );
 
 
 /* =========================================================
-   DRAG CLIPPY
+   CLIPPY DRAG
 ========================================================= */
 
 const clippy =
-    document.getElementById(
-        "ralseiClippy"
-    );
+document.getElementById(
+    "ralseiClippy"
+);
 
 let draggingClippy = false;
 
 let clippyOffsetX = 0;
 let clippyOffsetY = 0;
 
-
 clippy.addEventListener(
-    "mousedown",
-    function(e) {
+"mousedown",
+function(e){
 
-        if (e.button !== 0) return;
+    if(e.button !== 0)
+        return;
 
-        draggingClippy = true;
+    const rect =
+        clippy.getBoundingClientRect();
 
-        const rect =
-            clippy.getBoundingClientRect();
+    clippyOffsetX =
+        e.clientX-rect.left;
 
-        clippyOffsetX =
-            e.clientX - rect.left;
+    clippyOffsetY =
+        e.clientY-rect.top;
 
-        clippyOffsetY =
-            e.clientY - rect.top;
+    clippy.style.right =
+        "auto";
 
-        clippy.style.right =
-            "auto";
+    clippy.style.bottom =
+        "auto";
 
-        clippy.style.bottom =
-            "auto";
+    clippy.style.left =
+        rect.left+"px";
 
-        clippy.style.left =
-            rect.left + "px";
+    clippy.style.top =
+        rect.top+"px";
 
-        clippy.style.top =
-            rect.top + "px";
+    draggingClippy = true;
 
-        e.preventDefault();
+    e.preventDefault();
 
-    }
-);
-
-
-document.addEventListener(
-    "mousemove",
-    function(e) {
-
-        if (!draggingClippy) return;
-
-        clippy.style.left =
-            `${e.clientX - clippyOffsetX}px`;
-
-        clippy.style.top =
-            `${e.clientY - clippyOffsetY}px`;
-
-    }
-);
+});
 
 
 document.addEventListener(
-    "mouseup",
-    function() {
+"mousemove",
+function(e){
 
-        draggingClippy = false;
+    if(!draggingClippy)
+        return;
 
-    }
-);
+    clippy.style.left =
+        `${e.clientX-clippyOffsetX}px`;
+
+    clippy.style.top =
+        `${e.clientY-clippyOffsetY}px`;
+
+});
+
+
+document.addEventListener(
+"mouseup",
+function(){
+    draggingClippy = false;
+});
 
 
 /* =========================================================
-   RAUTATIFY MUSIC PLAYER
+   RAUTATIFY
 ========================================================= */
 
-const audio =
-    new Audio();
+/*
+   Put your real music files here later.
 
-audio.preload =
-    "metadata";
+   Example:
 
-audio.volume =
-    0.7;
+   "/music/song1.mp3"
 
+   For now they're empty so the playlist UI works
+   without inventing music URLs.
+*/
 
-const tracks =
-    Array.from(
-        document.querySelectorAll(
-            ".track"
-        )
-    );
+const rautatifyTracks = [
 
+    {
+        name:"Coming soon...",
+        artist:"rauta",
+        src:""
+    },
+
+    {
+        name:"Another rauta song",
+        artist:"rauta",
+        src:""
+    },
+
+    {
+        name:"secret track???",
+        artist:"rauta",
+        src:""
+    }
+
+];
+
+let currentTrack = 0;
+
+const rautatifyAudio =
+document.getElementById(
+    "rautatifyAudio"
+);
 
 const nowPlaying =
-    document.getElementById(
-        "nowPlaying"
-    );
-
-const mainPlayButton =
-    document.getElementById(
-        "mainPlayButton"
-    );
-
-const progressBar =
-    document.getElementById(
-        "progressBar"
-    );
-
-const volumeControl =
-    document.getElementById(
-        "volumeControl"
-    );
-
-const repeatButton =
-    document.getElementById(
-        "repeatButton"
-    );
-
-const shuffleButton =
-    document.getElementById(
-        "shuffleButton"
-    );
-
-const previousButton =
-    document.getElementById(
-        "previousButton"
-    );
-
-const nextButton =
-    document.getElementById(
-        "nextButton"
-    );
+document.getElementById(
+    "rautatifyNowPlaying"
+);
 
 
-let currentTrackIndex =
-    0;
+function playTrack(index){
 
-let repeatPlaylist =
-    true;
+    if(
+        index < 0 ||
+        index >= rautatifyTracks.length
+    )
+        return;
 
-let shuffle =
-    false;
+    currentTrack = index;
 
+    const track =
+        rautatifyTracks[index];
 
-function availableTracks() {
+    nowPlaying.textContent =
+        `${track.name} — ${track.artist}`;
 
-    return tracks.filter(
-        track =>
-            track.dataset.src &&
-            track.dataset.src.trim() !== ""
-    );
+    if(!track.src){
 
-}
-
-
-function playTrack(index) {
-
-    const available =
-        availableTracks();
-
-    if (!available.length) {
-
-        nowPlaying.textContent =
-            "no music added yet :(";
-
-        mainPlayButton.textContent =
-            "▶";
+        rautatifyAudio.removeAttribute(
+            "src"
+        );
 
         return;
 
     }
 
-    if (index < 0) {
-        index = available.length - 1;
-    }
+    rautatifyAudio.src =
+        track.src;
 
-    if (index >= available.length) {
-        index = 0;
-    }
-
-    currentTrackIndex =
-        index;
-
-    const track =
-        available[index];
-
-    audio.src =
-        track.dataset.src;
-
-    nowPlaying.textContent =
-        track.dataset.title || "unknown track";
-
-    audio.play().then(
-        () => {
-
-            mainPlayButton.textContent =
-                "⏸";
-
-        }
-    ).catch(
-        () => {
-
-            mainPlayButton.textContent =
-                "▶";
-
-        }
+    rautatifyAudio.play().catch(
+        () => {}
     );
 
 }
 
 
-function nextTrack() {
+function playCurrentTrack(){
 
-    const available =
-        availableTracks();
+    if(
+        rautatifyAudio.src
+    ){
 
-    if (!available.length) return;
+        rautatifyAudio.play()
+        .catch(()=>{});
 
-    if (shuffle) {
+    }else{
 
-        let next;
-
-        do {
-
-            next =
-                Math.floor(
-                    Math.random() *
-                    available.length
-                );
-
-        } while (
-            available.length > 1 &&
-            next === currentTrackIndex
-        );
-
-        currentTrackIndex =
-            next;
-
-    } else {
-
-        currentTrackIndex++;
-
-        if (
-            currentTrackIndex >=
-            available.length
-        ) {
-
-            currentTrackIndex = 0;
-
-        }
+        nowPlaying.textContent =
+            "no music has been added yet :(";
 
     }
-
-    playTrack(
-        currentTrackIndex
-    );
 
 }
 
 
-function previousTrack() {
+rautatifyAudio.addEventListener(
+"ended",
+function(){
 
-    const available =
-        availableTracks();
+    currentTrack++;
 
-    if (!available.length) return;
+    if(
+        currentTrack >=
+        rautatifyTracks.length
+    )
+        currentTrack = 0;
 
-    currentTrackIndex--;
+    playTrack(currentTrack);
 
-    if (currentTrackIndex < 0) {
-
-        currentTrackIndex =
-            available.length - 1;
-
-    }
-
-    playTrack(
-        currentTrackIndex
-    );
-
-}
-
-
-mainPlayButton.addEventListener(
-    "click",
-    function() {
-
-        if (!audio.src) {
-
-            playTrack(
-                currentTrackIndex
-            );
-
-            return;
-
-        }
-
-        if (audio.paused) {
-
-            audio.play();
-
-            mainPlayButton.textContent =
-                "⏸";
-
-        } else {
-
-            audio.pause();
-
-            mainPlayButton.textContent =
-                "▶";
-
-        }
-
-    }
-);
-
-
-nextButton.addEventListener(
-    "click",
-    nextTrack
-);
-
-
-previousButton.addEventListener(
-    "click",
-    previousTrack
-);
-
-
-volumeControl.addEventListener(
-    "input",
-    function() {
-
-        audio.volume =
-            Number(
-                volumeControl.value
-            );
-
-    }
-);
-
-
-progressBar.addEventListener(
-    "input",
-    function() {
-
-        if (!audio.duration) return;
-
-        audio.currentTime =
-            (
-                Number(
-                    progressBar.value
-                ) / 100
-            ) *
-            audio.duration;
-
-    }
-);
-
-
-audio.addEventListener(
-    "timeupdate",
-    function() {
-
-        if (!audio.duration) return;
-
-        progressBar.value =
-            (
-                audio.currentTime /
-                audio.duration
-            ) * 100;
-
-    }
-);
-
-
-audio.addEventListener(
-    "ended",
-    function() {
-
-        const available =
-            availableTracks();
-
-        if (!available.length) return;
-
-        /*
-            This is the important part:
-            repeat playlist instead of stopping.
-        */
-
-        if (repeatPlaylist) {
-
-            nextTrack();
-
-        } else if (
-            currentTrackIndex <
-            available.length - 1
-        ) {
-
-            nextTrack();
-
-        } else {
-
-            mainPlayButton.textContent =
-                "▶";
-
-        }
-
-    }
-);
-
-
-repeatButton.addEventListener(
-    "click",
-    function() {
-
-        repeatPlaylist =
-            !repeatPlaylist;
-
-        repeatButton.classList.toggle(
-            "active",
-            repeatPlaylist
-        );
-
-    }
-);
-
-
-shuffleButton.addEventListener(
-    "click",
-    function() {
-
-        shuffle =
-            !shuffle;
-
-        shuffleButton.classList.toggle(
-            "active",
-            shuffle
-        );
-
-    }
-);
-
-
-tracks.forEach(
-    track => {
-
-        const play =
-            track.querySelector(
-                ".track-play"
-            );
-
-        play.addEventListener(
-            "click",
-            function(e) {
-
-                e.stopPropagation();
-
-                const available =
-                    availableTracks();
-
-                const index =
-                    available.indexOf(
-                        track
-                    );
-
-                if (index !== -1) {
-
-                    playTrack(index);
-
-                }
-
-            }
-        );
-
-
-        track.addEventListener(
-            "dblclick",
-            function() {
-
-                const available =
-                    availableTracks();
-
-                const index =
-                    available.indexOf(
-                        track
-                    );
-
-                if (index !== -1) {
-
-                    playTrack(index);
-
-                }
-
-            }
-        );
-
-    }
-);
-
-
-/*
-    If you later add your songs:
-
-    data-src="music/song.mp3"
-
-    The first song will automatically start
-    after the user presses "enter :3".
-*/
-
-function startRautatifyIfMusicExists() {
-
-    if (
-        availableTracks().length > 0
-    ) {
-
-        playTrack(0);
-
-    }
-
-}
+});
 
 
 /* =========================================================
-   RAUTA TOOLS TABS
+   RAUTAOBFUSCATOR
 ========================================================= */
-
-document
-    .querySelectorAll(".tool-tab")
-    .forEach(
-        tab => {
-
-            tab.addEventListener(
-                "click",
-                function() {
-
-                    document
-                        .querySelectorAll(
-                            ".tool-tab"
-                        )
-                        .forEach(
-                            t =>
-                                t.classList.remove(
-                                    "active"
-                                )
-                        );
-
-                    document
-                        .querySelectorAll(
-                            ".tool-section"
-                        )
-                        .forEach(
-                            section =>
-                                section.classList.remove(
-                                    "active"
-                                )
-                        );
-
-                    tab.classList.add(
-                        "active"
-                    );
-
-                    const target =
-                        document.getElementById(
-                            tab.dataset.tool +
-                            "Tool"
-                        );
-
-                    if (target) {
-
-                        target.classList.add(
-                            "active"
-                        );
-
-                    }
-
-                }
-            );
-
-        }
-    );
-
-
-/* =========================================================
-   RAUTA OBFUSCATOR
-========================================================= */
-
-const obfuscatorInput =
-    document.getElementById(
-        "obfuscatorInput"
-    );
-
-const obfuscatorOutput =
-    document.getElementById(
-        "obfuscatorOutput"
-    );
-
-const obfuscatorStatus =
-    document.getElementById(
-        "obfuscatorStatus"
-    );
-
 
 /*
-    Lightweight reversible text obfuscation.
+   SAFE DESIGN
 
-    This is NOT encryption.
-    It is intended for making code/text annoying
-    to read, not for protecting secrets.
+   The Safe has:
+   - PIN
+   - encrypted payload
+   - browser crypto
+   - lock/unlock state
+
+   The actual encrypted Safe is stored locally.
+
+   IMPORTANT:
+   This is client-side storage. It is not a replacement
+   for a server-side password manager.
 */
 
-function rautaObfuscate(text) {
 
-    const bytes =
-        new TextEncoder().encode(
-            text
+let safeUnlocked = false;
+let safeKey = null;
+
+const SAFE_STORAGE =
+    "rauta_obfuscator_safe_v1";
+
+
+function setObfMessage(
+    text,
+    type="success"
+){
+
+    const box =
+        document.getElementById(
+            "obfMessage"
         );
 
-    let output =
-        "";
+    box.className =
+        type === "error"
+        ? "obf-error"
+        : "obf-success";
 
-    for (
-        let i = 0;
-        i < bytes.length;
-        i++
-    ) {
-
-        const transformed =
-            (
-                bytes[i] ^
-                ((i * 31 + 73) & 255)
-            );
-
-        output +=
-            transformed
-                .toString(16)
-                .padStart(2,"0");
-
-    }
-
-    return (
-        "RAUTAOBF1:" +
-        btoa(output)
-    );
+    box.textContent =
+        text;
 
 }
 
 
-function rautaDeobfuscate(data) {
+function updateSafeStatus(){
 
-    if (
-        !data.startsWith(
-            "RAUTAOBF1:"
+    const status =
+        document.getElementById(
+            "safeStatus"
+        );
+
+    if(safeUnlocked){
+
+        status.textContent =
+            "🔓 Safe unlocked";
+
+    }else if(
+        localStorage.getItem(
+            SAFE_STORAGE
         )
-    ) {
+    ){
 
-        throw new Error(
-            "invalid RautaObfuscator data"
-        );
+        status.textContent =
+            "🔒 Safe locked";
 
-    }
+    }else{
 
-    const hex =
-        atob(
-            data.substring(
-                "RAUTAOBF1:".length
-            )
-        );
-
-    const bytes =
-        new Uint8Array(
-            hex.length / 2
-        );
-
-    for (
-        let i = 0;
-        i < bytes.length;
-        i++
-    ) {
-
-        const value =
-            parseInt(
-                hex.substring(
-                    i * 2,
-                    i * 2 + 2
-                ),
-                16
-            );
-
-        bytes[i] =
-            value ^
-            ((i * 31 + 73) & 255);
+        status.textContent =
+            "🔒 No Safe";
 
     }
-
-    return new TextDecoder().decode(
-        bytes
-    );
 
 }
 
 
-document
-    .getElementById(
-        "obfuscateButton"
-    )
-    .addEventListener(
-        "click",
-        function() {
+/* ---------- crypto helpers ---------- */
 
-            try {
-
-                obfuscatorOutput.value =
-                    rautaObfuscate(
-                        obfuscatorInput.value
-                    );
-
-                obfuscatorStatus.textContent =
-                    "obfuscated successfully :3";
-
-            } catch (error) {
-
-                obfuscatorStatus.textContent =
-                    "something broke :(";
-
-            }
-
-        }
-    );
-
-
-document
-    .getElementById(
-        "decodeButton"
-    )
-    .addEventListener(
-        "click",
-        function() {
-
-            try {
-
-                obfuscatorOutput.value =
-                    rautaDeobfuscate(
-                        obfuscatorInput.value
-                    );
-
-                obfuscatorStatus.textContent =
-                    "deobfuscated successfully :3";
-
-            } catch (error) {
-
-                obfuscatorStatus.textContent =
-                    "invalid RautaObfuscator data";
-
-            }
-
-        }
-    );
-
-
-document
-    .getElementById(
-        "copyOutputButton"
-    )
-    .addEventListener(
-        "click",
-        async function() {
-
-            try {
-
-                await navigator.clipboard.writeText(
-                    obfuscatorOutput.value
-                );
-
-                obfuscatorStatus.textContent =
-                    "copied!!!";
-
-            } catch {
-
-                obfuscatorStatus.textContent =
-                    "couldn't access clipboard";
-
-            }
-
-        }
-    );
-
-
-document
-    .getElementById(
-        "clearToolButton"
-    )
-    .addEventListener(
-        "click",
-        function() {
-
-            obfuscatorInput.value =
-                "";
-
-            obfuscatorOutput.value =
-                "";
-
-            obfuscatorStatus.textContent =
-                "";
-
-        }
-    );
-
-
-/* =========================================================
-   RAUTA SAFE
-========================================================= */
-
-const safePin =
-    document.getElementById(
-        "safePin"
-    );
-
-const safeInput =
-    document.getElementById(
-        "safeInput"
-    );
-
-const safeOutput =
-    document.getElementById(
-        "safeOutput"
-    );
-
-const safeStatus =
-    document.getElementById(
-        "safeStatus"
-    );
-
-
-function bytesToBase64(bytes) {
+function bufferToBase64(buffer){
 
     let binary = "";
 
-    bytes.forEach(
-        byte => {
+    const bytes =
+        new Uint8Array(buffer);
 
-            binary +=
-                String.fromCharCode(
-                    byte
-                );
+    for(
+        let i=0;
+        i<bytes.byteLength;
+        i++
+    ){
 
-        }
-    );
+        binary +=
+            String.fromCharCode(
+                bytes[i]
+            );
+
+    }
 
     return btoa(binary);
 
 }
 
 
-function base64ToBytes(value) {
+function base64ToBuffer(base64){
 
     const binary =
-        atob(value);
+        atob(base64);
 
     const bytes =
         new Uint8Array(
             binary.length
         );
 
-    for (
-        let i = 0;
-        i < binary.length;
+    for(
+        let i=0;
+        i<binary.length;
         i++
-    ) {
+    ){
 
         bytes[i] =
             binary.charCodeAt(i);
 
     }
 
-    return bytes;
+    return bytes.buffer;
 
 }
 
 
-async function deriveSafeKey(
+async function deriveKey(
     pin,
     salt
-) {
+){
 
-    const baseKey =
+    const encoder =
+        new TextEncoder();
+
+    const material =
         await crypto.subtle.importKey(
             "raw",
-            new TextEncoder().encode(
-                pin
-            ),
+            encoder.encode(pin),
             "PBKDF2",
             false,
             ["deriveKey"]
@@ -4965,15 +3501,15 @@ async function deriveSafeKey(
 
     return crypto.subtle.deriveKey(
         {
-            name: "PBKDF2",
-            salt: salt,
-            iterations: 120000,
-            hash: "SHA-256"
+            name:"PBKDF2",
+            salt:salt,
+            iterations:150000,
+            hash:"SHA-256"
         },
-        baseKey,
+        material,
         {
-            name: "AES-GCM",
-            length: 256
+            name:"AES-GCM",
+            length:256
         },
         false,
         [
@@ -4986,15 +3522,12 @@ async function deriveSafeKey(
 
 
 async function encryptSafe(
-    text,
+    data,
     pin
-) {
+){
 
-    if (!pin) {
-        throw new Error(
-            "PIN required"
-        );
-    }
+    const encoder =
+        new TextEncoder();
 
     const salt =
         crypto.getRandomValues(
@@ -5007,7 +3540,7 @@ async function encryptSafe(
         );
 
     const key =
-        await deriveSafeKey(
+        await deriveKey(
             pin,
             salt
         );
@@ -5015,81 +3548,52 @@ async function encryptSafe(
     const encrypted =
         await crypto.subtle.encrypt(
             {
-                name: "AES-GCM",
-                iv: iv
+                name:"AES-GCM",
+                iv:iv
             },
             key,
-            new TextEncoder().encode(
-                text
+            encoder.encode(
+                JSON.stringify(data)
             )
         );
 
-    return JSON.stringify(
-        {
-            version: 1,
-            algorithm: "AES-GCM",
-            salt:
-                bytesToBase64(
-                    salt
-                ),
-            iv:
-                bytesToBase64(
-                    iv
-                ),
-            data:
-                bytesToBase64(
-                    new Uint8Array(
-                        encrypted
-                    )
-                )
-        }
-    );
+    return {
+
+        salt:bufferToBase64(salt),
+        iv:bufferToBase64(iv),
+        data:bufferToBase64(encrypted)
+
+    };
 
 }
 
 
 async function decryptSafe(
-    data,
+    payload,
     pin
-) {
-
-    if (!pin) {
-        throw new Error(
-            "PIN required"
-        );
-    }
-
-    const packet =
-        JSON.parse(data);
-
-    if (
-        packet.version !== 1 ||
-        packet.algorithm !== "AES-GCM"
-    ) {
-
-        throw new Error(
-            "invalid safe data"
-        );
-
-    }
+){
 
     const salt =
-        base64ToBytes(
-            packet.salt
+        new Uint8Array(
+            base64ToBuffer(
+                payload.salt
+            )
         );
 
     const iv =
-        base64ToBytes(
-            packet.iv
+        new Uint8Array(
+            base64ToBuffer(
+                payload.iv
+            )
         );
 
     const encrypted =
-        base64ToBytes(
-            packet.data
+        base64ToBuffer(
+            payload.data
         );
 
     const key =
-        await deriveSafeKey(
+        await deriveKey(
             pin,
             salt
         );
@@ -5097,79 +3601,830 @@ async function decryptSafe(
     const decrypted =
         await crypto.subtle.decrypt(
             {
-                name: "AES-GCM",
-                iv: iv
+                name:"AES-GCM",
+                iv:iv
             },
             key,
             encrypted
         );
 
-    return new TextDecoder().decode(
-        decrypted
+    const decoder =
+        new TextDecoder();
+
+    return JSON.parse(
+        decoder.decode(decrypted)
     );
 
 }
 
 
-document
-    .getElementById(
-        "safeEncryptButton"
-    )
-    .addEventListener(
-        "click",
-        async function() {
+/* ---------- Safe ---------- */
 
-            try {
+async function createSafe(){
 
-                safeOutput.value =
-                    await encryptSafe(
-                        safeInput.value,
-                        safePin.value
-                    );
+    const existing =
+        localStorage.getItem(
+            SAFE_STORAGE
+        );
 
-                safeStatus.textContent =
-                    "locked 🔒";
+    if(existing){
 
-            } catch (error) {
+        setObfMessage(
+            "A Safe already exists. Delete it first if you want a new one.",
+            "error"
+        );
 
-                safeStatus.textContent =
-                    "couldn't lock it: " +
-                    error.message;
+        return;
 
-            }
+    }
 
-        }
+    const pin =
+        document.getElementById(
+            "safePin"
+        ).value;
+
+    if(
+        !pin ||
+        pin.length < 4
+    ){
+
+        setObfMessage(
+            "PIN must be at least 4 characters.",
+            "error"
+        );
+
+        return;
+
+    }
+
+    const payload = {
+
+        version:1,
+
+        created:
+            new Date().toISOString(),
+
+        language:
+            document.getElementById(
+                "obfLanguage"
+            ).value,
+
+        code:"",
+
+        obfuscated:""
+
+    };
+
+    try{
+
+        const encrypted =
+            await encryptSafe(
+                payload,
+                pin
+            );
+
+        localStorage.setItem(
+            SAFE_STORAGE,
+            JSON.stringify(
+                encrypted
+            )
+        );
+
+        safeUnlocked = true;
+
+        safeKey = pin;
+
+        updateSafeStatus();
+
+        setObfMessage(
+            "Safe created and unlocked 🔐"
+        );
+
+    }catch(error){
+
+        console.error(error);
+
+        setObfMessage(
+            "Could not create Safe.",
+            "error"
+        );
+
+    }
+
+}
+
+
+async function unlockSafe(){
+
+    const stored =
+        localStorage.getItem(
+            SAFE_STORAGE
+        );
+
+    if(!stored){
+
+        setObfMessage(
+            "There is no Safe yet. Create one first.",
+            "error"
+        );
+
+        return;
+
+    }
+
+    const pin =
+        document.getElementById(
+            "safePin"
+        ).value;
+
+    if(!pin){
+
+        setObfMessage(
+            "Enter the Safe PIN first.",
+            "error"
+        );
+
+        return;
+
+    }
+
+    try{
+
+        const payload =
+            JSON.parse(stored);
+
+        const safeData =
+            await decryptSafe(
+                payload,
+                pin
+            );
+
+        safeUnlocked = true;
+
+        safeKey = pin;
+
+        document.getElementById(
+            "obfLanguage"
+        ).value =
+            safeData.language ||
+            "luau";
+
+        document.getElementById(
+            "obfInput"
+        ).value =
+            safeData.code || "";
+
+        document.getElementById(
+            "obfOutput"
+        ).value =
+            safeData.obfuscated || "";
+
+        updateSafeStatus();
+
+        setObfMessage(
+            "Correct PIN. Safe unlocked 🔓"
+        );
+
+    }catch(error){
+
+        safeUnlocked = false;
+        safeKey = null;
+
+        updateSafeStatus();
+
+        setObfMessage(
+            "ERROR: incorrect PIN or corrupted Safe.",
+            "error"
+        );
+
+    }
+
+}
+
+
+function lockSafe(){
+
+    safeUnlocked = false;
+
+    safeKey = null;
+
+    document.getElementById(
+        "obfInput"
+    ).value = "";
+
+    document.getElementById(
+        "obfOutput"
+    ).value = "";
+
+    document.getElementById(
+        "safePin"
+    ).value = "";
+
+    updateSafeStatus();
+
+    setObfMessage(
+        "Safe locked. You need the PIN to access it."
     );
 
+}
 
-document
-    .getElementById(
-        "safeDecryptButton"
+
+async function deleteSafe(){
+
+    if(
+        !confirm(
+            "Delete the local RautaObfuscator Safe?"
+        )
     )
-    .addEventListener(
-        "click",
-        async function() {
+        return;
 
-            try {
-
-                safeInput.value =
-                    await decryptSafe(
-                        safeOutput.value,
-                        safePin.value
-                    );
-
-                safeStatus.textContent =
-                    "unlocked 🔓";
-
-            } catch {
-
-                safeStatus.textContent =
-                    "wrong PIN or damaged safe data";
-
-            }
-
-        }
+    localStorage.removeItem(
+        SAFE_STORAGE
     );
+
+    safeUnlocked = false;
+    safeKey = null;
+
+    document.getElementById(
+        "obfInput"
+    ).value = "";
+
+    document.getElementById(
+        "obfOutput"
+    ).value = "";
+
+    updateSafeStatus();
+
+    setObfMessage(
+        "Safe deleted."
+    );
+
+}
+
+
+/* ---------- Obfuscation ---------- */
+
+/*
+   This is intentionally a generic source transformer.
+   It does not pretend that every programming language
+   has the same valid obfuscation rules.
+
+   The Safe is what provides the PIN-gated encryption.
+*/
+
+
+function encodeBase64Unicode(text){
+
+    return btoa(
+        unescape(
+            encodeURIComponent(
+                text
+            )
+        )
+    );
+
+}
+
+
+function decodeBase64Unicode(text){
+
+    return decodeURIComponent(
+        escape(
+            atob(text)
+        )
+    );
+
+}
+
+
+function obfuscateCode(){
+
+    if(!safeUnlocked){
+
+        setObfMessage(
+            "ERROR: unlock your Safe with the PIN before obfuscating.",
+            "error"
+        );
+
+        return;
+
+    }
+
+    const code =
+        document.getElementById(
+            "obfInput"
+        ).value;
+
+    if(!code){
+
+        setObfMessage(
+            "Put some code in first.",
+            "error"
+        );
+
+        return;
+
+    }
+
+    const language =
+        document.getElementById(
+            "obfLanguage"
+        ).value;
+
+    const encoded =
+        encodeBase64Unicode(
+            code
+        );
+
+    let output = "";
+
+    switch(language){
+
+        case "html":
+
+            output =
+`<!-- RautaObfuscator -->
+<script>
+document.write(decodeURIComponent(escape(atob("${encoded}"))));
+<\/script>`;
+
+            break;
+
+
+        case "css":
+
+            output =
+`/* RautaObfuscator
+   Encoded CSS payload:
+   ${encoded}
+*/`;
+
+            break;
+
+
+        case "python":
+
+            output =
+`# RautaObfuscator
+import base64
+exec(compile(base64.b64decode("${encoded}"), "<rauta>", "exec"))`;
+
+            break;
+
+
+        case "php":
+
+            output =
+`<?php
+/* RautaObfuscator */
+eval("?>".base64_decode("${encoded}"));
+?>`;
+
+            break;
+
+
+        case "lua":
+        case "luau":
+
+            output =
+`-- RautaObfuscator
+local b="${encoded}"
+-- encoded source payload
+print("RautaObfuscator payload:", b)`;
+
+            break;
+
+    }
+
+    document.getElementById(
+        "obfOutput"
+    ).value = output;
+
+    saveCurrentSafe(
+        code,
+        output,
+        language
+    );
+
+    setObfMessage(
+        "Code obfuscated and saved inside the unlocked Safe."
+    );
+
+}
+
+
+async function saveCurrentSafe(
+    code,
+    obfuscated,
+    language
+){
+
+    if(!safeUnlocked || !safeKey)
+        return;
+
+    const payload = {
+
+        version:1,
+
+        created:
+            new Date().toISOString(),
+
+        language:language,
+
+        code:code,
+
+        obfuscated:obfuscated
+
+    };
+
+    const encrypted =
+        await encryptSafe(
+            payload,
+            safeKey
+        );
+
+    localStorage.setItem(
+        SAFE_STORAGE,
+        JSON.stringify(
+            encrypted
+        )
+    );
+
+}
+
+
+function deobfuscateCode(){
+
+    if(!safeUnlocked){
+
+        setObfMessage(
+            "ERROR: enter the correct PIN to unlock the Safe before deobfuscating.",
+            "error"
+        );
+
+        return;
+
+    }
+
+    const output =
+        document.getElementById(
+            "obfOutput"
+        ).value;
+
+    if(!output){
+
+        setObfMessage(
+            "There is no obfuscated code.",
+            "error"
+        );
+
+        return;
+
+    }
+
+    const language =
+        document.getElementById(
+            "obfLanguage"
+        ).value;
+
+    let encoded = "";
+
+    const match =
+        output.match(
+            /(?:atob|base64_decode|local b=)["'(]*([A-Za-z0-9+/=]+)/
+        );
+
+    if(match)
+        encoded = match[1];
+
+    /*
+       CSS is intentionally treated differently because
+       the generated CSS output is a payload comment.
+    */
+
+    if(language === "css"){
+
+        const cssMatch =
+            output.match(
+                /Encoded CSS payload:\s*([A-Za-z0-9+/=]+)/
+            );
+
+        if(cssMatch)
+            encoded = cssMatch[1];
+
+    }
+
+    if(!encoded){
+
+        setObfMessage(
+            "Could not find a RautaObfuscator payload.",
+            "error"
+        );
+
+        return;
+
+    }
+
+    try{
+
+        const decoded =
+            decodeBase64Unicode(
+                encoded
+            );
+
+        document.getElementById(
+            "obfInput"
+        ).value =
+            decoded;
+
+        setObfMessage(
+            "Correct Safe PIN confirmed. Code deobfuscated 🔓"
+        );
+
+    }catch(error){
+
+        setObfMessage(
+            "ERROR: unable to deobfuscate this payload.",
+            "error"
+        );
+
+    }
+
+}
+
+
+async function copyObfOutput(){
+
+    const output =
+        document.getElementById(
+            "obfOutput"
+        ).value;
+
+    if(!output)
+        return;
+
+    await navigator.clipboard.writeText(
+        output
+    );
+
+    setObfMessage(
+        "Output copied."
+    );
+
+}
+
+
+updateSafeStatus();
+
+
+/* =========================================================
+   RAUTAPASTE
+========================================================= */
+
+function getPasteContent(){
+
+    return document.getElementById(
+        "pasteContent"
+    ).value;
+
+}
+
+
+function pasteStatus(text){
+
+    document.getElementById(
+        "pasteStatus"
+    ).textContent =
+        text;
+
+}
+
+
+async function copyPaste(){
+
+    const content =
+        getPasteContent();
+
+    if(!content){
+
+        pasteStatus(
+            "nothing to copy :("
+        );
+
+        return;
+
+    }
+
+    await navigator.clipboard.writeText(
+        content
+    );
+
+    pasteStatus(
+        "copied!!! :3"
+    );
+
+}
+
+
+function makeRaw(){
+
+    const content =
+        getPasteContent();
+
+    if(!content){
+
+        pasteStatus(
+            "nothing here yet!"
+        );
+
+        return;
+
+    }
+
+    const blob =
+        new Blob(
+            [content],
+            {
+                type:"text/plain"
+            }
+        );
+
+    const url =
+        URL.createObjectURL(
+            blob
+        );
+
+    window.open(
+        url,
+        "_blank"
+    );
+
+    setTimeout(
+        () => URL.revokeObjectURL(url),
+        5000
+    );
+
+    pasteStatus(
+        "opened raw paste."
+    );
+
+}
+
+
+function downloadPaste(){
+
+    const content =
+        getPasteContent();
+
+    if(!content){
+
+        pasteStatus(
+            "nothing to download!"
+        );
+
+        return;
+
+    }
+
+    const language =
+        document.getElementById(
+            "pasteLanguage"
+        ).value;
+
+    const extensions = {
+
+        "Luau":"lua",
+        "Lua":"lua",
+        "HTML":"html",
+        "CSS":"css",
+        "PHP":"php",
+        "Python":"py",
+        "JavaScript":"js",
+        "JSON":"json",
+        "Plain Text":"txt"
+
+    };
+
+    const ext =
+        extensions[language] ||
+        "txt";
+
+    const title =
+        document.getElementById(
+            "pasteTitle"
+        ).value ||
+        "rautapuaste";
+
+    const blob =
+        new Blob(
+            [content],
+            {
+                type:"text/plain"
+            }
+        );
+
+    const url =
+        URL.createObjectURL(
+            blob
+        );
+
+    const a =
+        document.createElement(
+            "a"
+        );
+
+    a.href = url;
+
+    a.download =
+        `${title}.${ext}`;
+
+    a.click();
+
+    URL.revokeObjectURL(url);
+
+    pasteStatus(
+        "download started :3"
+    );
+
+}
+
+
+function savePasteLocal(){
+
+    const content =
+        getPasteContent();
+
+    if(!content){
+
+        pasteStatus(
+            "there's nothing to save!"
+        );
+
+        return;
+
+    }
+
+    const paste = {
+
+        title:
+            document.getElementById(
+                "pasteTitle"
+            ).value ||
+            "Untitled paste",
+
+        language:
+            document.getElementById(
+                "pasteLanguage"
+            ).value,
+
+        content:content,
+
+        created:
+            new Date().toISOString()
+
+    };
+
+    localStorage.setItem(
+        "rauta_paste_last",
+        JSON.stringify(paste)
+    );
+
+    pasteStatus(
+        "paste saved locally!"
+    );
+
+}
+
+
+/* =========================================================
+   DESELECT ICONS
+========================================================= */
+
+document.addEventListener(
+"mousedown",
+function(e){
+
+    if(
+        !e.target.closest(".desktop-icon") &&
+        !e.target.closest(".panel") &&
+        !e.target.closest(".navbar") &&
+        !e.target.closest(".time-box")
+    ){
+
+        document
+        .querySelectorAll(
+            ".desktop-icon"
+        )
+        .forEach(
+            icon =>
+            icon.classList.remove(
+                "selected"
+            )
+        );
+
+    }
+
+});
 
 
 </script>
