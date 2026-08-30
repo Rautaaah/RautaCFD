@@ -2511,219 +2511,327 @@ nav {
 
 
 
+
 /* =========================================================
-   TASK MANAGER — MATCHES THE EXISTING GUI STYLE
+   WINDOWS XP TASK MANAGER — CLASSIC UI
 ========================================================= */
 
 #taskManagerPanel {
-    width: 520px;
-    max-width: calc(100vw - 30px);
+    width: 410px;
+    max-width: calc(100vw - 18px);
+    background: #ece9d8;
+    border: 1px solid #003c7d;
+    border-radius: 7px 7px 0 0;
+    box-shadow: 2px 3px 8px rgba(0,0,0,.55);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    overflow: hidden;
+    color: #111;
+    font-family: Tahoma, Arial, sans-serif;
 }
 
-#taskManagerPanel .panel-content {
-    padding: 14px;
+#taskManagerPanel .panel-title {
+    height: 30px;
+    padding: 0 5px 0 7px;
+    border-radius: 6px 6px 0 0;
+    background: linear-gradient(
+        to bottom,
+        #3b9bf7 0%,
+        #0b6de0 45%,
+        #0757bb 46%,
+        #08499c 100%
+    );
+    color: #fff;
+    font: bold 13px Tahoma, Arial, sans-serif;
+    text-shadow: 1px 1px 1px #164a87;
+}
+
+#taskManagerPanel .window-button {
+    width: 22px;
+    height: 21px;
+    margin-top: 4px;
+    border-radius: 3px;
+    border: 1px solid #fff;
+    border-right-color: #154a8d;
+    border-bottom-color: #154a8d;
+    background: linear-gradient(#65b7ff,#1264ca);
+    color: white;
+    font: bold 15px Arial, sans-serif;
+    line-height: 16px;
+    text-shadow: 1px 1px #24528b;
+}
+
+#taskManagerPanel .window-button.close {
+    background: linear-gradient(#ff8a73,#e24a26);
+}
+
+#taskManagerPanel .window-button:hover {
+    filter: brightness(1.08);
+}
+
+.tm-menu-row {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    height: 23px;
+    padding: 0 5px;
+    background: #ece9d8;
+    border-bottom: 1px solid #c4c0b2;
+    color: #111;
+    font: 11px Tahoma, Arial, sans-serif;
+}
+
+.tm-menu-row span {
+    padding: 4px 8px;
+    cursor: default;
+}
+
+.tm-menu-row span:hover {
+    background: #316ac5;
+    color: #fff;
 }
 
 .task-manager-tabs {
     display: flex;
-    gap: 5px;
-    padding: 8px 12px 0;
-    background: rgba(0, 0, 0, .10);
-    border-bottom: 1px solid rgba(255,255,255,.18);
+    align-items: flex-end;
+    gap: 2px;
+    padding: 4px 7px 0;
+    background: #ece9d8;
+    border-bottom: 1px solid #808080;
 }
 
 .tm-tab {
-    appearance: none;
-    border: 1px solid rgba(255,255,255,.20);
-    border-bottom: 0;
-    border-radius: 6px 6px 0 0;
-    padding: 7px 10px;
-    background: rgba(255,255,255,.10);
-    color: inherit;
-    font: inherit;
+    min-width: 0;
+    padding: 3px 8px 4px;
+    border: 1px solid #aaa;
+    border-bottom-color: #777;
+    border-radius: 3px 3px 0 0;
+    background: linear-gradient(#fff,#dedbd0);
+    color: #111;
+    font: 11px Tahoma, Arial, sans-serif;
     cursor: pointer;
-    transition: background .15s, transform .15s;
-}
-
-.tm-tab:hover {
-    background: rgba(255,255,255,.17);
 }
 
 .tm-tab.active {
-    background: rgba(255,255,255,.20);
-    transform: translateY(1px);
+    position: relative;
+    top: 1px;
+    background: #fff;
+    border-bottom-color: #fff;
 }
 
-.tm-page.hidden {
-    display: none;
+.panel-content.task-manager-content {
+    max-height: 55vh;
+    overflow-y: auto;
+    scrollbar-color: #bfcbe0 #eee;
+    scrollbar-width: auto;
+    padding: 10px;
+    min-height: 0;
+    background: #ece9d8;
+    color: #111;
+    font: 11px Tahoma, Arial, sans-serif;
 }
 
 .tm-toolbar {
+    display: none;
+}
+
+.tm-process-table-wrap {
+    height: 205px;
+    max-height: 42vh;
+    overflow: auto;
+    border: 1px solid #9b9b9b;
+    background: #fff;
+    scrollbar-color: #bfcbe0 #eee;
+}
+
+.tm-process-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    background: #fff;
+    color: #111;
+    font: 11px Tahoma, Arial, sans-serif;
+}
+
+.tm-process-table th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    padding: 4px 6px;
+    text-align: left;
+    font-weight: normal;
+    background: linear-gradient(#f8f8f8,#dedbd0);
+    border-right: 1px solid #c2bfb5;
+    border-bottom: 1px solid #aaa;
+}
+
+.tm-process-table th:nth-child(1){ width: 48%; }
+.tm-process-table th:nth-child(2){ width: 15%; }
+.tm-process-table th:nth-child(3){ width: 12%; }
+.tm-process-table th:nth-child(4){ width: 25%; }
+
+.tm-process-table td {
+    padding: 2px 6px;
+    height: 17px;
+    white-space: nowrap;
+    border: 0;
+}
+
+.tm-process-table tr {
+    cursor: default;
+}
+
+.tm-process-table tr.selected td {
+    background: #316ac5;
+    color: #fff;
+}
+
+.tm-users-checkbox {
+    display: block;
+    margin: 7px 0 3px;
+    color: #111;
+    font: 11px Tahoma, Arial, sans-serif;
+}
+
+.tm-users-checkbox input {
+    vertical-align: -2px;
+}
+
+.tm-process-actions {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    margin-bottom: 10px;
-    padding: 8px 10px;
-    border: 1px solid rgba(255,255,255,.18);
-    border-radius: 7px;
-    background: rgba(0,0,0,.12);
+    justify-content: flex-end;
+    padding-top: 2px;
+}
+
+.tm-xp-button {
+    min-width: 82px;
+    height: 24px;
+    padding: 1px 10px;
+    border: 1px solid #777;
+    border-radius: 3px;
+    background: linear-gradient(#fff,#e5e2d8);
+    color: #111;
+    font: 11px Tahoma, Arial, sans-serif;
+    box-shadow: inset 1px 1px rgba(255,255,255,.8);
+    cursor: pointer;
+}
+
+.tm-xp-button:disabled {
+    color: #999;
+    background: #eee;
+    cursor: default;
+}
+
+.tm-xp-button:not(:disabled):hover {
+    border-color: #316ac5;
 }
 
 .tm-list {
-    overflow: hidden;
-    border: 1px solid rgba(255,255,255,.18);
-    border-radius: 7px;
-    background: rgba(0,0,0,.10);
+    border: 1px solid #9b9b9b;
+    border-radius: 0;
+    background: #fff;
 }
 
 .tm-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    padding: 8px 10px;
-    border-bottom: 1px solid rgba(255,255,255,.12);
-}
-
-.tm-row:last-child {
-    border-bottom: 0;
+    padding: 4px 7px;
+    border-bottom: 1px solid #ddd;
+    color: #111;
 }
 
 .tm-row:hover {
-    background: rgba(255,255,255,.08);
+    background: #316ac5;
+    color: #fff;
 }
 
 .tm-performance-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-bottom: 10px;
+    gap: 8px;
 }
 
 .tm-meter-box,
 .tm-history-box,
 .tm-stats-grid > div {
-    border: 1px solid rgba(255,255,255,.18);
-    border-radius: 7px;
-    background: rgba(0,0,0,.10);
-    padding: 9px;
-}
-
-.tm-meter-title {
-    margin-bottom: 7px;
-}
-
-.tm-meter {
-    height: 62px;
-    border: 1px solid rgba(255,255,255,.25);
-    border-radius: 4px;
-    background:
-        repeating-linear-gradient(
-            to bottom,
-            rgba(0,0,0,.55) 0,
-            rgba(0,0,0,.55) 4px,
-            rgba(0,90,20,.45) 5px,
-            rgba(0,0,0,.55) 6px
-        );
-    display: flex;
-    align-items: flex-end;
-    overflow: hidden;
-}
-
-#tmCpuBar,
-#tmPfBar {
-    width: 100%;
-    min-height: 4px;
-    background:
-        repeating-linear-gradient(
-            to bottom,
-            #21c53a 0,
-            #21c53a 2px,
-            #08751a 3px,
-            #08751a 4px
-        );
-}
-
-.tm-history-box {
-    margin-top: 10px;
+    border: 1px solid #b4b0a3;
+    border-radius: 2px;
+    background: #ece9d8;
+    color: #111;
+    padding: 7px;
 }
 
 .tm-history-box canvas {
-    width: 100%;
-    height: auto;
-    display: block;
-    margin-top: 7px;
-    border: 1px solid rgba(255,255,255,.20);
-    border-radius: 4px;
-    background: rgba(0,0,0,.65);
-}
-
-.tm-stats-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.tm-stats-grid p {
-    margin: 4px 0;
-}
-
-
-.tm-statusbar {
-    display: flex;
-    border-top: 1px solid rgba(255,255,255,.18);
-    background: rgba(0,0,0,.10);
+    border: 1px solid #808080;
     border-radius: 0;
 }
 
+.tm-statusbar {
+    display: flex;
+    min-height: 20px;
+    border-top: 1px solid #aaa;
+    background: #ece9d8;
+    color: #111;
+    font: 10px Tahoma, Arial, sans-serif;
+}
+
 .tm-statusbar span {
-    flex: 1;
-    padding: 6px 8px;
-    border-right: 1px solid rgba(255,255,255,.12);
+    padding: 3px 5px;
+    border-right: 1px solid #c5c2b7;
 }
 
 .tm-statusbar span:last-child {
     border-right: 0;
 }
 
-@media(max-width:700px) {
-    #taskManagerPanel {
-        width: calc(100vw - 30px);
-    }
-
-    .tm-performance-grid,
-    .tm-stats-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .task-manager-tabs {
-        overflow-x: auto;
-    }
+/* Top-only rounding: all Task Manager bottom edges remain square. */
+#taskManagerPanel .tm-statusbar {
+    border-radius: 0;
 }
 
 
-/* XP DESKTOP ICONS */
-.desktop-icon .xp-desktop-icon {
-    width: 48px !important;
-    height: 48px !important;
-    display: block !important;
-    object-fit: contain !important;
-    margin: 0 auto 4px auto !important;
+/* Explorer termination effect */
+#xpExplorerCrash {
+    position: fixed;
+    inset: 0;
+    z-index: 1000000;
+    display: none;
+    background: #000;
+    overflow: hidden;
 }
 
-
-.tm-menu-row {
-    display: flex;
-    gap: 18px;
-    padding: 5px 10px 4px;
-    background: rgba(255,255,255,.08);
-    border-bottom: 1px solid rgba(255,255,255,.14);
-    font-size: 11px;
+#xpExplorerCrash.active {
+    display: block;
 }
-.tm-menu-row span {
-    cursor: default;
+
+#xpExplorerCrash .xp-crash-site {
+    position: absolute;
+    inset: 0;
+    background: #000;
+}
+
+#xpExplorerCrash .xp-crash-window {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: min(520px, 80vw);
+    padding: 22px;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    text-align: center;
+    font: 13px Tahoma, Arial, sans-serif;
+    animation: xpExplorerFly 1.7s cubic-bezier(.2,.7,.3,1) forwards;
+}
+
+@keyframes xpExplorerFly {
+    0% {
+        transform: translate(-50%,-50%) scale(1);
+        opacity: 1;
+    }
+    55% {
+        transform: translate(-50%,-180%) scale(.82);
+        opacity: .85;
+    }
+    100% {
+        transform: translate(-50%,-500%) scale(.45);
+        opacity: 0;
+    }
 }
 
 </style>
@@ -2733,6 +2841,19 @@ nav {
 
 
 <body>
+
+<div id="xpExplorerCrash" aria-hidden="true">
+    <div class="xp-crash-site"></div>
+    <div class="xp-crash-window">
+        <div style="font-size:18px;font-weight:bold;margin-bottom:8px;">
+            Windows Explorer
+        </div>
+        <div>
+            Explorer has been terminated.
+        </div>
+    </div>
+</div>
+
 
 
 <!-- =========================================================
@@ -5960,31 +6081,90 @@ for(let i = 0; i < 60; i++){
 
     <section class="tm-page hidden" data-page="processes">
 
-        <div class="tm-toolbar">
-            <strong>Processes</strong>
-            <span id="tmProcessCount">35 processes</span>
-        </div>
+    <div class="tm-process-table-wrap">
+        <table class="tm-process-table">
+            <thead>
+                <tr>
+                    <th>Image Name</th>
+                    <th>PID</th>
+                    <th>CPU</th>
+                    <th>Mem Usage</th>
+                </tr>
+            </thead>
+            <tbody id="tmProcessTable">
+                <tr data-process="accelerometerST.exe">
+                    <td>accelerometerST.exe</td><td>1432</td><td>00</td><td>2,320 K</td>
+                </tr>
+                <tr data-process="CLI.exe">
+                    <td>CLI.exe</td><td>1944</td><td>00</td><td>5,352 K</td>
+                </tr>
+                <tr data-process="CLI.exe">
+                    <td>CLI.exe</td><td>2792</td><td>00</td><td>5,308 K</td>
+                </tr>
+                <tr data-process="cmd.exe">
+                    <td>cmd.exe</td><td>3669</td><td>00</td><td>4,080 K</td>
+                </tr>
+                <tr data-process="csrss.exe">
+                    <td>csrss.exe</td><td>564</td><td>01</td><td>10,908 K</td>
+                </tr>
+                <tr data-process="explorer.exe">
+                    <td>explorer.exe</td><td>1244</td><td>01</td><td>76,140 K</td>
+                </tr>
+                <tr data-process="firefox.exe">
+                    <td>firefox.exe</td><td>448</td><td>01</td><td>83,180 K</td>
+                </tr>
+                <tr data-process="FrameWorkService.exe">
+                    <td>FrameWorkService.exe</td><td>1620</td><td>00</td><td>8,896 K</td>
+                </tr>
+                <tr data-process="GoogleUpdaterService.exe">
+                    <td>GoogleUpdaterService.exe</td><td>912</td><td>01</td><td>3,176 K</td>
+                </tr>
+                <tr data-process="HPTQTA1.exe">
+                    <td>HPTQTA1.exe</td><td>2156</td><td>00</td><td>4,476 K</td>
+                </tr>
+                <tr data-process="hpqwmiex.exe">
+                    <td>hpqwmiex.exe</td><td>1832</td><td>00</td><td>4,388 K</td>
+                </tr>
+                <tr data-process="jusched.exe">
+                    <td>jusched.exe</td><td>604</td><td>00</td><td>2,772 K</td>
+                </tr>
+                <tr data-process="lsass.exe">
+                    <td>lsass.exe</td><td>448</td><td>00</td><td>1,164 K</td>
+                </tr>
+                <tr data-process="MsSched.exe">
+                    <td>MsSched.exe</td><td>1648</td><td>01</td><td>67,112 K</td>
+                </tr>
+                <tr data-process="MDM.EXE">
+                    <td>MDM.EXE</td><td>2140</td><td>00</td><td>3,052 K</td>
+                </tr>
+                <tr data-process="mmc.exe">
+                    <td>mmc.exe</td><td>472</td><td>00</td><td>19,632 K</td>
+                </tr>
+                <tr data-process="rautatientoori.exe">
+                    <td>rautatientoori.exe</td><td>3000</td><td>02</td><td>48,120 K</td>
+                </tr>
+                <tr data-process="Ralsei-Clippy">
+                    <td>Ralsei-Clippy</td><td>3136</td><td>01</td><td>9,216 K</td>
+                </tr>
+                <tr data-process="oneko.exe">
+                    <td>oneko.exe</td><td>3320</td><td>00</td><td>4,812 K</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
-        <div class="tm-list">
-            <div class="tm-row">
-                <span>rautatientoori.exe</span>
-                <span id="tmCpu1">02%</span>
-            </div>
-            <div class="tm-row">
-                <span>ralsei-clippy.exe</span>
-                <span id="tmCpu2">01%</span>
-            </div>
-            <div class="tm-row">
-                <span>oneko.exe</span>
-                <span id="tmCpu3">00%</span>
-            </div>
-            <div class="tm-row">
-                <span>explorer.exe</span>
-                <span>03%</span>
-            </div>
-        </div>
+    <label class="tm-users-checkbox">
+        <input type="checkbox" checked>
+        Show processes from all users
+    </label>
 
-    </section>
+    <div class="tm-process-actions">
+        <button id="tmEndProcess" class="tm-xp-button" disabled>
+            End Process
+        </button>
+    </div>
+
+</section>
 
     <section class="tm-page hidden" data-page="performance">
 
@@ -12525,6 +12705,166 @@ catch(error){
     setInterval(
         updateTaskManager,
         1200
+    );
+
+})();
+
+
+
+/* =========================================================
+   RALSEI + EXPLORER PROCESS END BEHAVIOR
+========================================================= */
+
+(function(){
+
+    const table =
+        document.getElementById("tmProcessTable");
+
+    const endButton =
+        document.getElementById("tmEndProcess");
+
+    let selectedRow = null;
+
+    if(!table || !endButton)
+        return;
+
+    table.querySelectorAll("tr[data-process]").forEach(
+        function(row){
+
+            row.addEventListener("click", function(){
+
+                table.querySelectorAll("tr.selected")
+                    .forEach(
+                        r => r.classList.remove("selected")
+                    );
+
+                row.classList.add("selected");
+                selectedRow = row;
+                endButton.disabled = false;
+
+            });
+
+        }
+    );
+
+    function ralseiProcessEnd(){
+
+        const ralsei =
+            document.getElementById("ralseiClippy");
+
+        const bubble =
+            document.getElementById("clippyBubble");
+
+        if(!ralsei)
+            return;
+
+        if(bubble){
+            bubble.textContent =
+                "NOOOOOOOOOOOOO";
+            bubble.style.display =
+                "block";
+            bubble.style.opacity =
+                "1";
+            bubble.style.transition =
+                "opacity 3.5s ease";
+        }
+
+        ralsei.style.transition =
+            "opacity 4s ease, transform 4s ease";
+
+        ralsei.style.transform =
+            "translateY(35px)";
+
+        ralsei.style.opacity =
+            "0";
+
+        setTimeout(function(){
+
+            ralsei.style.display =
+                "none";
+
+        }, 4200);
+
+    }
+
+    function explorerProcessEnd(){
+
+        const crash =
+            document.getElementById("xpExplorerCrash");
+
+        const site =
+            document.getElementById("site");
+
+        if(!crash)
+            return;
+
+        crash.classList.add("active");
+
+        if(site){
+            site.style.transition =
+                "transform 1.7s cubic-bezier(.2,.7,.3,1), opacity 1.7s ease";
+
+            site.style.transform =
+                "translateY(-130vh)";
+
+            site.style.opacity =
+                "0";
+        }
+
+        setTimeout(function(){
+            crash.querySelector(".xp-crash-window")
+                ?.classList.add("fly");
+        }, 20);
+
+    }
+
+    endButton.addEventListener(
+        "click",
+        function(){
+
+            if(!selectedRow)
+                return;
+
+            const process =
+                selectedRow.getAttribute("data-process");
+
+            if(process === "Ralsei-Clippy"){
+
+                ralseiProcessEnd();
+
+            } else if(process === "explorer.exe"){
+
+                explorerProcessEnd();
+
+            } else {
+
+                selectedRow.remove();
+
+                const count =
+                    table.querySelectorAll(
+                        "tr[data-process]"
+                    ).length;
+
+                const countEls = [
+                    document.getElementById("tmProcessCount"),
+                    document.getElementById("tmStatusProcesses")
+                ];
+
+                countEls.forEach(function(el){
+                    if(el)
+                        el.textContent =
+                            count +
+                            (el.id === "tmProcessCount"
+                                ? " processes"
+                                : "");
+                });
+
+            }
+
+            endButton.disabled = true;
+            selectedRow = null;
+
+        }
     );
 
 })();
