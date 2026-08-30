@@ -2532,8 +2532,6 @@ nav {
     height: 30px;
     padding: 0 5px 0 8px;
     border-radius: 6px 6px 0 0;
-
-    /* The site's usual "sick" gradient, not a literal XP title bar. */
     background:
         linear-gradient(
             180deg,
@@ -2549,7 +2547,6 @@ nav {
             #6f63df 67%,
             #9b5bd7 100%
         );
-
     color: #fff;
     font: bold 13px Tahoma, Arial, sans-serif;
     text-shadow: 1px 1px 2px rgba(0,0,0,.55);
@@ -2796,13 +2793,10 @@ nav {
     border-right: 0;
 }
 
-/* Top-only rounding: all Task Manager bottom edges remain square. */
 #taskManagerPanel .tm-statusbar {
     border-radius: 0;
 }
 
-
-/* Explorer termination effect */
 #xpExplorerCrash {
     position: fixed;
     inset: 0;
@@ -2822,17 +2816,17 @@ nav {
     background: #000;
 }
 
-
+@keyframes xpCrashFly {
     55% {
         transform: translate(-50%,-180%) scale(.82);
         opacity: .85;
     }
+
     100% {
         transform: translate(-50%,-500%) scale(.45);
         opacity: 0;
     }
 }
-
 
 .tm-application-buttons {
     display: flex;
@@ -2840,19 +2834,6 @@ nav {
     gap: 6px;
     margin-top: 8px;
 }
-
-</style>
-
-<audio id="signinAudio" src="/signin.mp3" preload="auto"></audio>
-</head>
-
-
-<body>
-
-<div id="xpExplorerCrash" aria-hidden="true"><div class="xp-crash-site"></div></div>
-</div>
-
-
 
 <!-- =========================================================
      DRAG BOX
