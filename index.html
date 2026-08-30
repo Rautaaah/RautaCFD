@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,6 +14,7 @@
 <meta name="theme-color" content="#8B5CF6">
 
 <style>
+
 * {
     margin: 0;
     padding: 0;
@@ -30,6 +32,7 @@ body {
     background: black;
     font-family: Tahoma, Arial, sans-serif;
 }
+
 
 /* =========================
    INTRO
@@ -103,6 +106,7 @@ body {
     transition: opacity 1.5s ease;
 }
 
+
 /* =========================
    BACKGROUND
 ========================= */
@@ -123,12 +127,16 @@ body {
     position: absolute;
     inset: 0;
 
-    background: rgba(0, 0, 0, 0.25);
+    /* Reduced so the glass can show the GIF */
+    background: rgba(0, 0, 0, 0.15);
+
+    pointer-events: none;
 }
+
 
 /* =========================
    WINDOWS / PANELS
-   GLASS EFFECT ADDED HERE
+   GLASS EFFECT
 ========================= */
 
 .panel {
@@ -142,25 +150,51 @@ body {
 
     transform: translate(-50%, -50%);
 
-    background: rgba(212, 208, 200, 0.72);
+    /*
+        IMPORTANT:
+        This used to be rgba(..., 0.72).
+        That was too opaque for the glass effect.
+    */
+    background: rgba(255, 255, 255, 0.18);
 
-    border-top: 2px solid rgba(255,255,255,0.85);
-    border-left: 2px solid rgba(255,255,255,0.85);
-    border-right: 2px solid rgba(64,64,64,0.8);
-    border-bottom: 2px solid rgba(64,64,64,0.8);
+    /*
+        Real glass effect
+    */
+    backdrop-filter:
+        blur(18px)
+        saturate(160%);
+
+    -webkit-backdrop-filter:
+        blur(18px)
+        saturate(160%);
+
+    border-top: 2px solid rgba(255,255,255,0.75);
+    border-left: 2px solid rgba(255,255,255,0.75);
+    border-right: 2px solid rgba(64,64,64,0.45);
+    border-bottom: 2px solid rgba(64,64,64,0.45);
 
     box-shadow:
-        5px 5px 15px rgba(0,0,0,0.7);
-
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+        0 8px 32px rgba(0,0,0,0.45),
+        inset 0 1px 0 rgba(255,255,255,0.35),
+        inset 0 -1px 0 rgba(0,0,0,0.08);
 
     z-index: 20;
+
+    /*
+        Helps backdrop-filter render correctly
+        with child elements.
+    */
+    isolation: isolate;
 }
 
 .panel.hidden {
     display: none;
 }
+
+
+/* =========================
+   WINDOW TITLE
+========================= */
 
 .panel-title {
     height: 30px;
@@ -173,15 +207,20 @@ body {
 
     color: white;
 
+    /*
+        Slightly transparent title bar
+    */
     background: linear-gradient(
         to right,
-        rgba(243, 110, 210, 0.88) 0%,
-        rgba(122, 56, 105, 0.88) 50%,
-        rgba(51, 24, 44, 0.88) 100%
+        rgba(243, 110, 210, 0.82) 0%,
+        rgba(122, 56, 105, 0.82) 50%,
+        rgba(51, 24, 44, 0.82) 100%
     );
 
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(14px) saturate(150%);
+    -webkit-backdrop-filter: blur(14px) saturate(150%);
+
+    border-bottom: 1px solid rgba(255,255,255,0.2);
 
     font-size: 12px;
     font-weight: bold;
@@ -248,6 +287,11 @@ body {
     background: #df0000;
 }
 
+
+/* =========================
+   PANEL CONTENT
+========================= */
+
 .panel-content {
     padding: 18px;
 
@@ -257,10 +301,20 @@ body {
 
     min-height: 170px;
 
-    background: rgba(212, 208, 200, 0.48);
+    /*
+        Previously 0.48.
+        Much more transparent now.
+    */
+    background: rgba(255, 255, 255, 0.12);
 
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(10px) saturate(130%);
+    -webkit-backdrop-filter: blur(10px) saturate(130%);
+
+    /*
+        Prevents the content from visually
+        becoming a solid gray rectangle.
+    */
+    border-top: 1px solid rgba(255,255,255,0.12);
 }
 
 .panel-content h2 {
@@ -275,11 +329,12 @@ body {
 .panel-content hr {
     border: 0;
 
-    border-top: 1px solid rgba(128,128,128,0.8);
-    border-bottom: 1px solid rgba(255,255,255,0.8);
+    border-top: 1px solid rgba(128,128,128,0.45);
+    border-bottom: 1px solid rgba(255,255,255,0.45);
 
     margin: 12px 0;
 }
+
 
 /* =========================
    LINKS / POWERED BY
@@ -307,9 +362,9 @@ body {
     color: #000099;
 }
 
+
 /* =========================
    ANALOG CLOCK
-   TIME-BOX IS TRANSPARENT
 ========================= */
 
 .time-box {
@@ -318,14 +373,30 @@ body {
     right: 15px;
     top: 15px;
 
-    width: 220px;
-    height: 285px;
+    width: 145px;
+    height: 55px;
 
-    padding: 0;
+    padding: 6px 10px;
 
-    background: transparent;
-    border: none;
-    border-radius: 0;
+    color: white;
+
+    background: rgba(255,255,255,0.10);
+
+    backdrop-filter:
+        blur(14px)
+        saturate(150%);
+
+    -webkit-backdrop-filter:
+        blur(14px)
+        saturate(150%);
+
+    border: 1px solid rgba(255,255,255,0.28);
+    border-radius: 6px;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.22),
+        inset 0 -1px 0 rgba(255,255,255,0.05),
+        0 4px 16px rgba(0,0,0,0.25);
 
     text-align: center;
 
@@ -336,13 +407,39 @@ body {
     resize: both;
     overflow: auto;
 
-    min-width: 180px;
-    min-height: 240px;
+    min-width: 110px;
+    min-height: 45px;
 
-    z-index: 5000;
+    z-index: 1002;
 }
 
-/* The actual clock */
+#currentTime {
+    margin-top: 8px;
+
+    color: white;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    text-shadow:
+        1px 1px 3px black,
+        -1px -1px 3px black;
+}
+
+.time-label {
+    margin-top: 2px;
+
+    color: #e0e0e0;
+
+    font-size: 10px;
+
+    text-shadow: 1px 1px 3px black;
+}
+
+
+/* =========================
+   ANALOG CLOCK
+========================= */
 
 .analog-clock {
     position: relative;
@@ -372,8 +469,6 @@ body {
     border-radius: 50%;
 }
 
-/* Clock center */
-
 .clock-center {
     position: absolute;
 
@@ -393,8 +488,6 @@ body {
 
     z-index: 20;
 }
-
-/* Hands */
 
 .hand {
     position: absolute;
@@ -434,8 +527,6 @@ body {
     background: #4c8c75;
 }
 
-/* Numbers */
-
 .clock-number {
     position: absolute;
 
@@ -458,8 +549,6 @@ body {
     font-size: 24px;
 }
 
-/* 12 positions */
-
 .n1  { transform: rotate(30deg) translateY(-80px) rotate(-30deg); }
 .n2  { transform: rotate(60deg) translateY(-80px) rotate(-60deg); }
 .n3  { transform: rotate(90deg) translateY(-80px) rotate(-90deg); }
@@ -472,8 +561,6 @@ body {
 .n10 { transform: rotate(300deg) translateY(-80px) rotate(-300deg); }
 .n11 { transform: rotate(330deg) translateY(-80px) rotate(-330deg); }
 .n12 { transform: rotate(360deg) translateY(-80px) rotate(-360deg); }
-
-/* Little minute marks */
 
 .clock-mark {
     position: absolute;
@@ -491,8 +578,6 @@ body {
     transform-origin: 1px 99px;
 }
 
-/* Every fifth mark is a bit bigger */
-
 .clock-mark.big {
     width: 3px;
     height: 10px;
@@ -502,30 +587,6 @@ body {
     background: #356f5b;
 }
 
-/* Digital time under clock */
-
-#currentTime {
-    margin-top: 8px;
-
-    color: white;
-
-    font-size: 18px;
-    font-weight: bold;
-
-    text-shadow:
-        1px 1px 3px black,
-        -1px -1px 3px black;
-}
-
-.time-label {
-    margin-top: 2px;
-
-    color: #e0e0e0;
-
-    font-size: 10px;
-
-    text-shadow: 1px 1px 3px black;
-}
 
 /* =========================
    MUSIC BUTTON
@@ -573,6 +634,7 @@ body {
     transform: scale(0.95);
 }
 
+
 /* =========================
    XP BUTTON
 ========================= */
@@ -580,7 +642,7 @@ body {
 .xp-button {
     padding: 5px 20px;
 
-    background: rgba(212,208,200,0.8);
+    background: rgba(212,208,200,0.65);
 
     border-top: 2px solid white;
     border-left: 2px solid white;
@@ -600,9 +662,9 @@ body {
     border-bottom-color: white;
 }
 
+
 /* =========================
    NAVBAR
-   GLASS EFFECT ADDED HERE
 ========================= */
 
 .navbar {
@@ -621,13 +683,13 @@ body {
 
     background: linear-gradient(
         to bottom,
-        rgba(243, 110, 210, 0.72) 0%,
-        rgba(122, 56, 105, 0.72) 50%,
-        rgba(51, 24, 44, 0.78) 100%
+        rgba(243,110,210,0.65) 0%,
+        rgba(122,56,105,0.65) 50%,
+        rgba(51,24,44,0.72) 100%
     );
 
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px) saturate(140%);
+    -webkit-backdrop-filter: blur(12px) saturate(140%);
 
     border-top: 2px solid rgba(220,170,255,0.7);
 
@@ -636,6 +698,7 @@ body {
 
     z-index: 1000;
 }
+
 
 /* =========================
    DESKTOP ICONS
@@ -705,6 +768,7 @@ body {
     cursor: grabbing;
 }
 
+
 /* =========================
    START BUTTON
 ========================= */
@@ -747,6 +811,7 @@ body {
         #f0b900
     );
 }
+
 
 /* =========================
    NAV LINKS
@@ -793,6 +858,7 @@ body {
 
     border-color: rgba(200,160,255,0.7);
 }
+
 
 /* =========================
    TASK BUTTONS
@@ -860,6 +926,7 @@ body {
     border-left: 1px solid rgba(0,0,0,0.5);
 }
 
+
 /* =========================
    RALSEI CLIPPY
 ========================= */
@@ -895,7 +962,7 @@ body {
 }
 
 .clippy-bubble {
-    background: rgba(255,255,255,0.88);
+    background: rgba(255,255,255,0.82);
 
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
@@ -943,6 +1010,7 @@ body {
     z-index: 2;
 }
 
+
 /* =========================
    FRIENDS
 ========================= */
@@ -961,6 +1029,7 @@ body {
 
     image-rendering: auto;
 }
+
 
 /* =========================
    PANEL SIZES
@@ -1009,24 +1078,102 @@ body {
 #newsletterPanel {
     width: 440px;
 }
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 700px) {
+
+    .panel {
+        width: calc(100vw - 30px) !important;
+        max-width: calc(100vw - 30px);
+    }
+
+    .analog-clock {
+        transform: scale(0.7);
+        transform-origin: top center;
+    }
+
+    .time-box {
+        width: 125px;
+        height: 48px;
+        overflow: hidden;
+    }
+
+    .nav-links {
+        gap: 0;
+    }
+
+    .nav-links a,
+    .nav-button {
+        padding: 6px 5px;
+        font-size: 10px;
+    }
+
+}
+
+
+/* =========================
+   EXTRA GLASS HIGHLIGHT
+========================= */
+
+.panel::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,0.20),
+            rgba(255,255,255,0.03) 40%,
+            rgba(255,255,255,0.00) 70%
+        );
+
+    opacity: 0.7;
+
+    z-index: 0;
+}
+
+.panel-title,
+.panel-content {
+    position: relative;
+    z-index: 1;
+}
+
 </style>
 </head>
 
 <body>
+
 
 <!-- =========================
      INTRO
 ========================= -->
 
 <div id="intro">
+
     <button id="enterButton">
         enter :3
     </button>
+
 </div>
 
+
 <audio id="signinMusic" preload="auto">
-    <source src="https://rautacfd.vercel.app/signin.mp3" type="audio/mpeg">
+
+    <source
+        src="https://rautacfd.vercel.app/signin.mp3"
+        type="audio/mpeg">
+
 </audio>
+
 
 <!-- =========================
      SITE
@@ -1039,6 +1186,7 @@ body {
     <img src="background.gif">
 
     <div class="overlay"></div>
+
 
     <!-- HOME -->
 
@@ -1066,6 +1214,7 @@ body {
 
         </div>
 
+
         <div class="panel-content">
 
             <h2>hai :3</h2>
@@ -1081,9 +1230,13 @@ body {
             </p>
 
             <p>
-                TTHANKJ U TO MY FRIEND FOR THE DOMAIN :P (his site: ralsei.cfd)
+                TTHANKJ U TO MY FRIEND FOR THE DOMAIN :P
+                (his site: ralsei.cfd)
+
                 <br>
+
                 (I BASED IT OFF
+
                 <a
                     href="https://youtube.com/@rautatientorii"
                     target="_blank">
@@ -1092,19 +1245,29 @@ body {
             </p>
 
             <p>
-                i made this site for jokes and funs lowkey but i hope u enjoyed ur time here :P (also this is a fork of ralsei.cfd)
+                i made this site for jokes and funs lowkey
+                but i hope u enjoyed ur time here :P
+                (also this is a fork of ralsei.cfd)
             </p>
 
             <p>
-                i upload WHATEVER here and i make blogs and all that yada yada
+                i upload WHATEVER here and i make blogs
+                and all that yada yada
             </p>
 
             <p>
                 btw!!!! i have a mc server!!! its coming soon!
+
                 <br>
+
                 u should see its site at:
-                <a href="https://ralseismp.xo.je">HERE</a>
+
+                <a href="https://ralseismp.xo.je">
+                    HERE
+                </a>
+
                 <br>
+
                 (COMING SOON)
             </p>
 
@@ -1125,6 +1288,7 @@ body {
         </div>
 
     </div>
+
 
     <!-- ABOUT -->
 
@@ -1161,24 +1325,31 @@ body {
             </p>
 
             <p>
-                i'm a video game creator, and i like to write stories and i make ALOT OF MUSIC and a bunch of internet shit.
+                i'm a video game creator, and i like to write
+                stories and i make ALOT OF MUSIC and a bunch
+                of internet shit.
             </p>
 
             <hr>
 
             <p>
-                i wanted to make alot of stuff when i started using the internet, like "what if this existed?" and "what if i made that?", i love to create and DESTROY.
+                i wanted to make alot of stuff when i started
+                using the internet, like "what if this existed?"
+                and "what if i made that?", i love to create
+                and DESTROY.
             </p>
 
             <hr>
 
             <p>
-                i got alot of hate so i don't like to do music as much as i wanted to do but i learn everyday!!!!!!
+                i got alot of hate so i don't like to do music
+                as much as i wanted to do but i learn everyday!!!!!!
             </p>
 
         </div>
 
     </div>
+
 
     <!-- PROJECTS -->
 
@@ -1217,30 +1388,42 @@ body {
             <hr>
 
             <p>
-                <strong>redium.xyz</strong> - a 2017 Roblox revival i created with my best friend @pokltyy
-                after his first revival failed. it originally started as reblox.vip,
-                but staymad (owner of the name) sent me death threats for it-
-                now we have 150+ members (tysm all) :3
+                <strong>redium.xyz</strong> -
+                a 2017 Roblox revival i created with my best friend
+                @pokltyy after his first revival failed.
+                it originally started as reblox.vip,
+                but staymad (owner of the name) sent me death threats
+                for it- now we have 150+ members (tysm all) :3
             </p>
 
             <p>
                 <strong>mycontact</strong>
-                (<a href="http://mycontact.reblox.vip" target="_blank">mycontact.reblox.vip</a>):
-                a Facebook 2009 type social media that i'm admin on AND i help develop!
+                (<a
+                    href="http://mycontact.reblox.vip"
+                    target="_blank">
+                    mycontact.reblox.vip
+                </a>):
+                a Facebook 2009 type social media that i'm admin on
+                AND i help develop!
                 with 30+ users (if i counted correctly-)
             </p>
 
             <p>
-                <strong>MiraOS</strong> - a psychological horror game where you find
-                a 2000's computer for the first time in decades, but you're not alone.
+                <strong>MiraOS</strong> -
+                a psychological horror game where you find
+                a 2000's computer for the first time in decades,
+                but you're not alone.
                 your only goal is to reset the PC, but don't worry!
                 Mira and her friends are here to keep you "safe..."
-                however i'm still planning the story so it's not out yet-
+                however i'm still planning the story so it's not
+                out yet-
             </p>
 
             <p>
-                <strong>RalseiSMP</strong> (aka. mc.rauta.cfd) - a Minecraft server
-                i made that's the best SMP for new players!
+                <strong>RalseiSMP</strong>
+                (aka. mc.rauta.cfd) -
+                a Minecraft server i made that's the best SMP
+                for new players!
                 we support 1.20.5 to the newest version!
                 (you can play on cracked)
             </p>
@@ -1248,6 +1431,7 @@ body {
         </div>
 
     </div>
+
 
     <!-- CONTACT -->
 
@@ -1286,7 +1470,8 @@ body {
             <hr>
 
             <p>
-                discord: @strawberry.wave - the fastest i can respond to
+                discord: @strawberry.wave -
+                the fastest i can respond to
             </p>
 
             <p>
@@ -1314,6 +1499,7 @@ body {
         </div>
 
     </div>
+
 
     <!-- CATS -->
 
@@ -1352,63 +1538,92 @@ body {
             </iframe>
 
             <p class="powered-by">
+
                 powered by
-                <a href="http://mycontact.reblox.vip" target="_blank">
+
+                <a
+                    href="http://mycontact.reblox.vip"
+                    target="_blank">
                     MyContact
                 </a>
+
             </p>
 
             <p class="powered-by">
+
                 want more cats?
+
                 <a href="https://rauta.cfd/cats">
                     go here
                 </a>
+
             </p>
 
         </div>
 
     </div>
 
+
     <!-- MUSIC -->
 
-    <button id="musicButton" class="music-button" title="play music">
+    <button
+        id="musicButton"
+        class="music-button"
+        title="play music">
         ▶
     </button>
 
+
     <audio id="siteMusic" preload="auto">
-        <source src="https://rauta.cfd/cat.mp3" type="audio/mpeg">
+
+        <source
+            src="https://rauta.cfd/cat.mp3"
+            type="audio/mpeg">
+
     </audio>
+
 
     <!-- NAVBAR -->
 
     <nav class="navbar">
 
-        <a href="#" class="logo" onclick="openPanel('homePanel'); return false;">
+        <a
+            href="#"
+            class="logo"
+            onclick="openPanel('homePanel'); return false;">
             rautatientori :P
         </a>
 
         <ul class="nav-links">
 
             <li>
-                <a href="#" onclick="openPanel('homePanel'); return false;">
+                <a
+                    href="#"
+                    onclick="openPanel('homePanel'); return false;">
                     meow
                 </a>
             </li>
 
             <li>
-                <a href="#" onclick="openPanel('aboutPanel'); return false;">
+                <a
+                    href="#"
+                    onclick="openPanel('aboutPanel'); return false;">
                     who is this chud
                 </a>
             </li>
 
             <li>
-                <a href="#" onclick="openPanel('projectsPanel'); return false;">
+                <a
+                    href="#"
+                    onclick="openPanel('projectsPanel'); return false;">
                     my stuff
                 </a>
             </li>
 
             <li>
-                <a href="#" onclick="openPanel('contactPanel'); return false;">
+                <a
+                    href="#"
+                    onclick="openPanel('contactPanel'); return false;">
                     talk to me :P
                 </a>
             </li>
@@ -1449,7 +1664,10 @@ body {
 
         </ul>
 
-        <div class="task-buttons" id="taskButtons"></div>
+        <div
+            class="task-buttons"
+            id="taskButtons">
+        </div>
 
         <div class="nav-right">
 
@@ -1466,6 +1684,7 @@ body {
 
 </div>
 </div>
+
 
 <!-- =========================
      ANALOG CLOCK
@@ -1487,8 +1706,6 @@ body {
         <div class="clock-number n9">9</div>
         <div class="clock-number n10">10</div>
         <div class="clock-number n11">11</div>
-
-        <!-- Minute marks -->
 
         <div class="clock-mark big" style="transform: rotate(0deg);"></div>
         <div class="clock-mark" style="transform: rotate(6deg);"></div>
@@ -1551,18 +1768,35 @@ body {
         <div class="clock-mark" style="transform: rotate(348deg);"></div>
         <div class="clock-mark" style="transform: rotate(354deg);"></div>
 
-        <div class="hand hour-hand" id="hourHand"></div>
-        <div class="hand minute-hand" id="minuteHand"></div>
-        <div class="hand second-hand" id="secondHand"></div>
+        <div
+            class="hand hour-hand"
+            id="hourHand">
+        </div>
+
+        <div
+            class="hand minute-hand"
+            id="minuteHand">
+        </div>
+
+        <div
+            class="hand second-hand"
+            id="secondHand">
+        </div>
 
         <div class="clock-center"></div>
 
     </div>
 
-    <div id="currentTime">00:00:00</div>
-    <div class="time-label">time for me</div>
+    <div id="currentTime">
+        00:00:00
+    </div>
+
+    <div class="time-label">
+        time for me
+    </div>
 
 </div>
+
 
 <!-- =========================
      DESKTOP ICONS
@@ -1579,9 +1813,12 @@ body {
             src="http://rauta.cfd/aliendestroyers.png"
             alt="Alien Destroyer">
 
-        <span>alien destroyer</span>
+        <span>
+            alien destroyer
+        </span>
 
     </div>
+
 
     <div
         class="desktop-icon"
@@ -1592,32 +1829,44 @@ body {
             src="http://rauta.cfd/changelog.png"
             alt="Cat">
 
-        <span>changelogs!!!</span>
+        <span>
+            changelogs!!!
+        </span>
 
     </div>
+
 
     <div
         class="desktop-icon"
         data-panel="chatroomPanel"
         style="left: 25px; top: 270px;">
 
-        <img src="game3.png" alt="Game">
+        <img
+            src="game3.png"
+            alt="Game">
 
-        <span>chatroom.exe</span>
+        <span>
+            chatroom.exe
+        </span>
 
     </div>
 
 </div>
 
+
 <!-- =========================
      ALIEN DESTROYER
 ========================= -->
 
-<div class="panel hidden" id="game1Panel">
+<div
+    class="panel hidden"
+    id="game1Panel">
 
     <div class="panel-title">
 
-        <span>alien destroyer.exe</span>
+        <span>
+            alien destroyer.exe
+        </span>
 
         <div class="window-buttons">
 
@@ -1651,15 +1900,20 @@ body {
 
 </div>
 
+
 <!-- =========================
      CHANGELOG
 ========================= -->
 
-<div class="panel hidden" id="changelogPanel">
+<div
+    class="panel hidden"
+    id="changelogPanel">
 
     <div class="panel-title">
 
-        <span>changelog.exe</span>
+        <span>
+            changelog.exe
+        </span>
 
         <div class="window-buttons">
 
@@ -1679,13 +1933,18 @@ body {
 
     </div>
 
-    <div class="panel-content changelog-content">
+    <div
+        class="panel-content changelog-content">
 
-        <h2>rauta.cfd updates</h2>
+        <h2>
+            rauta.cfd updates
+        </h2>
 
         <hr>
 
-        <h3>8/9/26 v1.0 - main</h3>
+        <h3>
+            8/9/26 v1.0 - main
+        </h3>
 
         <p>
             I MADE IT!!!
@@ -1699,7 +1958,9 @@ body {
 
         <hr>
 
-        <h3>8/9/26 v1.1 - games</h3>
+        <h3>
+            8/9/26 v1.1 - games
+        </h3>
 
         <p>
             added the games section!!
@@ -1712,35 +1973,46 @@ body {
 
         <hr>
 
-        <h3>8/10/26 v1.1.1 - cats!!!</h3>
+        <h3>
+            8/10/26 v1.1.1 - cats!!!
+        </h3>
 
         <p>
-            added the cats page (u can go there from the cats button!!!)
+            added the cats page
+            (u can go there from the cats button!!!)
         </p>
 
         <hr>
 
-        <h3>8/10/26 v1.1.2 - MORE CATS</h3>
+        <h3>
+            8/10/26 v1.1.2 - MORE CATS
+        </h3>
 
         <p>
-            added oneko that chases u around, also u can pet it :P<br>
+            added oneko that chases u around,
+            also u can pet it :P<br>
             BEST FEATURE IN rauta.cfd TOPS<br>
             also added trello board so u can see my progress meow
         </p>
 
         <hr>
 
-        <h3>8/10/26 v1.1.2.1 - add the 1's update</h3>
+        <h3>
+            8/10/26 v1.1.2.1 - add the 1's update
+        </h3>
 
         <p>
-            RALLIPY HAS BEEN ADDED! he's a goober who speaks now<br>
+            RALLIPY HAS BEEN ADDED!
+            he's a goober who speaks now<br>
             changed the sign in song<br>
             ralseismp landing DONE!
         </p>
 
         <hr>
 
-        <h3>coming soon...</h3>
+        <h3>
+            coming soon...
+        </h3>
 
         <p>
             who knows what i'll add next :P
@@ -1760,15 +2032,20 @@ body {
 
 </div>
 
+
 <!-- =========================
      CHATROOM
 ========================= -->
 
-<div class="panel hidden" id="chatroomPanel">
+<div
+    class="panel hidden"
+    id="chatroomPanel">
 
     <div class="panel-title">
 
-        <span>chatroom.exe</span>
+        <span>
+            chatroom.exe
+        </span>
 
         <div class="window-buttons">
 
@@ -1802,34 +2079,45 @@ body {
 
 </div>
 
+
 <script src="/oneko.js"></script>
+
 
 <!-- =========================
      RALSEI CLIPPY
 ========================= -->
 
-<div id="ralseiClippy" class="ralsei-clippy">
+<div
+    id="ralseiClippy"
+    class="ralsei-clippy">
 
     <img
         src="/ralsei-clippy.png"
         alt="Ralsei Clippy"
         class="clippy-image">
 
-    <div class="clippy-bubble" id="clippyBubble">
+    <div
+        class="clippy-bubble"
+        id="clippyBubble">
         hey :3
     </div>
 
 </div>
 
+
 <!-- =========================
      FRIENDS
 ========================= -->
 
-<div class="panel hidden" id="friendsPanel">
+<div
+    class="panel hidden"
+    id="friendsPanel">
 
     <div class="panel-title">
 
-        <span>friends.exe</span>
+        <span>
+            friends.exe
+        </span>
 
         <div class="window-buttons">
 
@@ -1851,24 +2139,50 @@ body {
 
     <div class="panel-content">
 
-        <h1>friends</h1>
+        <h1>
+            friends
+        </h1>
 
         <div class="friend-grid">
 
-            <a class="friend" href="#">
-                <img src="https://rauta.cfd/rautabadge.png" alt="rauta">
+            <a
+                class="friend"
+                href="#">
+
+                <img
+                    src="https://rauta.cfd/rautabadge.png"
+                    alt="rauta">
+
             </a>
 
-            <a class="friend" href="http://mycontact.reblox.vip">
-                <img src="poklty.png" alt="poklty">
+            <a
+                class="friend"
+                href="http://mycontact.reblox.vip">
+
+                <img
+                    src="poklty.png"
+                    alt="poklty">
+
             </a>
 
-            <a class="friend" href="https://rauta.rauta.cfd">
-                <img src="YOUR-IMAGE-URL.png" alt="rautatientori">
+            <a
+                class="friend"
+                href="https://rauta.rauta.cfd">
+
+                <img
+                    src="YOUR-IMAGE-URL.png"
+                    alt="rautatientori">
+
             </a>
 
-            <a class="friend" href="https://toxicchemical.xyz">
-                <img src="YOUR-IMAGE-URL.png" alt="quivering iirc">
+            <a
+                class="friend"
+                href="https://toxicchemical.xyz">
+
+                <img
+                    src="YOUR-IMAGE-URL.png"
+                    alt="quivering iirc">
+
             </a>
 
         </div>
@@ -1877,15 +2191,20 @@ body {
 
 </div>
 
+
 <!-- =========================
      NEWSLETTER
 ========================= -->
 
-<div class="panel hidden" id="newsletterPanel">
+<div
+    class="panel hidden"
+    id="newsletterPanel">
 
     <div class="panel-title">
 
-        <span>newsletter.exe</span>
+        <span>
+            newsletter.exe
+        </span>
 
         <div class="window-buttons">
 
@@ -1907,10 +2226,13 @@ body {
 
     <div class="panel-content">
 
-        <h2>rauta.cfd newsletters</h2>
+        <h2>
+            rauta.cfd newsletters
+        </h2>
 
         <p>
-            sign up for updates about anything! blogs, projects...zzz i fell asleep
+            sign up for updates about anything!
+            blogs, projects...zzz i fell asleep
         </p>
 
         <form
@@ -1944,38 +2266,69 @@ body {
 
 </div>
 
+
 <!-- =========================
      JAVASCRIPT
 ========================= -->
 
 <script>
 
-/* INTRO */
 
-const intro = document.getElementById("intro");
-const site = document.getElementById("site");
-const enterButton = document.getElementById("enterButton");
-const signinMusic = document.getElementById("signinMusic");
+/* =========================
+   INTRO
+========================= */
 
-enterButton.addEventListener("click", function() {
+const intro =
+    document.getElementById("intro");
 
-    signinMusic.play().catch(function(error) {
-        console.log("son btw i couldnt start the audio", error);
-    });
+const site =
+    document.getElementById("site");
 
-    intro.style.opacity = "0";
-    site.style.opacity = "1";
+const enterButton =
+    document.getElementById("enterButton");
 
-    setTimeout(function() {
-        intro.style.display = "none";
-    }, 1500);
-
-});
+const signinMusic =
+    document.getElementById("signinMusic");
 
 
-/* PANELS */
+enterButton.addEventListener(
+    "click",
+    function() {
+
+        signinMusic.play().catch(
+            function(error) {
+
+                console.log(
+                    "son btw i couldnt start the audio",
+                    error
+                );
+
+            }
+        );
+
+        intro.style.opacity = "0";
+
+        site.style.opacity = "1";
+
+        setTimeout(
+            function() {
+
+                intro.style.display = "none";
+
+            },
+            1500
+        );
+
+    }
+);
+
+
+/* =========================
+   PANELS
+========================= */
 
 let highestZ = 20;
+
 
 const panelNames = {
 
@@ -1992,13 +2345,16 @@ const panelNames = {
 
 };
 
+
 function openPanel(id) {
 
-    const panel = document.getElementById(id);
+    const panel =
+        document.getElementById(id);
 
     if (!panel) return;
 
     panel.classList.remove("hidden");
+
     panel.style.display = "block";
 
     removeTaskButton(id);
@@ -2007,9 +2363,11 @@ function openPanel(id) {
 
 }
 
+
 function minimizePanel(id) {
 
-    const panel = document.getElementById(id);
+    const panel =
+        document.getElementById(id);
 
     if (!panel) return;
 
@@ -2019,53 +2377,69 @@ function minimizePanel(id) {
 
 }
 
+
 function closePanel(id) {
 
-    const panel = document.getElementById(id);
+    const panel =
+        document.getElementById(id);
 
     if (!panel) return;
 
     panel.style.display = "none";
+
     panel.classList.add("hidden");
 
     removeTaskButton(id);
 
 }
 
+
 function addTaskButton(id) {
 
-    const existing = document.getElementById("task-" + id);
+    const existing =
+        document.getElementById("task-" + id);
 
     if (existing) return;
 
-    const button = document.createElement("button");
 
-    button.id = "task-" + id;
-    button.className = "task-window";
+    const button =
+        document.createElement("button");
 
-    button.textContent = panelNames[id] || id;
+    button.id =
+        "task-" + id;
 
-    button.onclick = function() {
+    button.className =
+        "task-window";
 
-        const panel = document.getElementById(id);
+    button.textContent =
+        panelNames[id] || id;
 
-        if (!panel) return;
 
-        if (panel.style.display === "none") {
+    button.onclick =
+        function() {
 
-            panel.style.display = "block";
+            const panel =
+                document.getElementById(id);
 
-            panel.classList.remove("hidden");
+            if (!panel) return;
+
+
+            if (panel.style.display === "none") {
+
+                panel.style.display = "block";
+
+                panel.classList.remove("hidden");
+
+                bringToFront(panel);
+
+                return;
+
+            }
 
             bringToFront(panel);
 
-            return;
+        };
 
-        }
-
-        bringToFront(panel);
-
-    };
 
     document
         .getElementById("taskButtons")
@@ -2073,316 +2447,513 @@ function addTaskButton(id) {
 
 }
 
+
 function removeTaskButton(id) {
 
-    const button = document.getElementById("task-" + id);
+    const button =
+        document.getElementById("task-" + id);
 
     if (button) {
+
         button.remove();
+
     }
 
 }
+
 
 function bringToFront(panel) {
 
     highestZ++;
 
-    panel.style.zIndex = highestZ;
+    panel.style.zIndex =
+        highestZ;
 
 }
 
-document.querySelectorAll(".panel").forEach(function(panel) {
 
-    panel.addEventListener("mousedown", function() {
+document
+    .querySelectorAll(".panel")
+    .forEach(
+        function(panel) {
 
-        bringToFront(panel);
+            panel.addEventListener(
+                "mousedown",
+                function() {
 
-    });
+                    bringToFront(panel);
 
-});
+                }
+            );
 
-
-/* DRAG PANELS */
-
-document.querySelectorAll(".panel-title").forEach(function(title) {
-
-    let dragging = false;
-
-    let offsetX = 0;
-    let offsetY = 0;
-
-    const panel = title.closest(".panel");
-
-    title.addEventListener("mousedown", function(e) {
-
-        if (e.target.closest(".window-buttons")) {
-            return;
         }
-
-        dragging = true;
-
-        const rect = panel.getBoundingClientRect();
-
-        offsetX = e.clientX - rect.left;
-        offsetY = e.clientY - rect.top;
-
-        panel.style.transform = "none";
-
-        panel.style.left = rect.left + "px";
-        panel.style.top = rect.top + "px";
-
-        bringToFront(panel);
-
-        e.preventDefault();
-
-    });
-
-    document.addEventListener("mousemove", function(e) {
-
-        if (!dragging) return;
-
-        panel.style.left =
-            (e.clientX - offsetX) + "px";
-
-        panel.style.top =
-            (e.clientY - offsetY) + "px";
-
-    });
-
-    document.addEventListener("mouseup", function() {
-
-        dragging = false;
-
-    });
-
-});
+    );
 
 
 /* =========================
-   ANALOG CLOCK + DIGITAL TIME
+   DRAG PANELS
 ========================= */
 
-const hourHand = document.getElementById("hourHand");
-const minuteHand = document.getElementById("minuteHand");
-const secondHand = document.getElementById("secondHand");
-const currentTime = document.getElementById("currentTime");
+document
+    .querySelectorAll(".panel-title")
+    .forEach(
+        function(title) {
+
+            let dragging = false;
+
+            let offsetX = 0;
+            let offsetY = 0;
+
+            const panel =
+                title.closest(".panel");
+
+
+            title.addEventListener(
+                "mousedown",
+                function(e) {
+
+                    if (
+                        e.target.closest(
+                            ".window-buttons"
+                        )
+                    ) {
+                        return;
+                    }
+
+
+                    dragging = true;
+
+
+                    const rect =
+                        panel.getBoundingClientRect();
+
+
+                    offsetX =
+                        e.clientX - rect.left;
+
+                    offsetY =
+                        e.clientY - rect.top;
+
+
+                    panel.style.transform =
+                        "none";
+
+
+                    panel.style.left =
+                        rect.left + "px";
+
+                    panel.style.top =
+                        rect.top + "px";
+
+
+                    bringToFront(panel);
+
+                    e.preventDefault();
+
+                }
+            );
+
+
+            document.addEventListener(
+                "mousemove",
+                function(e) {
+
+                    if (!dragging) return;
+
+
+                    panel.style.left =
+                        (e.clientX - offsetX) + "px";
+
+                    panel.style.top =
+                        (e.clientY - offsetY) + "px";
+
+                }
+            );
+
+
+            document.addEventListener(
+                "mouseup",
+                function() {
+
+                    dragging = false;
+
+                }
+            );
+
+        }
+    );
+
+
+/* =========================
+   ANALOG CLOCK
+========================= */
+
+const hourHand =
+    document.getElementById("hourHand");
+
+const minuteHand =
+    document.getElementById("minuteHand");
+
+const secondHand =
+    document.getElementById("secondHand");
+
+const currentTime =
+    document.getElementById("currentTime");
+
 
 function updateClock() {
 
-    const now = new Date();
+    const now =
+        new Date();
 
-    const hours = now.getHours();
-    const minutes = now.getMinutes();
-    const seconds = now.getSeconds();
 
-    /* Analog clock angles */
+    const hours =
+        now.getHours();
+
+    const minutes =
+        now.getMinutes();
+
+    const seconds =
+        now.getSeconds();
+
 
     const hourDegrees =
         ((hours % 12) * 30) +
         (minutes * 0.5);
 
+
     const minuteDegrees =
         (minutes * 6) +
         (seconds * 0.1);
 
+
     const secondDegrees =
         seconds * 6;
+
 
     hourHand.style.transform =
         `rotate(${hourDegrees}deg)`;
 
+
     minuteHand.style.transform =
         `rotate(${minuteDegrees}deg)`;
+
 
     secondHand.style.transform =
         `rotate(${secondDegrees}deg)`;
 
-    /* Digital clock */
 
     const displayHours =
         String(hours).padStart(2, "0");
 
+
     const displayMinutes =
         String(minutes).padStart(2, "0");
 
+
     const displaySeconds =
         String(seconds).padStart(2, "0");
+
 
     currentTime.textContent =
         `${displayHours}:${displayMinutes}:${displaySeconds}`;
 
 }
 
+
 updateClock();
 
-setInterval(updateClock, 1000);
+setInterval(
+    updateClock,
+    1000
+);
 
 
-/* DRAG THE CLOCK */
+/* =========================
+   DRAG CLOCK
+========================= */
 
-const timeBox = document.getElementById("timeBox");
+const timeBox =
+    document.getElementById("timeBox");
+
 
 let draggingTime = false;
 
 let timeOffsetX = 0;
 let timeOffsetY = 0;
 
-timeBox.addEventListener("mousedown", function(e) {
 
-    if (
-        e.offsetX > timeBox.clientWidth - 20 &&
-        e.offsetY > timeBox.clientHeight - 20
-    ) {
-        return;
-    }
+timeBox.addEventListener(
+    "mousedown",
+    function(e) {
 
-    draggingTime = true;
-
-    const rect = timeBox.getBoundingClientRect();
-
-    timeOffsetX = e.clientX - rect.left;
-    timeOffsetY = e.clientY - rect.top;
-
-    timeBox.style.right = "auto";
-    timeBox.style.bottom = "auto";
-
-    timeBox.style.left = rect.left + "px";
-    timeBox.style.top = rect.top + "px";
-
-    e.preventDefault();
-
-});
-
-document.addEventListener("mousemove", function(e) {
-
-    if (!draggingTime) return;
-
-    timeBox.style.left =
-        (e.clientX - timeOffsetX) + "px";
-
-    timeBox.style.top =
-        (e.clientY - timeOffsetY) + "px";
-
-});
-
-document.addEventListener("mouseup", function() {
-
-    draggingTime = false;
-
-});
+        if (
+            e.offsetX >
+                timeBox.clientWidth - 20 &&
+            e.offsetY >
+                timeBox.clientHeight - 20
+        ) {
+            return;
+        }
 
 
-/* DESKTOP ICONS */
+        draggingTime = true;
 
-document.querySelectorAll(".desktop-icon").forEach(icon => {
 
-    let moved = false;
+        const rect =
+            timeBox.getBoundingClientRect();
 
-    let startX = 0;
-    let startY = 0;
 
-    let offsetX = 0;
-    let offsetY = 0;
+        timeOffsetX =
+            e.clientX - rect.left;
 
-    let isMouseDown = false;
+        timeOffsetY =
+            e.clientY - rect.top;
 
-    icon.addEventListener("mousedown", function(e) {
 
-        if (e.button !== 0) return;
+        timeBox.style.right =
+            "auto";
 
-        const rect = icon.getBoundingClientRect();
+        timeBox.style.bottom =
+            "auto";
 
-        startX = e.clientX;
-        startY = e.clientY;
 
-        offsetX = e.clientX - rect.left;
-        offsetY = e.clientY - rect.top;
+        timeBox.style.left =
+            rect.left + "px";
 
-        moved = false;
-        isMouseDown = true;
+        timeBox.style.top =
+            rect.top + "px";
 
-        document.querySelectorAll(".desktop-icon")
-            .forEach(other => {
-                other.classList.remove("selected");
-            });
-
-        icon.classList.add("selected");
 
         e.preventDefault();
 
-    });
-
-    document.addEventListener("mousemove", function(e) {
-
-        if (!isMouseDown) return;
-
-        const distanceX =
-            Math.abs(e.clientX - startX);
-
-        const distanceY =
-            Math.abs(e.clientY - startY);
-
-        if (distanceX > 5 || distanceY > 5) {
-
-            moved = true;
-
-            icon.classList.add("dragging");
-
-            icon.style.left =
-                (e.clientX - offsetX) + "px";
-
-            icon.style.top =
-                (e.clientY - offsetY) + "px";
-
-        }
-
-    });
-
-    document.addEventListener("mouseup", function() {
-
-        isMouseDown = false;
-
-        icon.classList.remove("dragging");
-
-    });
-
-    icon.addEventListener("dblclick", function() {
-
-        if (moved) return;
-
-        const panel = icon.dataset.panel;
-
-        if (panel) {
-            openPanel(panel);
-        }
-
-    });
-
-});
+    }
+);
 
 
-/* CLICK EMPTY DESKTOP TO DESELECT */
+document.addEventListener(
+    "mousemove",
+    function(e) {
 
-document.addEventListener("mousedown", function(e) {
+        if (!draggingTime) return;
 
-    if (
-        !e.target.closest(".desktop-icon") &&
-        !e.target.closest(".panel") &&
-        !e.target.closest(".navbar") &&
-        !e.target.closest(".time-box")
-    ) {
 
-        document.querySelectorAll(".desktop-icon")
-            .forEach(icon => {
-                icon.classList.remove("selected");
-            });
+        timeBox.style.left =
+            (e.clientX - timeOffsetX) + "px";
+
+
+        timeBox.style.top =
+            (e.clientY - timeOffsetY) + "px";
 
     }
+);
 
-});
+
+document.addEventListener(
+    "mouseup",
+    function() {
+
+        draggingTime = false;
+
+    }
+);
 
 
-/* MUSIC */
+/* =========================
+   DESKTOP ICONS
+========================= */
+
+document
+    .querySelectorAll(".desktop-icon")
+    .forEach(
+        icon => {
+
+            let moved = false;
+
+            let startX = 0;
+            let startY = 0;
+
+            let offsetX = 0;
+            let offsetY = 0;
+
+            let isMouseDown = false;
+
+
+            icon.addEventListener(
+                "mousedown",
+                function(e) {
+
+                    if (e.button !== 0) return;
+
+
+                    const rect =
+                        icon.getBoundingClientRect();
+
+
+                    startX =
+                        e.clientX;
+
+                    startY =
+                        e.clientY;
+
+
+                    offsetX =
+                        e.clientX - rect.left;
+
+                    offsetY =
+                        e.clientY - rect.top;
+
+
+                    moved = false;
+
+                    isMouseDown = true;
+
+
+                    document
+                        .querySelectorAll(".desktop-icon")
+                        .forEach(
+                            other => {
+
+                                other.classList.remove(
+                                    "selected"
+                                );
+
+                            }
+                        );
+
+
+                    icon.classList.add(
+                        "selected"
+                    );
+
+
+                    e.preventDefault();
+
+                }
+            );
+
+
+            document.addEventListener(
+                "mousemove",
+                function(e) {
+
+                    if (!isMouseDown) return;
+
+
+                    const distanceX =
+                        Math.abs(
+                            e.clientX - startX
+                        );
+
+
+                    const distanceY =
+                        Math.abs(
+                            e.clientY - startY
+                        );
+
+
+                    if (
+                        distanceX > 5 ||
+                        distanceY > 5
+                    ) {
+
+                        moved = true;
+
+
+                        icon.classList.add(
+                            "dragging"
+                        );
+
+
+                        icon.style.left =
+                            (e.clientX - offsetX) +
+                            "px";
+
+
+                        icon.style.top =
+                            (e.clientY - offsetY) +
+                            "px";
+
+                    }
+
+                }
+            );
+
+
+            document.addEventListener(
+                "mouseup",
+                function() {
+
+                    isMouseDown = false;
+
+                    icon.classList.remove(
+                        "dragging"
+                    );
+
+                }
+            );
+
+
+            icon.addEventListener(
+                "dblclick",
+                function() {
+
+                    if (moved) return;
+
+
+                    const panel =
+                        icon.dataset.panel;
+
+
+                    if (panel) {
+
+                        openPanel(panel);
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+
+/* =========================
+   DESELECT ICONS
+========================= */
+
+document.addEventListener(
+    "mousedown",
+    function(e) {
+
+        if (
+            !e.target.closest(".desktop-icon") &&
+            !e.target.closest(".panel") &&
+            !e.target.closest(".navbar") &&
+            !e.target.closest(".time-box")
+        ) {
+
+            document
+                .querySelectorAll(".desktop-icon")
+                .forEach(
+                    icon => {
+
+                        icon.classList.remove(
+                            "selected"
+                        );
+
+                    }
+                );
+
+        }
+
+    }
+);
+
+
+/* =========================
+   MUSIC
+========================= */
 
 const musicButton =
     document.getElementById("musicButton");
@@ -2390,39 +2961,53 @@ const musicButton =
 const siteMusic =
     document.getElementById("siteMusic");
 
-musicButton.addEventListener("click", function() {
 
-    if (siteMusic.paused) {
+musicButton.addEventListener(
+    "click",
+    function() {
 
-        siteMusic.play()
-            .then(function() {
+        if (siteMusic.paused) {
 
-                musicButton.textContent = "❚❚";
+            siteMusic
+                .play()
+                .then(
+                    function() {
 
-            })
-            .catch(function(error) {
+                        musicButton.textContent =
+                            "❚❚";
 
-                console.error(
-                    "Music couldn't play:",
-                    error
+                    }
+                )
+                .catch(
+                    function(error) {
+
+                        console.error(
+                            "Music couldn't play:",
+                            error
+                        );
+
+                    }
                 );
 
-            });
+        } else {
 
-    } else {
+            siteMusic.pause();
 
-        siteMusic.pause();
+            musicButton.textContent =
+                "▶";
 
-        musicButton.textContent = "▶";
+        }
 
     }
+);
 
-});
 
-
-/* CLIPPY TEXT */
+/* =========================
+   CLIPPY
+========================= */
 
 const clippyLines = [
+
     "hey :3",
     "meow/",
     "what are u doing",
@@ -2435,10 +3020,15 @@ const clippyLines = [
     "what if u added another cat",
     ":3",
     ":P"
+
 ];
 
+
 const clippyBubble =
-    document.getElementById("clippyBubble");
+    document.getElementById(
+        "clippyBubble"
+    );
+
 
 function clippyTalk() {
 
@@ -2450,73 +3040,112 @@ function clippyTalk() {
             )
         ];
 
-    clippyBubble.textContent = line;
+
+    clippyBubble.textContent =
+        line;
 
 }
 
+
 let clippyTimer = null;
+
 
 function startClippy() {
 
     if (clippyTimer) {
-        clearInterval(clippyTimer);
+
+        clearInterval(
+            clippyTimer
+        );
+
     }
 
+
     clippyTimer =
-        setInterval(clippyTalk, 15000);
+        setInterval(
+            clippyTalk,
+            15000
+        );
 
 }
+
 
 startClippy();
 
 
-/* DRAG CLIPPY */
+/* =========================
+   DRAG CLIPPY
+========================= */
 
 const clippy =
-    document.getElementById("ralseiClippy");
+    document.getElementById(
+        "ralseiClippy"
+    );
+
 
 let draggingClippy = false;
 
 let clippyOffsetX = 0;
 let clippyOffsetY = 0;
 
-clippy.addEventListener("mousedown", function(e) {
 
-    draggingClippy = true;
+clippy.addEventListener(
+    "mousedown",
+    function(e) {
 
-    const rect =
-        clippy.getBoundingClientRect();
+        draggingClippy = true;
 
-    clippyOffsetX =
-        e.clientX - rect.left;
 
-    clippyOffsetY =
-        e.clientY - rect.top;
+        const rect =
+            clippy.getBoundingClientRect();
 
-    clippy.style.right = "auto";
-    clippy.style.bottom = "auto";
 
-    e.preventDefault();
+        clippyOffsetX =
+            e.clientX - rect.left;
 
-});
+        clippyOffsetY =
+            e.clientY - rect.top;
 
-document.addEventListener("mousemove", function(e) {
 
-    if (!draggingClippy) return;
+        clippy.style.right =
+            "auto";
 
-    clippy.style.left =
-        `${e.clientX - clippyOffsetX}px`;
+        clippy.style.bottom =
+            "auto";
 
-    clippy.style.top =
-        `${e.clientY - clippyOffsetY}px`;
 
-});
+        e.preventDefault();
 
-document.addEventListener("mouseup", function() {
+    }
+);
 
-    draggingClippy = false;
 
-});
+document.addEventListener(
+    "mousemove",
+    function(e) {
+
+        if (!draggingClippy) return;
+
+
+        clippy.style.left =
+            `${e.clientX - clippyOffsetX}px`;
+
+
+        clippy.style.top =
+            `${e.clientY - clippyOffsetY}px`;
+
+    }
+);
+
+
+document.addEventListener(
+    "mouseup",
+    function() {
+
+        draggingClippy = false;
+
+    }
+);
 
 </script>
 
