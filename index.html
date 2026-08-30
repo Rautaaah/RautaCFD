@@ -1719,6 +1719,106 @@ a:visited {
     cursor:default;
 }
 
+
+/* =========================================================
+   GAMES FOLDER
+========================================================= */
+
+#gamesFolderPanel{
+    width:650px;
+    min-height:0;
+}
+
+.explorer-games-grid{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(105px,1fr));
+    gap:14px;
+    padding:16px 0;
+}
+
+.explorer-game-card{
+    min-width:0;
+    padding:10px 6px;
+    border:1px solid transparent;
+    text-align:center;
+    cursor:pointer;
+}
+
+.explorer-game-card:hover{
+    background:#dbe8ff;
+    border-color:#8aaee8;
+}
+
+.explorer-game-icon{
+    width:72px;
+    height:72px;
+    margin:0 auto 7px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#d4d0c8;
+    border-top:2px solid white;
+    border-left:2px solid white;
+    border-right:2px solid #555;
+    border-bottom:2px solid #555;
+    color:#222;
+    font:bold 18px Tahoma,Arial,sans-serif;
+}
+
+.explorer-game-name{
+    color:#222;
+    font-size:10px;
+    overflow-wrap:anywhere;
+}
+
+@media(max-width:700px){
+    #gamesFolderPanel{
+        width:calc(100vw - 20px);
+    }
+
+    .explorer-games-grid{
+        grid-template-columns:repeat(2,minmax(105px,1fr));
+    }
+}
+
+
+.rautatify-help{
+    margin-top:10px;
+    padding:10px;
+    background:#eee;
+    border-top:2px solid #777;
+    border-left:2px solid #777;
+    border-right:2px solid white;
+    border-bottom:2px solid white;
+    color:#222;
+    font-family:Tahoma,Arial,sans-serif;
+    font-size:10px;
+}
+
+.rautatify-help.hidden{
+    display:none;
+}
+
+.rautatify-help ol{
+    margin:7px 0 7px 18px;
+    padding:0;
+}
+
+.rautatify-help code{
+    background:#fff;
+    padding:1px 3px;
+    border:1px solid #ccc;
+    font-family:"Courier New",monospace;
+}
+
+.rautatify-help pre{
+    margin:7px 0;
+    padding:8px;
+    overflow:auto;
+    background:#1e1e1e;
+    color:#fff;
+    font:10px "Courier New",monospace;
+}
 /* =========================================================
    MONACO
 ========================================================= */
@@ -3069,6 +3169,14 @@ a:visited {
                 ▶ play
             </button>
 
+            <button
+                class="track-action"
+                onclick="document.getElementById('rautatifyMusicHelp').classList.toggle('hidden')"
+                style="margin-left:5px;"
+            >
+                ? music
+            </button>
+
         </div>
 
         <div
@@ -3174,6 +3282,44 @@ a:visited {
         </div>
 
     </div>
+
+
+<div
+    id="rautatifyMusicHelp"
+    class="rautatify-help hidden"
+>
+
+    <strong>How to add your own music</strong>
+
+    <ol>
+        <li>
+            Put your MP3/OGG file in your website's public
+            <code>/music/</code> folder.
+        </li>
+
+        <li>
+            Open the <code>rautatifyTracks</code> list in this HTML.
+        </li>
+
+        <li>
+            Give your track a name, artist, and source path, like:
+            <code>/music/my-song.mp3</code>
+        </li>
+    </ol>
+
+    <pre>{
+    name: "my song",
+    artist: "me",
+    src: "/music/my-song.mp3"
+}</pre>
+
+    <p>
+        Then refresh the page. The track will use the normal
+        Rautatify audio player.
+    </p>
+
+</div>
+
 
     <div class="player">
 
@@ -3869,8 +4015,8 @@ a:visited {
             color:#666;
         "
     >
-        The image is uploaded to the configured public image host.
-        The returned direct URL can be placed into an image embed.
+        The image is processed locally in your browser.
+        The image can be opened or saved locally from the result.
     </p>
 
 </div>
@@ -3961,7 +4107,7 @@ a:visited {
             color:#666;
         "
     >
-        Temporary uploads use a one-hour expiry.
+        Temporary images are kept in this browser for one hour.
     </p>
 
 </div>
@@ -4266,6 +4412,249 @@ a:visited {
     </button>
 </div>
 </div>
+
+
+<!-- =========================================================
+     GAMES FOLDER
+========================================================= -->
+
+<div
+    class="panel hidden"
+    id="gamesFolderPanel"
+>
+
+<div class="panel-title">
+
+    <span>
+        Games - File Explorer
+    </span>
+
+    <div class="window-buttons">
+
+        <button
+            class="window-button"
+            onclick="minimizePanel('gamesFolderPanel')"
+        >
+            −
+        </button>
+
+        <button
+            class="window-button close"
+            onclick="closePanel('gamesFolderPanel')"
+        >
+            ×
+        </button>
+
+    </div>
+
+</div>
+
+<div class="panel-content">
+
+    <div class="explorer-window">
+
+        <div class="explorer-toolbar">
+
+            <button
+                class="explorer-tool"
+                type="button"
+            >
+                <span class="explorer-tool-icon">◀</span>
+                Back
+            </button>
+
+            <button
+                class="explorer-tool"
+                type="button"
+            >
+                <span class="explorer-tool-icon">▶</span>
+            </button>
+
+            <button
+                class="explorer-tool"
+                type="button"
+            >
+                <span class="explorer-tool-icon">⬆</span>
+            </button>
+
+            <button
+                class="explorer-tool"
+                type="button"
+                onclick="gameFolderSearch()"
+            >
+                <span class="explorer-tool-icon">🔎</span>
+                Search
+            </button>
+
+            <button
+                class="explorer-tool"
+                type="button"
+            >
+                <span class="explorer-tool-icon">📁</span>
+                Folders
+            </button>
+
+        </div>
+
+        <div class="explorer-address">
+
+            <span class="explorer-address-label">
+                Address
+            </span>
+
+            <div class="explorer-address-path">
+                My Computer\Games
+            </div>
+
+            <div class="explorer-address-go">
+                Go
+            </div>
+
+        </div>
+
+        <div class="explorer-main">
+
+            <div class="explorer-heading">
+                Games Stored on This Computer
+            </div>
+
+            <div
+                id="gamesFolderFiles"
+                class="explorer-games-grid"
+            >
+
+                <div
+                    class="explorer-game-card"
+                    data-game-panel="game1Panel"
+                    onclick="openGameFromFolder(this)"
+                >
+                    <div class="explorer-game-icon">
+                        👾
+                    </div>
+                    <div class="explorer-game-name">
+                        alien destroyer.exe
+                    </div>
+                </div>
+
+                <div
+                    class="explorer-game-card"
+                    data-game-panel="snakePanel"
+                    onclick="openGameFromFolder(this)"
+                >
+                    <div class="explorer-game-icon">
+                        🐍
+                    </div>
+                    <div class="explorer-game-name">
+                        snake.exe
+                    </div>
+                </div>
+
+                <div
+                    class="explorer-game-card"
+                    data-game-panel="pongPanel"
+                    onclick="openGameFromFolder(this)"
+                >
+                    <div class="explorer-game-icon">
+                        🏓
+                    </div>
+                    <div class="explorer-game-name">
+                        rauta pong.exe
+                    </div>
+                </div>
+
+                <div
+                    class="explorer-game-card"
+                    data-game-panel="minesweeperPanel"
+                    onclick="openGameFromFolder(this)"
+                >
+                    <div class="explorer-game-icon">
+                        💣
+                    </div>
+                    <div class="explorer-game-name">
+                        minesweeper.exe
+                    </div>
+                </div>
+
+                <div
+                    class="explorer-game-card"
+                    data-game-panel="game2048Panel"
+                    onclick="openGameFromFolder(this)"
+                >
+                    <div class="explorer-game-icon">
+                        2048
+                    </div>
+                    <div class="explorer-game-name">
+                        2048.exe
+                    </div>
+                </div>
+
+                <div
+                    class="explorer-game-card"
+                    data-game-panel="breakoutPanel"
+                    onclick="openGameFromFolder(this)"
+                >
+                    <div class="explorer-game-icon">
+                        🧱
+                    </div>
+                    <div class="explorer-game-name">
+                        breakout.exe
+                    </div>
+                </div>
+
+                <div
+                    class="explorer-game-card"
+                    data-game-panel="tictactoePanel"
+                    onclick="openGameFromFolder(this)"
+                >
+                    <div class="explorer-game-icon">
+                        XO
+                    </div>
+                    <div class="explorer-game-name">
+                        tic tac toe.exe
+                    </div>
+                </div>
+
+                <div
+                    class="explorer-game-card"
+                    data-game-panel="flappyPanel"
+                    onclick="openGameFromFolder(this)"
+                >
+                    <div class="explorer-game-icon">
+                        🐤
+                    </div>
+                    <div class="explorer-game-name">
+                        flappy rauta.exe
+                    </div>
+                </div>
+
+                <div
+                    class="explorer-game-card"
+                    data-game-panel="memoryPanel"
+                    onclick="openGameFromFolder(this)"
+                >
+                    <div class="explorer-game-icon">
+                        🧠
+                    </div>
+                    <div class="explorer-game-name">
+                        memory.exe
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="explorer-statusbar">
+            <span>9 games</span>
+            <span>My Computer</span>
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
 
 <!-- =========================================================
      CHANGELOG
@@ -4717,6 +5106,41 @@ for(let i = 0; i < 60; i++){
 ========================================================= -->
 
 <div class="desktop-icons">
+
+
+<!-- GAMES FOLDER -->
+
+<div
+    class="desktop-icon"
+    data-panel="gamesFolderPanel"
+    style="
+        left:425px;
+        top:450px;
+    "
+>
+
+    <div
+        class="app-icon"
+        style="
+            background:
+                linear-gradient(
+                    135deg,
+                    #f6c85f,
+                    #b77b16
+                );
+        "
+    >
+        📁
+    </div>
+
+    <span>
+        Games
+    </span>
+
+</div>
+
+
+
 
 
 <!-- CONFUSED GIRLS FOLDER -->
@@ -5269,6 +5693,10 @@ const panelNames = {
 
 function openPanel(id){
 
+    playRautaSFX(
+        "open"
+    );
+
     const panel =
         document.getElementById(id);
 
@@ -5291,6 +5719,10 @@ function openPanel(id){
 
 function minimizePanel(id){
 
+    playRautaSFX(
+        "close"
+    );
+
     const panel =
         document.getElementById(id);
 
@@ -5306,6 +5738,10 @@ function minimizePanel(id){
 
 
 function closePanel(id){
+
+    playRautaSFX(
+        "close"
+    );
 
     const panel =
         document.getElementById(id);
@@ -8748,9 +9184,12 @@ async function uploadRautaImage(temporary){
         !fileInput.files ||
         !fileInput.files[0]
     ){
-
         result.textContent =
-            "please choose an image first :(";
+            "please choose an image first :3";
+
+        playRautaSFX(
+            "error"
+        );
 
         return;
     }
@@ -8758,109 +9197,177 @@ async function uploadRautaImage(temporary){
     const file =
         fileInput.files[0];
 
-    if(!file.type.startsWith("image/")){
-
+    if(
+        !file.type.startsWith(
+            "image/"
+        )
+    ){
         result.textContent =
             "that file is not an image :(";
+
+        playRautaSFX(
+            "error"
+        );
+
+        return;
+    }
+
+    if(
+        file.size >
+        8 * 1024 * 1024
+    ){
+        result.textContent =
+            "image is over the 8 MB browser limit :(";
+
+        playRautaSFX(
+            "error"
+        );
 
         return;
     }
 
     result.textContent =
-        "uploading... :3";
+        "processing image... :3";
 
     try{
 
-        const form =
-            new FormData();
+        const dataUrl =
+            await new Promise(
+                (
+                    resolve,
+                    reject
+                ) => {
 
-        form.append(
-            "reqtype",
-            "fileupload"
-        );
+                    const reader =
+                        new FileReader();
 
-        form.append(
-            "fileToUpload",
-            file
-        );
+                    reader.onload =
+                        () =>
+                            resolve(
+                                String(
+                                    reader.result
+                                )
+                            );
 
-        let endpoint;
+                    reader.onerror =
+                        () =>
+                            reject(
+                                new Error(
+                                    "could not read image"
+                                )
+                            );
 
-        if(temporary){
+                    reader.readAsDataURL(
+                        file
+                    );
 
-            form.append(
-                "time",
-                "1h"
-            );
-
-            endpoint =
-                "https://litterbox.catbox.moe/resources/internals/api.php";
-
-        }
-        else{
-
-            endpoint =
-                "https://catbox.moe/user/api.php";
-
-        }
-
-        const response =
-            await fetch(
-                endpoint,
-                {
-                    method:
-                        "POST",
-                    body:
-                        form
                 }
             );
 
-        if(!response.ok)
-            throw new Error(
-                "upload failed (" +
-                response.status +
-                ")"
+        result.innerHTML =
+            `
+            <strong>
+                ${
+                    temporary
+                        ? "temporary image ready! :3"
+                        : "RautaImage ready! :3"
+                }
+            </strong>
+            <br>
+            <a
+                href="${escapeHtml(dataUrl)}"
+                download="${escapeHtml(file.name)}"
+            >
+                open / save image
+            </a>
+            <br>
+            <small>
+                local browser image • no Catbox fetch required
+            </small>
+            `;
+
+        const preview =
+            document.createElement(
+                "img"
             );
 
-        const url =
-            (await response.text()).trim();
+        preview.src =
+            dataUrl;
 
-        if(
-            !url ||
-            !/^https?:\/\//i.test(url)
-        ){
+        preview.alt =
+            file.name;
 
-            throw new Error(
-                url ||
-                "the host did not return a URL"
+        preview.style.cssText =
+            "display:block;max-width:100%;max-height:300px;margin-top:10px;border:1px solid #999;";
+
+        result.appendChild(
+            preview
+        );
+
+        try{
+
+            localStorage.setItem(
+                temporary
+                    ? "rauta_temp_image_data"
+                    : "rauta_image_data",
+                JSON.stringify({
+                    name:file.name,
+                    type:file.type,
+                    dataUrl:dataUrl,
+                    expires:
+                        temporary
+                            ? Date.now() + 3600000
+                            : null
+                })
             );
 
         }
+        catch(storageError){
 
-        result.innerHTML =
-            `<a href="${escapeHtml(url)}" target="_blank" rel="noopener">${escapeHtml(url)}</a>`;
+            console.warn(
+                "Could not save image locally:",
+                storageError
+            );
+        }
+
+        playRautaSFX(
+            "click"
+        );
 
     }
     catch(error){
 
         console.error(
-            "Rauta image upload failed:",
+            "Rauta image processing failed:",
             error
         );
 
         result.textContent =
-            "upload failed: " +
+            "couldn't process image: " +
             (
                 error.message ||
                 "unknown error"
             );
 
+        playRautaSFX(
+            "error"
+        );
     }
-
 }
 
+function restoreRautaLocalImage(
+    temporary
+){
 
-async function copyImageLink(resultId){
+    const key =
+        temporary
+            ? "rauta_temp_image_data"
+            : "rauta_image_data";
+
+    const resultId =
+        temporary
+            ? "rautaTempImageResult"
+            : "rautaImageResult";
 
     const result =
         document.getElementById(
@@ -8870,45 +9377,92 @@ async function copyImageLink(resultId){
     if(!result)
         return;
 
-    const link =
-        result.querySelector("a");
-
-    if(!link){
-
-        result.textContent =
-            "there is no image link to copy yet :(";
-
-        return;
-    }
-
     try{
 
-        await navigator.clipboard.writeText(
-            link.href
-        );
+        const raw =
+            localStorage.getItem(
+                key
+            );
 
-        const oldText =
-            result.innerHTML;
+        if(!raw)
+            return;
+
+        const item =
+            JSON.parse(
+                raw
+            );
+
+        if(
+            item.expires &&
+            Date.now() >=
+            item.expires
+        ){
+
+            localStorage.removeItem(
+                key
+            );
+
+            return;
+        }
 
         result.innerHTML =
-            oldText +
-            "<br><strong>copied! :3</strong>";
+            `
+            <strong>
+                restored local image :3
+            </strong>
+            <br>
+            <a
+                href="${escapeHtml(item.dataUrl)}"
+                download="${escapeHtml(item.name)}"
+            >
+                open / save image
+            </a>
+            `;
+
+        const preview =
+            document.createElement(
+                "img"
+            );
+
+        preview.src =
+            item.dataUrl;
+
+        preview.alt =
+            item.name ||
+            "local image";
+
+        preview.style.cssText =
+            "display:block;max-width:100%;max-height:300px;margin-top:10px;border:1px solid #999;";
+
+        result.appendChild(
+            preview
+        );
+
+        if(item.expires){
+
+            setTimeout(
+                () => {
+                    localStorage.removeItem(
+                        key
+                    );
+                },
+                Math.max(
+                    0,
+                    item.expires -
+                    Date.now()
+                )
+            );
+        }
 
     }
     catch(error){
 
-        console.error(
-            "Could not copy image URL:",
+        console.warn(
+            "Could not restore local image:",
             error
         );
-
-        result.textContent =
-            "couldn't copy automatically; copy the link manually.";
-
     }
-
 }
-
 
 function escapeHtml(value){
 
@@ -9836,6 +10390,304 @@ function flipMemoryCard(index){
 }
 
 resetMemoryGame();
+
+
+/* =========================================================
+   GAMES FOLDER
+========================================================= */
+
+function openGameFromFolder(card){
+
+    if(!card)
+        return;
+
+    const panel =
+        card.dataset.gamePanel;
+
+    if(!panel)
+        return;
+
+    openPanel(
+        panel
+    );
+}
+
+function gameFolderSearch(){
+
+    const term =
+        window.prompt(
+            "Search games:",
+            ""
+        );
+
+    if(
+        term === null
+    )
+        return;
+
+    const needle =
+        term
+            .trim()
+            .toLowerCase();
+
+    document
+        .querySelectorAll(
+            "#gamesFolderFiles .explorer-game-card"
+        )
+        .forEach(
+            card => {
+
+                const name =
+                    card
+                        .querySelector(
+                            ".explorer-game-name"
+                        )
+                        .textContent
+                        .toLowerCase();
+
+                card.style.display =
+                    !needle ||
+                    name.includes(
+                        needle
+                    )
+                        ? ""
+                        : "none";
+            }
+        );
+}
+
+
+/* =========================================================
+   RAUTA SFX SYSTEM
+========================================================= */
+let rautaAudioContext = null;
+
+function getRautaAudioContext(){
+    if(!rautaAudioContext){
+        const Ctx =
+            window.AudioContext ||
+            window.webkitAudioContext;
+
+        if(!Ctx)
+            return null;
+
+        rautaAudioContext =
+            new Ctx();
+    }
+
+    if(
+        rautaAudioContext.state ===
+        "suspended"
+    )
+        rautaAudioContext.resume().catch(
+            () => {}
+        );
+
+    return rautaAudioContext;
+}
+
+function rautaTone(
+    freq,
+    duration,
+    type,
+    volume
+){
+
+    const ctx =
+        getRautaAudioContext();
+
+    if(!ctx)
+        return;
+
+    const osc =
+        ctx.createOscillator();
+
+    const gain =
+        ctx.createGain();
+
+    const now =
+        ctx.currentTime;
+
+    osc.type =
+        type || "square";
+
+    osc.frequency.value =
+        freq;
+
+    gain.gain.setValueAtTime(
+        .0001,
+        now
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        volume || .02,
+        now + .008
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        .0001,
+        now + duration
+    );
+
+    osc.connect(
+        gain
+    );
+
+    gain.connect(
+        ctx.destination
+    );
+
+    osc.start(now);
+    osc.stop(
+        now + duration + .02
+    );
+}
+
+const rautaSFXFiles = {
+    click: "/sfx/click.mp3",
+    open: "/sfx/open.mp3",
+    close: "/sfx/close.mp3",
+    error: "/sfx/error.mp3",
+    game: "/sfx/game.mp3"
+};
+
+const rautaSFXCache = {};
+
+function playRautaSFX(
+    name
+){
+
+    const src =
+        rautaSFXFiles[
+            name
+        ];
+
+    if(!src)
+        return;
+
+    let audio =
+        rautaSFXCache[
+            name
+        ];
+
+    if(!audio){
+
+        audio =
+            new Audio(
+                src
+            );
+
+        audio.preload =
+            "auto";
+
+        audio.volume =
+            .34;
+
+        rautaSFXCache[
+            name
+        ] =
+            audio;
+    }
+
+    audio.currentTime =
+        0;
+
+    audio.play().catch(
+        () => {
+            playRautaSynthSFX(
+                name
+            );
+        }
+    );
+}
+
+function playRautaSynthSFX(
+    name
+){
+
+    const ctx =
+        getRautaAudioContext();
+
+    if(
+        !ctx ||
+        ctx.state === "suspended"
+    )
+        return;
+
+    const settings = {
+        click: [680,.035,"square"],
+        open: [520,.055,"square"],
+        close: [300,.07,"square"],
+        error: [150,.10,"sawtooth"],
+        game: [820,.06,"triangle"]
+    };
+
+    const set =
+        settings[
+            name
+        ] ||
+        settings.click;
+
+    rautaTone(
+        set[0],
+        set[1],
+        set[2],
+        .018
+    );
+}
+
+document.addEventListener(
+    "pointerdown",
+    function(e){
+
+        const target =
+            e.target.closest(
+                "button, .desktop-icon, .track, .explorer-game-card"
+            );
+
+        if(
+            !target ||
+            target.id ===
+                "enterButton"
+        )
+            return;
+
+        if(
+            target.closest(
+                ".game-content"
+            )
+        ){
+            playRautaSFX(
+                "game"
+            );
+        }
+        else{
+            playRautaSFX(
+                "click"
+            );
+        }
+    }
+);
+
+document.addEventListener(
+    "keydown",
+    function(e){
+
+        if(
+            [
+                "Enter",
+                " ",
+                "ArrowUp",
+                "ArrowDown",
+                "ArrowLeft",
+                "ArrowRight"
+            ].includes(e.key)
+        )
+            playRautaSFX(
+                "game"
+            );
+    }
+);
 
 /* =========================================================
    DESELECT ICONS
