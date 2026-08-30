@@ -13,7 +13,6 @@
 <meta name="theme-color" content="#8B5CF6">
 
 <style>
-
 * {
     margin: 0;
     padding: 0;
@@ -44,7 +43,9 @@ body {
     align-items: center;
     justify-content: center;
 
-    background: url("https://c.tenor.com/9gs1Eb5qSW4AAAAd/tenor.gif") center / cover no-repeat;
+    background:
+        url("https://c.tenor.com/9gs1Eb5qSW4AAAAd/tenor.gif")
+        center / cover no-repeat;
 
     z-index: 10000;
 
@@ -93,10 +94,6 @@ body {
     transform: translateY(1px);
 }
 
-/* =========================
-   SITE
-========================= */
-
 #site {
     position: fixed;
     inset: 0;
@@ -105,6 +102,10 @@ body {
 
     transition: opacity 1.5s ease;
 }
+
+/* =========================
+   BACKGROUND
+========================= */
 
 .background {
     position: absolute;
@@ -126,7 +127,8 @@ body {
 }
 
 /* =========================
-   PANELS
+   WINDOWS / PANELS
+   GLASS EFFECT ADDED HERE
 ========================= */
 
 .panel {
@@ -140,15 +142,18 @@ body {
 
     transform: translate(-50%, -50%);
 
-    background: #d4d0c8;
+    background: rgba(212, 208, 200, 0.72);
 
-    border-top: 2px solid #f4f4f4;
-    border-left: 2px solid #f4f4f4;
-    border-right: 2px solid #404040;
-    border-bottom: 2px solid #404040;
+    border-top: 2px solid rgba(255,255,255,0.85);
+    border-left: 2px solid rgba(255,255,255,0.85);
+    border-right: 2px solid rgba(64,64,64,0.8);
+    border-bottom: 2px solid rgba(64,64,64,0.8);
 
     box-shadow:
         5px 5px 15px rgba(0,0,0,0.7);
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 
     z-index: 20;
 }
@@ -170,10 +175,13 @@ body {
 
     background: linear-gradient(
         to right,
-        rgb(243, 110, 210) 0%,
-        rgb(122, 56, 105) 50%,
-        rgb(51, 24, 44) 100%
+        rgba(243, 110, 210, 0.88) 0%,
+        rgba(122, 56, 105, 0.88) 50%,
+        rgba(51, 24, 44, 0.88) 100%
     );
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 
     font-size: 12px;
     font-weight: bold;
@@ -187,9 +195,7 @@ body {
 
 .window-buttons {
     display: flex;
-
     gap: 2px;
-
     margin-left: auto;
 }
 
@@ -250,11 +256,15 @@ body {
     font-size: 12px;
 
     min-height: 170px;
+
+    background: rgba(212, 208, 200, 0.48);
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 }
 
 .panel-content h2 {
     margin-bottom: 10px;
-
     font-size: 18px;
 }
 
@@ -265,17 +275,21 @@ body {
 .panel-content hr {
     border: 0;
 
-    border-top: 1px solid #808080;
-    border-bottom: 1px solid white;
+    border-top: 1px solid rgba(128,128,128,0.8);
+    border-bottom: 1px solid rgba(255,255,255,0.8);
 
     margin: 12px 0;
 }
+
+/* =========================
+   LINKS / POWERED BY
+========================= */
 
 .powered-by {
     margin-top: 8px;
     margin-bottom: 0 !important;
 
-    color: #666;
+    color: #444;
     font-size: 10px;
     text-align: center;
 }
@@ -294,7 +308,8 @@ body {
 }
 
 /* =========================
-   CLOCK
+   ANALOG CLOCK
+   TIME-BOX IS TRANSPARENT
 ========================= */
 
 .time-box {
@@ -303,382 +318,222 @@ body {
     right: 15px;
     top: 15px;
 
-    width: 150px;
-    height: 180px;
+    width: 220px;
+    height: 285px;
 
-    padding: 10px;
+    padding: 0;
 
-    color: white;
-
-    background: rgba(20, 10, 30, 0.65);
-
-    border: 1px solid rgba(190, 150, 240, 0.45);
-    border-radius: 3px;
+    background: transparent;
+    border: none;
+    border-radius: 0;
 
     text-align: center;
 
     font-family: Tahoma, Arial, sans-serif;
-
-    backdrop-filter: blur(6px);
 
     cursor: move;
 
     resize: both;
     overflow: auto;
 
-    min-width: 120px;
-    min-height: 140px;
+    min-width: 180px;
+    min-height: 240px;
 
-    z-index: 1002;
+    z-index: 5000;
 }
 
-/* Analog clock */
-
-/* =========================
-   WINDOWS-STYLE ANALOG CLOCK
-========================= */
+/* The actual clock */
 
 .analog-clock {
-    width: 145px;
-    height: 145px;
-
-    margin: 0 auto 10px;
-
-    padding: 7px;
-
-    border-radius: 50%;
-
-    background:
-        linear-gradient(
-            145deg,
-            #111 0%,
-            #444 35%,
-            #111 70%,
-            #555 100%
-        );
-
-    box-shadow:
-        0 4px 8px rgba(0,0,0,0.8),
-        inset 0 2px 2px rgba(255,255,255,0.35),
-        inset 0 -3px 4px rgba(0,0,0,0.8);
-
     position: relative;
-}
 
-/* Inner clock face */
+    width: 210px;
+    height: 210px;
 
-.clock-face {
-    width: 100%;
-    height: 100%;
-
-    position: relative;
+    margin: 0 auto;
 
     border-radius: 50%;
 
     background:
         radial-gradient(
-            circle at 45% 35%,
-            #ffffff 0%,
-            #eeeeee 55%,
-            #cfcfcf 100%
+            circle at 50% 50%,
+            #f8f8f8 0%,
+            #eeeeee 68%,
+            #d8d8d8 100%
         );
 
-    border: 1px solid #777;
+    border: 8px solid #383838;
 
     box-shadow:
-        inset 0 1px 3px rgba(0,0,0,0.35),
-        inset 0 -2px 4px rgba(255,255,255,0.7);
+        inset 0 0 0 2px rgba(255,255,255,0.8),
+        inset 0 0 18px rgba(0,0,0,0.18),
+        0 7px 14px rgba(0,0,0,0.6);
+
+    border-radius: 50%;
 }
 
-/* =========================
-   CLOCK NUMBERS
-========================= */
+/* Clock center */
 
-.number {
+.clock-center {
     position: absolute;
 
-    width: 30px;
-    height: 25px;
+    width: 12px;
+    height: 12px;
 
-    margin-left: -15px;
-    margin-top: -12px;
-
-    text-align: center;
-
-    font-family:
-        Arial,
-        Tahoma,
-        sans-serif;
-
-    font-size: 22px;
-
-    font-weight: normal;
-
-    color: #111;
-
-    line-height: 25px;
-
-    z-index: 3;
-
-    text-shadow:
-        0 1px 0 white;
-}
-
-/* Positions */
-
-.n12 {
     left: 50%;
-    top: 14%;
-}
-
-.n1 {
-    left: 70%;
-    top: 19%;
-}
-
-.n2 {
-    left: 83%;
-    top: 32%;
-}
-
-.n3 {
-    left: 88%;
     top: 50%;
-}
 
-.n4 {
-    left: 83%;
-    top: 68%;
-}
-
-.n5 {
-    left: 70%;
-    top: 81%;
-}
-
-.n6 {
-    left: 50%;
-    top: 86%;
-}
-
-.n7 {
-    left: 30%;
-    top: 81%;
-}
-
-.n8 {
-    left: 17%;
-    top: 68%;
-}
-
-.n9 {
-    left: 12%;
-    top: 50%;
-}
-
-.n10 {
-    left: 17%;
-    top: 32%;
-}
-
-.n11 {
-    left: 30%;
-    top: 19%;
-}
-
-/* =========================
-   MINUTE TICKS
-========================= */
-
-.ticks {
-    position: absolute;
-
-    inset: 5px;
+    transform: translate(-50%, -50%);
 
     border-radius: 50%;
 
-    z-index: 1;
-}
-
-.tick {
-    position: absolute;
-
-    width: 1px;
-    height: 5px;
-
-    background: #555;
-
-    left: 50%;
-    top: 2px;
-
-    transform-origin:
-        50%
-        65px;
-}
-
-.tick.major {
-    width: 2px;
-    height: 7px;
-
     background: #222;
+
+    border: 2px solid #888;
+
+    z-index: 20;
 }
 
-/* =========================
-   CLOCK HANDS
-========================= */
+/* Hands */
 
-.clock-hand {
+.hand {
     position: absolute;
 
     left: 50%;
     bottom: 50%;
 
-    transform-origin:
-        bottom center;
+    transform-origin: bottom center;
 
-    transform:
-        translateX(-50%);
+    background: #1d1d1d;
 
-    border-radius: 4px;
-
-    z-index: 5;
-}
-
-/* Hour */
-
-.hour-hand {
-    width: 5px;
-    height: 34px;
-
-    background:
-        linear-gradient(
-            to right,
-            #111,
-            #444,
-            #111
-        );
-
-    box-shadow:
-        1px 1px 2px rgba(0,0,0,0.5);
-}
-
-/* Minute */
-
-.minute-hand {
-    width: 4px;
-    height: 48px;
-
-    background:
-        linear-gradient(
-            to right,
-            #111,
-            #444,
-            #111
-        );
-
-    box-shadow:
-        1px 1px 2px rgba(0,0,0,0.5);
-}
-
-/* Second */
-
-.second-hand {
-    width: 2px;
-    height: 55px;
-
-    background: #111;
-
-    box-shadow:
-        1px 1px 2px rgba(0,0,0,0.4);
-
-    z-index: 6;
-}
-
-/* =========================
-   CENTER PIN
-========================= */
-
-.clock-center {
-    position: absolute;
-
-    width: 11px;
-    height: 11px;
-
-    left: 50%;
-    top: 50%;
-
-    transform:
-        translate(-50%, -50%);
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle at 35% 30%,
-            #eeeeee,
-            #555 45%,
-            #111 100%
-        );
-
-    border: 1px solid #222;
-
-    box-shadow:
-        0 1px 2px rgba(0,0,0,0.7);
+    border-radius: 10px;
 
     z-index: 10;
 }
 
-/* =========================
-   DATE BOX
-========================= */
+.hour-hand {
+    width: 7px;
+    height: 52px;
 
-.clock-date {
+    margin-left: -3.5px;
+}
+
+.minute-hand {
+    width: 5px;
+    height: 75px;
+
+    margin-left: -2.5px;
+}
+
+.second-hand {
+    width: 2px;
+    height: 84px;
+
+    margin-left: -1px;
+
+    background: #4c8c75;
+}
+
+/* Numbers */
+
+.clock-number {
     position: absolute;
 
     left: 50%;
-    top: 43%;
-
-    transform:
-        translate(-50%, -50%);
+    top: 50%;
 
     width: 28px;
-    height: 18px;
+    height: 28px;
 
-    background:
-        linear-gradient(
-            to bottom,
-            #f5f5f5,
-            #d6d6d6
-        );
+    margin-left: -14px;
+    margin-top: -14px;
 
-    border: 1px solid #aaa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    color: #666;
+    color: #202020;
 
-    font-family:
-        Arial,
-        sans-serif;
+    font-family: Arial, sans-serif;
+    font-size: 24px;
+}
 
-    font-size: 12px;
+/* 12 positions */
 
+.n1  { transform: rotate(30deg) translateY(-80px) rotate(-30deg); }
+.n2  { transform: rotate(60deg) translateY(-80px) rotate(-60deg); }
+.n3  { transform: rotate(90deg) translateY(-80px) rotate(-90deg); }
+.n4  { transform: rotate(120deg) translateY(-80px) rotate(-120deg); }
+.n5  { transform: rotate(150deg) translateY(-80px) rotate(-150deg); }
+.n6  { transform: rotate(180deg) translateY(-80px) rotate(-180deg); }
+.n7  { transform: rotate(210deg) translateY(-80px) rotate(-210deg); }
+.n8  { transform: rotate(240deg) translateY(-80px) rotate(-240deg); }
+.n9  { transform: rotate(270deg) translateY(-80px) rotate(-270deg); }
+.n10 { transform: rotate(300deg) translateY(-80px) rotate(-300deg); }
+.n11 { transform: rotate(330deg) translateY(-80px) rotate(-330deg); }
+.n12 { transform: rotate(360deg) translateY(-80px) rotate(-360deg); }
+
+/* Little minute marks */
+
+.clock-mark {
+    position: absolute;
+
+    width: 2px;
+    height: 7px;
+
+    left: 50%;
+    top: 6px;
+
+    margin-left: -1px;
+
+    background: #666;
+
+    transform-origin: 1px 99px;
+}
+
+/* Every fifth mark is a bit bigger */
+
+.clock-mark.big {
+    width: 3px;
+    height: 10px;
+
+    margin-left: -1.5px;
+
+    background: #356f5b;
+}
+
+/* Digital time under clock */
+
+#currentTime {
+    margin-top: 8px;
+
+    color: white;
+
+    font-size: 18px;
     font-weight: bold;
 
-    line-height: 16px;
-
-    text-align: center;
-
-    box-shadow:
-        inset 0 1px white,
-        0 1px 1px rgba(0,0,0,0.3);
-
-    z-index: 4;
+    text-shadow:
+        1px 1px 3px black,
+        -1px -1px 3px black;
 }
+
+.time-label {
+    margin-top: 2px;
+
+    color: #e0e0e0;
+
+    font-size: 10px;
+
+    text-shadow: 1px 1px 3px black;
+}
+
 /* =========================
-   MUSIC
+   MUSIC BUTTON
 ========================= */
 
 .music-button {
     position: fixed;
+
     right: 20px;
     bottom: 75px;
 
@@ -725,7 +580,7 @@ body {
 .xp-button {
     padding: 5px 20px;
 
-    background: #d4d0c8;
+    background: rgba(212,208,200,0.8);
 
     border-top: 2px solid white;
     border-left: 2px solid white;
@@ -747,6 +602,7 @@ body {
 
 /* =========================
    NAVBAR
+   GLASS EFFECT ADDED HERE
 ========================= */
 
 .navbar {
@@ -765,20 +621,25 @@ body {
 
     background: linear-gradient(
         to bottom,
-        rgb(243, 110, 210) 0%,
-        rgb(122, 56, 105) 50%,
-        rgb(51, 24, 44) 100%
+        rgba(243, 110, 210, 0.72) 0%,
+        rgba(122, 56, 105, 0.72) 50%,
+        rgba(51, 24, 44, 0.78) 100%
     );
 
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 
-    border-top: 2px solid rgba(160,110,220,0.7);
+    border-top: 2px solid rgba(220,170,255,0.7);
 
     box-shadow:
         0 -2px 6px rgba(0,0,0,0.6);
 
     z-index: 1000;
 }
+
+/* =========================
+   DESKTOP ICONS
+========================= */
 
 .desktop-icons {
     position: absolute;
@@ -833,7 +694,6 @@ body {
 
 .desktop-icon.selected span {
     background: #316ac5;
-
     border: 1px dotted white;
 }
 
@@ -844,6 +704,10 @@ body {
 .desktop-icon.dragging {
     cursor: grabbing;
 }
+
+/* =========================
+   START BUTTON
+========================= */
 
 .logo {
     display: block;
@@ -883,6 +747,10 @@ body {
         #f0b900
     );
 }
+
+/* =========================
+   NAV LINKS
+========================= */
 
 .nav-links {
     display: flex;
@@ -926,6 +794,10 @@ body {
     border-color: rgba(200,160,255,0.7);
 }
 
+/* =========================
+   TASK BUTTONS
+========================= */
+
 .task-buttons {
     display: flex;
 
@@ -952,7 +824,10 @@ body {
 
     color: white;
 
-    background: rgba(25,10,40,0.65);
+    background: rgba(25,10,40,0.5);
+
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
 
     border-top: 1px solid rgba(200,160,255,0.45);
     border-left: 1px solid rgba(200,160,255,0.45);
@@ -991,6 +866,7 @@ body {
 
 .ralsei-clippy {
     position: fixed;
+
     right: 30px;
     bottom: 70px;
 
@@ -999,6 +875,7 @@ body {
     z-index: 9999;
 
     user-select: none;
+
     cursor: grab;
 }
 
@@ -1018,9 +895,13 @@ body {
 }
 
 .clippy-bubble {
-    background: white;
+    background: rgba(255,255,255,0.88);
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 
     border: 2px solid #333;
+
     border-radius: 8px;
 
     padding: 10px;
@@ -1062,13 +943,15 @@ body {
     z-index: 2;
 }
 
-.clippy-close:hover {
-    background: #ddd;
-}
-
 /* =========================
    FRIENDS
 ========================= */
+
+.friend-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
 
 .friend img {
     width: 110px;
@@ -1119,6 +1002,13 @@ body {
     height: 415px;
 }
 
+#friendsPanel {
+    width: 500px;
+}
+
+#newsletterPanel {
+    width: 440px;
+}
 </style>
 </head>
 
@@ -1129,11 +1019,9 @@ body {
 ========================= -->
 
 <div id="intro">
-
     <button id="enterButton">
         enter :3
     </button>
-
 </div>
 
 <audio id="signinMusic" preload="auto">
@@ -1193,8 +1081,7 @@ body {
             </p>
 
             <p>
-                TTHANKJ U TO MY FRIEND FOR THE DOMAIN :P
-                (his site: ralsei.cfd)
+                TTHANKJ U TO MY FRIEND FOR THE DOMAIN :P (his site: ralsei.cfd)
                 <br>
                 (I BASED IT OFF
                 <a
@@ -1205,8 +1092,7 @@ body {
             </p>
 
             <p>
-                i made this site for jokes and funs lowkey but i hope u enjoyed ur time here :P
-                (also this is a fork of ralsei.cfd)
+                i made this site for jokes and funs lowkey but i hope u enjoyed ur time here :P (also this is a fork of ralsei.cfd)
             </p>
 
             <p>
@@ -1275,23 +1161,19 @@ body {
             </p>
 
             <p>
-                i'm a video game creator, and i like to write stories
-                and i make ALOT OF MUSIC and a bunch of internet shit.
+                i'm a video game creator, and i like to write stories and i make ALOT OF MUSIC and a bunch of internet shit.
             </p>
 
             <hr>
 
             <p>
-                i wanted to make alot of stuff when i started using the internet,
-                like "what if this existed?" and "what if i made that?",
-                i love to create and DESTROY.
+                i wanted to make alot of stuff when i started using the internet, like "what if this existed?" and "what if i made that?", i love to create and DESTROY.
             </p>
 
             <hr>
 
             <p>
-                i got alot of hate so i don't like to do music as much as i wanted
-                to do but i learn everyday!!!!!!
+                i got alot of hate so i don't like to do music as much as i wanted to do but i learn everyday!!!!!!
             </p>
 
         </div>
@@ -1335,19 +1217,17 @@ body {
             <hr>
 
             <p>
-                <strong>redium.xyz</strong> - a 2017 Roblox revival i created
-                with my best friend @pokltyy after his first revival failed.
-                it originally started as reblox.vip, but staymad (owner of the name)
-                sent me death threats for it- now we have 150+ members (tysm all) :3
+                <strong>redium.xyz</strong> - a 2017 Roblox revival i created with my best friend @pokltyy
+                after his first revival failed. it originally started as reblox.vip,
+                but staymad (owner of the name) sent me death threats for it-
+                now we have 150+ members (tysm all) :3
             </p>
 
             <p>
                 <strong>mycontact</strong>
-                (<a href="http://mycontact.reblox.vip" target="_blank">
-                    mycontact.reblox.vip
-                </a>):
-                a Facebook 2009 type social media that i'm admin on
-                AND i help develop! with 30+ users (if i counted correctly-)
+                (<a href="http://mycontact.reblox.vip" target="_blank">mycontact.reblox.vip</a>):
+                a Facebook 2009 type social media that i'm admin on AND i help develop!
+                with 30+ users (if i counted correctly-)
             </p>
 
             <p>
@@ -1503,43 +1383,32 @@ body {
 
     <nav class="navbar">
 
-        <a
-            href="#"
-            class="logo"
-            onclick="openPanel('homePanel'); return false;">
+        <a href="#" class="logo" onclick="openPanel('homePanel'); return false;">
             rautatientori :P
         </a>
 
         <ul class="nav-links">
 
             <li>
-                <a
-                    href="#"
-                    onclick="openPanel('homePanel'); return false;">
+                <a href="#" onclick="openPanel('homePanel'); return false;">
                     meow
                 </a>
             </li>
 
             <li>
-                <a
-                    href="#"
-                    onclick="openPanel('aboutPanel'); return false;">
+                <a href="#" onclick="openPanel('aboutPanel'); return false;">
                     who is this chud
                 </a>
             </li>
 
             <li>
-                <a
-                    href="#"
-                    onclick="openPanel('projectsPanel'); return false;">
+                <a href="#" onclick="openPanel('projectsPanel'); return false;">
                     my stuff
                 </a>
             </li>
 
             <li>
-                <a
-                    href="#"
-                    onclick="openPanel('contactPanel'); return false;">
+                <a href="#" onclick="openPanel('contactPanel'); return false;">
                     talk to me :P
                 </a>
             </li>
@@ -1580,10 +1449,7 @@ body {
 
         </ul>
 
-        <div
-            class="task-buttons"
-            id="taskButtons">
-        </div>
+        <div class="task-buttons" id="taskButtons"></div>
 
         <div class="nav-right">
 
@@ -1599,63 +1465,105 @@ body {
     </nav>
 
 </div>
-
 </div>
 
 <!-- =========================
-     ANALOG + DIGITAL CLOCK
+     ANALOG CLOCK
 ========================= -->
 
-<div class="time-box">
+<div class="time-box" id="timeBox">
 
     <div class="analog-clock">
 
-        <div class="clock-face">
+        <div class="clock-number n12">12</div>
+        <div class="clock-number n1">1</div>
+        <div class="clock-number n2">2</div>
+        <div class="clock-number n3">3</div>
+        <div class="clock-number n4">4</div>
+        <div class="clock-number n5">5</div>
+        <div class="clock-number n6">6</div>
+        <div class="clock-number n7">7</div>
+        <div class="clock-number n8">8</div>
+        <div class="clock-number n9">9</div>
+        <div class="clock-number n10">10</div>
+        <div class="clock-number n11">11</div>
 
-            <!-- Minute ticks -->
-            <div class="ticks" id="clockTicks"></div>
+        <!-- Minute marks -->
 
-            <!-- Numbers -->
-            <div class="number n12">12</div>
-            <div class="number n1">1</div>
-            <div class="number n2">2</div>
-            <div class="number n3">3</div>
-            <div class="number n4">4</div>
-            <div class="number n5">5</div>
-            <div class="number n6">6</div>
-            <div class="number n7">7</div>
-            <div class="number n8">8</div>
-            <div class="number n9">9</div>
-            <div class="number n10">10</div>
-            <div class="number n11">11</div>
+        <div class="clock-mark big" style="transform: rotate(0deg);"></div>
+        <div class="clock-mark" style="transform: rotate(6deg);"></div>
+        <div class="clock-mark" style="transform: rotate(12deg);"></div>
+        <div class="clock-mark" style="transform: rotate(18deg);"></div>
+        <div class="clock-mark" style="transform: rotate(24deg);"></div>
+        <div class="clock-mark big" style="transform: rotate(30deg);"></div>
+        <div class="clock-mark" style="transform: rotate(36deg);"></div>
+        <div class="clock-mark" style="transform: rotate(42deg);"></div>
+        <div class="clock-mark" style="transform: rotate(48deg);"></div>
+        <div class="clock-mark" style="transform: rotate(54deg);"></div>
+        <div class="clock-mark big" style="transform: rotate(60deg);"></div>
+        <div class="clock-mark" style="transform: rotate(66deg);"></div>
+        <div class="clock-mark" style="transform: rotate(72deg);"></div>
+        <div class="clock-mark" style="transform: rotate(78deg);"></div>
+        <div class="clock-mark" style="transform: rotate(84deg);"></div>
+        <div class="clock-mark big" style="transform: rotate(90deg);"></div>
+        <div class="clock-mark" style="transform: rotate(96deg);"></div>
+        <div class="clock-mark" style="transform: rotate(102deg);"></div>
+        <div class="clock-mark" style="transform: rotate(108deg);"></div>
+        <div class="clock-mark" style="transform: rotate(114deg);"></div>
+        <div class="clock-mark big" style="transform: rotate(120deg);"></div>
+        <div class="clock-mark" style="transform: rotate(126deg);"></div>
+        <div class="clock-mark" style="transform: rotate(132deg);"></div>
+        <div class="clock-mark" style="transform: rotate(138deg);"></div>
+        <div class="clock-mark" style="transform: rotate(144deg);"></div>
+        <div class="clock-mark big" style="transform: rotate(150deg);"></div>
+        <div class="clock-mark" style="transform: rotate(156deg);"></div>
+        <div class="clock-mark" style="transform: rotate(162deg);"></div>
+        <div class="clock-mark" style="transform: rotate(168deg);"></div>
+        <div class="clock-mark" style="transform: rotate(174deg);"></div>
+        <div class="clock-mark big" style="transform: rotate(180deg);"></div>
+        <div class="clock-mark" style="transform: rotate(186deg);"></div>
+        <div class="clock-mark" style="transform: rotate(192deg);"></div>
+        <div class="clock-mark" style="transform: rotate(198deg);"></div>
+        <div class="clock-mark" style="transform: rotate(204deg);"></div>
+        <div class="clock-mark big" style="transform: rotate(210deg);"></div>
+        <div class="clock-mark" style="transform: rotate(216deg);"></div>
+        <div class="clock-mark" style="transform: rotate(222deg);"></div>
+        <div class="clock-mark" style="transform: rotate(228deg);"></div>
+        <div class="clock-mark" style="transform: rotate(234deg);"></div>
+        <div class="clock-mark big" style="transform: rotate(240deg);"></div>
+        <div class="clock-mark" style="transform: rotate(246deg);"></div>
+        <div class="clock-mark" style="transform: rotate(252deg);"></div>
+        <div class="clock-mark" style="transform: rotate(258deg);"></div>
+        <div class="clock-mark" style="transform: rotate(264deg);"></div>
+        <div class="clock-mark big" style="transform: rotate(270deg);"></div>
+        <div class="clock-mark" style="transform: rotate(276deg);"></div>
+        <div class="clock-mark" style="transform: rotate(282deg);"></div>
+        <div class="clock-mark" style="transform: rotate(288deg);"></div>
+        <div class="clock-mark" style="transform: rotate(294deg);"></div>
+        <div class="clock-mark big" style="transform: rotate(300deg);"></div>
+        <div class="clock-mark" style="transform: rotate(306deg);"></div>
+        <div class="clock-mark" style="transform: rotate(312deg);"></div>
+        <div class="clock-mark" style="transform: rotate(318deg);"></div>
+        <div class="clock-mark" style="transform: rotate(324deg);"></div>
+        <div class="clock-mark big" style="transform: rotate(330deg);"></div>
+        <div class="clock-mark" style="transform: rotate(336deg);"></div>
+        <div class="clock-mark" style="transform: rotate(342deg);"></div>
+        <div class="clock-mark" style="transform: rotate(348deg);"></div>
+        <div class="clock-mark" style="transform: rotate(354deg);"></div>
 
-            <!-- Date -->
-            <div class="clock-date" id="clockDate">
-                16
-            </div>
+        <div class="hand hour-hand" id="hourHand"></div>
+        <div class="hand minute-hand" id="minuteHand"></div>
+        <div class="hand second-hand" id="secondHand"></div>
 
-            <!-- Hands -->
-            <div class="clock-hand hour-hand"></div>
-
-            <div class="clock-hand minute-hand"></div>
-
-            <div class="clock-hand second-hand"></div>
-
-            <div class="clock-center"></div>
-
-        </div>
+        <div class="clock-center"></div>
 
     </div>
 
-    <div id="currentTime">
-        00:00:00
-    </div>
-
-    <div class="time-label">
-        time for me
-    </div>
+    <div id="currentTime">00:00:00</div>
+    <div class="time-label">time for me</div>
 
 </div>
+
 <!-- =========================
      DESKTOP ICONS
 ========================= -->
@@ -1671,9 +1579,7 @@ body {
             src="http://rauta.cfd/aliendestroyers.png"
             alt="Alien Destroyer">
 
-        <span>
-            alien destroyer
-        </span>
+        <span>alien destroyer</span>
 
     </div>
 
@@ -1686,9 +1592,7 @@ body {
             src="http://rauta.cfd/changelog.png"
             alt="Cat">
 
-        <span>
-            changelogs!!!
-        </span>
+        <span>changelogs!!!</span>
 
     </div>
 
@@ -1697,29 +1601,23 @@ body {
         data-panel="chatroomPanel"
         style="left: 25px; top: 270px;">
 
-        <img
-            src="game3.png"
-            alt="Game">
+        <img src="game3.png" alt="Game">
 
-        <span>
-            chatroom.exe
-        </span>
+        <span>chatroom.exe</span>
 
     </div>
 
 </div>
 
 <!-- =========================
-     GAME PANEL
+     ALIEN DESTROYER
 ========================= -->
 
 <div class="panel hidden" id="game1Panel">
 
     <div class="panel-title">
 
-        <span>
-            alien destroyer.exe
-        </span>
+        <span>alien destroyer.exe</span>
 
         <div class="window-buttons">
 
@@ -1761,9 +1659,7 @@ body {
 
     <div class="panel-title">
 
-        <span>
-            changelog.exe
-        </span>
+        <span>changelog.exe</span>
 
         <div class="window-buttons">
 
@@ -1819,8 +1715,7 @@ body {
         <h3>8/10/26 v1.1.1 - cats!!!</h3>
 
         <p>
-            added the cats page
-            (u can go there from the cats button!!!)
+            added the cats page (u can go there from the cats button!!!)
         </p>
 
         <hr>
@@ -1873,9 +1768,7 @@ body {
 
     <div class="panel-title">
 
-        <span>
-            chatroom.exe
-        </span>
+        <span>chatroom.exe</span>
 
         <div class="window-buttons">
 
@@ -1922,9 +1815,7 @@ body {
         alt="Ralsei Clippy"
         class="clippy-image">
 
-    <div
-        class="clippy-bubble"
-        id="clippyBubble">
+    <div class="clippy-bubble" id="clippyBubble">
         hey :3
     </div>
 
@@ -1938,9 +1829,7 @@ body {
 
     <div class="panel-title">
 
-        <span>
-            friends.exe
-        </span>
+        <span>friends.exe</span>
 
         <div class="window-buttons">
 
@@ -1967,39 +1856,19 @@ body {
         <div class="friend-grid">
 
             <a class="friend" href="#">
-                <img
-                    src="https://rauta.cfd/rautabadge.png"
-                    alt="rauta">
+                <img src="https://rauta.cfd/rautabadge.png" alt="rauta">
             </a>
 
-            <a
-                class="friend"
-                href="mycontact.reblox.vip">
-
-                <img
-                    src="poklty.png"
-                    alt="poklty">
-
+            <a class="friend" href="http://mycontact.reblox.vip">
+                <img src="poklty.png" alt="poklty">
             </a>
 
-            <a
-                class="friend"
-                href="https://rauta.rauta.cfd">
-
-                <img
-                    src="YOUR-IMAGE-URL.png"
-                    alt="rautatientori">
-
+            <a class="friend" href="https://rauta.rauta.cfd">
+                <img src="YOUR-IMAGE-URL.png" alt="rautatientori">
             </a>
 
-            <a
-                class="friend"
-                href="https://toxicchemical.xyz">
-
-                <img
-                    src="YOUR-IMAGE-URL.png"
-                    alt="quivering iirc">
-
+            <a class="friend" href="https://toxicchemical.xyz">
+                <img src="YOUR-IMAGE-URL.png" alt="quivering iirc">
             </a>
 
         </div>
@@ -2016,9 +1885,7 @@ body {
 
     <div class="panel-title">
 
-        <span>
-            newsletter.exe
-        </span>
+        <span>newsletter.exe</span>
 
         <div class="window-buttons">
 
@@ -2040,13 +1907,10 @@ body {
 
     <div class="panel-content">
 
-        <h2>
-            rauta.cfd newsletters
-        </h2>
+        <h2>rauta.cfd newsletters</h2>
 
         <p>
-            sign up for updates about anything!
-            blogs, projects...zzz i fell asleep
+            sign up for updates about anything! blogs, projects...zzz i fell asleep
         </p>
 
         <form
@@ -2080,86 +1944,61 @@ body {
 
 </div>
 
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
 <script>
 
-/* =========================
-   INTRO
-========================= */
+/* INTRO */
 
-const intro =
-    document.getElementById("intro");
-
-const site =
-    document.getElementById("site");
-
-const enterButton =
-    document.getElementById("enterButton");
-
-const music =
-    document.getElementById("signinMusic");
+const intro = document.getElementById("intro");
+const site = document.getElementById("site");
+const enterButton = document.getElementById("enterButton");
+const signinMusic = document.getElementById("signinMusic");
 
 enterButton.addEventListener("click", function() {
 
-    music.play().catch(function(error) {
-
-        console.log(
-            "son btw i couldnt start the audio",
-            error
-        );
-
+    signinMusic.play().catch(function(error) {
+        console.log("son btw i couldnt start the audio", error);
     });
 
     intro.style.opacity = "0";
-
     site.style.opacity = "1";
 
     setTimeout(function() {
-
         intro.style.display = "none";
-
     }, 1500);
 
 });
 
-/* =========================
-   PANELS
-========================= */
+
+/* PANELS */
 
 let highestZ = 20;
 
 const panelNames = {
 
     homePanel: "meow.exe",
-
     aboutPanel: "about.exe",
-
     projectsPanel: "my stuff.exe",
-
     contactPanel: "contact.exe",
-
     catsPanel: "cats :3",
-
     game1Panel: "alien destroyer.exe",
-
     changelogPanel: "changelog.exe",
-
     chatroomPanel: "chatroom.exe",
-
     friendsPanel: "friends.exe",
-
     newsletterPanel: "newsletter.exe"
 
 };
 
 function openPanel(id) {
 
-    const panel =
-        document.getElementById(id);
+    const panel = document.getElementById(id);
 
     if (!panel) return;
 
     panel.classList.remove("hidden");
-
     panel.style.display = "block";
 
     removeTaskButton(id);
@@ -2170,8 +2009,7 @@ function openPanel(id) {
 
 function minimizePanel(id) {
 
-    const panel =
-        document.getElementById(id);
+    const panel = document.getElementById(id);
 
     if (!panel) return;
 
@@ -2183,13 +2021,11 @@ function minimizePanel(id) {
 
 function closePanel(id) {
 
-    const panel =
-        document.getElementById(id);
+    const panel = document.getElementById(id);
 
     if (!panel) return;
 
     panel.style.display = "none";
-
     panel.classList.add("hidden");
 
     removeTaskButton(id);
@@ -2198,27 +2034,20 @@ function closePanel(id) {
 
 function addTaskButton(id) {
 
-    const existing =
-        document.getElementById("task-" + id);
+    const existing = document.getElementById("task-" + id);
 
     if (existing) return;
 
-    const button =
-        document.createElement("button");
+    const button = document.createElement("button");
 
-    button.id =
-        "task-" + id;
+    button.id = "task-" + id;
+    button.className = "task-window";
 
-    button.className =
-        "task-window";
-
-    button.textContent =
-        panelNames[id] || id;
+    button.textContent = panelNames[id] || id;
 
     button.onclick = function() {
 
-        const panel =
-            document.getElementById(id);
+        const panel = document.getElementById(id);
 
         if (!panel) return;
 
@@ -2246,8 +2075,7 @@ function addTaskButton(id) {
 
 function removeTaskButton(id) {
 
-    const button =
-        document.getElementById("task-" + id);
+    const button = document.getElementById("task-" + id);
 
     if (button) {
         button.remove();
@@ -2259,12 +2087,9 @@ function bringToFront(panel) {
 
     highestZ++;
 
-    panel.style.zIndex =
-        highestZ;
+    panel.style.zIndex = highestZ;
 
 }
-
-/* Panel click = bring to front */
 
 document.querySelectorAll(".panel").forEach(function(panel) {
 
@@ -2276,9 +2101,8 @@ document.querySelectorAll(".panel").forEach(function(panel) {
 
 });
 
-/* =========================
-   PANEL DRAGGING
-========================= */
+
+/* DRAG PANELS */
 
 document.querySelectorAll(".panel-title").forEach(function(title) {
 
@@ -2287,8 +2111,7 @@ document.querySelectorAll(".panel-title").forEach(function(title) {
     let offsetX = 0;
     let offsetY = 0;
 
-    const panel =
-        title.closest(".panel");
+    const panel = title.closest(".panel");
 
     title.addEventListener("mousedown", function(e) {
 
@@ -2298,23 +2121,15 @@ document.querySelectorAll(".panel-title").forEach(function(title) {
 
         dragging = true;
 
-        const rect =
-            panel.getBoundingClientRect();
+        const rect = panel.getBoundingClientRect();
 
-        offsetX =
-            e.clientX - rect.left;
+        offsetX = e.clientX - rect.left;
+        offsetY = e.clientY - rect.top;
 
-        offsetY =
-            e.clientY - rect.top;
+        panel.style.transform = "none";
 
-        panel.style.transform =
-            "none";
-
-        panel.style.left =
-            rect.left + "px";
-
-        panel.style.top =
-            rect.top + "px";
+        panel.style.left = rect.left + "px";
+        panel.style.top = rect.top + "px";
 
         bringToFront(panel);
 
@@ -2342,23 +2157,45 @@ document.querySelectorAll(".panel-title").forEach(function(title) {
 
 });
 
+
 /* =========================
-   CLOCK
+   ANALOG CLOCK + DIGITAL TIME
 ========================= */
 
-function updateTime() {
+const hourHand = document.getElementById("hourHand");
+const minuteHand = document.getElementById("minuteHand");
+const secondHand = document.getElementById("secondHand");
+const currentTime = document.getElementById("currentTime");
 
-    const now =
-        new Date();
+function updateClock() {
 
-    const hours =
-        now.getHours();
+    const now = new Date();
 
-    const minutes =
-        now.getMinutes();
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const seconds = now.getSeconds();
 
-    const seconds =
-        now.getSeconds();
+    /* Analog clock angles */
+
+    const hourDegrees =
+        ((hours % 12) * 30) +
+        (minutes * 0.5);
+
+    const minuteDegrees =
+        (minutes * 6) +
+        (seconds * 0.1);
+
+    const secondDegrees =
+        seconds * 6;
+
+    hourHand.style.transform =
+        `rotate(${hourDegrees}deg)`;
+
+    minuteHand.style.transform =
+        `rotate(${minuteDegrees}deg)`;
+
+    secondHand.style.transform =
+        `rotate(${secondDegrees}deg)`;
 
     /* Digital clock */
 
@@ -2371,54 +2208,19 @@ function updateTime() {
     const displaySeconds =
         String(seconds).padStart(2, "0");
 
-    document
-        .getElementById("currentTime")
-        .textContent =
+    currentTime.textContent =
         `${displayHours}:${displayMinutes}:${displaySeconds}`;
-
-    /* Analog clock */
-
-    const secondAngle =
-        seconds * 6;
-
-    const minuteAngle =
-        minutes * 6 +
-        seconds * 0.1;
-
-    const hourAngle =
-        (hours % 12) * 30 +
-        minutes * 0.5;
-
-    document
-        .querySelector(".second-hand")
-        .style.transform =
-        `translateX(-50%) rotate(${secondAngle}deg)`;
-
-    document
-        .querySelector(".minute-hand")
-        .style.transform =
-        `translateX(-50%) rotate(${minuteAngle}deg)`;
-
-    document
-        .querySelector(".hour-hand")
-        .style.transform =
-        `translateX(-50%) rotate(${hourAngle}deg)`;
 
 }
 
-updateTime();
+updateClock();
 
-setInterval(
-    updateTime,
-    1000
-);
+setInterval(updateClock, 1000);
 
-/* =========================
-   CLOCK DRAGGING
-========================= */
 
-const timeBox =
-    document.querySelector(".time-box");
+/* DRAG THE CLOCK */
+
+const timeBox = document.getElementById("timeBox");
 
 let draggingTime = false;
 
@@ -2427,41 +2229,25 @@ let timeOffsetY = 0;
 
 timeBox.addEventListener("mousedown", function(e) {
 
-    /* Don't start dragging from resize corner */
-
     if (
-        e.offsetX >
-            timeBox.clientWidth - 20 &&
-        e.offsetY >
-            timeBox.clientHeight - 20
+        e.offsetX > timeBox.clientWidth - 20 &&
+        e.offsetY > timeBox.clientHeight - 20
     ) {
-
         return;
-
     }
 
     draggingTime = true;
 
-    const rect =
-        timeBox.getBoundingClientRect();
+    const rect = timeBox.getBoundingClientRect();
 
-    timeOffsetX =
-        e.clientX - rect.left;
+    timeOffsetX = e.clientX - rect.left;
+    timeOffsetY = e.clientY - rect.top;
 
-    timeOffsetY =
-        e.clientY - rect.top;
+    timeBox.style.right = "auto";
+    timeBox.style.bottom = "auto";
 
-    timeBox.style.right =
-        "auto";
-
-    timeBox.style.bottom =
-        "auto";
-
-    timeBox.style.left =
-        rect.left + "px";
-
-    timeBox.style.top =
-        rect.top + "px";
+    timeBox.style.left = rect.left + "px";
+    timeBox.style.top = rect.top + "px";
 
     e.preventDefault();
 
@@ -2485,13 +2271,11 @@ document.addEventListener("mouseup", function() {
 
 });
 
-/* =========================
-   DESKTOP ICONS
-========================= */
+
+/* DESKTOP ICONS */
 
 document.querySelectorAll(".desktop-icon").forEach(icon => {
 
-    let dragging = false;
     let moved = false;
 
     let startX = 0;
@@ -2500,32 +2284,27 @@ document.querySelectorAll(".desktop-icon").forEach(icon => {
     let offsetX = 0;
     let offsetY = 0;
 
+    let isMouseDown = false;
+
     icon.addEventListener("mousedown", function(e) {
 
         if (e.button !== 0) return;
 
-        const rect =
-            icon.getBoundingClientRect();
+        const rect = icon.getBoundingClientRect();
 
-        startX =
-            e.clientX;
+        startX = e.clientX;
+        startY = e.clientY;
 
-        startY =
-            e.clientY;
-
-        offsetX =
-            e.clientX - rect.left;
-
-        offsetY =
-            e.clientY - rect.top;
+        offsetX = e.clientX - rect.left;
+        offsetY = e.clientY - rect.top;
 
         moved = false;
+        isMouseDown = true;
 
-        document
-            .querySelectorAll(".desktop-icon")
-            .forEach(other =>
-                other.classList.remove("selected")
-            );
+        document.querySelectorAll(".desktop-icon")
+            .forEach(other => {
+                other.classList.remove("selected");
+            });
 
         icon.classList.add("selected");
 
@@ -2535,9 +2314,7 @@ document.querySelectorAll(".desktop-icon").forEach(icon => {
 
     document.addEventListener("mousemove", function(e) {
 
-        if (!icon.classList.contains("selected")) {
-            return;
-        }
+        if (!isMouseDown) return;
 
         const distanceX =
             Math.abs(e.clientX - startX);
@@ -2545,14 +2322,9 @@ document.querySelectorAll(".desktop-icon").forEach(icon => {
         const distanceY =
             Math.abs(e.clientY - startY);
 
-        if (
-            distanceX > 5 ||
-            distanceY > 5
-        ) {
+        if (distanceX > 5 || distanceY > 5) {
 
             moved = true;
-
-            dragging = true;
 
             icon.classList.add("dragging");
 
@@ -2566,11 +2338,9 @@ document.querySelectorAll(".desktop-icon").forEach(icon => {
 
     });
 
-    document.addEventListener("mouseup", function(e) {
+    document.addEventListener("mouseup", function() {
 
-        if (e.button !== 0) return;
-
-        dragging = false;
+        isMouseDown = false;
 
         icon.classList.remove("dragging");
 
@@ -2580,8 +2350,7 @@ document.querySelectorAll(".desktop-icon").forEach(icon => {
 
         if (moved) return;
 
-        const panel =
-            icon.dataset.panel;
+        const panel = icon.dataset.panel;
 
         if (panel) {
             openPanel(panel);
@@ -2591,9 +2360,8 @@ document.querySelectorAll(".desktop-icon").forEach(icon => {
 
 });
 
-/* =========================
-   DESELECT DESKTOP ICONS
-========================= */
+
+/* CLICK EMPTY DESKTOP TO DESELECT */
 
 document.addEventListener("mousedown", function(e) {
 
@@ -2604,23 +2372,17 @@ document.addEventListener("mousedown", function(e) {
         !e.target.closest(".time-box")
     ) {
 
-        document
-            .querySelectorAll(".desktop-icon")
+        document.querySelectorAll(".desktop-icon")
             .forEach(icon => {
-
-                icon.classList.remove(
-                    "selected"
-                );
-
+                icon.classList.remove("selected");
             });
 
     }
 
 });
 
-/* =========================
-   MUSIC BUTTON
-========================= */
+
+/* MUSIC */
 
 const musicButton =
     document.getElementById("musicButton");
@@ -2635,8 +2397,7 @@ musicButton.addEventListener("click", function() {
         siteMusic.play()
             .then(function() {
 
-                musicButton.textContent =
-                    "❚❚";
+                musicButton.textContent = "❚❚";
 
             })
             .catch(function(error) {
@@ -2652,43 +2413,28 @@ musicButton.addEventListener("click", function() {
 
         siteMusic.pause();
 
-        musicButton.textContent =
-            "▶";
+        musicButton.textContent = "▶";
 
     }
 
 });
 
-/* =========================
-   CLIPPY
-========================= */
+
+/* CLIPPY TEXT */
 
 const clippyLines = [
-
     "hey :3",
-
     "meow/",
-
     "what are u doing",
-
     "this Website is getting big vro",
-
     "did u check the changelog?",
-
     "why are there so many cats",
-
     "rAlseismp when",
-
     "10000r37772323 bugs",
-
     "This site is pretty cool",
-
     "what if u added another cat",
-
     ":3",
-
     ":P"
-
 ];
 
 const clippyBubble =
@@ -2704,8 +2450,7 @@ function clippyTalk() {
             )
         ];
 
-    clippyBubble.textContent =
-        line;
+    clippyBubble.textContent = line;
 
 }
 
@@ -2714,31 +2459,18 @@ let clippyTimer = null;
 function startClippy() {
 
     if (clippyTimer) {
-
-        clearInterval(
-            clippyTimer
-        );
-
+        clearInterval(clippyTimer);
     }
 
     clippyTimer =
-        setInterval(
-            clippyTalk,
-            15000
-        );
+        setInterval(clippyTalk, 15000);
 
 }
 
 startClippy();
 
-function closeClippy() {
 
-    document
-        .getElementById("ralseiClippy")
-        .style.display =
-        "none";
-
-}
+/* DRAG CLIPPY */
 
 const clippy =
     document.getElementById("ralseiClippy");
@@ -2749,16 +2481,6 @@ let clippyOffsetX = 0;
 let clippyOffsetY = 0;
 
 clippy.addEventListener("mousedown", function(e) {
-
-    if (
-        e.target.classList.contains(
-            "clippy-close"
-        )
-    ) {
-
-        return;
-
-    }
 
     draggingClippy = true;
 
@@ -2771,11 +2493,10 @@ clippy.addEventListener("mousedown", function(e) {
     clippyOffsetY =
         e.clientY - rect.top;
 
-    clippy.style.right =
-        "auto";
+    clippy.style.right = "auto";
+    clippy.style.bottom = "auto";
 
-    clippy.style.bottom =
-        "auto";
+    e.preventDefault();
 
 });
 
