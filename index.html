@@ -27,6 +27,7 @@
     content="https://rauta.cfd"
 >
 
+
 <meta
     property="og:image"
     content="background.gif"
@@ -1398,7 +1399,7 @@ a:visited {
 
     height: 300px;
 
-    background: #1e1e1e;
+    background: #d4d0c8;
 
     border-top:
         2px solid #777;
@@ -1449,7 +1450,23 @@ a:visited {
 
     width: 700px;
 
-    min-height: 560px;
+    min-height: 0;
+
+    max-height: calc(100vh - 70px);
+}
+
+#obfuscatorPanel .panel-content {
+
+    max-height: calc(100vh - 100px);
+
+    overflow-y: auto;
+
+    overflow-x: hidden;
+}
+
+#obfuscatorPanel .obfuscator-wrap {
+
+    min-height: 0;
 }
 
 .obfuscator-wrap {
@@ -1797,6 +1814,8 @@ a:visited {
     #rautatifyPanel,
     #obfuscatorPanel,
     #rautaPastePanel,
+    #rautaImagePanel,
+    #rautaTempImagePanel,
     #commissionsPanel {
 
         width:
@@ -3061,6 +3080,190 @@ a:visited {
 
 
 <!-- =========================================================
+     RAUTA IMAGE HOST
+========================================================= -->
+
+<div
+    class="panel hidden"
+    id="rautaImagePanel"
+>
+
+<div class="panel-title">
+
+    <span>RautaImage.exe</span>
+
+    <div class="window-buttons">
+
+        <button
+            class="window-button"
+            onclick="minimizePanel('rautaImagePanel')"
+        >
+            −
+        </button>
+
+        <button
+            class="window-button close"
+            onclick="closePanel('rautaImagePanel')"
+        >
+            ×
+        </button>
+
+    </div>
+
+</div>
+
+<div class="panel-content">
+
+    <h2>RautaImage</h2>
+
+    <p>
+        upload an image and get a direct link for embeds,
+        including Discord.
+    </p>
+
+    <hr>
+
+    <input
+        type="file"
+        id="rautaImageFile"
+        accept="image/*"
+    >
+
+    <div
+        class="obf-actions"
+        style="margin-top:10px;"
+    >
+
+        <button
+            class="tool-button"
+            onclick="uploadRautaImage(false)"
+        >
+            🖼️ Upload image
+        </button>
+
+        <button
+            class="tool-button"
+            onclick="copyImageLink('rautaImageResult')"
+        >
+            📋 Copy link
+        </button>
+
+    </div>
+
+    <div
+        class="paste-output"
+        id="rautaImageResult"
+    >
+        ready :3
+    </div>
+
+    <p
+        style="
+            margin-top:10px;
+            color:#666;
+        "
+    >
+        The image is uploaded to the configured public image host.
+        The returned direct URL can be placed into an image embed.
+    </p>
+
+</div>
+
+</div>
+
+
+<!-- =========================================================
+     RAUTA TEMP IMAGE HOST
+========================================================= -->
+
+<div
+    class="panel hidden"
+    id="rautaTempImagePanel"
+>
+
+<div class="panel-title">
+
+    <span>RautaTempImage.exe</span>
+
+    <div class="window-buttons">
+
+        <button
+            class="window-button"
+            onclick="minimizePanel('rautaTempImagePanel')"
+        >
+            −
+        </button>
+
+        <button
+            class="window-button close"
+            onclick="closePanel('rautaTempImagePanel')"
+        >
+            ×
+        </button>
+
+    </div>
+
+</div>
+
+<div class="panel-content">
+
+    <h2>RautaTempImage</h2>
+
+    <p>
+        same thing, except the uploaded image expires automatically.
+    </p>
+
+    <hr>
+
+    <input
+        type="file"
+        id="rautaTempImageFile"
+        accept="image/*"
+    >
+
+    <div
+        class="obf-actions"
+        style="margin-top:10px;"
+    >
+
+        <button
+            class="tool-button"
+            onclick="uploadRautaImage(true)"
+        >
+            ⏱️ Upload temporary image
+        </button>
+
+        <button
+            class="tool-button"
+            onclick="copyImageLink('rautaTempImageResult')"
+        >
+            📋 Copy link
+        </button>
+
+    </div>
+
+    <div
+        class="paste-output"
+        id="rautaTempImageResult"
+    >
+        ready :3
+    </div>
+
+    <p
+        style="
+            margin-top:10px;
+            color:#666;
+        "
+    >
+        Temporary uploads use a one-hour expiry.
+    </p>
+
+</div>
+
+</div>
+
+
+<!-- =========================================================
      COMMISSIONS
 ========================================================= -->
 
@@ -3521,6 +3724,36 @@ a:visited {
     <a
         href="#"
         onclick="
+            openPanel('rautaImagePanel');
+            return false;
+        "
+    >
+        RautaImage
+    </a>
+
+</li>
+
+
+<li>
+
+    <a
+        href="#"
+        onclick="
+            openPanel('rautaTempImagePanel');
+            return false;
+        "
+    >
+        Temp Image
+    </a>
+
+</li>
+
+
+<li>
+
+    <a
+        href="#"
+        onclick="
             openPanel('commissionsPanel');
             return false;
         "
@@ -3818,6 +4051,70 @@ for(let i = 0; i < 60; i++){
 </div>
 
 
+<!-- RAUTA IMAGE -->
+
+<div
+    class="desktop-icon"
+    data-panel="rautaImagePanel"
+    style="
+        left:125px;
+        top:450px;
+    "
+>
+
+    <div
+        class="app-icon"
+        style="
+            background:
+                linear-gradient(
+                    135deg,
+                    #22c55e,
+                    #166534
+                );
+        "
+    >
+        🖼️
+    </div>
+
+    <span>
+        RautaImage
+    </span>
+
+</div>
+
+
+<!-- TEMP IMAGE -->
+
+<div
+    class="desktop-icon"
+    data-panel="rautaTempImagePanel"
+    style="
+        left:225px;
+        top:450px;
+    "
+>
+
+    <div
+        class="app-icon"
+        style="
+            background:
+                linear-gradient(
+                    135deg,
+                    #06b6d4,
+                    #155e75
+                );
+        "
+    >
+        ⏱️
+    </div>
+
+    <span>
+        Temp Image
+    </span>
+
+</div>
+
+
 <!-- =====================================================
      COMMISSIONS APP ICON
 ===================================================== -->
@@ -4017,6 +4314,12 @@ const panelNames = {
 
     rautaPastePanel:
         "RautaPaste.exe",
+
+    rautaImagePanel:
+        "RautaImage.exe",
+
+    rautaTempImagePanel:
+        "RautaTempImage.exe",
 
     commissionsPanel:
         "commissions.exe"
@@ -5819,7 +6122,7 @@ function startRautaMonaco(){
             const commonOptions = {
 
                 theme:
-                    "vs-dark",
+                    "vs",
 
                 automaticLayout:
                     true,
@@ -7469,6 +7772,212 @@ function savePasteLocal(){
     pasteStatus(
         "paste saved locally!"
     );
+
+}
+
+
+/* =========================================================
+   RAUTA IMAGE TOOLS
+========================================================= */
+
+/*
+    Normal images use Catbox's public upload endpoint.
+    Temporary images use Litterbox with a 1-hour expiry.
+
+    The returned URL is a direct file URL suitable for image embeds.
+*/
+
+async function uploadRautaImage(temporary){
+
+    const fileInput =
+        document.getElementById(
+            temporary
+                ? "rautaTempImageFile"
+                : "rautaImageFile"
+        );
+
+    const result =
+        document.getElementById(
+            temporary
+                ? "rautaTempImageResult"
+                : "rautaImageResult"
+        );
+
+    if(
+        !fileInput ||
+        !fileInput.files ||
+        !fileInput.files[0]
+    ){
+
+        result.textContent =
+            "please choose an image first :(";
+
+        return;
+    }
+
+    const file =
+        fileInput.files[0];
+
+    if(!file.type.startsWith("image/")){
+
+        result.textContent =
+            "that file is not an image :(";
+
+        return;
+    }
+
+    result.textContent =
+        "uploading... :3";
+
+    try{
+
+        const form =
+            new FormData();
+
+        form.append(
+            "reqtype",
+            "fileupload"
+        );
+
+        form.append(
+            "fileToUpload",
+            file
+        );
+
+        let endpoint;
+
+        if(temporary){
+
+            form.append(
+                "time",
+                "1h"
+            );
+
+            endpoint =
+                "https://litterbox.catbox.moe/resources/internals/api.php";
+
+        }
+        else{
+
+            endpoint =
+                "https://catbox.moe/user/api.php";
+
+        }
+
+        const response =
+            await fetch(
+                endpoint,
+                {
+                    method:
+                        "POST",
+                    body:
+                        form
+                }
+            );
+
+        if(!response.ok)
+            throw new Error(
+                "upload failed (" +
+                response.status +
+                ")"
+            );
+
+        const url =
+            (await response.text()).trim();
+
+        if(
+            !url ||
+            !/^https?:\/\//i.test(url)
+        ){
+
+            throw new Error(
+                url ||
+                "the host did not return a URL"
+            );
+
+        }
+
+        result.innerHTML =
+            `<a href="${escapeHtml(url)}" target="_blank" rel="noopener">${escapeHtml(url)}</a>`;
+
+    }
+    catch(error){
+
+        console.error(
+            "Rauta image upload failed:",
+            error
+        );
+
+        result.textContent =
+            "upload failed: " +
+            (
+                error.message ||
+                "unknown error"
+            );
+
+    }
+
+}
+
+
+async function copyImageLink(resultId){
+
+    const result =
+        document.getElementById(
+            resultId
+        );
+
+    if(!result)
+        return;
+
+    const link =
+        result.querySelector("a");
+
+    if(!link){
+
+        result.textContent =
+            "there is no image link to copy yet :(";
+
+        return;
+    }
+
+    try{
+
+        await navigator.clipboard.writeText(
+            link.href
+        );
+
+        const oldText =
+            result.innerHTML;
+
+        result.innerHTML =
+            oldText +
+            "<br><strong>copied! :3</strong>";
+
+    }
+    catch(error){
+
+        console.error(
+            "Could not copy image URL:",
+            error
+        );
+
+        result.textContent =
+            "couldn't copy automatically; copy the link manually.";
+
+    }
+
+}
+
+
+function escapeHtml(value){
+
+    return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
 
 }
 
