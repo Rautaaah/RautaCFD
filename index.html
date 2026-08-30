@@ -1650,6 +1650,75 @@ a:visited {
 }
 
 
+
+/* =========================================================
+   EXTRA GAME STYLES
+========================================================= */
+
+.ttt-board{
+    width:246px;
+    margin:14px auto;
+    display:grid;
+    grid-template-columns:repeat(3,82px);
+    grid-template-rows:repeat(3,82px);
+}
+
+.ttt-cell{
+    width:82px;
+    height:82px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#d4d0c8;
+    border-top:2px solid white;
+    border-left:2px solid white;
+    border-right:2px solid #555;
+    border-bottom:2px solid #555;
+    color:#111;
+    font:bold 30px Tahoma,Arial,sans-serif;
+    cursor:pointer;
+}
+
+.ttt-cell:disabled{
+    color:#111;
+    cursor:default;
+}
+
+.memory-board{
+    width:360px;
+    max-width:100%;
+    margin:14px auto;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:7px;
+}
+
+.memory-card{
+    min-height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#d4d0c8;
+    border-top:2px solid white;
+    border-left:2px solid white;
+    border-right:2px solid #555;
+    border-bottom:2px solid #555;
+    color:#222;
+    font:bold 24px Tahoma,Arial,sans-serif;
+    cursor:pointer;
+}
+
+.memory-card.revealed,
+.memory-card.matched{
+    background:#eee;
+    border:1px solid #aaa;
+}
+
+.memory-card.matched{
+    opacity:.65;
+    cursor:default;
+}
+
 /* =========================================================
    MONACO
 ========================================================= */
@@ -4094,6 +4163,110 @@ a:visited {
 </div>
 
 
+
+<!-- =========================================================
+     TIC TAC TOE
+========================================================= -->
+
+<div
+    class="panel hidden"
+    id="tictactoePanel"
+>
+<div class="panel-title">
+    <span>tic tac toe.exe</span>
+    <div class="window-buttons">
+        <button class="window-button" onclick="minimizePanel('tictactoePanel')">−</button>
+        <button class="window-button close" onclick="closePanel('tictactoePanel')">×</button>
+    </div>
+</div>
+
+<div class="panel-content game-content">
+    <h2>Tic-Tac-Toe</h2>
+    <p>you are X. the computer is O.</p>
+
+    <div id="tttBoard" class="ttt-board"></div>
+
+    <div id="tttStatus" class="game-status">
+        your turn :3
+    </div>
+
+    <button class="xp-button" onclick="resetTicTacToe()">
+        restart
+    </button>
+</div>
+</div>
+
+
+<!-- =========================================================
+     FLAPPY
+========================================================= -->
+
+<div
+    class="panel hidden"
+    id="flappyPanel"
+>
+<div class="panel-title">
+    <span>flappy rauta.exe</span>
+    <div class="window-buttons">
+        <button class="window-button" onclick="minimizePanel('flappyPanel')">−</button>
+        <button class="window-button close" onclick="closePanel('flappyPanel')">×</button>
+    </div>
+</div>
+
+<div class="panel-content game-content">
+    <h2>Flappy Rauta</h2>
+    <p>press Space / click to flap.</p>
+
+    <canvas
+        id="flappyCanvas"
+        width="480"
+        height="300"
+        class="game-canvas"
+    ></canvas>
+
+    <div id="flappyStatus" class="game-status">
+        score: 0
+    </div>
+
+    <button class="xp-button" onclick="resetFlappy()">
+        restart
+    </button>
+</div>
+</div>
+
+
+<!-- =========================================================
+     MEMORY
+========================================================= -->
+
+<div
+    class="panel hidden"
+    id="memoryPanel"
+>
+<div class="panel-title">
+    <span>memory.exe</span>
+    <div class="window-buttons">
+        <button class="window-button" onclick="minimizePanel('memoryPanel')">−</button>
+        <button class="window-button close" onclick="closePanel('memoryPanel')">×</button>
+    </div>
+</div>
+
+<div class="panel-content game-content">
+    <h2>Memory</h2>
+    <p>find all the matching pairs.</p>
+
+    <div id="memoryBoard" class="memory-board"></div>
+
+    <div id="memoryStatus" class="game-status">
+        pairs: 0 / 8
+    </div>
+
+    <button class="xp-button" onclick="resetMemoryGame()">
+        restart
+    </button>
+</div>
+</div>
+
 <!-- =========================================================
      CHANGELOG
 ========================================================= -->
@@ -4784,6 +4957,85 @@ for(let i = 0; i < 60; i++){
         Temp Image
     </span>
 
+</div>
+
+
+
+<!-- TIC TAC TOE -->
+<div
+    class="desktop-icon"
+    data-panel="tictactoePanel"
+    style="
+        left:625px;
+        top:450px;
+    "
+>
+    <div
+        class="app-icon"
+        style="
+            background:
+                linear-gradient(
+                    135deg,
+                    #80a2d6,
+                    #34547f
+                );
+        "
+    >
+        XO
+    </div>
+    <span>Tic-Tac-Toe</span>
+</div>
+
+
+<!-- FLAPPY -->
+<div
+    class="desktop-icon"
+    data-panel="flappyPanel"
+    style="
+        left:625px;
+        top:540px;
+    "
+>
+    <div
+        class="app-icon"
+        style="
+            background:
+                linear-gradient(
+                    135deg,
+                    #f3ca4c,
+                    #9d7510
+                );
+        "
+    >
+        🐤
+    </div>
+    <span>Flappy Rauta</span>
+</div>
+
+
+<!-- MEMORY -->
+<div
+    class="desktop-icon"
+    data-panel="memoryPanel"
+    style="
+        left:725px;
+        top:540px;
+    "
+>
+    <div
+        class="app-icon"
+        style="
+            background:
+                linear-gradient(
+                    135deg,
+                    #c47bd9,
+                    #653578
+                );
+        "
+    >
+        🧠
+    </div>
+    <span>Memory</span>
 </div>
 
 
@@ -8781,6 +9033,809 @@ function explorerSearch(){
             }
         );
 }
+
+
+/* =========================================================
+   EXTRA GAMES
+========================================================= */
+
+/* ---------- Tic-Tac-Toe ---------- */
+
+let tttBoard = [];
+let tttOver = false;
+
+function resetTicTacToe(){
+
+    tttBoard =
+        Array.from(
+            {length:9},
+            () => ""
+        );
+
+    tttOver =
+        false;
+
+    drawTicTacToe();
+
+    const status =
+        document.getElementById(
+            "tttStatus"
+        );
+
+    if(status)
+        status.textContent =
+            "your turn :3";
+}
+
+function drawTicTacToe(){
+
+    const board =
+        document.getElementById(
+            "tttBoard"
+        );
+
+    if(!board)
+        return;
+
+    board.innerHTML =
+        "";
+
+    tttBoard.forEach(
+        (value,index) => {
+
+            const cell =
+                document.createElement(
+                    "button"
+                );
+
+            cell.className =
+                "ttt-cell";
+
+            cell.textContent =
+                value;
+
+            cell.disabled =
+                Boolean(value) ||
+                tttOver;
+
+            cell.onclick =
+                function(){
+                    playTicTacToe(
+                        index
+                    );
+                };
+
+            board.appendChild(
+                cell
+            );
+        }
+    );
+}
+
+function tttWinner(board){
+
+    const wins = [
+        [0,1,2],
+        [3,4,5],
+        [6,7,8],
+        [0,3,6],
+        [1,4,7],
+        [2,5,8],
+        [0,4,8],
+        [2,4,6]
+    ];
+
+    for(
+        const combo
+        of wins
+    ){
+
+        const [
+            a,b,c
+        ] = combo;
+
+        if(
+            board[a] &&
+            board[a] === board[b] &&
+            board[b] === board[c]
+        )
+            return board[a];
+    }
+
+    return null;
+}
+
+function playTicTacToe(index){
+
+    if(
+        tttOver ||
+        tttBoard[index]
+    )
+        return;
+
+    tttBoard[index] =
+        "X";
+
+    let winner =
+        tttWinner(
+            tttBoard
+        );
+
+    if(winner ||
+       tttBoard.every(Boolean)){
+
+        finishTicTacToe(
+            winner
+        );
+
+        return;
+    }
+
+    const move =
+        pickTicTacToeMove();
+
+    if(move >= 0)
+        tttBoard[move] =
+            "O";
+
+    winner =
+        tttWinner(
+            tttBoard
+        );
+
+    if(winner ||
+       tttBoard.every(Boolean)){
+
+        finishTicTacToe(
+            winner
+        );
+
+        return;
+    }
+
+    drawTicTacToe();
+}
+
+function pickTicTacToeMove(){
+
+    const empty =
+        tttBoard
+            .map(
+                (v,i) =>
+                    v ? -1 : i
+            )
+            .filter(
+                i => i >= 0
+            );
+
+    if(!empty.length)
+        return -1;
+
+    // Try an immediate win.
+    for(
+        const i
+        of empty
+    ){
+
+        tttBoard[i] =
+            "O";
+
+        if(
+            tttWinner(
+                tttBoard
+            ) === "O"
+        ){
+
+            tttBoard[i] =
+                "";
+
+            return i;
+        }
+
+        tttBoard[i] =
+            "";
+    }
+
+    // Block an immediate player win.
+    for(
+        const i
+        of empty
+    ){
+
+        tttBoard[i] =
+            "X";
+
+        if(
+            tttWinner(
+                tttBoard
+            ) === "X"
+        ){
+
+            tttBoard[i] =
+                "";
+
+            return i;
+        }
+
+        tttBoard[i] =
+            "";
+    }
+
+    // Otherwise choose center, corner, then random square.
+    if(
+        !tttBoard[4]
+    )
+        return 4;
+
+    const corners =
+        [0,2,6,8].filter(
+            i => !tttBoard[i]
+        );
+
+    if(corners.length)
+        return corners[
+            Math.floor(
+                Math.random() *
+                corners.length
+            )
+        ];
+
+    return empty[
+        Math.floor(
+            Math.random() *
+            empty.length
+        )
+    ];
+}
+
+function finishTicTacToe(winner){
+
+    tttOver =
+        true;
+
+    drawTicTacToe();
+
+    const status =
+        document.getElementById(
+            "tttStatus"
+        );
+
+    if(!status)
+        return;
+
+    status.textContent =
+        winner === "X"
+            ? "YOU WIN :3"
+            : winner === "O"
+                ? "computer wins..."
+                : "draw!";
+}
+
+resetTicTacToe();
+
+
+/* ---------- Flappy Rauta ---------- */
+
+const flappyCanvas =
+    document.getElementById(
+        "flappyCanvas"
+    );
+
+const flappyCtx =
+    flappyCanvas
+        ? flappyCanvas.getContext(
+            "2d"
+        )
+        : null;
+
+const flappyStatus =
+    document.getElementById(
+        "flappyStatus"
+    );
+
+let flappyY =
+    145;
+
+let flappyVy =
+    0;
+
+let flappyScore =
+    0;
+
+let flappyPipes =
+    [];
+
+let flappyRunning =
+    false;
+
+let flappyTimer =
+    null;
+
+function resetFlappy(){
+
+    if(!flappyCtx)
+        return;
+
+    flappyY =
+        145;
+
+    flappyVy =
+        0;
+
+    flappyScore =
+        0;
+
+    flappyPipes =
+        [
+            makeFlappyPipe(
+                500
+            )
+        ];
+
+    flappyRunning =
+        true;
+
+    if(flappyStatus)
+        flappyStatus.textContent =
+            "score: 0";
+
+    clearInterval(
+        flappyTimer
+    );
+
+    flappyTimer =
+        setInterval(
+            tickFlappy,
+            16
+        );
+
+    drawFlappy();
+}
+
+function makeFlappyPipe(x){
+
+    const gap =
+        88;
+
+    const gapY =
+        55 +
+        Math.random() *
+        130;
+
+    return {
+        x,
+        gapY,
+        gap,
+        counted:false
+    };
+}
+
+function flapRauta(){
+
+    if(!flappyRunning)
+        return;
+
+    flappyVy =
+        -6.5;
+}
+
+function tickFlappy(){
+
+    if(!flappyRunning)
+        return;
+
+    flappyVy +=
+        .34;
+
+    flappyY +=
+        flappyVy;
+
+    flappyPipes.forEach(
+        pipe => {
+            pipe.x -=
+                2.5;
+        }
+    );
+
+    const last =
+        flappyPipes[
+            flappyPipes.length-1
+        ];
+
+    if(
+        last &&
+        last.x < 300
+    )
+        flappyPipes.push(
+            makeFlappyPipe(
+                520
+            )
+        );
+
+    flappyPipes =
+        flappyPipes.filter(
+            pipe =>
+                pipe.x > -70
+        );
+
+    flappyPipes.forEach(
+        pipe => {
+
+            if(
+                !pipe.counted &&
+                pipe.x + 50 < 80
+            ){
+
+                pipe.counted =
+                    true;
+
+                flappyScore++;
+
+                if(flappyStatus)
+                    flappyStatus.textContent =
+                        "score: " +
+                        flappyScore;
+            }
+        }
+    );
+
+    const hitGround =
+        flappyY > 285;
+
+    const hitCeiling =
+        flappyY < 0;
+
+    const hitPipe =
+        flappyPipes.some(
+            pipe =>
+                80 + 16 > pipe.x &&
+                80 - 16 < pipe.x + 50 &&
+                (
+                    flappyY - 12 < pipe.gapY ||
+                    flappyY + 12 >
+                        pipe.gapY + pipe.gap
+                )
+        );
+
+    if(
+        hitGround ||
+        hitCeiling ||
+        hitPipe
+    ){
+
+        flappyRunning =
+            false;
+
+        clearInterval(
+            flappyTimer
+        );
+
+        if(flappyStatus)
+            flappyStatus.textContent =
+                "GAME OVER — score: " +
+                flappyScore;
+    }
+
+    drawFlappy();
+}
+
+function drawFlappy(){
+
+    if(!flappyCtx)
+        return;
+
+    flappyCtx.fillStyle =
+        "#8fc9e8";
+
+    flappyCtx.fillRect(
+        0,
+        0,
+        flappyCanvas.width,
+        flappyCanvas.height
+    );
+
+    flappyCtx.fillStyle =
+        "#76a85d";
+
+    flappyCtx.fillRect(
+        0,
+        285,
+        flappyCanvas.width,
+        15
+    );
+
+    flappyPipes.forEach(
+        pipe => {
+
+            flappyCtx.fillStyle =
+                "#619b51";
+
+            flappyCtx.fillRect(
+                pipe.x,
+                0,
+                50,
+                pipe.gapY
+            );
+
+            flappyCtx.fillRect(
+                pipe.x,
+                pipe.gapY + pipe.gap,
+                50,
+                300 -
+                (
+                    pipe.gapY +
+                    pipe.gap
+                )
+            );
+
+        }
+    );
+
+    // Simple Rauta bird.
+    flappyCtx.fillStyle =
+        "#e9c957";
+
+    flappyCtx.fillRect(
+        68,
+        flappyY - 10,
+        24,
+        20
+    );
+
+    flappyCtx.fillStyle =
+        "#222";
+
+    flappyCtx.fillRect(
+        84,
+        flappyY - 6,
+        4,
+        4
+    );
+}
+
+document.addEventListener(
+    "keydown",
+    function(e){
+
+        if(
+            e.code === "Space"
+        ){
+
+            const panel =
+                document.getElementById(
+                    "flappyPanel"
+                );
+
+            if(
+                panel &&
+                panel.style.display ===
+                "block"
+            ){
+
+                e.preventDefault();
+
+                flapRauta();
+            }
+        }
+    }
+);
+
+if(flappyCanvas){
+
+    flappyCanvas.addEventListener(
+        "click",
+        function(){
+            flapRauta();
+        }
+    );
+}
+
+resetFlappy();
+
+
+/* ---------- Memory ---------- */
+
+const memorySymbols =
+    [
+        "★",
+        "☂",
+        "♫",
+        "☀",
+        "♥",
+        "✿",
+        "☁",
+        "☾"
+    ];
+
+let memoryDeck = [];
+let memoryOpen = [];
+let memoryMatches = 0;
+let memoryLocked = false;
+
+function resetMemoryGame(){
+
+    const board =
+        document.getElementById(
+            "memoryBoard"
+        );
+
+    if(!board)
+        return;
+
+    memoryDeck =
+        memorySymbols
+            .concat(
+                memorySymbols
+            )
+            .sort(
+                () =>
+                    Math.random() -
+                    .5
+            );
+
+    memoryOpen =
+        [];
+
+    memoryMatches =
+        0;
+
+    memoryLocked =
+        false;
+
+    drawMemoryGame();
+}
+
+function drawMemoryGame(){
+
+    const board =
+        document.getElementById(
+            "memoryBoard"
+        );
+
+    if(!board)
+        return;
+
+    board.innerHTML =
+        "";
+
+    memoryDeck.forEach(
+        (symbol,index) => {
+
+            const card =
+                document.createElement(
+                    "button"
+                );
+
+            const isOpen =
+                memoryOpen.includes(
+                    index
+                );
+
+            const matched =
+                card.dataset.matched ===
+                "true";
+
+            card.className =
+                "memory-card";
+
+            if(isOpen)
+                card.classList.add(
+                    "revealed"
+                );
+
+            card.textContent =
+                isOpen
+                    ? symbol
+                    : "?";
+
+            card.onclick =
+                function(){
+                    flipMemoryCard(
+                        index
+                    );
+                };
+
+            board.appendChild(
+                card
+            );
+        }
+    );
+
+    const status =
+        document.getElementById(
+            "memoryStatus"
+        );
+
+    if(status)
+        status.textContent =
+            "pairs: " +
+            memoryMatches +
+            " / " +
+            memorySymbols.length;
+}
+
+function flipMemoryCard(index){
+
+    if(
+        memoryLocked ||
+        memoryOpen.includes(
+            index
+        )
+    )
+        return;
+
+    memoryOpen.push(
+        index
+    );
+
+    drawMemoryGame();
+
+    if(
+        memoryOpen.length <
+        2
+    )
+        return;
+
+    memoryLocked =
+        true;
+
+    const [
+        first,
+        second
+    ] =
+        memoryOpen;
+
+    if(
+        memoryDeck[first] ===
+        memoryDeck[second]
+    ){
+
+        memoryMatches++;
+
+        memoryOpen =
+            [];
+
+        memoryLocked =
+            false;
+
+        drawMemoryGame();
+
+        if(
+            memoryMatches ===
+            memorySymbols.length
+        ){
+
+            const status =
+                document.getElementById(
+                    "memoryStatus"
+                );
+
+            if(status)
+                status.textContent =
+                    "YOU WIN :3";
+        }
+
+    }
+    else{
+
+        setTimeout(
+            function(){
+
+                memoryOpen =
+                    [];
+
+                memoryLocked =
+                    false;
+
+                drawMemoryGame();
+
+            },
+            650
+        );
+    }
+}
+
+resetMemoryGame();
 
 /* =========================================================
    DESELECT ICONS
