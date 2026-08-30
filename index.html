@@ -2519,12 +2519,10 @@ nav {
 #taskManagerPanel {
     width: 410px;
     max-width: calc(100vw - 18px);
-    background: #ece9d8;
-    border: 1px solid #003c7d;
+    background: rgba(236,233,216,.96);
+    border: 1px solid rgba(0,0,0,.42);
     border-radius: 7px 7px 0 0;
-    box-shadow: 2px 3px 8px rgba(0,0,0,.55);
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
+    box-shadow: 2px 3px 8px rgba(0,0,0,.45);
     overflow: hidden;
     color: #111;
     font-family: Tahoma, Arial, sans-serif;
@@ -2532,41 +2530,58 @@ nav {
 
 #taskManagerPanel .panel-title {
     height: 30px;
-    padding: 0 5px 0 7px;
+    padding: 0 5px 0 8px;
     border-radius: 6px 6px 0 0;
-    background: linear-gradient(
-        to bottom,
-        #3b9bf7 0%,
-        #0b6de0 45%,
-        #0757bb 46%,
-        #08499c 100%
-    );
+
+    /* The site's usual "sick" gradient, not a literal XP title bar. */
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,.34) 0%,
+            rgba(255,255,255,.08) 18%,
+            rgba(0,0,0,.08) 19%,
+            rgba(0,0,0,.22) 100%
+        ),
+        linear-gradient(
+            90deg,
+            #6db7ff 0%,
+            #398fe7 32%,
+            #6f63df 67%,
+            #9b5bd7 100%
+        );
+
     color: #fff;
     font: bold 13px Tahoma, Arial, sans-serif;
-    text-shadow: 1px 1px 1px #164a87;
+    text-shadow: 1px 1px 2px rgba(0,0,0,.55);
 }
 
 #taskManagerPanel .window-button {
     width: 22px;
     height: 21px;
     margin-top: 4px;
-    border-radius: 3px;
-    border: 1px solid #fff;
-    border-right-color: #154a8d;
-    border-bottom-color: #154a8d;
-    background: linear-gradient(#65b7ff,#1264ca);
-    color: white;
+    border-radius: 4px;
+    border: 1px solid rgba(255,255,255,.65);
+    background: linear-gradient(
+        rgba(255,255,255,.35),
+        rgba(255,255,255,.04)
+    );
+    color: #fff;
     font: bold 15px Arial, sans-serif;
     line-height: 16px;
-    text-shadow: 1px 1px #24528b;
+    text-shadow: 1px 1px 2px #555;
 }
 
 #taskManagerPanel .window-button.close {
-    background: linear-gradient(#ff8a73,#e24a26);
+    background:
+        linear-gradient(
+            rgba(255,255,255,.28),
+            rgba(0,0,0,.12)
+        ),
+        linear-gradient(135deg,#ff8c79,#df4528);
 }
 
 #taskManagerPanel .window-button:hover {
-    filter: brightness(1.08);
+    filter: brightness(1.12);
 }
 
 .tm-menu-row {
@@ -2575,9 +2590,9 @@ nav {
     gap: 0;
     height: 23px;
     padding: 0 5px;
-    background: #ece9d8;
-    border-bottom: 1px solid #c4c0b2;
-    color: #111;
+    background: rgba(255,255,255,.22);
+    border-bottom: 1px solid rgba(0,0,0,.16);
+    color: #222;
     font: 11px Tahoma, Arial, sans-serif;
 }
 
@@ -2620,8 +2635,9 @@ nav {
 }
 
 .panel-content.task-manager-content {
-    max-height: 55vh;
+    max-height: 54vh;
     overflow-y: auto;
+    overflow-x: hidden;
     scrollbar-color: #bfcbe0 #eee;
     scrollbar-width: auto;
     padding: 10px;
@@ -2806,24 +2822,7 @@ nav {
     background: #000;
 }
 
-#xpExplorerCrash .xp-crash-window {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: min(520px, 80vw);
-    padding: 22px;
-    transform: translate(-50%, -50%);
-    color: #fff;
-    text-align: center;
-    font: 13px Tahoma, Arial, sans-serif;
-    animation: xpExplorerFly 1.7s cubic-bezier(.2,.7,.3,1) forwards;
-}
 
-@keyframes xpExplorerFly {
-    0% {
-        transform: translate(-50%,-50%) scale(1);
-        opacity: 1;
-    }
     55% {
         transform: translate(-50%,-180%) scale(.82);
         opacity: .85;
@@ -2834,6 +2833,14 @@ nav {
     }
 }
 
+
+.tm-application-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 6px;
+    margin-top: 8px;
+}
+
 </style>
 
 <audio id="signinAudio" src="/signin.mp3" preload="auto"></audio>
@@ -2842,16 +2849,7 @@ nav {
 
 <body>
 
-<div id="xpExplorerCrash" aria-hidden="true">
-    <div class="xp-crash-site"></div>
-    <div class="xp-crash-window">
-        <div style="font-size:18px;font-weight:bold;margin-bottom:8px;">
-            Windows Explorer
-        </div>
-        <div>
-            Explorer has been terminated.
-        </div>
-    </div>
+<div id="xpExplorerCrash" aria-hidden="true"><div class="xp-crash-site"></div></div>
 </div>
 
 
@@ -6014,7 +6012,7 @@ for(let i = 0; i < 60; i++){
 
 <div class="panel-title">
 
-    <span>Windows Task Manager</span>
+    <span>Rauta's super pro task manager</span>
 
     <div class="window-buttons">
 
@@ -6057,27 +6055,25 @@ for(let i = 0; i < 60; i++){
 
     <section class="tm-page" data-page="applications">
 
-        <div class="tm-toolbar">
-            <strong>Applications</strong>
-            <span id="tmAppStatus">3 applications running</span>
-        </div>
+    <div class="tm-toolbar">
+        <strong>Applications</strong>
+        <span id="tmAppStatus">0 applications running</span>
+    </div>
 
-        <div class="tm-list">
-            <div class="tm-row">
-                <span>Rautatientori</span>
-                <span>Running</span>
-            </div>
-            <div class="tm-row">
-                <span>Ralsei Clippy</span>
-                <span>Running</span>
-            </div>
-            <div class="tm-row">
-                <span>Task Manager</span>
-                <span>Running</span>
-            </div>
-        </div>
+    <div class="tm-list" id="tmApplicationsList">
+        <!-- Filled from the currently open/minimized desktop GUIs. -->
+    </div>
 
-    </section>
+    <div class="tm-application-buttons">
+        <button id="tmSwitchToApp" class="tm-xp-button" disabled>
+            Switch To
+        </button>
+        <button id="tmNewTask" class="tm-xp-button">
+            New Task...
+        </button>
+    </div>
+
+</section>
 
     <section class="tm-page hidden" data-page="processes">
 
@@ -6445,7 +6441,7 @@ const panelNames = {
         "ConfusedGirls",
 
     taskManagerPanel:
-        "Windows Task Manager"
+        "Rauta's super pro task manager"
 
 };
 
@@ -6463,6 +6459,8 @@ document
         }
     );
 
+
+window.panelNames = panelNames;
 
 function openPanel(id){
 
@@ -12494,89 +12492,89 @@ catch(error){
 
 
 /* =========================================================
-   TASK MANAGER BEHAVIOR
+   TASK MANAGER BEHAVIOR — WORKING TABS
 ========================================================= */
 
 (function(){
 
-    const tm =
-        document.getElementById("taskManagerPanel");
+    const tm = document.getElementById("taskManagerPanel");
+    if(!tm) return;
 
-    if(!tm)
-        return;
+    const tabs = Array.from(tm.querySelectorAll(".tm-tab"));
+    const pages = Array.from(tm.querySelectorAll(".tm-page"));
 
-    const tabs =
-        tm.querySelectorAll(".tm-tab");
+    function showTab(name){
 
-    const pages =
-        tm.querySelectorAll(".tm-page");
+        tabs.forEach(function(tab){
+            const active =
+                tab.getAttribute("data-tab") === name;
+
+            tab.classList.toggle("active", active);
+            tab.setAttribute("aria-selected", active ? "true" : "false");
+        });
+
+        pages.forEach(function(page){
+            const match =
+                page.getAttribute("data-page") === name;
+
+            page.classList.toggle("hidden", !match);
+        });
+
+        /* Keep the Task Manager's compact layout after changing tabs. */
+        const content =
+            tm.querySelector(".task-manager-content");
+
+        if(content)
+            content.scrollTop = 0;
+    }
 
     tabs.forEach(function(tab){
 
-        tab.addEventListener(
-            "click",
-            function(){
+        tab.type = "button";
 
-                const target =
-                    tab.getAttribute("data-tab");
+        tab.addEventListener("click", function(event){
 
-                tabs.forEach(
-                    t => t.classList.remove("active")
-                );
+            event.preventDefault();
+            event.stopPropagation();
 
-                pages.forEach(
-                    page => page.classList.add("hidden")
-                );
+            const name =
+                tab.getAttribute("data-tab");
 
-                tab.classList.add("active");
+            if(name)
+                showTab(name);
 
-                const page =
-                    tm.querySelector(
-                        '.tm-page[data-page="' +
-                        target +
-                        '"]'
-                    );
-
-                if(page)
-                    page.classList.remove("hidden");
-
-            }
-        );
+        }, true);
 
     });
 
-    const cpuGraph =
-        document.getElementById("tmCpuGraph");
+    /* Default tab. */
+    if(tabs.length)
+        showTab(
+            tabs[0].getAttribute("data-tab") || "applications"
+        );
 
-    const pfGraph =
-        document.getElementById("tmPfGraph");
+    /* ---------------------------------------------------------
+       LIVE PERFORMANCE GRAPH
+    --------------------------------------------------------- */
+
+    const cpuGraph = document.getElementById("tmCpuGraph");
+    const pfGraph = document.getElementById("tmPfGraph");
 
     const cpuCtx =
-        cpuGraph ?
-        cpuGraph.getContext("2d") :
-        null;
+        cpuGraph ? cpuGraph.getContext("2d") : null;
 
     const pfCtx =
-        pfGraph ?
-        pfGraph.getContext("2d") :
-        null;
+        pfGraph ? pfGraph.getContext("2d") : null;
 
     let cpuHistory =
-        Array.from(
-            {length: 70},
-            () => Math.random() * 18
-        );
+        Array.from({length:70}, () => Math.random() * 18);
 
     let pfHistory =
-        Array.from(
-            {length: 70},
-            () => 42 + Math.random() * 8
-        );
+        Array.from({length:70}, () => 42 + Math.random() * 8);
 
     function drawGraph(ctx, values, max){
 
-        if(!ctx)
-            return;
+        if(!ctx) return;
 
         const w = ctx.canvas.width;
         const h = ctx.canvas.height;
@@ -12607,12 +12605,10 @@ catch(error){
         values.forEach(function(value,i){
 
             const x =
-                i *
-                (w / (values.length - 1));
+                i * (w / (values.length - 1));
 
             const y =
-                h -
-                (value / max) * h;
+                h - (value / max) * h;
 
             if(i === 0)
                 ctx.moveTo(x,y);
@@ -12627,14 +12623,10 @@ catch(error){
     function updateTaskManager(){
 
         const cpu =
-            Math.floor(
-                6 + Math.random() * 14
-            );
+            Math.floor(3 + Math.random() * 12);
 
         const pf =
-            Math.floor(
-                800 + Math.random() * 100
-            );
+            Math.floor(800 + Math.random() * 100);
 
         cpuHistory.push(cpu);
         cpuHistory.shift();
@@ -12666,7 +12658,7 @@ catch(error){
 
         if(pfBar)
             pfBar.style.height =
-                Math.min(100, pf / 10) + "%";
+                Math.min(100,pf / 10) + "%";
 
         const statusCpu =
             document.getElementById("tmStatusCpu");
@@ -12675,40 +12667,289 @@ catch(error){
             statusCpu.textContent =
                 cpu + "%";
 
-        const cpu1 =
-            document.getElementById("tmCpu1");
-
-        const cpu2 =
-            document.getElementById("tmCpu2");
-
-        const cpu3 =
-            document.getElementById("tmCpu3");
-
-        if(cpu1)
-            cpu1.textContent =
-                Math.floor(cpu / 2) + "%";
-
-        if(cpu2)
-            cpu2.textContent =
-                Math.floor(cpu / 3) + "%";
-
-        if(cpu3)
-            cpu3.textContent =
-                "00%";
-
         drawGraph(cpuCtx, cpuHistory, 100);
         drawGraph(pfCtx, pfHistory, 100);
     }
 
     updateTaskManager();
-
-    setInterval(
-        updateTaskManager,
-        1200
-    );
+    setInterval(updateTaskManager, 1200);
 
 })();
 
+
+
+
+/* =========================================================
+   LIVE APPLICATIONS TAB
+   Applications = currently open desktop GUIs.
+   Processes = the process list.
+   Performance = live system-style stats.
+========================================================= */
+
+(function(){
+
+    const tm =
+        document.getElementById("taskManagerPanel");
+
+    if(!tm)
+        return;
+
+    const list =
+        document.getElementById("tmApplicationsList");
+
+    const status =
+        document.getElementById("tmAppStatus");
+
+    const switchButton =
+        document.getElementById("tmSwitchToApp");
+
+    const newTaskButton =
+        document.getElementById("tmNewTask");
+
+    let selectedId = null;
+
+    function isOpen(panel){
+
+        if(!panel || panel === tm)
+            return false;
+
+        return !panel.classList.contains("hidden") &&
+               getComputedStyle(panel).display !== "none";
+    }
+
+    function refreshApplications(){
+
+        if(!list)
+            return;
+
+        list.innerHTML = "";
+
+        const panels =
+            Array.from(
+                document.querySelectorAll(".panel")
+            ).filter(isOpen);
+
+        /* Task Manager itself is an open application too. */
+        if(isOpen(tm))
+            panels.push(tm);
+
+        const seen = new Set();
+
+        panels.forEach(function(panel){
+
+            if(seen.has(panel.id))
+                return;
+
+            seen.add(panel.id);
+
+            const row =
+                document.createElement("div");
+
+            row.className = "tm-row";
+            row.dataset.panelId = panel.id;
+
+            const name =
+                (window.panelNames &&
+                 window.panelNames[panel.id]) ||
+                panel.id;
+
+            const left =
+                document.createElement("span");
+
+            const right =
+                document.createElement("span");
+
+            left.textContent = name;
+            right.textContent = "Running";
+
+            row.appendChild(left);
+            row.appendChild(right);
+
+            row.addEventListener("click", function(){
+
+                list.querySelectorAll(".tm-row.selected")
+                    .forEach(
+                        r => r.classList.remove("selected")
+                    );
+
+                row.classList.add("selected");
+                selectedId = panel.id;
+
+                if(switchButton)
+                    switchButton.disabled = false;
+
+            });
+
+            list.appendChild(row);
+
+        });
+
+        if(status){
+            status.textContent =
+                panels.length +
+                (panels.length === 1
+                    ? " application running"
+                    : " applications running");
+        }
+
+        if(!selectedId ||
+           !document.getElementById(selectedId) ||
+           !isOpen(document.getElementById(selectedId))){
+
+            selectedId = null;
+
+            if(switchButton)
+                switchButton.disabled = true;
+
+        }
+    }
+
+    window.refreshTaskManagerApplications =
+        refreshApplications;
+
+    if(switchButton){
+
+        switchButton.addEventListener(
+            "click",
+            function(){
+
+                if(!selectedId)
+                    return;
+
+                const panel =
+                    document.getElementById(selectedId);
+
+                if(!panel)
+                    return;
+
+                panel.classList.remove("hidden");
+                panel.style.display = "block";
+
+                if(typeof bringToFront === "function")
+                    bringToFront(panel);
+
+            }
+        );
+
+    }
+
+    if(newTaskButton){
+
+        newTaskButton.addEventListener(
+            "click",
+            function(){
+
+                const command =
+                    prompt(
+                        "Type the name of a site app to open:"
+                    );
+
+                if(!command)
+                    return;
+
+                const match =
+                    Object.keys(window.panelNames || {})
+                        .find(function(id){
+
+                            const name =
+                                window.panelNames[id];
+
+                            return (
+                                name.toLowerCase() ===
+                                command.toLowerCase()
+                            ) ||
+                            id.toLowerCase() ===
+                                command.toLowerCase();
+
+                        });
+
+                if(match &&
+                   document.getElementById(match)){
+
+                    openPanel(match);
+                    refreshApplications();
+
+                } else {
+
+                    alert(
+                        "That app isn't installed on Rautatientori."
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+    /*
+     * Wrap the existing window functions so Applications always
+     * mirrors what is actually visible on the desktop.
+     */
+    const originalOpen = window.openPanel;
+    const originalMinimize = window.minimizePanel;
+    const originalClose = window.closePanel;
+
+    if(typeof originalOpen === "function"){
+        window.openPanel = function(id){
+
+            originalOpen(id);
+
+            setTimeout(
+                refreshApplications,
+                0
+            );
+
+        };
+    }
+
+    if(typeof originalMinimize === "function"){
+        window.minimizePanel = function(id){
+
+            originalMinimize(id);
+
+            setTimeout(
+                refreshApplications,
+                0
+            );
+
+        };
+    }
+
+    if(typeof originalClose === "function"){
+        window.closePanel = function(id){
+
+            originalClose(id);
+
+            setTimeout(
+                refreshApplications,
+                0
+            );
+
+        };
+    }
+
+    /* Also notice windows restored from the taskbar. */
+    document.addEventListener(
+        "click",
+        function(event){
+
+            if(
+                event.target.closest &&
+                event.target.closest(".task-window")
+            ){
+                setTimeout(
+                    refreshApplications,
+                    0
+                );
+            }
+
+        }
+    );
+
+    refreshApplications();
+
+})();
 
 
 /* =========================================================
@@ -12795,26 +13036,39 @@ catch(error){
         const site =
             document.getElementById("site");
 
-        if(!crash)
+        if(!site)
             return;
 
-        crash.classList.add("active");
-
-        if(site){
-            site.style.transition =
-                "transform 1.7s cubic-bezier(.2,.7,.3,1), opacity 1.7s ease";
-
-            site.style.transform =
-                "translateY(-130vh)";
-
-            site.style.opacity =
-                "0";
+        /*
+         * Explorer is the desktop itself here:
+         * everything starts moving upward and fading together.
+         * The black layer only becomes visible underneath it.
+         */
+        if(crash){
+            crash.classList.add("active");
         }
 
+        site.style.transformOrigin = "50% 100%";
+        site.style.transition =
+            "transform 1.8s cubic-bezier(.18,.72,.24,1), opacity 1.8s ease";
+
+        requestAnimationFrame(function(){
+            site.style.transform =
+                "translate3d(0,-115vh,0) scale(.96)";
+            site.style.opacity = "0";
+        });
+
         setTimeout(function(){
-            crash.querySelector(".xp-crash-window")
-                ?.classList.add("fly");
-        }, 20);
+
+            if(crash){
+                const crashWindow =
+                    crash.querySelector(".xp-crash-window");
+
+                if(crashWindow)
+                    crashWindow.style.display = "none";
+            }
+
+        }, 1900);
 
     }
 
