@@ -1398,7 +1398,7 @@ a:visited {
 
     height: 300px;
 
-    background: #FFFFFF;
+    background: #d4d0c8;
 
     border-top:
         2px solid #777;
@@ -1421,25 +1421,6 @@ a:visited {
 
     height: 100%;
 }
-
-/* Rauta's extra semantic-ish coloring layered on top of Monaco's
-   built-in language grammars. This keeps the real Monaco tokenizer
-   intact while giving function calls a consistent accent. */
-
-.rauta-function-token {
-
-    color: #2563EB !important;
-
-}
-
-.rauta-builtin-token {
-
-    color: #A21CAF !important;
-
-    font-weight: 500;
-
-}
-
 
 .editor-label {
 
@@ -5240,11 +5221,17 @@ rautatifyAudio.addEventListener(
    RAUTA MONACO SYSTEM
 ========================================================= */
 
-let pasteEditor = null;
-let obfInputEditor = null;
-let obfOutputEditor = null;
-let monacoReady = false;
-let rautaDecorationEditors = [];
+let pasteEditor =
+    null;
+
+let obfInputEditor =
+    null;
+
+let obfOutputEditor =
+    null;
+
+let monacoReady =
+    false;
 
 
 /* ---------------------------------------------------------
@@ -5253,30 +5240,65 @@ let rautaDecorationEditors = [];
 
 const rautaMonacoLanguages = {
 
-    "Plain Text": "plaintext",
+    "Plain Text":
+        "plaintext",
 
-    "Luau": "luau",
-    "Lua": "lua",
+    "Luau":
+        "luau",
 
-    "HTML": "html",
-    "CSS": "css",
-    "PHP": "php",
-    "Python": "python",
-    "JavaScript": "javascript",
-    "TypeScript": "typescript",
-    "JSON": "json",
+    "Lua":
+        "lua",
 
-    "C": "c",
-    "C++": "cpp",
-    "C#": "csharp",
-    "Java": "java",
-    "Go": "go",
-    "Rust": "rust",
+    "HTML":
+        "html",
 
-    "SQL": "sql",
-    "Shell": "shell",
-    "Markdown": "markdown",
-    "XML": "xml"
+    "CSS":
+        "css",
+
+    "PHP":
+        "php",
+
+    "Python":
+        "python",
+
+    "JavaScript":
+        "javascript",
+
+    "TypeScript":
+        "typescript",
+
+    "JSON":
+        "json",
+
+    "C":
+        "c",
+
+    "C++":
+        "cpp",
+
+    "C#":
+        "csharp",
+
+    "Java":
+        "java",
+
+    "Go":
+        "go",
+
+    "Rust":
+        "rust",
+
+    "SQL":
+        "sql",
+
+    "Shell":
+        "shell",
+
+    "Markdown":
+        "markdown",
+
+    "XML":
+        "xml"
 
 };
 
@@ -5288,338 +5310,634 @@ const rautaMonacoLanguages = {
 const rautaCompletions = {
 
     lua: [
-        "print", "pairs", "ipairs", "next", "type",
-        "tostring", "tonumber", "select", "error", "assert",
-        "pcall", "xpcall", "require",
-        "string", "table", "math", "os", "io", "debug", "utf8",
-        "coroutine", "function", "local", "return", "if",
-        "then", "else", "elseif", "for", "while", "repeat",
-        "until", "break", "do", "end", "and", "or", "not"
+
+        "print",
+        "pairs",
+        "ipairs",
+        "next",
+        "type",
+        "tostring",
+        "tonumber",
+        "select",
+        "error",
+        "assert",
+        "pcall",
+        "xpcall",
+        "require",
+
+        "string",
+        "table",
+        "math",
+        "os",
+        "io",
+        "debug",
+        "utf8",
+
+        "coroutine"
+
     ],
+
 
     luau: [
-        "print", "warn", "error", "assert", "type", "typeof",
-        "tostring", "tonumber", "pairs", "ipairs", "next",
-        "select", "pcall", "xpcall", "require",
-        "task", "task.wait", "task.spawn", "task.defer",
-        "task.delay", "task.cancel",
-        "string", "table", "math", "coroutine", "os", "utf8",
-        "game", "workspace", "script", "Instance",
-        "Vector2", "Vector3", "CFrame", "Color3", "UDim", "UDim2",
-        "Enum", "GetService", "FindFirstChild", "WaitForChild",
-        "Destroy", "Clone", "Connect", "Fire", "Invoke",
-        "RunService", "Players", "ReplicatedStorage",
-        "ServerStorage", "ServerScriptService",
-        "TweenService", "UserInputService", "HttpService",
-        "function", "local", "return", "if", "then", "else",
-        "elseif", "for", "while", "repeat", "until", "break",
-        "continue", "do", "end", "and", "or", "not", "typeof"
+
+        "print",
+        "warn",
+        "error",
+        "assert",
+
+        "type",
+        "typeof",
+
+        "tostring",
+        "tonumber",
+
+        "pairs",
+        "ipairs",
+        "next",
+        "select",
+
+        "pcall",
+        "xpcall",
+        "require",
+
+        "task",
+        "task.wait",
+        "task.spawn",
+        "task.defer",
+        "task.delay",
+        "task.cancel",
+
+        "string",
+        "table",
+        "math",
+        "coroutine",
+        "os",
+        "utf8",
+
+        "game",
+        "workspace",
+        "script",
+
+        "Instance",
+
+        "Vector2",
+        "Vector3",
+        "CFrame",
+
+        "Color3",
+
+        "UDim",
+        "UDim2",
+
+        "Enum",
+
+        "GetService",
+        "FindFirstChild",
+        "WaitForChild",
+        "Destroy",
+        "Clone",
+
+        "Connect",
+        "Fire",
+        "Invoke",
+
+        "RunService",
+        "Players",
+
+        "ReplicatedStorage",
+        "ServerStorage",
+        "ServerScriptService",
+
+        "TweenService",
+
+        "UserInputService",
+
+        "HttpService"
+
     ],
+
 
     javascript: [
-        "console.log", "console.error", "console.warn",
-        "print", "parseInt", "parseFloat", "isNaN",
-        "setTimeout", "setInterval", "clearTimeout", "clearInterval",
-        "fetch", "requestAnimationFrame",
-        "JSON.parse", "JSON.stringify",
-        "Array.isArray", "Object.keys", "Object.values",
-        "Object.entries", "Math.max", "Math.min", "Math.random",
-        "String", "Number", "Boolean", "Array", "Object", "Date",
-        "Promise", "Map", "Set", "RegExp",
-        "document.querySelector", "document.getElementById",
-        "document.createElement",
-        "addEventListener", "removeEventListener",
-        "localStorage.getItem", "localStorage.setItem",
-        "async", "await", "function", "return",
-        "const", "let", "var", "class", "extends",
-        "import", "export", "from", "throw", "try", "catch"
+
+        "console",
+        "console.log",
+        "console.error",
+        "console.warn",
+
+        "document",
+        "window",
+        "navigator",
+
+        "setTimeout",
+        "setInterval",
+
+        "clearTimeout",
+        "clearInterval",
+
+        "fetch",
+
+        "Promise",
+
+        "async",
+        "await",
+
+        "JSON",
+
+        "Math",
+
+        "Date",
+
+        "Array",
+        "Object",
+        "String",
+        "Number",
+        "Boolean",
+
+        "localStorage",
+        "sessionStorage"
+
     ],
+
 
     typescript: [
-        "console.log", "console.error", "console.warn",
-        "parseInt", "parseFloat", "setTimeout", "setInterval",
-        "fetch", "JSON.parse", "JSON.stringify",
-        "Array.isArray", "Object.keys", "Object.values",
-        "Math.max", "Math.min", "Math.random",
-        "String", "Number", "Boolean", "Array", "Object", "Date",
-        "Promise", "Map", "Set",
-        "interface", "type", "class", "extends", "implements",
-        "public", "private", "protected", "readonly",
-        "async", "await", "function", "return",
-        "const", "let", "import", "export", "from",
-        "Partial", "Required", "Readonly", "Record", "Pick", "Omit"
+
+        "console",
+        "console.log",
+
+        "interface",
+        "type",
+
+        "class",
+        "extends",
+        "implements",
+
+        "public",
+        "private",
+        "protected",
+
+        "readonly",
+
+        "async",
+        "await",
+
+        "Promise",
+
+        "Record",
+        "Partial",
+        "Pick",
+        "Omit"
+
     ],
+
 
     python: [
-        "print", "input", "len", "range", "enumerate", "zip",
-        "map", "filter", "sorted", "reversed", "sum", "min", "max",
-        "abs", "round", "any", "all", "isinstance", "issubclass",
-        "str", "int", "float", "bool", "list", "dict", "tuple", "set",
-        "open", "super", "property",
-        "math.sqrt", "math.floor", "math.ceil",
-        "random.randint", "random.choice",
-        "json.loads", "json.dumps",
-        "True", "False", "None",
-        "import", "from", "as", "def", "class", "return",
-        "yield", "async", "await", "if", "elif", "else",
-        "for", "while", "in", "not", "and", "or", "try",
-        "except", "finally", "with", "lambda", "raise"
+
+        "print",
+        "input",
+
+        "len",
+        "range",
+        "enumerate",
+        "zip",
+
+        "map",
+        "filter",
+
+        "sorted",
+        "reversed",
+
+        "str",
+        "int",
+        "float",
+        "bool",
+
+        "list",
+        "dict",
+        "tuple",
+        "set",
+
+        "True",
+        "False",
+        "None",
+
+        "import",
+        "from",
+
+        "def",
+        "class",
+
+        "return",
+        "yield",
+
+        "async",
+        "await",
+
+        "self",
+        "super",
+
+        "open",
+
+        "json",
+        "os",
+        "sys",
+        "math",
+        "random",
+        "datetime"
+
     ],
+
 
     html: [
-        "html", "head", "body", "title", "meta", "link",
-        "script", "style", "div", "span", "p", "h1", "h2", "h3",
-        "a", "img", "button", "input", "textarea", "select",
-        "option", "form", "label", "main", "section", "header",
-        "footer", "nav", "class", "id", "style", "href", "src",
-        "alt", "onclick", "onload"
+
+        "html",
+        "head",
+        "body",
+        "title",
+
+        "meta",
+        "link",
+
+        "script",
+        "style",
+
+        "div",
+        "span",
+
+        "p",
+
+        "h1",
+        "h2",
+        "h3",
+
+        "a",
+        "img",
+
+        "button",
+        "input",
+        "textarea",
+
+        "select",
+        "option",
+
+        "form",
+        "label",
+
+        "main",
+        "section",
+        "header",
+        "footer",
+        "nav",
+
+        "class",
+        "id",
+
+        "style",
+        "href",
+        "src",
+        "alt"
+
     ],
+
 
     css: [
-        "display", "position", "absolute", "relative", "fixed",
-        "sticky", "width", "height", "min-width", "max-width",
-        "margin", "padding", "color", "background",
-        "background-color", "font-size", "font-family", "font-weight",
-        "border", "border-radius", "box-shadow",
-        "flex", "grid", "gap", "justify-content", "align-items",
-        "transform", "transition", "animation", "opacity",
-        "overflow", "z-index", "calc", "var", "rgb", "rgba"
+
+        "display",
+        "position",
+
+        "absolute",
+        "relative",
+        "fixed",
+        "sticky",
+
+        "width",
+        "height",
+
+        "margin",
+        "padding",
+
+        "color",
+
+        "background",
+        "background-color",
+
+        "font-size",
+        "font-family",
+        "font-weight",
+
+        "border",
+        "border-radius",
+
+        "box-shadow",
+
+        "flex",
+        "grid",
+        "gap",
+
+        "transform",
+        "transition",
+        "animation",
+
+        "opacity",
+
+        "overflow",
+
+        "z-index"
+
     ],
+
 
     php: [
-        "echo", "print", "isset", "empty", "count", "sizeof",
-        "array", "explode", "implode", "strlen", "str_replace",
-        "json_encode", "json_decode",
-        "function", "class", "public", "private", "protected",
-        "include", "require", "require_once",
-        "foreach", "while", "if", "else", "elseif",
-        "return", "new", "use", "namespace",
-        "$_GET", "$_POST", "$_SESSION", "$_COOKIE", "$_SERVER"
+
+        "echo",
+        "print",
+
+        "isset",
+        "empty",
+        "count",
+
+        "array",
+
+        "json_encode",
+        "json_decode",
+
+        "function",
+        "class",
+
+        "public",
+        "private",
+        "protected",
+
+        "include",
+        "require",
+        "require_once",
+
+        "$_GET",
+        "$_POST",
+        "$_SESSION",
+        "$_COOKIE",
+        "$_SERVER"
+
     ],
 
-    c: [
-        "printf", "scanf", "puts", "gets", "malloc", "calloc",
-        "realloc", "free", "memcpy", "memset", "strlen",
-        "strcmp", "strcpy", "strcat", "fopen", "fclose",
-        "fprintf", "fscanf", "main", "sizeof",
-        "if", "else", "for", "while", "switch", "case",
-        "break", "continue", "return", "struct", "typedef",
-        "const", "static", "void", "int", "char", "float", "double"
-    ],
-
-    cpp: [
-        "std::cout", "std::cin", "std::cerr",
-        "printf", "scanf", "malloc", "free",
-        "strlen", "strcmp", "memcpy",
-        "main", "sizeof", "vector", "string", "map", "set",
-        "unordered_map", "sort", "find", "move", "forward",
-        "make_shared", "make_unique", "shared_ptr", "unique_ptr",
-        "if", "else", "for", "while", "switch", "case",
-        "break", "continue", "return", "class", "struct",
-        "public", "private", "protected", "namespace", "template",
-        "auto", "const", "constexpr", "nullptr"
-    ],
-
-    csharp: [
-        "Console.WriteLine", "Console.Write", "Console.ReadLine",
-        "Math.Abs", "Math.Max", "Math.Min", "Math.Round",
-        "string", "int", "double", "float", "bool", "object",
-        "List", "Dictionary", "Task",
-        "class", "struct", "interface", "public", "private",
-        "protected", "static", "async", "await", "new",
-        "using", "namespace", "return", "if", "else", "for",
-        "foreach", "while", "switch", "try", "catch", "throw"
-    ],
-
-    java: [
-        "System.out.println", "System.out.print",
-        "Math.abs", "Math.max", "Math.min", "Math.random",
-        "String", "Integer", "Double", "Boolean", "Object",
-        "ArrayList", "HashMap", "HashSet", "Scanner",
-        "public", "private", "protected", "static", "final",
-        "class", "interface", "extends", "implements",
-        "new", "return", "if", "else", "for", "while",
-        "switch", "case", "try", "catch", "throw", "throws"
-    ],
-
-    go: [
-        "fmt.Println", "fmt.Printf", "fmt.Sprintf",
-        "make", "new", "append", "copy", "len", "cap",
-        "close", "panic", "recover",
-        "string", "int", "float64", "bool", "byte", "rune",
-        "func", "return", "defer", "go", "chan", "select",
-        "if", "else", "for", "range", "switch", "case",
-        "struct", "interface", "package", "import", "type"
-    ],
-
-    rust: [
-        "println!", "print!", "eprintln!", "format!",
-        "vec!", "panic!", "assert!", "assert_eq!",
-        "dbg!", "todo!", "unimplemented!",
-        "String", "Vec", "Option", "Result", "Box", "Rc", "Arc",
-        "Some", "None", "Ok", "Err",
-        "fn", "let", "mut", "pub", "struct", "enum", "trait",
-        "impl", "use", "mod", "match", "if", "else", "loop",
-        "while", "for", "in", "return", "async", "await"
-    ],
 
     sql: [
-        "SELECT", "FROM", "WHERE", "INSERT", "INTO", "VALUES",
-        "UPDATE", "SET", "DELETE", "CREATE", "TABLE", "ALTER",
-        "DROP", "JOIN", "LEFT JOIN", "RIGHT JOIN", "INNER JOIN",
-        "ORDER BY", "GROUP BY", "HAVING", "LIMIT", "OFFSET",
-        "AND", "OR", "NOT", "NULL",
-        "COUNT", "SUM", "AVG", "MIN", "MAX", "COALESCE",
-        "CAST", "CONCAT", "DISTINCT", "AS"
+
+        "SELECT",
+        "FROM",
+        "WHERE",
+
+        "INSERT",
+        "INTO",
+        "VALUES",
+
+        "UPDATE",
+        "SET",
+
+        "DELETE",
+
+        "CREATE",
+        "TABLE",
+
+        "ALTER",
+        "DROP",
+
+        "JOIN",
+        "LEFT JOIN",
+        "RIGHT JOIN",
+        "INNER JOIN",
+
+        "ORDER BY",
+        "GROUP BY",
+
+        "HAVING",
+
+        "LIMIT",
+        "OFFSET",
+
+        "AND",
+        "OR",
+        "NOT",
+
+        "NULL"
+
     ],
+
 
     shell: [
-        "echo", "printf", "cd", "pwd", "ls", "mkdir", "rmdir",
-        "rm", "cp", "mv", "cat", "grep", "find", "chmod",
-        "chown", "curl", "wget", "tar", "zip", "unzip",
-        "sed", "awk", "head", "tail", "sort", "uniq", "xargs",
-        "export", "source", "alias", "exit", "read", "test"
-    ],
 
-    json: [
-        "true", "false", "null"
-    ],
+        "echo",
+        "cd",
+        "pwd",
+        "ls",
 
-    markdown: [
-        "#", "##", "###", "**bold**", "*italic*", "`code`",
-        "[link](url)", "```code```"
-    ],
+        "mkdir",
+        "rm",
+        "cp",
+        "mv",
 
-    xml: [
-        "xml", "root", "item", "name", "id", "class",
-        "xmlns", "version", "encoding"
+        "cat",
+
+        "grep",
+        "find",
+
+        "chmod",
+
+        "curl",
+        "wget",
+
+        "printf"
+
     ]
 
 };
 
 
 /* ---------------------------------------------------------
-   RAUTA LIGHT THEME
+   REGISTER LUA / LUAU
 --------------------------------------------------------- */
 
-function registerRautaTheme(){
+function registerRautaLanguages(){
 
-    monaco.editor.defineTheme(
-        "rauta-light",
+    if(
+        !monaco.languages
+            .getLanguages()
+            .some(
+                language =>
+                    language.id === "luau"
+            )
+    ){
+
+        monaco.languages.register({
+            id:
+                "luau"
+        });
+
+    }
+
+
+    if(
+        !monaco.languages
+            .getLanguages()
+            .some(
+                language =>
+                    language.id === "lua"
+            )
+    ){
+
+        monaco.languages.register({
+            id:
+                "lua"
+        });
+
+    }
+
+
+    const luaKeywords = [
+
+        "and",
+        "break",
+        "do",
+        "else",
+        "elseif",
+        "end",
+
+        "false",
+
+        "for",
+        "function",
+        "if",
+
+        "in",
+
+        "local",
+        "nil",
+
+        "not",
+        "or",
+
+        "repeat",
+        "return",
+
+        "then",
+        "true",
+
+        "until",
+        "while"
+
+    ];
+
+
+    monaco.languages.setMonarchTokensProvider(
+        "lua",
         {
-            base: "vs",
-            inherit: true,
 
-            rules: [
+            keywords:
+                luaKeywords,
 
-                {
-                    token: "comment",
-                    foreground: "7A7A7A",
-                    fontStyle: "italic"
-                },
+            tokenizer: {
 
-                {
-                    token: "keyword",
-                    foreground: "7C3AED"
-                },
+                root: [
 
-                {
-                    token: "keyword.control",
-                    foreground: "7C3AED"
-                },
+                    [
+                        /--.*/,
+                        "comment"
+                    ],
 
-                {
-                    token: "string",
-                    foreground: "16803C"
-                },
+                    [
+                        /"(?:[^"\\]|\\.)*"/,
+                        "string"
+                    ],
 
-                {
-                    token: "string.escape",
-                    foreground: "C2410C"
-                },
+                    [
+                        /'(?:[^'\\]|\\.)*'/,
+                        "string"
+                    ],
 
-                {
-                    token: "number",
-                    foreground: "B45309"
-                },
+                    [
+                        /\b\d+(?:\.\d+)?\b/,
+                        "number"
+                    ],
 
-                {
-                    token: "type",
-                    foreground: "007C91"
-                },
+                    [
+                        /[a-zA-Z_]\w*/,
+                        {
+                            cases: {
 
-                {
-                    token: "type.identifier",
-                    foreground: "007C91"
-                },
+                                "@keywords":
+                                    "keyword",
 
-                {
-                    token: "predefined",
-                    foreground: "A21CAF"
-                },
+                                "@default":
+                                    "identifier"
 
-                {
-                    token: "constant",
-                    foreground: "B45309"
-                },
+                            }
+                        }
+                    ]
 
-                {
-                    token: "function",
-                    foreground: "2563EB"
-                },
+                ]
 
-                {
-                    token: "function.call",
-                    foreground: "2563EB"
-                },
+            }
 
-                {
-                    token: "identifier",
-                    foreground: "202020"
-                },
+        }
+    );
 
-                {
-                    token: "delimiter",
-                    foreground: "505050"
-                },
 
-                {
-                    token: "tag",
-                    foreground: "B42318"
-                },
+    monaco.languages.setMonarchTokensProvider(
+        "luau",
+        {
 
-                {
-                    token: "attribute.name",
-                    foreground: "7C3AED"
-                },
+            keywords: [
 
-                {
-                    token: "attribute.value",
-                    foreground: "16803C"
-                }
+                ...luaKeywords,
+
+                "continue",
+                "export",
+                "type",
+                "typeof"
 
             ],
 
-            colors: {
+            tokenizer: {
 
-                "editor.background": "#FFFFFF",
-                "editor.foreground": "#202020",
-                "editorLineNumber.foreground": "#9A9A9A",
-                "editorLineNumber.activeForeground": "#505050",
-                "editorCursor.foreground": "#333333",
-                "editor.selectionBackground": "#CDE7FF",
-                "editor.inactiveSelectionBackground": "#E7F3FF",
-                "editor.lineHighlightBackground": "#F5F5F5",
-                "editorSuggestWidget.background": "#FFFFFF",
-                "editorSuggestWidget.foreground": "#202020",
-                "editorSuggestWidget.selectedBackground": "#E6F2FF",
-                "editorSuggestWidget.highlightForeground": "#2563EB",
-                "editorWidget.border": "#B8B8B8",
-                "editorSuggestWidget.border": "#B8B8B8",
-                "editorHoverWidget.background": "#FFFFFF",
-                "editorHoverWidget.border": "#B8B8B8",
-                "editorBracketMatch.background": "#EEF6FF",
-                "editorBracketMatch.border": "#7AAFE8"
+                root: [
+
+                    [
+                        /--.*/,
+                        "comment"
+                    ],
+
+                    [
+                        /"(?:[^"\\]|\\.)*"/,
+                        "string"
+                    ],
+
+                    [
+                        /'(?:[^'\\]|\\.)*'/,
+                        "string"
+                    ],
+
+                    [
+                        /\b\d+(?:\.\d+)?\b/,
+                        "number"
+                    ],
+
+                    [
+                        /[a-zA-Z_]\w*/,
+                        {
+
+                            cases: {
+
+                                "@keywords":
+                                    "keyword",
+
+                                "@default":
+                                    "identifier"
+
+                            }
+
+                        }
+                    ]
+
+                ]
 
             }
 
@@ -5630,286 +5948,139 @@ function registerRautaTheme(){
 
 
 /* ---------------------------------------------------------
-   CUSTOM COMPLETION PROVIDERS
+   CUSTOM AUTOCOMPLETE
 --------------------------------------------------------- */
-
-function rautaCompletionKind(language, item){
-
-    const functionWords = [
-        "print", "warn", "error", "assert", "typeof",
-        "tostring", "tonumber", "pairs", "ipairs", "next",
-        "select", "pcall", "xpcall", "require",
-        "len", "range", "enumerate", "zip", "map", "filter",
-        "sorted", "reversed", "sum", "min", "max", "abs",
-        "round", "input", "open", "echo", "printf", "scanf",
-        "malloc", "free", "strlen", "strcmp", "fopen", "fclose",
-        "fetch", "setTimeout", "setInterval", "clearTimeout",
-        "parseInt", "parseFloat", "make", "append", "copy",
-        "panic", "recover", "close", "sort", "find"
-    ];
-
-    if(
-        functionWords.includes(item) ||
-        item.includes(".") ||
-        item.endsWith("!")
-    )
-        return monaco.languages.CompletionItemKind.Function;
-
-    if(
-        [
-            "class", "struct", "interface", "enum",
-            "String", "Integer", "Double", "Boolean",
-            "Array", "Object", "Promise", "Map", "Set",
-            "Vector2", "Vector3", "CFrame", "Color3",
-            "Instance", "Vec", "Option", "Result"
-        ].includes(item)
-    )
-        return monaco.languages.CompletionItemKind.Class;
-
-    if(
-        /^(if|else|elseif|for|while|switch|case|return|function|func|fn|def|class|struct|interface|import|export|from|public|private|protected|const|let|var|local|async|await|try|catch|throw|new|use|match|impl|pub|package|type)$/.test(item)
-    )
-        return monaco.languages.CompletionItemKind.Keyword;
-
-    return monaco.languages.CompletionItemKind.Value;
-
-}
-
 
 function registerRautaCompletions(){
 
-    Object.keys(rautaCompletions).forEach(
+    Object.keys(
+        rautaCompletions
+    )
+    .forEach(
         language => {
 
-            monaco.languages.registerCompletionItemProvider(
-                language,
-                {
-
-                    triggerCharacters: [".", ":", "#"],
-
-                    provideCompletionItems: function(model, position){
-
-                        const word =
-                            model.getWordUntilPosition(position);
-
-                        const range = {
-
-                            startLineNumber: position.lineNumber,
-                            endLineNumber: position.lineNumber,
-                            startColumn: word.startColumn,
-                            endColumn: word.endColumn
-
-                        };
-
-                        const suggestions =
-                            rautaCompletions[language].map(
-                                item => {
-
-                                    let insertText = item;
-
-                                    if(
-                                        rautaCompletionKind(
-                                            language,
-                                            item
-                                        ) ===
-                                        monaco.languages.CompletionItemKind.Function &&
-                                        !/[!)]$/.test(item) &&
-                                        !item.includes(" ")
-                                    ){
-
-                                        insertText = item + "()";
-
-                                    }
-
-                                    return {
-
-                                        label: item,
-
-                                        kind:
-                                            rautaCompletionKind(
-                                                language,
-                                                item
-                                            ),
-
-                                        insertText: insertText,
-
-                                        range: range,
-
-                                        detail:
-                                            language === "luau"
-                                                ? "Rauta • Luau"
-                                                : "Rauta • " + language
-
-                                    };
-
-                                }
-                            );
-
-                        return {
-                            suggestions: suggestions
-                        };
-
-                    }
-
-                }
-            );
-
-        }
-    );
-
-}
-
-
-/* ---------------------------------------------------------
-   EXTRA FUNCTION / BUILTIN COLORING
---------------------------------------------------------- */
-
-function rautaColorEditor(editor){
-
-    if(!editor)
-        return;
-
-    const model = editor.getModel();
-
-    if(!model)
-        return;
-
-    let decorations = [];
-
-    const update = function(){
-
-        const language =
-            model.getLanguageId();
-
-        const functions =
-            new Set(
-                (rautaCompletions[language] || [])
-                    .filter(
-                        item =>
-                            rautaCompletionKind(
-                                language,
-                                item
-                            ) ===
-                            monaco.languages.CompletionItemKind.Function
-                    )
-                    .map(
-                        item =>
-                            item
-                                .replace(/[!]/g, "")
-                                .split(".")
-                                .pop()
-                    )
-            );
-
-        const functionPattern =
-            /\b[A-Za-z_$][\w$]*(?:\.[A-Za-z_$][\w$]*)*(?=\s*\()/g;
-
-        const knownPattern =
-            functions.size
-                ? new RegExp(
-                    "\\b(?:" +
-                    Array.from(functions)
-                        .sort(
-                            (a,b) => b.length - a.length
-                        )
-                        .map(
-                            name =>
-                                name.replace(
-                                    /[.*+?^${}()|[\]\\]/g,
-                                    "\\$&"
-                                )
-                        )
-                        .join("|") +
-                    ")\\b",
-                    "g"
-                )
-                : null;
-
-        const matches = [];
-
-        for(
-            let line = 1;
-            line <= model.getLineCount();
-            line++
-        ){
-
-            const content =
-                model.getLineContent(line);
-
-            functionPattern.lastIndex = 0;
-
-            let match;
-
-            while(
-                (match =
-                    functionPattern.exec(content))
-                !== null
-            ){
-
-                matches.push(
+            monaco.languages
+                .registerCompletionItemProvider(
+                    language,
                     {
-                        range:
-                            new monaco.Range(
-                                line,
-                                match.index + 1,
-                                line,
-                                match.index + match[0].length + 1
-                            ),
 
-                        options: {
-                            inlineClassName:
-                                "rauta-function-token"
-                        }
+                        provideCompletionItems:
+                            function(
+                                model,
+                                position
+                            ){
+
+                                const word =
+                                    model.getWordUntilPosition(
+                                        position
+                                    );
+
+                                const range = {
+
+                                    startLineNumber:
+                                        position.lineNumber,
+
+                                    endLineNumber:
+                                        position.lineNumber,
+
+                                    startColumn:
+                                        word.startColumn,
+
+                                    endColumn:
+                                        word.endColumn
+
+                                };
+
+
+                                const suggestions =
+                                    rautaCompletions[
+                                        language
+                                    ]
+                                    .map(
+                                        item => {
+
+                                            let insertText =
+                                                item;
+
+
+                                            const functionNames = [
+
+                                                "print",
+                                                "warn",
+                                                "error",
+                                                "assert",
+
+                                                "typeof",
+                                                "tostring",
+                                                "tonumber",
+
+                                                "console.log",
+                                                "console.error",
+                                                "console.warn",
+
+                                                "len",
+                                                "input",
+                                                "range",
+
+                                                "echo"
+
+                                            ];
+
+
+                                            if(
+                                                functionNames
+                                                    .includes(
+                                                        item
+                                                    )
+                                            ){
+
+                                                insertText =
+                                                    item +
+                                                    "()";
+
+                                            }
+
+
+                                            return {
+
+                                                label:
+                                                    item,
+
+                                                kind:
+                                                    monaco
+                                                        .languages
+                                                        .CompletionItemKind
+                                                        .Function,
+
+                                                insertText:
+                                                    insertText,
+
+                                                range:
+                                                    range,
+
+                                                detail:
+                                                    "Rauta autocomplete"
+
+                                            };
+
+                                        }
+                                    );
+
+
+                                return {
+
+                                    suggestions:
+                                        suggestions
+
+                                };
+
+                            }
+
                     }
                 );
 
-            }
-
-            if(knownPattern){
-
-                knownPattern.lastIndex = 0;
-
-                while(
-                    (match =
-                        knownPattern.exec(content))
-                    !== null
-                ){
-
-                    matches.push(
-                        {
-                            range:
-                                new monaco.Range(
-                                    line,
-                                    match.index + 1,
-                                    line,
-                                    match.index + match[0].length + 1
-                                ),
-
-                            options: {
-                                inlineClassName:
-                                    "rauta-builtin-token"
-                            }
-                        }
-                    );
-
-                }
-
-            }
-
         }
-
-        decorations =
-            editor.deltaDecorations(
-                decorations,
-                matches
-            );
-
-    };
-
-    update();
-
-    model.onDidChangeContent(update);
-    model.onDidChangeLanguage(update);
+    );
 
 }
 
@@ -5918,41 +6089,11 @@ function rautaColorEditor(editor){
    START MONACO
 --------------------------------------------------------- */
 
-function createRautaEditor(containerId, options){
-
-    const container =
-        document.getElementById(containerId);
-
-    if(!container)
-        throw new Error(
-            "Monaco container not found: " +
-            containerId
-        );
-
-    return monaco.editor.create(
-        container,
-        options
-    );
-
-}
-
-
 function startRautaMonaco(){
 
     if(monacoReady)
         return;
 
-    if(
-        typeof require !== "function"
-    ){
-
-        console.error(
-            "Rauta Monaco: loader.min.js did not load."
-        );
-
-        return;
-
-    }
 
     require.config({
 
@@ -5965,143 +6106,149 @@ function startRautaMonaco(){
 
     });
 
+
     require(
-        ["vs/editor/editor.main"],
+        [
+            "vs/editor/editor.main"
+        ],
         function(){
 
-            try{
+            registerRautaLanguages();
 
-                registerRautaLanguages();
-                registerRautaTheme();
-                registerRautaCompletions();
-
-                const commonOptions = {
-
-                    theme: "rauta-light",
-
-                    automaticLayout: true,
-
-                    minimap: {
-                        enabled: false
-                    },
-
-                    fontSize: 13,
-
-                    lineNumbers: "on",
-
-                    roundedSelection: false,
-
-                    scrollBeyondLastLine: false,
-
-                    wordWrap: "off",
-
-                    tabSize: 4,
-
-                    insertSpaces: true,
-
-                    suggestOnTriggerCharacters: true,
-
-                    quickSuggestions: {
-                        other: true,
-                        comments: false,
-                        strings: false
-                    },
-
-                    suggestSelection: "first",
-
-                    acceptSuggestionOnEnter: "on",
-
-                    parameterHints: {
-                        enabled: true
-                    },
-
-                    folding: true,
-
-                    smoothScrolling: true,
-
-                    padding: {
-                        top: 6,
-                        bottom: 6
-                    },
-
-                    renderWhitespace: "selection",
-
-                    bracketPairColorization: {
-                        enabled: true
-                    }
-
-                };
+            registerRautaCompletions();
 
 
-                pasteEditor =
-                    createRautaEditor(
-                        "pasteEditor",
-                        {
-                            ...commonOptions,
-                            language: "plaintext",
-                            value: ""
-                        }
-                    );
+            const commonOptions = {
+
+                theme:
+                    "vs",
+
+                automaticLayout:
+                    true,
+
+                minimap: {
+
+                    enabled:
+                        false
+
+                },
+
+                fontSize:
+                    13,
+
+                lineNumbers:
+                    "on",
+
+                roundedSelection:
+                    false,
+
+                scrollBeyondLastLine:
+                    false,
+
+                wordWrap:
+                    "off",
+
+                tabSize:
+                    4,
+
+                insertSpaces:
+                    true,
+
+                suggestOnTriggerCharacters:
+                    true,
+
+                quickSuggestions:
+                    true,
+
+                parameterHints: {
+
+                    enabled:
+                        true
+
+                },
+
+                folding:
+                    true,
+
+                smoothScrolling:
+                    true
+
+            };
 
 
-                obfInputEditor =
-                    createRautaEditor(
-                        "obfInputEditor",
-                        {
-                            ...commonOptions,
-                            language: "luau",
-                            value: ""
-                        }
-                    );
+            /* RAUTAPASTE */
 
+            pasteEditor =
+                monaco.editor.create(
+                    document.getElementById(
+                        "pasteEditor"
+                    ),
+                    {
 
-                obfOutputEditor =
-                    createRautaEditor(
-                        "obfOutputEditor",
-                        {
-                            ...commonOptions,
-                            language: "plaintext",
-                            value: "",
-                            readOnly: true
-                        }
-                    );
+                        ...commonOptions,
 
+                        language:
+                            "plaintext",
 
-                monacoReady = true;
-
-                rautaColorEditor(pasteEditor);
-                rautaColorEditor(obfInputEditor);
-
-                updatePasteEditorLanguage();
-                updateObfEditorLanguage();
-
-                requestAnimationFrame(
-                    function(){
-
-                        pasteEditor.layout();
-                        obfInputEditor.layout();
-                        obfOutputEditor.layout();
+                        value:
+                            ""
 
                     }
                 );
 
-            }
-            catch(error){
 
-                console.error(
-                    "Rauta Monaco failed to initialize:",
-                    error
+            /* OBFUSCATOR INPUT */
+
+            obfInputEditor =
+                monaco.editor.create(
+                    document.getElementById(
+                        "obfInputEditor"
+                    ),
+                    {
+
+                        ...commonOptions,
+
+                        language:
+                            "luau",
+
+                        value:
+                            ""
+
+                    }
                 );
 
-            }
 
-        },
-        function(error){
+            /* OBFUSCATOR OUTPUT */
 
-            console.error(
-                "Rauta Monaco loader failed:",
-                error
-            );
+            obfOutputEditor =
+                monaco.editor.create(
+                    document.getElementById(
+                        "obfOutputEditor"
+                    ),
+                    {
+
+                        ...commonOptions,
+
+                        language:
+                            "plaintext",
+
+                        value:
+                            "",
+
+                        readOnly:
+                            true
+
+                    }
+                );
+
+
+            monacoReady =
+                true;
+
+
+            updatePasteEditorLanguage();
+
+            updateObfEditorLanguage();
 
         }
     );
