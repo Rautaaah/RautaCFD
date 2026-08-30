@@ -2422,6 +2422,68 @@ nav {
     z-index: 9999 !important;
 }
 
+
+/* =========================================================
+   INTERACTIVE IMAGE UI
+========================================================= */
+
+.image-url-box{
+    display:block;
+    width:100%;
+    box-sizing:border-box;
+    margin-top:8px;
+    padding:7px;
+    font-family:"Courier New",monospace;
+    font-size:11px;
+    border:1px solid rgba(80,50,90,.45);
+    background:rgba(255,255,255,.62);
+    color:#24152a;
+}
+
+.image-result-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    margin-top:9px;
+}
+
+.interactive-image-preview{
+    display:block;
+    max-width:100%;
+    max-height:340px;
+    margin-top:12px;
+    border:1px solid rgba(50,30,60,.5);
+    border-radius:4px;
+    cursor:zoom-in;
+    box-shadow:0 6px 18px rgba(0,0,0,.28);
+    background:rgba(255,255,255,.3);
+}
+
+.image-info{
+    display:block;
+    margin-top:7px;
+    opacity:.75;
+}
+
+.discord-ready{
+    margin-top:8px;
+    padding:7px 9px;
+    border-left:3px solid #5865f2;
+    background:rgba(88,101,242,.10);
+}
+
+.image-host-warning{
+    margin-top:8px;
+    padding:7px 9px;
+    background:rgba(255,190,70,.18);
+    border:1px solid rgba(150,90,0,.35);
+}
+
+.image-drag-over{
+    outline:3px dashed rgba(243,110,210,.8);
+    outline-offset:-5px;
+}
+
 </style>
 
 <audio id="signinAudio" src="/signin.mp3" preload="auto"></audio>
@@ -9440,126 +9502,96 @@ async function uploadRautaImage(temporary){
     ){
         result.textContent =
             "please choose an image first :3";
-
-        playRautaSFX(
-            "error"
-        );
-
+        playRautaSFX("error");
         return;
     }
 
     const file =
         fileInput.files[0];
 
-    if(
-        !file.type.startsWith(
-            "image/"
-        )
-    ){
+    if(!file.type.startsWith("image/")){
         result.textContent =
             "that file is not an image :(";
-
-        playRautaSFX(
-            "error"
-        );
-
+        playRautaSFX("error");
         return;
     }
 
-    if(
-        file.size >
-        8 * 1024 * 1024
-    ){
+    if(file.size > 8 * 1024 * 1024){
         result.textContent =
             "image is over the 8 MB browser limit :(";
-
-        playRautaSFX(
-            "error"
-        );
-
+        playRautaSFX("error");
         return;
     }
 
-    result.textContent =
-        "processing image... :3";
+    result.innerHTML =
+        `<strong>uploading ${escapeHtml(file.name)}... :3</strong>`;
 
     try{
 
-        const dataUrl =
-            await new Promise(
-                (
-                    resolve,
-                    reject
-                ) => {
+        /*
+            Discord needs a PUBLIC HTTPS image URL for a link preview.
+            A data: URL is local to the browser and cannot be used as a
+            normal Discord image link.
 
-                    const reader =
-                        new FileReader();
+            Normal images -> Catbox (permanent)
+            Temporary images -> Litterbox (1 hour)
+        */
+        const endpoint =
+            temporary
+                ? "https://litterbox.catbox.moe/resources/internals/api.php"
+                : "https://catbox.moe/user/api.php";
 
-                    reader.onload =
-                        () =>
-                            resolve(
-                                String(
-                                    reader.result
-                                )
-                            );
+        const form =
+            new FormData();
 
-                    reader.onerror =
-                        () =>
-                            reject(
-                                new Error(
-                                    "could not read image"
-                                )
-                            );
+        form.append(
+            "reqtype",
+            "fileupload"
+        );
 
-                    reader.readAsDataURL(
-                        file
-                    );
+        if(temporary){
+            form.append(
+                "time",
+                "1h"
+            );
+        }
 
+        form.append(
+            "fileToUpload",
+            file,
+            file.name
+        );
+
+        const response =
+            await fetch(
+                endpoint,
+                {
+                    method:"POST",
+                    body:form
                 }
             );
 
-        result.innerHTML =
-            `
-            <strong>
-                ${
-                    temporary
-                        ? "temporary image ready! :3"
-                        : "RautaImage ready! :3"
-                }
-            </strong>
-            <br>
-            <a
-                href="${escapeHtml(dataUrl)}"
-                download="${escapeHtml(file.name)}"
-            >
-                open / save image
-            </a>
-            <br>
-            <small>
-                local browser image • no Catbox fetch required
-            </small>
-            `;
+        const publicUrl =
+            (await response.text()).trim();
 
-        const preview =
-            document.createElement(
-                "img"
+        if(
+            !response.ok ||
+            !/^https?:\/\//i.test(publicUrl)
+        ){
+            throw new Error(
+                publicUrl ||
+                "image host rejected the upload"
             );
+        }
 
-        preview.src =
-            dataUrl;
-
-        preview.alt =
-            file.name;
-
-        preview.style.cssText =
-            "display:block;max-width:100%;max-height:300px;margin-top:10px;border:1px solid #999;";
-
-        result.appendChild(
-            preview
+        renderHostedImageResult(
+            result,
+            publicUrl,
+            file,
+            temporary
         );
 
         try{
-
             localStorage.setItem(
                 temporary
                     ? "rauta_temp_image_data"
@@ -9567,47 +9599,634 @@ async function uploadRautaImage(temporary){
                 JSON.stringify({
                     name:file.name,
                     type:file.type,
-                    dataUrl:dataUrl,
+                    url:publicUrl,
                     expires:
                         temporary
                             ? Date.now() + 3600000
                             : null
                 })
             );
-
         }
         catch(storageError){
-
             console.warn(
-                "Could not save image locally:",
+                "Could not save hosted image locally:",
                 storageError
             );
         }
 
-        playRautaSFX(
-            "click"
-        );
+        playRautaSFX("click");
 
     }
     catch(error){
 
-        console.error(
-            "Rauta image processing failed:",
+        console.warn(
+            "Public image upload failed:",
             error
         );
 
-        result.textContent =
-            "couldn't process image: " +
-            (
-                error.message ||
-                "unknown error"
+        /*
+            Keep the tool usable if the browser blocks the remote API
+            because of CORS/network policy. The local copy is still useful,
+            but it is explicitly marked as NOT Discord-embeddable.
+        */
+        try{
+
+            const dataUrl =
+                await readFileAsDataURL(file);
+
+            renderLocalImageResult(
+                result,
+                dataUrl,
+                file,
+                temporary
             );
 
-        playRautaSFX(
-            "error"
-        );
+            result.insertAdjacentHTML(
+                "beforeend",
+                `<div class="image-host-warning">
+                    ⚠️ Public upload failed in this browser.
+                    The local image works here, but its <b>data:</b> URL
+                    will not make a Discord link embed.
+                </div>`
+            );
+
+        }
+        catch(localError){
+
+            result.textContent =
+                "couldn't upload/process image: " +
+                (
+                    error.message ||
+                    "unknown error"
+                );
+
+            playRautaSFX("error");
+        }
     }
 }
+
+function readFileAsDataURL(file){
+
+    return new Promise(
+        (resolve,reject) => {
+
+            const reader =
+                new FileReader();
+
+            reader.onload =
+                () =>
+                    resolve(
+                        String(reader.result)
+                    );
+
+            reader.onerror =
+                () =>
+                    reject(
+                        new Error(
+                            "could not read image"
+                        )
+                    );
+
+            reader.readAsDataURL(file);
+        }
+    );
+}
+
+function renderHostedImageResult(
+    result,
+    url,
+    file,
+    temporary
+){
+
+    result.innerHTML = "";
+
+    const title =
+        document.createElement("strong");
+
+    title.textContent =
+        temporary
+            ? "temporary image uploaded! :3"
+            : "RautaImage uploaded! :3";
+
+    result.appendChild(title);
+
+    result.appendChild(
+        document.createElement("br")
+    );
+
+    const link =
+        document.createElement("a");
+
+    link.href =
+        url;
+
+    link.target =
+        "_blank";
+
+    link.rel =
+        "noopener noreferrer";
+
+    link.textContent =
+        "open direct image";
+
+    result.appendChild(link);
+
+    result.appendChild(
+        document.createElement("br")
+    );
+
+    const urlBox =
+        document.createElement("input");
+
+    urlBox.className =
+        "image-url-box";
+
+    urlBox.value =
+        url;
+
+    urlBox.readOnly =
+        true;
+
+    urlBox.title =
+        "Direct public image URL";
+
+    result.appendChild(urlBox);
+
+    const actions =
+        document.createElement("div");
+
+    actions.className =
+        "image-result-actions";
+
+    actions.innerHTML = `
+        <button type="button" class="tool-button"
+            onclick="copyImageLink('${result.id}')">
+            📋 Copy URL
+        </button>
+        <button type="button" class="tool-button"
+            onclick="copyImageMarkdown('${result.id}')">
+            📝 Copy Markdown
+        </button>
+        <button type="button" class="tool-button"
+            onclick="copyImageHTML('${result.id}')">
+            🌐 Copy HTML
+        </button>
+        <button type="button" class="tool-button"
+            onclick="openImageLink('${result.id}')">
+            ↗️ Open
+        </button>
+        <button type="button" class="tool-button"
+            onclick="downloadHostedImage('${result.id}')">
+            💾 Download
+        </button>
+        <button type="button" class="tool-button"
+            onclick="clearImageResult('${result.id}')">
+            🗑️ Clear
+        </button>
+    `;
+
+    result.appendChild(actions);
+
+    const preview =
+        document.createElement("img");
+
+    preview.className =
+        "interactive-image-preview";
+
+    preview.src =
+        url;
+
+    preview.alt =
+        file.name;
+
+    preview.title =
+        "Click to open the full image";
+
+    preview.addEventListener(
+        "click",
+        () => window.open(
+            url,
+            "_blank",
+            "noopener,noreferrer"
+        )
+    );
+
+    result.appendChild(preview);
+
+    const info =
+        document.createElement("small");
+
+    info.className =
+        "image-info";
+
+    info.textContent =
+        `${file.name} • ${formatBytes(file.size)} • ` +
+        `${file.type || "image"} • ` +
+        (
+            temporary
+                ? "expires in about 1 hour"
+                : "public hosted image"
+        );
+
+    result.appendChild(info);
+
+    const discord =
+        document.createElement("div");
+
+    discord.className =
+        "discord-ready";
+
+    discord.innerHTML =
+        "💬 <b>Discord-ready:</b> paste the copied HTTPS URL " +
+        "directly into Discord. If link previews are enabled, " +
+        "Discord can display the image preview.";
+
+    result.appendChild(discord);
+}
+
+function renderLocalImageResult(
+    result,
+    dataUrl,
+    file,
+    temporary
+){
+
+    result.innerHTML = "";
+
+    const title =
+        document.createElement("strong");
+
+    title.textContent =
+        temporary
+            ? "temporary image ready locally :3"
+            : "RautaImage ready locally :3";
+
+    result.appendChild(title);
+
+    result.appendChild(
+        document.createElement("br")
+    );
+
+    const link =
+        document.createElement("a");
+
+    link.href =
+        dataUrl;
+
+    link.download =
+        file.name;
+
+    link.textContent =
+        "open / save image";
+
+    result.appendChild(link);
+
+    const preview =
+        document.createElement("img");
+
+    preview.className =
+        "interactive-image-preview";
+
+    preview.src =
+        dataUrl;
+
+    preview.alt =
+        file.name;
+
+    result.appendChild(preview);
+
+    const info =
+        document.createElement("small");
+
+    info.className =
+        "image-info";
+
+    info.textContent =
+        `${file.name} • ${formatBytes(file.size)} • local only`;
+
+    result.appendChild(info);
+}
+
+function getImageURLFromResult(resultId){
+
+    const result =
+        document.getElementById(resultId);
+
+    if(!result)
+        return "";
+
+    const urlBox =
+        result.querySelector(
+            ".image-url-box"
+        );
+
+    if(
+        urlBox &&
+        /^https?:\/\//i.test(urlBox.value.trim())
+    )
+        return urlBox.value.trim();
+
+    const anchor =
+        result.querySelector("a[href]");
+
+    if(
+        anchor &&
+        /^https?:\/\//i.test(anchor.href)
+    )
+        return anchor.href;
+
+    return "";
+}
+
+async function copyImageLink(resultId){
+
+    const url =
+        getImageURLFromResult(resultId);
+
+    const result =
+        document.getElementById(resultId);
+
+    if(!url){
+
+        showCopyLinkStatus(
+            result,
+            "No public HTTPS image URL yet :(",
+            true
+        );
+
+        playRautaSFX("error");
+
+        return false;
+    }
+
+    try{
+
+        if(
+            navigator.clipboard &&
+            window.isSecureContext
+        ){
+            await navigator.clipboard.writeText(url);
+        }
+        else{
+
+            const textarea =
+                document.createElement("textarea");
+
+            textarea.value =
+                url;
+
+            textarea.style.position =
+                "fixed";
+
+            textarea.style.left =
+                "-9999px";
+
+            document.body.appendChild(
+                textarea
+            );
+
+            textarea.focus();
+            textarea.select();
+
+            if(
+                !document.execCommand("copy")
+            )
+                throw new Error(
+                    "copy command failed"
+                );
+
+            textarea.remove();
+        }
+
+        showCopyLinkStatus(
+            result,
+            "HTTPS image URL copied! Discord-ready :3",
+            false
+        );
+
+        playRautaSFX("click");
+
+        return true;
+
+    }
+    catch(error){
+
+        showCopyLinkStatus(
+            result,
+            "Couldn't copy the URL :(",
+            true
+        );
+
+        playRautaSFX("error");
+
+        return false;
+    }
+}
+
+async function copyImageMarkdown(resultId){
+
+    const url =
+        getImageURLFromResult(resultId);
+
+    const result =
+        document.getElementById(resultId);
+
+    if(!url){
+        showCopyLinkStatus(
+            result,
+            "Upload a public image first :(",
+            true
+        );
+        return;
+    }
+
+    const name =
+        (
+            result.querySelector(
+                ".interactive-image-preview"
+            )?.alt ||
+            "image"
+        ).replace(
+            /[\[\]]/g,
+            ""
+        );
+
+    await navigator.clipboard.writeText(
+        `![${name}](${url})`
+    );
+
+    showCopyLinkStatus(
+        result,
+        "Markdown copied! :3",
+        false
+    );
+}
+
+async function copyImageHTML(resultId){
+
+    const url =
+        getImageURLFromResult(resultId);
+
+    const result =
+        document.getElementById(resultId);
+
+    if(!url){
+        showCopyLinkStatus(
+            result,
+            "Upload a public image first :(",
+            true
+        );
+        return;
+    }
+
+    const alt =
+        (
+            result.querySelector(
+                ".interactive-image-preview"
+            )?.alt ||
+            "image"
+        ).replace(
+            /"/g,
+            "&quot;"
+        );
+
+    await navigator.clipboard.writeText(
+        `<img src="${url}" alt="${alt}">`
+    );
+
+    showCopyLinkStatus(
+        result,
+        "HTML copied! :3",
+        false
+    );
+}
+
+function openImageLink(resultId){
+
+    const url =
+        getImageURLFromResult(resultId);
+
+    if(url)
+        window.open(
+            url,
+            "_blank",
+            "noopener,noreferrer"
+        );
+}
+
+function downloadHostedImage(resultId){
+
+    const url =
+        getImageURLFromResult(resultId);
+
+    if(!url)
+        return;
+
+    const a =
+        document.createElement("a");
+
+    a.href =
+        url;
+
+    a.target =
+        "_blank";
+
+    a.rel =
+        "noopener noreferrer";
+
+    a.click();
+}
+
+function clearImageResult(resultId){
+
+    const result =
+        document.getElementById(resultId);
+
+    if(!result)
+        return;
+
+    result.innerHTML =
+        "ready :3";
+
+    const temporary =
+        resultId ===
+        "rautaTempImageResult";
+
+    try{
+        localStorage.removeItem(
+            temporary
+                ? "rauta_temp_image_data"
+                : "rauta_image_data"
+        );
+    }
+    catch(error){}
+
+    playRautaSFX("close");
+}
+
+function formatBytes(bytes){
+
+    if(bytes < 1024)
+        return bytes + " B";
+
+    if(bytes < 1024 * 1024)
+        return (
+            bytes / 1024
+        ).toFixed(1) + " KB";
+
+    return (
+        bytes / (1024 * 1024)
+    ).toFixed(2) + " MB";
+}
+
+function showCopyLinkStatus(
+    result,
+    message,
+    isError
+){
+
+    if(!result)
+        return;
+
+    const old =
+        result.querySelector(
+            ".copy-link-status"
+        );
+
+    if(old)
+        old.remove();
+
+    const status =
+        document.createElement("div");
+
+    status.className =
+        "copy-link-status";
+
+    status.style.cssText =
+        "margin-top:8px;font-weight:bold;" +
+        (
+            isError
+                ? "color:#b00000;"
+                : "color:#176b17;"
+        );
+
+    status.textContent =
+        message;
+
+    result.appendChild(
+        status
+    );
+
+    window.setTimeout(
+        () => {
+            if(status.isConnected)
+                status.remove();
+        },
+        3000
+    );
+}
+
 
 function restoreRautaLocalImage(
     temporary
@@ -10835,6 +11454,172 @@ function gameFolderSearch(){
             }
         );
 }
+
+
+
+/* =========================================================
+   IMAGE TOOL INTERACTIONS
+========================================================= */
+
+function wireInteractiveImageInput(
+    inputId,
+    temporary
+){
+
+    const input =
+        document.getElementById(inputId);
+
+    if(!input)
+        return;
+
+    const panel =
+        input.closest(".panel");
+
+    if(!panel)
+        return;
+
+    panel.addEventListener(
+        "dragover",
+        function(e){
+            e.preventDefault();
+            panel.classList.add(
+                "image-drag-over"
+            );
+        }
+    );
+
+    panel.addEventListener(
+        "dragleave",
+        function(e){
+            if(
+                !panel.contains(
+                    e.relatedTarget
+                )
+            ){
+                panel.classList.remove(
+                    "image-drag-over"
+                );
+            }
+        }
+    );
+
+    panel.addEventListener(
+        "drop",
+        function(e){
+
+            e.preventDefault();
+
+            panel.classList.remove(
+                "image-drag-over"
+            );
+
+            const file =
+                [...(
+                    e.dataTransfer.files ||
+                    []
+                )].find(
+                    item =>
+                        item.type.startsWith(
+                            "image/"
+                        )
+                );
+
+            if(!file)
+                return;
+
+            const transfer =
+                new DataTransfer();
+
+            transfer.items.add(file);
+
+            input.files =
+                transfer.files;
+
+            input.dispatchEvent(
+                new Event(
+                    "change",
+                    {bubbles:true}
+                )
+            );
+
+            uploadRautaImage(
+                temporary
+            );
+        }
+    );
+}
+
+wireInteractiveImageInput(
+    "rautaImageFile",
+    false
+);
+
+wireInteractiveImageInput(
+    "rautaTempImageFile",
+    true
+);
+
+/* Ctrl/Cmd+V can paste an image straight into the image tool. */
+document.addEventListener(
+    "paste",
+    function(e){
+
+        const active =
+            document.activeElement;
+
+        const panel =
+            active?.closest(".panel");
+
+        if(!panel)
+            return;
+
+        const items =
+            [...(
+                e.clipboardData?.items ||
+                []
+            )];
+
+        const imageItem =
+            items.find(
+                item =>
+                    item.type.startsWith(
+                        "image/"
+                    )
+            );
+
+        if(!imageItem)
+            return;
+
+        const input =
+            panel.querySelector(
+                'input[type="file"][accept*="image"]'
+            );
+
+        if(!input)
+            return;
+
+        const file =
+            imageItem.getAsFile();
+
+        if(!file)
+            return;
+
+        const transfer =
+            new DataTransfer();
+
+        transfer.items.add(file);
+
+        input.files =
+            transfer.files;
+
+        input.dispatchEvent(
+            new Event(
+                "change",
+                {bubbles:true}
+            )
+        );
+    }
+);
 
 
 /* =========================================================
