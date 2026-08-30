@@ -1,9 +1,12 @@
+```html
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 
 <title>R</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <meta property="og:title" content="rautatientorii">
 <meta property="og:description" content="hhi guys im rauta andd this is my websssite">
@@ -15,6 +18,10 @@
 <meta name="theme-color" content="#8B5CF6">
 
 <style>
+
+/* =========================================================
+   RESET
+========================================================= */
 
 * {
     margin: 0;
@@ -30,14 +37,14 @@ body {
 
 body {
     overflow: hidden;
-    background: black;
+    background: #000;
     font-family: Tahoma, Arial, sans-serif;
 }
 
 
-/* =========================
+/* =========================================================
    INTRO
-========================= */
+========================================================= */
 
 #intro {
     position: fixed;
@@ -51,7 +58,7 @@ body {
         url("https://c.tenor.com/9gs1Eb5qSW4AAAAd/tenor.gif")
         center / cover no-repeat;
 
-    z-index: 10000;
+    z-index: 100000;
 
     transition: opacity 1.5s ease;
 }
@@ -61,9 +68,9 @@ body {
 
     background: linear-gradient(
         to bottom,
-        rgb(243, 110, 210) 0%,
+        rgb(243, 110, 210),
         rgb(122, 56, 105) 50%,
-        rgb(51, 24, 44) 100%
+        rgb(51, 24, 44)
     );
 
     border: 1px solid #a77ce8;
@@ -81,23 +88,20 @@ body {
     box-shadow:
         inset 0 1px rgba(255,255,255,0.35),
         0 3px 10px rgba(0,0,0,0.8);
-
-    transition: 0.15s;
 }
 
 #enterButton:hover {
-    background: linear-gradient(
-        to bottom,
-        rgb(209, 94, 180) 0%,
-        rgb(92, 43, 80) 50%,
-        rgb(45, 21, 40) 100%
-    );
+    filter: brightness(1.1);
 }
 
 #enterButton:active {
     transform: translateY(1px);
 }
 
+
+/* =========================================================
+   SITE
+========================================================= */
 
 #site {
     position: fixed;
@@ -106,36 +110,55 @@ body {
     opacity: 0;
 
     transition: opacity 1.5s ease;
+
+    isolation: isolate;
 }
 
 
-/* =========================
+/* =========================================================
    BACKGROUND
-========================= */
+========================================================= */
 
 .background {
     position: absolute;
     inset: 0;
+
+    overflow: hidden;
+
+    z-index: 0;
 }
 
 .background img {
+    position: absolute;
+    inset: 0;
+
     width: 100%;
     height: 100%;
 
     object-fit: cover;
+
+    z-index: 0;
 }
 
 .overlay {
     position: absolute;
     inset: 0;
 
-    background: rgba(0, 0, 0, 0.25);
+    background:
+        linear-gradient(
+            rgba(0,0,0,0.20),
+            rgba(0,0,0,0.28)
+        );
+
+    z-index: 1;
+
+    pointer-events: none;
 }
 
 
-/* =========================
-   WINDOW DRAG BOX
-========================= */
+/* =========================================================
+   DRAG BOX
+========================================================= */
 
 #dragBox {
     position: fixed;
@@ -144,21 +167,21 @@ body {
 
     pointer-events: none;
 
-    background: rgba(40, 150, 255, 0.20);
+    background: rgba(40,150,255,0.12);
 
-    border: 1px solid rgba(0, 255, 255, 0.95);
+    border: 1px solid rgba(0,255,255,0.95);
 
     box-shadow:
-        inset 0 0 8px rgba(0, 220, 255, 0.18),
-        0 0 4px rgba(0, 220, 255, 0.4);
+        inset 0 0 8px rgba(0,220,255,0.18),
+        0 0 4px rgba(0,220,255,0.4);
 
-    z-index: 99999;
+    z-index: 999999;
 }
 
 
-/* =========================
-   WINDOWS / PANELS
-========================= */
+/* =========================================================
+   WINDOWS
+========================================================= */
 
 .panel {
     position: absolute;
@@ -171,22 +194,34 @@ body {
 
     transform: translate(-50%, -50%);
 
-    background: rgba(212, 208, 200, 0.72);
+    /*
+       IMPORTANT:
+       This is kept translucent so backdrop-filter
+       can actually see the GIF behind the window.
+    */
+    background: rgba(212,208,200,0.42);
 
-    border-top: 2px solid rgba(255,255,255,0.85);
-    border-left: 2px solid rgba(255,255,255,0.85);
-    border-right: 2px solid rgba(64,64,64,0.8);
-    border-bottom: 2px solid rgba(64,64,64,0.8);
+    border-top: 2px solid rgba(255,255,255,0.88);
+    border-left: 2px solid rgba(255,255,255,0.88);
+    border-right: 2px solid rgba(55,55,55,0.80);
+    border-bottom: 2px solid rgba(55,55,55,0.80);
 
     box-shadow:
-        5px 5px 15px rgba(0,0,0,0.7);
+        5px 5px 18px rgba(0,0,0,0.65),
+        inset 0 0 25px rgba(255,255,255,0.08);
 
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    /*
+       The old setup could make the glass look flat.
+       These make the backdrop effect much more reliable.
+    */
+    backdrop-filter: blur(14px) saturate(115%);
+    -webkit-backdrop-filter: blur(14px) saturate(115%);
 
     z-index: 20;
 
     user-select: none;
+
+    overflow: hidden;
 }
 
 .panel.hidden {
@@ -199,20 +234,20 @@ body {
     display: flex;
     align-items: center;
 
-    padding-left: 8px;
-    padding-right: 4px;
+    padding: 0 4px 0 8px;
 
     color: white;
 
-    background: linear-gradient(
-        to right,
-        rgba(243, 110, 210, 0.88) 0%,
-        rgba(122, 56, 105, 0.88) 50%,
-        rgba(51, 24, 44, 0.88) 100%
-    );
+    background:
+        linear-gradient(
+            to right,
+            rgba(243,110,210,0.90),
+            rgba(122,56,105,0.90) 50%,
+            rgba(51,24,44,0.92)
+        );
 
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 
     font-size: 12px;
     font-weight: bold;
@@ -231,6 +266,7 @@ body {
 .window-buttons {
     display: flex;
     gap: 2px;
+
     margin-left: auto;
 }
 
@@ -242,11 +278,12 @@ body {
 
     color: white;
 
-    background: linear-gradient(
-        to bottom,
-        #ff7de9,
-        #6e5b9a
-    );
+    background:
+        linear-gradient(
+            to bottom,
+            #ff7de9,
+            #6e5b9a
+        );
 
     border-top: 1px solid #c5a9f5;
     border-left: 1px solid #c5a9f5;
@@ -267,11 +304,12 @@ body {
 }
 
 .window-button.close {
-    background: linear-gradient(
-        to bottom,
-        #ef6666,
-        #a80000
-    );
+    background:
+        linear-gradient(
+            to bottom,
+            #ef6666,
+            #a80000
+        );
 
     border-top-color: #ff9b9b;
     border-left-color: #ff9b9b;
@@ -292,7 +330,11 @@ body {
 
     min-height: 170px;
 
-    background: rgba(212, 208, 200, 0.48);
+    /*
+       Separate translucent layer instead of making
+       the whole panel opaque.
+    */
+    background: rgba(238,235,228,0.48);
 
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
@@ -300,8 +342,12 @@ body {
     user-select: text;
 }
 
+.panel-content h1,
 .panel-content h2 {
     margin-bottom: 10px;
+}
+
+.panel-content h2 {
     font-size: 18px;
 }
 
@@ -312,43 +358,492 @@ body {
 .panel-content hr {
     border: 0;
 
-    border-top: 1px solid rgba(128,128,128,0.8);
+    border-top: 1px solid rgba(128,128,128,0.7);
     border-bottom: 1px solid rgba(255,255,255,0.8);
 
     margin: 12px 0;
 }
 
 
-/* =========================
+/* =========================================================
    LINKS
-========================= */
+========================================================= */
 
-.powered-by {
-    margin-top: 8px;
-    margin-bottom: 0 !important;
-
-    color: #444;
-    font-size: 10px;
-    text-align: center;
-}
-
-.powered-by a {
+a {
     color: #0000ee;
-    text-decoration: underline;
 }
 
-.powered-by a:visited {
+a:visited {
     color: #551a8b;
 }
 
-.powered-by a:hover {
+a:hover {
     color: #000099;
 }
 
 
-/* =========================
-   INVISIBLE TIME BOX
-========================= */
+/* =========================================================
+   PANEL SIZES
+========================================================= */
+
+#homePanel {
+    width: 440px;
+}
+
+#aboutPanel {
+    width: 440px;
+}
+
+#projectsPanel {
+    width: 500px;
+}
+
+#contactPanel {
+    width: 420px;
+}
+
+#catsPanel {
+    width: 591px;
+    height: 415px;
+}
+
+#changelogPanel {
+    width: 591px;
+    height: 392px;
+}
+
+#chatroomPanel {
+    width: 591px;
+    height: 415px;
+}
+
+#friendsPanel {
+    width: 500px;
+}
+
+#newsletterPanel {
+    width: 440px;
+}
+
+#rautatifyPanel {
+    width: 570px;
+    min-height: 400px;
+}
+
+#toolsPanel {
+    width: 620px;
+    min-height: 420px;
+}
+
+#commissionsPanel {
+    width: 500px;
+    min-height: 350px;
+}
+
+
+/* =========================================================
+   RAUTATIFY
+========================================================= */
+
+.rautatify-content {
+    background:
+        rgba(248,248,248,0.78);
+
+    color: #111;
+}
+
+.rautatify-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 14px;
+}
+
+.rautatify-logo {
+    font-size: 28px;
+    font-weight: bold;
+
+    color: #8B5CF6;
+
+    text-shadow:
+        1px 1px 0 #ddd;
+}
+
+.rautatify-subtitle {
+    color: #666;
+    margin-top: 2px;
+}
+
+.rautatify-controls {
+    display: flex;
+    gap: 5px;
+}
+
+.music-control {
+    width: 30px;
+    height: 27px;
+
+    border: 1px solid #aaa;
+
+    background:
+        linear-gradient(
+            #fff,
+            #ddd
+        );
+
+    cursor: pointer;
+
+    font-size: 13px;
+}
+
+.music-control:hover {
+    background: #eee;
+}
+
+.music-control.active {
+    background: #d9c9ff;
+    border-color: #8B5CF6;
+}
+
+.playlist-box {
+    border: 1px solid #bbb;
+
+    background: rgba(255,255,255,0.82);
+
+    padding: 11px;
+
+    margin-bottom: 9px;
+
+    box-shadow:
+        0 2px 5px rgba(0,0,0,0.12);
+}
+
+.playlist-header {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 10px;
+}
+
+.playlist-cover {
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            #8B5CF6,
+            #241238
+        );
+
+    color: white;
+
+    font-size: 22px;
+    font-weight: bold;
+
+    border-radius: 5px;
+
+    box-shadow:
+        0 2px 5px rgba(0,0,0,0.25);
+}
+
+.playlist-info {
+    flex: 1;
+}
+
+.playlist-info h3 {
+    font-size: 14px;
+    margin-bottom: 3px;
+}
+
+.playlist-info p {
+    color: #777;
+    margin: 0;
+}
+
+.track {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 7px;
+
+    border-top: 1px solid #ddd;
+
+    cursor: pointer;
+}
+
+.track:hover {
+    background: #f2f2f2;
+}
+
+.track-number {
+    width: 20px;
+    color: #777;
+    text-align: center;
+}
+
+.track-name {
+    flex: 1;
+}
+
+.track-name strong {
+    display: block;
+    font-size: 12px;
+}
+
+.track-name small {
+    color: #888;
+}
+
+.track-play {
+    width: 25px;
+    height: 25px;
+
+    border: 1px solid #aaa;
+
+    background: white;
+
+    cursor: pointer;
+}
+
+.track-play:hover {
+    background: #e9e9e9;
+}
+
+.player {
+    margin-top: 13px;
+
+    padding: 10px;
+
+    border: 1px solid #aaa;
+
+    background: #eee;
+}
+
+.now-playing {
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+
+.progress {
+    width: 100%;
+    height: 7px;
+
+    appearance: none;
+    -webkit-appearance: none;
+
+    cursor: pointer;
+}
+
+.player-row {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    margin-top: 7px;
+}
+
+.player-row button {
+    border: 1px solid #aaa;
+
+    background: white;
+
+    padding: 4px 8px;
+
+    cursor: pointer;
+}
+
+.player-row button:hover {
+    background: #ddd;
+}
+
+.volume {
+    width: 100px;
+}
+
+
+/* =========================================================
+   RAUTA TOOLS
+========================================================= */
+
+.tool-tabs {
+    display: flex;
+    gap: 4px;
+
+    margin-bottom: 12px;
+}
+
+.tool-tab {
+    padding: 6px 12px;
+
+    border: 1px solid #999;
+
+    background:
+        linear-gradient(#fff,#ddd);
+
+    cursor: pointer;
+}
+
+.tool-tab.active {
+    background: #d9c9ff;
+    border-color: #8B5CF6;
+}
+
+.tool-section {
+    display: none;
+}
+
+.tool-section.active {
+    display: block;
+}
+
+.tool-label {
+    display: block;
+
+    margin-bottom: 5px;
+
+    font-weight: bold;
+}
+
+.code-box {
+    width: 100%;
+    min-height: 130px;
+
+    resize: vertical;
+
+    padding: 8px;
+
+    border: 1px solid #888;
+
+    background: #fff;
+
+    color: #111;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-size: 12px;
+}
+
+.tool-buttons {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 6px;
+
+    margin: 10px 0;
+}
+
+.tool-button {
+    padding: 6px 12px;
+
+    border-top: 2px solid white;
+    border-left: 2px solid white;
+    border-right: 2px solid #555;
+    border-bottom: 2px solid #555;
+
+    background: #d4d0c8;
+
+    font-family: Tahoma, Arial, sans-serif;
+
+    cursor: pointer;
+}
+
+.tool-button:active {
+    border-top-color: #555;
+    border-left-color: #555;
+    border-right-color: white;
+    border-bottom-color: white;
+}
+
+.tool-status {
+    min-height: 18px;
+
+    margin-top: 6px;
+
+    color: #444;
+
+    font-size: 11px;
+}
+
+.safe-box {
+    padding: 12px;
+
+    border: 1px solid #999;
+
+    background: rgba(255,255,255,0.75);
+
+    margin-top: 10px;
+}
+
+.pin-input {
+    width: 160px;
+
+    padding: 6px;
+
+    border: 1px solid #888;
+}
+
+
+/* =========================================================
+   COMMISSIONS
+========================================================= */
+
+.commission-card {
+    border: 1px solid #aaa;
+
+    background: rgba(255,255,255,0.72);
+
+    padding: 12px;
+
+    margin-bottom: 10px;
+}
+
+.commission-card h3 {
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.commission-list {
+    padding-left: 20px;
+    margin-bottom: 12px;
+}
+
+.commission-list li {
+    margin-bottom: 5px;
+}
+
+.commission-status {
+    display: inline-block;
+
+    padding: 4px 8px;
+
+    background: #d9c9ff;
+
+    border: 1px solid #8B5CF6;
+
+    color: #402080;
+
+    font-weight: bold;
+}
+
+
+/* =========================================================
+   TIME BOX
+========================================================= */
 
 .time-box {
     position: absolute;
@@ -357,18 +852,6 @@ body {
     top: 15px;
 
     width: 130px;
-    height: auto;
-
-    padding: 0;
-
-    background: transparent;
-
-    border: none;
-
-    box-shadow: none;
-
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
 
     color: white;
 
@@ -382,11 +865,6 @@ body {
 
     user-select: none;
 }
-
-
-/* =========================
-   SMALL ANALOG CLOCK
-========================= */
 
 .analog-clock {
     position: relative;
@@ -415,11 +893,6 @@ body {
 
     overflow: visible;
 }
-
-
-/* =========================
-   CLOCK NUMBERS
-========================= */
 
 .clock-number {
     position: absolute;
@@ -459,11 +932,6 @@ body {
 .n11 { transform: rotate(330deg) translateY(-45px) rotate(-330deg); }
 .n12 { transform: rotate(360deg) translateY(-45px) rotate(-360deg); }
 
-
-/* =========================
-   CLOCK MINUTE MARKS
-========================= */
-
 .clock-mark {
     position: absolute;
 
@@ -490,11 +958,6 @@ body {
 
     background: #356f5b;
 }
-
-
-/* =========================
-   CLOCK HANDS
-========================= */
 
 .hand {
     position: absolute;
@@ -556,11 +1019,6 @@ body {
     z-index: 20;
 }
 
-
-/* =========================
-   DIGITAL TIME
-========================= */
-
 #currentTime {
     margin-top: 5px;
 
@@ -581,42 +1039,13 @@ body {
 
     font-size: 8px;
 
-    text-shadow:
-        1px 1px 3px black;
+    text-shadow: 1px 1px 3px black;
 }
 
 
-/* =========================
-   XP BUTTON
-========================= */
-
-.xp-button {
-    padding: 5px 20px;
-
-    background: rgba(212,208,200,0.8);
-
-    border-top: 2px solid white;
-    border-left: 2px solid white;
-    border-right: 2px solid #404040;
-    border-bottom: 2px solid #404040;
-
-    font-family: Tahoma, Arial, sans-serif;
-    font-size: 12px;
-
-    cursor: pointer;
-}
-
-.xp-button:active {
-    border-top-color: #404040;
-    border-left-color: #404040;
-    border-right-color: white;
-    border-bottom-color: white;
-}
-
-
-/* =========================
+/* =========================================================
    NAVBAR
-========================= */
+========================================================= */
 
 .navbar {
     position: absolute;
@@ -632,12 +1061,13 @@ body {
 
     padding: 0 6px;
 
-    background: linear-gradient(
-        to bottom,
-        rgba(243, 110, 210, 0.72) 0%,
-        rgba(122, 56, 105, 0.72) 50%,
-        rgba(51, 24, 44, 0.78) 100%
-    );
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(243,110,210,0.72),
+            rgba(122,56,105,0.72) 50%,
+            rgba(51,24,44,0.78)
+        );
 
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
@@ -647,87 +1077,13 @@ body {
     box-shadow:
         0 -2px 6px rgba(0,0,0,0.6);
 
-    z-index: 1000;
+    z-index: 5000;
 }
-
-
-/* =========================
-   DESKTOP ICONS
-========================= */
-
-.desktop-icons {
-    position: absolute;
-    inset: 0;
-
-    z-index: 1001;
-
-    pointer-events: none;
-}
-
-.desktop-icon {
-    position: absolute;
-
-    width: 80px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    color: white;
-    font-family: Tahoma, Arial, sans-serif;
-    font-size: 11px;
-
-    text-align: center;
-    user-select: none;
-
-    cursor: default;
-
-    pointer-events: auto;
-}
-
-.desktop-icon img {
-    width: 48px;
-    height: 48px;
-
-    object-fit: contain;
-
-    margin-bottom: 4px;
-}
-
-.desktop-icon span {
-    display: block;
-
-    padding: 2px 3px;
-
-    color: white;
-
-    text-shadow:
-        1px 1px 2px black,
-        -1px -1px 2px black;
-}
-
-.desktop-icon.selected span {
-    background: #316ac5;
-    border: 1px dotted white;
-}
-
-.desktop-icon.selected img {
-    filter: brightness(0.8);
-}
-
-.desktop-icon.dragging {
-    cursor: grabbing;
-}
-
-
-/* =========================
-   START BUTTON
-========================= */
 
 .logo {
     display: block;
 
-    color: #111;
+    color: #111 !important;
 
     text-decoration: none;
 
@@ -736,12 +1092,13 @@ body {
 
     padding: 7px 14px;
 
-    background: linear-gradient(
-        to bottom,
-        #fff36b 0%,
-        #ffd92f 45%,
-        #e6a900 100%
-    );
+    background:
+        linear-gradient(
+            to bottom,
+            #fff36b,
+            #ffd92f 45%,
+            #e6a900
+        );
 
     border: 1px solid #9b7200;
 
@@ -755,18 +1112,14 @@ body {
 }
 
 .logo:hover {
-    background: linear-gradient(
-        to bottom,
-        #fff98c,
-        #ffe34d,
-        #f0b900
-    );
+    background:
+        linear-gradient(
+            to bottom,
+            #fff98c,
+            #ffe34d,
+            #f0b900
+        );
 }
-
-
-/* =========================
-   NAV LINKS
-========================= */
 
 .nav-links {
     display: flex;
@@ -781,7 +1134,7 @@ body {
 .nav-button {
     display: block;
 
-    color: white;
+    color: white !important;
 
     text-decoration: none;
 
@@ -801,19 +1154,15 @@ body {
 
 .nav-links a:hover,
 .nav-button:hover {
-    background: linear-gradient(
-        to bottom,
-        rgba(130,75,200,0.8),
-        rgba(55,20,90,0.9)
-    );
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(130,75,200,0.8),
+            rgba(55,20,90,0.9)
+        );
 
     border-color: rgba(200,160,255,0.7);
 }
-
-
-/* =========================
-   TASK BUTTONS
-========================= */
 
 .task-buttons {
     display: flex;
@@ -825,6 +1174,10 @@ body {
     margin-left: 5px;
 
     height: 100%;
+
+    min-width: 0;
+
+    overflow: hidden;
 }
 
 .task-window {
@@ -865,10 +1218,6 @@ body {
     background: rgba(120,70,190,0.7);
 }
 
-.task-window.active {
-    background: rgba(130,75,200,0.8);
-}
-
 .nav-right {
     margin-left: auto;
 
@@ -878,9 +1227,151 @@ body {
 }
 
 
-/* =========================
+/* =========================================================
+   DESKTOP ICONS
+========================================================= */
+
+.desktop-icons {
+    position: absolute;
+    inset: 0;
+
+    z-index: 4500;
+
+    pointer-events: none;
+}
+
+.desktop-icon {
+    position: absolute;
+
+    width: 80px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    color: white;
+
+    font-size: 11px;
+
+    text-align: center;
+
+    user-select: none;
+
+    pointer-events: auto;
+}
+
+.desktop-icon img {
+    width: 48px;
+    height: 48px;
+
+    object-fit: contain;
+
+    margin-bottom: 4px;
+}
+
+.desktop-icon span {
+    display: block;
+
+    padding: 2px 3px;
+
+    color: white;
+
+    text-shadow:
+        1px 1px 2px black,
+        -1px -1px 2px black;
+}
+
+.desktop-icon.selected span {
+    background: #316ac5;
+    border: 1px dotted white;
+}
+
+.desktop-icon.selected img {
+    filter: brightness(0.8);
+}
+
+.desktop-icon.dragging {
+    cursor: grabbing;
+}
+
+
+/* =========================================================
+   ICON APP STYLE
+========================================================= */
+
+.app-icon {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+
+    color: white;
+
+    font-size: 26px;
+    font-weight: bold;
+
+    box-shadow:
+        0 3px 8px rgba(0,0,0,0.6);
+
+    border: 2px solid rgba(255,255,255,0.7);
+}
+
+.rautatify-icon {
+    background:
+        linear-gradient(
+            135deg,
+            #8B5CF6,
+            #241238
+        );
+}
+
+.tools-icon {
+    background:
+        linear-gradient(
+            135deg,
+            #4f8cff,
+            #14244d
+        );
+}
+
+.commission-icon {
+    background:
+        linear-gradient(
+            135deg,
+            #ff8acb,
+            #64204d
+        );
+}
+
+
+/* =========================================================
+   XP BUTTON
+========================================================= */
+
+.xp-button {
+    padding: 5px 20px;
+
+    background: rgba(212,208,200,0.8);
+
+    border-top: 2px solid white;
+    border-left: 2px solid white;
+    border-right: 2px solid #404040;
+    border-bottom: 2px solid #404040;
+
+    font-family: Tahoma, Arial, sans-serif;
+    font-size: 12px;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
    RALSEI CLIPPY
-========================= */
+========================================================= */
 
 .ralsei-clippy {
     position: fixed;
@@ -921,15 +1412,11 @@ body {
 
     border: 3px solid #fff;
 
-    border-radius: 0;
-
     padding: 12px 13px;
 
     margin-bottom: 8px;
 
-    font-family:
-        "Courier New",
-        monospace;
+    font-family: "Courier New", monospace;
 
     font-size: 13px;
 
@@ -972,28 +1459,15 @@ body {
 
     color: #fff;
 
-    font-family:
-        "Courier New",
-        monospace;
-
-    font-size: 13px;
-    font-weight: bold;
-
-    line-height: 18px;
-
-    padding: 0;
+    font-family: "Courier New", monospace;
 
     cursor: pointer;
 }
 
-.clippy-close:hover {
-    color: #ffff00;
-}
 
-
-/* =========================
+/* =========================================================
    FRIENDS
-========================= */
+========================================================= */
 
 .friend-grid {
     display: flex;
@@ -1006,113 +1480,22 @@ body {
     height: 39px;
 
     object-fit: cover;
-
-    image-rendering: auto;
 }
 
 
-/* =========================
-   PANEL SIZES
-========================= */
-
-#homePanel {
-    width: 440px;
-}
-
-#aboutPanel {
-    width: 440px;
-}
-
-#projectsPanel {
-    width: 500px;
-}
-
-#contactPanel {
-    width: 420px;
-}
-
-#catsPanel {
-    width: 591px;
-    height: 415px;
-}
-
-#changelogPanel {
-    width: 591px;
-    height: 392px;
-}
+/* =========================================================
+   CHANGELOG
+========================================================= */
 
 .changelog-content {
     max-height: 320px;
     overflow-y: auto;
 }
 
-#chatroomPanel {
-    width: 591px;
-    height: 415px;
-}
 
-#friendsPanel {
-    width: 500px;
-}
-
-#newsletterPanel {
-    width: 440px;
-}
-
-
-/* =========================
-   RAUTATIFY
-========================= */
-
-#rautatifyPanel {
-    width: 500px;
-    min-height: 300px;
-}
-
-.rautatify-logo {
-    font-size: 28px;
-    font-weight: bold;
-
-    margin-bottom: 5px;
-
-    color: #8B5CF6;
-
-    text-shadow:
-        1px 1px 0 #222;
-}
-
-.rautatify-subtitle {
-    color: #555;
-    margin-bottom: 18px;
-}
-
-.playlist-box {
-    border-top: 2px solid white;
-    border-left: 2px solid white;
-    border-right: 2px solid #555;
-    border-bottom: 2px solid #555;
-
-    background: rgba(240,240,240,0.65);
-
-    padding: 12px;
-
-    margin-bottom: 10px;
-}
-
-.playlist-box h3 {
-    font-size: 14px;
-    margin-bottom: 5px;
-}
-
-.playlist-box p {
-    margin-bottom: 0;
-    color: #555;
-}
-
-
-/* =========================
+/* =========================================================
    MOBILE
-========================= */
+========================================================= */
 
 @media (max-width: 700px) {
 
@@ -1131,13 +1514,15 @@ body {
     #homePanel,
     #aboutPanel,
     #contactPanel,
-    #newsletterPanel {
+    #newsletterPanel,
+    #commissionsPanel {
         width: calc(100vw - 20px);
     }
 
     #projectsPanel,
     #friendsPanel,
-    #rautatifyPanel {
+    #rautatifyPanel,
+    #toolsPanel {
         width: calc(100vw - 20px);
     }
 
@@ -1150,15 +1535,21 @@ body {
     .ralsei-clippy {
         transform: scale(0.8);
         transform-origin: bottom right;
+
         right: 5px;
+    }
+
+    .time-box {
+        transform: scale(0.8);
+        transform-origin: top right;
     }
 
 }
 
 
-/* =========================
+/* =========================================================
    SCROLLBARS
-========================= */
+========================================================= */
 
 ::-webkit-scrollbar {
     width: 14px;
@@ -1169,11 +1560,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: linear-gradient(
-        to right,
-        #e8e8e8,
-        #999
-    );
+    background:
+        linear-gradient(
+            to right,
+            #e8e8e8,
+            #999
+        );
 
     border-top: 1px solid white;
     border-left: 1px solid white;
@@ -1187,16 +1579,16 @@ body {
 <body>
 
 
-<!-- =========================
+<!-- =========================================================
      DRAG BOX
-========================= -->
+========================================================= -->
 
 <div id="dragBox"></div>
 
 
-<!-- =========================
+<!-- =========================================================
      INTRO
-========================= -->
+========================================================= -->
 
 <div id="intro">
 
@@ -1207,31 +1599,24 @@ body {
 </div>
 
 
-<audio id="signinMusic" preload="auto">
-
-    <source
-        src="https://rautacfd.vercel.app/signin.mp3"
-        type="audio/mpeg">
-
-</audio>
-
-
-<!-- =========================
+<!-- =========================================================
      SITE
-========================= -->
+========================================================= -->
 
 <div id="site">
 
-<div class="background">
+    <div class="background">
 
-    <img src="background.gif" alt="">
+        <img src="background.gif" alt="">
 
-    <div class="overlay"></div>
+        <div class="overlay"></div>
+
+    </div>
 
 
-    <!-- =========================
+    <!-- =====================================================
          HOME
-    ========================= -->
+    ====================================================== -->
 
     <div class="panel" id="homePanel">
 
@@ -1278,7 +1663,8 @@ body {
                 (I BASED IT OFF
                 <a
                     href="https://youtube.com/@rautatientorii"
-                    target="_blank">
+                    target="_blank"
+                    rel="noopener noreferrer">
                     MY USERNAME
                 </a>)
             </p>
@@ -1298,7 +1684,10 @@ body {
                 btw!!!! i have a mc server!!! its coming soon!
                 <br>
                 u should see its site at:
-                <a href="https://ralseismp.xo.je">
+                <a
+                    href="https://ralseismp.xo.je"
+                    target="_blank"
+                    rel="noopener noreferrer">
                     HERE
                 </a>
                 <br>
@@ -1324,9 +1713,9 @@ body {
     </div>
 
 
-    <!-- =========================
+    <!-- =====================================================
          ABOUT
-    ========================= -->
+    ====================================================== -->
 
     <div class="panel hidden" id="aboutPanel">
 
@@ -1387,9 +1776,9 @@ body {
     </div>
 
 
-    <!-- =========================
+    <!-- =====================================================
          PROJECTS
-    ========================= -->
+    ====================================================== -->
 
     <div class="panel hidden" id="projectsPanel">
 
@@ -1461,9 +1850,9 @@ body {
     </div>
 
 
-    <!-- =========================
+    <!-- =====================================================
          CONTACT
-    ========================= -->
+    ====================================================== -->
 
     <div class="panel hidden" id="contactPanel">
 
@@ -1532,9 +1921,9 @@ body {
     </div>
 
 
-    <!-- =========================
+    <!-- =====================================================
          CATS
-    ========================= -->
+    ====================================================== -->
 
     <div class="panel hidden" id="catsPanel">
 
@@ -1570,26 +1959,20 @@ body {
                 allowfullscreen>
             </iframe>
 
-            <p class="powered-by">
-
+            <p>
                 powered by
-
                 <a
                     href="http://mycontact.reblox.vip"
                     target="_blank">
                     MyContact
                 </a>
-
             </p>
 
-            <p class="powered-by">
-
+            <p>
                 want more cats?
-
                 <a href="https://rauta.cfd/cats">
                     go here
                 </a>
-
             </p>
 
         </div>
@@ -1597,9 +1980,9 @@ body {
     </div>
 
 
-    <!-- =========================
+    <!-- =====================================================
          RAUTATIFY
-    ========================= -->
+    ====================================================== -->
 
     <div class="panel hidden" id="rautatifyPanel">
 
@@ -1625,51 +2008,205 @@ body {
 
         </div>
 
-        <div class="panel-content">
+        <div class="panel-content rautatify-content">
 
-            <div class="rautatify-logo">
-                Rautatify
+            <div class="rautatify-header">
+
+                <div>
+
+                    <div class="rautatify-logo">
+                        Rautatify
+                    </div>
+
+                    <div class="rautatify-subtitle">
+                        music by rauta :3
+                    </div>
+
+                </div>
+
+                <div class="rautatify-controls">
+
+                    <button
+                        class="music-control"
+                        id="shuffleButton"
+                        title="Shuffle">
+                        🔀
+                    </button>
+
+                    <button
+                        class="music-control active"
+                        id="repeatButton"
+                        title="Repeat playlist">
+                        🔁
+                    </button>
+
+                </div>
+
             </div>
 
-            <div class="rautatify-subtitle">
-                music by rauta :3
-            </div>
 
-            <hr>
+            <!--
+                =================================================
+                PLAYLIST
+
+                Replace the empty src values with your own
+                MP3/OGG URLs when your music is ready.
+                =================================================
+            -->
 
             <div class="playlist-box">
 
-                <h3>
-                    🎵 my music
-                </h3>
+                <div class="playlist-header">
 
-                <p>
-                    playlists coming soon...
-                </p>
+                    <div class="playlist-cover">
+                        R
+                    </div>
+
+                    <div class="playlist-info">
+
+                        <h3>
+                            rauta's collection
+                        </h3>
+
+                        <p>
+                            random music from the silly website
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="track"
+                    data-src=""
+                    data-title="track one">
+
+                    <div class="track-number">
+                        1
+                    </div>
+
+                    <div class="track-name">
+
+                        <strong>
+                            track one
+                        </strong>
+
+                        <small>
+                            coming soon...
+                        </small>
+
+                    </div>
+
+                    <button class="track-play">
+                        ▶
+                    </button>
+
+                </div>
+
+
+                <div
+                    class="track"
+                    data-src=""
+                    data-title="track two">
+
+                    <div class="track-number">
+                        2
+                    </div>
+
+                    <div class="track-name">
+
+                        <strong>
+                            track two
+                        </strong>
+
+                        <small>
+                            coming soon...
+                        </small>
+
+                    </div>
+
+                    <button class="track-play">
+                        ▶
+                    </button>
+
+                </div>
+
+
+                <div
+                    class="track"
+                    data-src=""
+                    data-title="track three">
+
+                    <div class="track-number">
+                        3
+                    </div>
+
+                    <div class="track-name">
+
+                        <strong>
+                            track three
+                        </strong>
+
+                        <small>
+                            rauta is cooking...
+                        </small>
+
+                    </div>
+
+                    <button class="track-play">
+                        ▶
+                    </button>
+
+                </div>
 
             </div>
 
-            <div class="playlist-box">
 
-                <h3>
-                    🎧 playlist #2
-                </h3>
+            <div class="player">
 
-                <p>
-                    nothing here yet!!!
-                </p>
+                <div
+                    class="now-playing"
+                    id="nowPlaying">
+                    nothing playing :(
+                </div>
 
-            </div>
+                <input
+                    type="range"
+                    id="progressBar"
+                    class="progress"
+                    min="0"
+                    max="100"
+                    value="0">
 
-            <div class="playlist-box">
+                <div class="player-row">
 
-                <h3>
-                    💿 more music
-                </h3>
+                    <button id="previousButton">
+                        ⏮
+                    </button>
 
-                <p>
-                    rauta is cooking something...
-                </p>
+                    <button id="mainPlayButton">
+                        ▶
+                    </button>
+
+                    <button id="nextButton">
+                        ⏭
+                    </button>
+
+                    <span style="margin-left:auto;">
+                        🔊
+                    </span>
+
+                    <input
+                        type="range"
+                        id="volumeControl"
+                        class="volume"
+                        min="0"
+                        max="1"
+                        step="0.01"
+                        value="0.7">
+
+                </div>
 
             </div>
 
@@ -1678,9 +2215,698 @@ body {
     </div>
 
 
-    <!-- =========================
+    <!-- =====================================================
+         RAUTA TOOLS
+    ====================================================== -->
+
+    <div class="panel hidden" id="toolsPanel">
+
+        <div class="panel-title">
+
+            <span>rautatools.exe</span>
+
+            <div class="window-buttons">
+
+                <button
+                    class="window-button"
+                    onclick="minimizePanel('toolsPanel')">
+                    −
+                </button>
+
+                <button
+                    class="window-button close"
+                    onclick="closePanel('toolsPanel')">
+                    ×
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="panel-content">
+
+            <h2>
+                RautaTools
+            </h2>
+
+            <p>
+                stupid little tools made for rauta.cfd :P
+            </p>
+
+            <hr>
+
+
+            <div class="tool-tabs">
+
+                <button
+                    class="tool-tab active"
+                    data-tool="obfuscator">
+                    RautaObfuscator
+                </button>
+
+                <button
+                    class="tool-tab"
+                    data-tool="safe">
+                    RautaSafe
+                </button>
+
+            </div>
+
+
+            <!-- =================================================
+                 OBFUSCATOR
+            ================================================== -->
+
+            <div
+                class="tool-section active"
+                id="obfuscatorTool">
+
+                <label class="tool-label">
+                    code input
+                </label>
+
+                <textarea
+                    id="obfuscatorInput"
+                    class="code-box"
+                    placeholder="// paste your code here..."></textarea>
+
+
+                <div class="tool-buttons">
+
+                    <button
+                        class="tool-button"
+                        id="obfuscateButton">
+                        obfuscate
+                    </button>
+
+                    <button
+                        class="tool-button"
+                        id="decodeButton">
+                        deobfuscate
+                    </button>
+
+                    <button
+                        class="tool-button"
+                        id="copyOutputButton">
+                        copy output
+                    </button>
+
+                    <button
+                        class="tool-button"
+                        id="clearToolButton">
+                        clear
+                    </button>
+
+                </div>
+
+
+                <label class="tool-label">
+                    output
+                </label>
+
+                <textarea
+                    id="obfuscatorOutput"
+                    class="code-box"
+                    placeholder="output appears here..."
+                    readonly></textarea>
+
+                <div
+                    class="tool-status"
+                    id="obfuscatorStatus">
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 SAFE
+            ================================================== -->
+
+            <div
+                class="tool-section"
+                id="safeTool">
+
+                <p>
+                    RautaSafe encrypts a piece of text locally
+                    using AES-GCM. Your PIN is used to derive
+                    the encryption key.
+                </p>
+
+                <div class="safe-box">
+
+                    <label class="tool-label">
+                        PIN
+                    </label>
+
+                    <input
+                        type="password"
+                        id="safePin"
+                        class="pin-input"
+                        inputmode="numeric"
+                        placeholder="enter PIN">
+
+                    <div class="tool-buttons">
+
+                        <button
+                            class="tool-button"
+                            id="safeEncryptButton">
+                            lock it up
+                        </button>
+
+                        <button
+                            class="tool-button"
+                            id="safeDecryptButton">
+                            unlock it
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <label class="tool-label">
+                    safe contents
+                </label>
+
+                <textarea
+                    id="safeInput"
+                    class="code-box"
+                    placeholder="put your code/text here..."></textarea>
+
+
+                <label
+                    class="tool-label"
+                    style="margin-top:10px;">
+                    encrypted output
+                </label>
+
+                <textarea
+                    id="safeOutput"
+                    class="code-box"
+                    placeholder="encrypted data appears here..."></textarea>
+
+                <div
+                    class="tool-status"
+                    id="safeStatus">
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         COMMISSIONS
+    ====================================================== -->
+
+    <div class="panel hidden" id="commissionsPanel">
+
+        <div class="panel-title">
+
+            <span>commissions.exe</span>
+
+            <div class="window-buttons">
+
+                <button
+                    class="window-button"
+                    onclick="minimizePanel('commissionsPanel')">
+                    −
+                </button>
+
+                <button
+                    class="window-button close"
+                    onclick="closePanel('commissionsPanel')">
+                    ×
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="panel-content">
+
+            <h2>
+                commissions :3
+            </h2>
+
+            <p>
+                yo!!! i do commissions sometimes!!!
+            </p>
+
+            <div class="commission-card">
+
+                <h3>
+                    🌐 websites
+                </h3>
+
+                <p>
+                    want a silly personal website, portfolio,
+                    retro page, or something completely cursed?
+                    i can make one.
+                </p>
+
+            </div>
+
+            <div class="commission-card">
+
+                <h3>
+                    🎮 game / project stuff
+                </h3>
+
+                <p>
+                    i can help with little web games,
+                    interactive projects, prototypes and
+                    other internet nonsense.
+                </p>
+
+            </div>
+
+            <div class="commission-card">
+
+                <h3>
+                    🎨 other stuff
+                </h3>
+
+                <ul class="commission-list">
+
+                    <li>
+                        custom web pages
+                    </li>
+
+                    <li>
+                        UI / retro interfaces
+                    </li>
+
+                    <li>
+                        small interactive projects
+                    </li>
+
+                    <li>
+                        silly experimental stuff
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <span class="commission-status">
+                commissions: ask me first :3
+            </span>
+
+            <hr>
+
+            <p>
+                contact me through the contact page if
+                you're interested!
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         ALIEN DESTROYER
+    ====================================================== -->
+
+    <div class="panel hidden" id="game1Panel">
+
+        <div class="panel-title">
+
+            <span>
+                alien destroyer.exe
+            </span>
+
+            <div class="window-buttons">
+
+                <button
+                    class="window-button"
+                    onclick="minimizePanel('game1Panel')">
+                    −
+                </button>
+
+                <button
+                    class="window-button close"
+                    onclick="closePanel('game1Panel')">
+                    ×
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="panel-content">
+
+            <iframe
+                src="https://scratch.mit.edu/projects/1376240877/embed"
+                width="315"
+                height="315"
+                frameborder="0"
+                allowfullscreen>
+            </iframe>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         CHANGELOG
+    ====================================================== -->
+
+    <div class="panel hidden" id="changelogPanel">
+
+        <div class="panel-title">
+
+            <span>
+                changelog.exe
+            </span>
+
+            <div class="window-buttons">
+
+                <button
+                    class="window-button"
+                    onclick="minimizePanel('changelogPanel')">
+                    −
+                </button>
+
+                <button
+                    class="window-button close"
+                    onclick="closePanel('changelogPanel')">
+                    ×
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="panel-content changelog-content">
+
+            <h2>
+                rauta.cfd updates
+            </h2>
+
+            <hr>
+
+            <h3>
+                8/9/26 v1.0 - main
+            </h3>
+
+            <p>
+                I MADE IT!!!
+            </p>
+
+            <p>
+                yeah i made the site YIPPYY<br>
+                everything u see now<br>
+                and a bunch of random shit :P
+            </p>
+
+            <hr>
+
+            <h3>
+                8/10/26 v1.1 - games
+            </h3>
+
+            <p>
+                added the games section!!
+            </p>
+
+            <p>
+                alien destroyer.exe is now playable<br>
+                made in scratch but that's okie :3
+            </p>
+
+            <hr>
+
+            <h3>
+                8/10/26 v1.1.1 - cats!!!
+            </h3>
+
+            <p>
+                added the cats page
+                (u can go there from the cats button!!!)
+            </p>
+
+            <hr>
+
+            <h3>
+                8/10/26 v1.1.2 - MORE CATS
+            </h3>
+
+            <p>
+                added oneko that chases u around,
+                also u can pet it :P<br>
+                BEST FEATURE IN rauta.cfd TOPS<br>
+                also added trello board so u can see my progress meow
+            </p>
+
+            <hr>
+
+            <h3>
+                8/10/26 v1.1.2.1 - add the 1's update
+            </h3>
+
+            <p>
+                RALLIPY HAS BEEN ADDED!
+                he's a goober who speaks now<br>
+                changed the sign in song<br>
+                ralseismp landing DONE!
+            </p>
+
+            <hr>
+
+            <h3>
+                coming soon...
+            </h3>
+
+            <p>
+                who knows what i'll add next :P
+            </p>
+
+            <p>
+                probably something stupid.
+            </p>
+
+            <hr>
+
+            <p>
+                - rautaaaaaa :3
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         CHATROOM
+    ====================================================== -->
+
+    <div class="panel hidden" id="chatroomPanel">
+
+        <div class="panel-title">
+
+            <span>
+                chatroom.exe
+            </span>
+
+            <div class="window-buttons">
+
+                <button
+                    class="window-button"
+                    onclick="minimizePanel('chatroomPanel')">
+                    −
+                </button>
+
+                <button
+                    class="window-button close"
+                    onclick="closePanel('chatroomPanel')">
+                    ×
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="panel-content">
+
+            <iframe
+                src="https://chat.rauta.cfd"
+                width="560"
+                height="315"
+                frameborder="0"
+                allowfullscreen>
+            </iframe>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         FRIENDS
+    ====================================================== -->
+
+    <div class="panel hidden" id="friendsPanel">
+
+        <div class="panel-title">
+
+            <span>
+                friends.exe
+            </span>
+
+            <div class="window-buttons">
+
+                <button
+                    class="window-button"
+                    onclick="minimizePanel('friendsPanel')">
+                    −
+                </button>
+
+                <button
+                    class="window-button close"
+                    onclick="closePanel('friendsPanel')">
+                    ×
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="panel-content">
+
+            <h1>
+                friends
+            </h1>
+
+            <div class="friend-grid">
+
+                <a
+                    class="friend"
+                    href="#">
+
+                    <img
+                        src="https://rauta.cfd/rautabadge.png"
+                        alt="rauta">
+
+                </a>
+
+                <a
+                    class="friend"
+                    href="http://mycontact.reblox.vip">
+
+                    <img
+                        src="poklty.png"
+                        alt="poklty">
+
+                </a>
+
+                <a
+                    class="friend"
+                    href="https://rauta.rauta.cfd">
+
+                    <img
+                        src="YOUR-IMAGE-URL.png"
+                        alt="rautatientori">
+
+                </a>
+
+                <a
+                    class="friend"
+                    href="https://toxicchemical.xyz">
+
+                    <img
+                        src="YOUR-IMAGE-URL.png"
+                        alt="quivering iirc">
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         NEWSLETTER
+    ====================================================== -->
+
+    <div class="panel hidden" id="newsletterPanel">
+
+        <div class="panel-title">
+
+            <span>
+                newsletter.exe
+            </span>
+
+            <div class="window-buttons">
+
+                <button
+                    class="window-button"
+                    onclick="minimizePanel('newsletterPanel')">
+                    −
+                </button>
+
+                <button
+                    class="window-button close"
+                    onclick="closePanel('newsletterPanel')">
+                    ×
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="panel-content">
+
+            <h2>
+                rauta.cfd newsletters
+            </h2>
+
+            <p>
+                sign up for updates about anything!
+                blogs, projects...zzz i fell asleep
+            </p>
+
+            <form
+                action="https://assets.mailerlite.com/jsonp/2568621/forms/195466784979027416/subscribe"
+                method="post"
+                target="_blank">
+
+                <input
+                    type="email"
+                    name="fields[email]"
+                    placeholder="my email"
+                    required>
+
+                <input
+                    type="hidden"
+                    name="ml-submit"
+                    value="1">
+
+                <input
+                    type="hidden"
+                    name="anticsrf"
+                    value="true">
+
+                <button type="submit">
+                    pls sub :3
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
          NAVBAR
-    ========================= -->
+    ====================================================== -->
 
     <nav class="navbar">
 
@@ -1722,6 +2948,30 @@ body {
                     href="#"
                     onclick="openPanel('contactPanel'); return false;">
                     talk to me :P
+                </a>
+            </li>
+
+            <li>
+                <a
+                    href="#"
+                    onclick="openPanel('commissionsPanel'); return false;">
+                    commissions
+                </a>
+            </li>
+
+            <li>
+                <a
+                    href="#"
+                    onclick="openPanel('toolsPanel'); return false;">
+                    tools
+                </a>
+            </li>
+
+            <li>
+                <a
+                    href="#"
+                    onclick="openPanel('rautatifyPanel'); return false;">
+                    Rautatify
                 </a>
             </li>
 
@@ -1780,12 +3030,11 @@ body {
     </nav>
 
 </div>
-</div>
 
 
-<!-- =========================
+<!-- =========================================================
      ANALOG CLOCK
-========================= -->
+========================================================= -->
 
 <div class="time-box" id="timeBox">
 
@@ -1804,93 +3053,81 @@ body {
         <div class="clock-number n10">10</div>
         <div class="clock-number n11">11</div>
 
-        <div class="clock-mark big" style="transform: rotate(0deg);"></div>
-        <div class="clock-mark" style="transform: rotate(6deg);"></div>
-        <div class="clock-mark" style="transform: rotate(12deg);"></div>
-        <div class="clock-mark" style="transform: rotate(18deg);"></div>
-        <div class="clock-mark" style="transform: rotate(24deg);"></div>
+        <div class="clock-mark big" style="transform:rotate(0deg)"></div>
+        <div class="clock-mark" style="transform:rotate(6deg)"></div>
+        <div class="clock-mark" style="transform:rotate(12deg)"></div>
+        <div class="clock-mark" style="transform:rotate(18deg)"></div>
+        <div class="clock-mark" style="transform:rotate(24deg)"></div>
 
-        <div class="clock-mark big" style="transform: rotate(30deg);"></div>
-        <div class="clock-mark" style="transform: rotate(36deg);"></div>
-        <div class="clock-mark" style="transform: rotate(42deg);"></div>
-        <div class="clock-mark" style="transform: rotate(48deg);"></div>
-        <div class="clock-mark" style="transform: rotate(54deg);"></div>
+        <div class="clock-mark big" style="transform:rotate(30deg)"></div>
+        <div class="clock-mark" style="transform:rotate(36deg)"></div>
+        <div class="clock-mark" style="transform:rotate(42deg)"></div>
+        <div class="clock-mark" style="transform:rotate(48deg)"></div>
+        <div class="clock-mark" style="transform:rotate(54deg)"></div>
 
-        <div class="clock-mark big" style="transform: rotate(60deg);"></div>
-        <div class="clock-mark" style="transform: rotate(66deg);"></div>
-        <div class="clock-mark" style="transform: rotate(72deg);"></div>
-        <div class="clock-mark" style="transform: rotate(78deg);"></div>
-        <div class="clock-mark" style="transform: rotate(84deg);"></div>
+        <div class="clock-mark big" style="transform:rotate(60deg)"></div>
+        <div class="clock-mark" style="transform:rotate(66deg)"></div>
+        <div class="clock-mark" style="transform:rotate(72deg)"></div>
+        <div class="clock-mark" style="transform:rotate(78deg)"></div>
+        <div class="clock-mark" style="transform:rotate(84deg)"></div>
 
-        <div class="clock-mark big" style="transform: rotate(90deg);"></div>
-        <div class="clock-mark" style="transform: rotate(96deg);"></div>
-        <div class="clock-mark" style="transform: rotate(102deg);"></div>
-        <div class="clock-mark" style="transform: rotate(108deg);"></div>
-        <div class="clock-mark" style="transform: rotate(114deg);"></div>
+        <div class="clock-mark big" style="transform:rotate(90deg)"></div>
+        <div class="clock-mark" style="transform:rotate(96deg)"></div>
+        <div class="clock-mark" style="transform:rotate(102deg)"></div>
+        <div class="clock-mark" style="transform:rotate(108deg)"></div>
+        <div class="clock-mark" style="transform:rotate(114deg)"></div>
 
-        <div class="clock-mark big" style="transform: rotate(120deg);"></div>
-        <div class="clock-mark" style="transform: rotate(126deg);"></div>
-        <div class="clock-mark" style="transform: rotate(132deg);"></div>
-        <div class="clock-mark" style="transform: rotate(138deg);"></div>
-        <div class="clock-mark" style="transform: rotate(144deg);"></div>
+        <div class="clock-mark big" style="transform:rotate(120deg)"></div>
+        <div class="clock-mark" style="transform:rotate(126deg)"></div>
+        <div class="clock-mark" style="transform:rotate(132deg)"></div>
+        <div class="clock-mark" style="transform:rotate(138deg)"></div>
+        <div class="clock-mark" style="transform:rotate(144deg)"></div>
 
-        <div class="clock-mark big" style="transform: rotate(150deg);"></div>
-        <div class="clock-mark" style="transform: rotate(156deg);"></div>
-        <div class="clock-mark" style="transform: rotate(162deg);"></div>
-        <div class="clock-mark" style="transform: rotate(168deg);"></div>
-        <div class="clock-mark" style="transform: rotate(174deg);"></div>
+        <div class="clock-mark big" style="transform:rotate(150deg)"></div>
+        <div class="clock-mark" style="transform:rotate(156deg)"></div>
+        <div class="clock-mark" style="transform:rotate(162deg)"></div>
+        <div class="clock-mark" style="transform:rotate(168deg)"></div>
+        <div class="clock-mark" style="transform:rotate(174deg)"></div>
 
-        <div class="clock-mark big" style="transform: rotate(180deg);"></div>
-        <div class="clock-mark" style="transform: rotate(186deg);"></div>
-        <div class="clock-mark" style="transform: rotate(192deg);"></div>
-        <div class="clock-mark" style="transform: rotate(198deg);"></div>
-        <div class="clock-mark" style="transform: rotate(204deg);"></div>
+        <div class="clock-mark big" style="transform:rotate(180deg)"></div>
+        <div class="clock-mark" style="transform:rotate(186deg)"></div>
+        <div class="clock-mark" style="transform:rotate(192deg)"></div>
+        <div class="clock-mark" style="transform:rotate(198deg)"></div>
+        <div class="clock-mark" style="transform:rotate(204deg)"></div>
 
-        <div class="clock-mark big" style="transform: rotate(210deg);"></div>
-        <div class="clock-mark" style="transform: rotate(216deg);"></div>
-        <div class="clock-mark" style="transform: rotate(222deg);"></div>
-        <div class="clock-mark" style="transform: rotate(228deg);"></div>
-        <div class="clock-mark" style="transform: rotate(234deg);"></div>
+        <div class="clock-mark big" style="transform:rotate(210deg)"></div>
+        <div class="clock-mark" style="transform:rotate(216deg)"></div>
+        <div class="clock-mark" style="transform:rotate(222deg)"></div>
+        <div class="clock-mark" style="transform:rotate(228deg)"></div>
+        <div class="clock-mark" style="transform:rotate(234deg)"></div>
 
-        <div class="clock-mark big" style="transform: rotate(240deg);"></div>
-        <div class="clock-mark" style="transform: rotate(246deg);"></div>
-        <div class="clock-mark" style="transform: rotate(252deg);"></div>
-        <div class="clock-mark" style="transform: rotate(258deg);"></div>
-        <div class="clock-mark" style="transform: rotate(264deg);"></div>
+        <div class="clock-mark big" style="transform:rotate(240deg)"></div>
+        <div class="clock-mark" style="transform:rotate(246deg)"></div>
+        <div class="clock-mark" style="transform:rotate(252deg)"></div>
+        <div class="clock-mark" style="transform:rotate(258deg)"></div>
+        <div class="clock-mark" style="transform:rotate(264deg)"></div>
 
-        <div class="clock-mark big" style="transform: rotate(270deg);"></div>
-        <div class="clock-mark" style="transform: rotate(276deg);"></div>
-        <div class="clock-mark" style="transform: rotate(282deg);"></div>
-        <div class="clock-mark" style="transform: rotate(288deg);"></div>
-        <div class="clock-mark" style="transform: rotate(294deg);"></div>
+        <div class="clock-mark big" style="transform:rotate(270deg)"></div>
+        <div class="clock-mark" style="transform:rotate(276deg)"></div>
+        <div class="clock-mark" style="transform:rotate(282deg)"></div>
+        <div class="clock-mark" style="transform:rotate(288deg)"></div>
+        <div class="clock-mark" style="transform:rotate(294deg)"></div>
 
-        <div class="clock-mark big" style="transform: rotate(300deg);"></div>
-        <div class="clock-mark" style="transform: rotate(306deg);"></div>
-        <div class="clock-mark" style="transform: rotate(312deg);"></div>
-        <div class="clock-mark" style="transform: rotate(318deg);"></div>
-        <div class="clock-mark" style="transform: rotate(324deg);"></div>
+        <div class="clock-mark big" style="transform:rotate(300deg)"></div>
+        <div class="clock-mark" style="transform:rotate(306deg)"></div>
+        <div class="clock-mark" style="transform:rotate(312deg)"></div>
+        <div class="clock-mark" style="transform:rotate(318deg)"></div>
+        <div class="clock-mark" style="transform:rotate(324deg)"></div>
 
-        <div class="clock-mark big" style="transform: rotate(330deg);"></div>
-        <div class="clock-mark" style="transform: rotate(336deg);"></div>
-        <div class="clock-mark" style="transform: rotate(342deg);"></div>
-        <div class="clock-mark" style="transform: rotate(348deg);"></div>
-        <div class="clock-mark" style="transform: rotate(354deg);"></div>
+        <div class="clock-mark big" style="transform:rotate(330deg)"></div>
+        <div class="clock-mark" style="transform:rotate(336deg)"></div>
+        <div class="clock-mark" style="transform:rotate(342deg)"></div>
+        <div class="clock-mark" style="transform:rotate(348deg)"></div>
+        <div class="clock-mark" style="transform:rotate(354deg)"></div>
 
-
-        <div
-            class="hand hour-hand"
-            id="hourHand">
-        </div>
-
-        <div
-            class="hand minute-hand"
-            id="minuteHand">
-        </div>
-
-        <div
-            class="hand second-hand"
-            id="secondHand">
-        </div>
+        <div class="hand hour-hand" id="hourHand"></div>
+        <div class="hand minute-hand" id="minuteHand"></div>
+        <div class="hand second-hand" id="secondHand"></div>
 
         <div class="clock-center"></div>
 
@@ -1907,16 +3144,16 @@ body {
 </div>
 
 
-<!-- =========================
+<!-- =========================================================
      DESKTOP ICONS
-========================= -->
+========================================================= -->
 
 <div class="desktop-icons">
 
     <div
         class="desktop-icon"
         data-panel="game1Panel"
-        style="left: 25px; top: 90px;">
+        style="left:25px;top:90px;">
 
         <img
             src="aliendestroyers.png"
@@ -1932,7 +3169,7 @@ body {
     <div
         class="desktop-icon"
         data-panel="changelogPanel"
-        style="left: 25px; top: 180px;">
+        style="left:25px;top:180px;">
 
         <img
             src="changelog.png"
@@ -1944,28 +3181,15 @@ body {
 
     </div>
 
+
     <!-- RAUTATIFY -->
 
     <div
         class="desktop-icon"
         data-panel="rautatifyPanel"
-        style="left: 25px; top: 360px;">
+        style="left:25px;top:270px;">
 
-        <div
-            style="
-                width:48px;
-                height:48px;
-                display:flex;
-                align-items:center;
-                justify-content:center;
-                border-radius:8px;
-                background:linear-gradient(135deg,#8B5CF6,#241238);
-                border:2px solid rgba(255,255,255,0.7);
-                color:white;
-                font-size:27px;
-                font-weight:bold;
-                box-shadow:0 3px 8px rgba(0,0,0,0.6);
-            ">
+        <div class="app-icon rautatify-icon">
             R
         </div>
 
@@ -1975,234 +3199,55 @@ body {
 
     </div>
 
-</div>
 
+    <!-- TOOLS -->
 
-<!-- =========================
-     ALIEN DESTROYER
-========================= -->
+    <div
+        class="desktop-icon"
+        data-panel="toolsPanel"
+        style="left:25px;top:360px;">
 
-<div class="panel hidden" id="game1Panel">
-
-    <div class="panel-title">
-
-        <span>
-            alien destroyer.exe
-        </span>
-
-        <div class="window-buttons">
-
-            <button
-                class="window-button"
-                onclick="minimizePanel('game1Panel')">
-                −
-            </button>
-
-            <button
-                class="window-button close"
-                onclick="closePanel('game1Panel')">
-                ×
-            </button>
-
+        <div class="app-icon tools-icon">
+            ⚙
         </div>
 
-    </div>
-
-    <div class="panel-content">
-
-        <iframe
-            src="https://scratch.mit.edu/projects/1376240877/embed"
-            width="315"
-            height="315"
-            frameborder="0"
-            allowfullscreen>
-        </iframe>
-
-    </div>
-
-</div>
-
-
-<!-- =========================
-     CHANGELOG
-========================= -->
-
-<div class="panel hidden" id="changelogPanel">
-
-    <div class="panel-title">
-
         <span>
-            changelog.exe
+            RautaTools
         </span>
 
-        <div class="window-buttons">
+    </div>
 
-            <button
-                class="window-button"
-                onclick="minimizePanel('changelogPanel')">
-                −
-            </button>
 
-            <button
-                class="window-button close"
-                onclick="closePanel('changelogPanel')">
-                ×
-            </button>
+    <!-- COMMISSIONS -->
 
+    <div
+        class="desktop-icon"
+        data-panel="commissionsPanel"
+        style="left:25px;top:450px;">
+
+        <div class="app-icon commission-icon">
+            $
         </div>
-
-    </div>
-
-    <div class="panel-content changelog-content">
-
-        <h2>
-            rauta.cfd updates
-        </h2>
-
-        <hr>
-
-        <h3>
-            8/9/26 v1.0 - main
-        </h3>
-
-        <p>
-            I MADE IT!!!
-        </p>
-
-        <p>
-            yeah i made the site YIPPYY<br>
-            everything u see now<br>
-            and a bunch of random shit :P
-        </p>
-
-        <hr>
-
-        <h3>
-            8/9/26 v1.1 - games
-        </h3>
-
-        <p>
-            added the games section!!
-        </p>
-
-        <p>
-            alien destroyer.exe is now playable<br>
-            made in scratch but that's okie :3
-        </p>
-
-        <hr>
-
-        <h3>
-            8/10/26 v1.1.1 - cats!!!
-        </h3>
-
-        <p>
-            added the cats page
-            (u can go there from the cats button!!!)
-        </p>
-
-        <hr>
-
-        <h3>
-            8/10/26 v1.1.2 - MORE CATS
-        </h3>
-
-        <p>
-            added oneko that chases u around,
-            also u can pet it :P<br>
-            BEST FEATURE IN rauta.cfd TOPS<br>
-            also added trello board so u can see my progress meow
-        </p>
-
-        <hr>
-
-        <h3>
-            8/10/26 v1.1.2.1 - add the 1's update
-        </h3>
-
-        <p>
-            RALLIPY HAS BEEN ADDED!
-            he's a goober who speaks now<br>
-            changed the sign in song<br>
-            ralseismp landing DONE!
-        </p>
-
-        <hr>
-
-        <h3>
-            coming soon...
-        </h3>
-
-        <p>
-            who knows what i'll add next :P
-        </p>
-
-        <p>
-            probably something stupid.
-        </p>
-
-        <hr>
-
-        <p>
-            - rautaaaaaa :3
-        </p>
-
-    </div>
-
-</div>
-
-
-<!-- =========================
-     CHATROOM
-========================= -->
-
-<div class="panel hidden" id="chatroomPanel">
-
-    <div class="panel-title">
 
         <span>
-            chatroom.exe
+            commissions
         </span>
-
-        <div class="window-buttons">
-
-            <button
-                class="window-button"
-                onclick="minimizePanel('chatroomPanel')">
-                −
-            </button>
-
-            <button
-                class="window-button close"
-                onclick="closePanel('chatroomPanel')">
-                ×
-            </button>
-
-        </div>
-
-    </div>
-
-    <div class="panel-content">
-
-        <iframe
-            src="https://chat.rauta.cfd"
-            width="560"
-            height="315"
-            frameborder="0"
-            allowfullscreen>
-        </iframe>
 
     </div>
 
 </div>
 
+
+<!-- =========================================================
+     ONeko
+========================================================= -->
 
 <script src="/oneko.js"></script>
 
 
-<!-- =========================
+<!-- =========================================================
      RALSEI CLIPPY
-========================= -->
+========================================================= -->
 
 <div
     id="ralseiClippy"
@@ -2222,170 +3267,16 @@ body {
 </div>
 
 
-<!-- =========================
-     FRIENDS
-========================= -->
-
-<div class="panel hidden" id="friendsPanel">
-
-    <div class="panel-title">
-
-        <span>
-            friends.exe
-        </span>
-
-        <div class="window-buttons">
-
-            <button
-                class="window-button"
-                onclick="minimizePanel('friendsPanel')">
-                −
-            </button>
-
-            <button
-                class="window-button close"
-                onclick="closePanel('friendsPanel')">
-                ×
-            </button>
-
-        </div>
-
-    </div>
-
-    <div class="panel-content">
-
-        <h1>
-            friends
-        </h1>
-
-        <div class="friend-grid">
-
-            <a
-                class="friend"
-                href="#">
-
-                <img
-                    src="https://rauta.cfd/rautabadge.png"
-                    alt="rauta">
-
-            </a>
-
-            <a
-                class="friend"
-                href="http://mycontact.reblox.vip">
-
-                <img
-                    src="poklty.png"
-                    alt="poklty">
-
-            </a>
-
-            <a
-                class="friend"
-                href="https://rauta.rauta.cfd">
-
-                <img
-                    src="YOUR-IMAGE-URL.png"
-                    alt="rautatientori">
-
-            </a>
-
-            <a
-                class="friend"
-                href="https://toxicchemical.xyz">
-
-                <img
-                    src="YOUR-IMAGE-URL.png"
-                    alt="quivering iirc">
-
-            </a>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- =========================
-     NEWSLETTER
-========================= -->
-
-<div class="panel hidden" id="newsletterPanel">
-
-    <div class="panel-title">
-
-        <span>
-            newsletter.exe
-        </span>
-
-        <div class="window-buttons">
-
-            <button
-                class="window-button"
-                onclick="minimizePanel('newsletterPanel')">
-                −
-            </button>
-
-            <button
-                class="window-button close"
-                onclick="closePanel('newsletterPanel')">
-                ×
-            </button>
-
-        </div>
-
-    </div>
-
-    <div class="panel-content">
-
-        <h2>
-            rauta.cfd newsletters
-        </h2>
-
-        <p>
-            sign up for updates about anything!
-            blogs, projects...zzz i fell asleep
-        </p>
-
-        <form
-            action="https://assets.mailerlite.com/jsonp/2568621/forms/195466784979027416/subscribe"
-            method="post"
-            target="_blank">
-
-            <input
-                type="email"
-                name="fields[email]"
-                placeholder="my email"
-                required>
-
-            <input
-                type="hidden"
-                name="ml-submit"
-                value="1">
-
-            <input
-                type="hidden"
-                name="anticsrf"
-                value="true">
-
-            <button type="submit">
-                pls sub :3
-            </button>
-
-        </form>
-
-    </div>
-
-</div>
-
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
 
 <script>
 
 
-/* =========================
+/* =========================================================
    TITLE ANIMATION
-========================= */
+========================================================= */
 
 const titleText = "RAUTATIENTORI";
 
@@ -2393,48 +3284,36 @@ let titleIndex = 0;
 
 function animateTitle() {
 
-    if (titleIndex <= titleText.length) {
+    document.title =
+        titleText.substring(0, titleIndex);
 
-        document.title =
-            titleText.substring(0, titleIndex);
+    titleIndex++;
 
-        titleIndex++;
+    if (titleIndex > titleText.length) {
 
-        setTimeout(
-            animateTitle,
-            1000
-        );
+        setTimeout(() => {
 
+            titleIndex = 0;
+
+            animateTitle();
+
+        }, 1000);
+
+        return;
     }
 
-    else {
-
-        /*
-            Leave the complete title visible
-            for one second, then start again.
-        */
-
-        setTimeout(
-            function() {
-
-                titleIndex = 0;
-
-                animateTitle();
-
-            },
-            1000
-        );
-
-    }
-
+    setTimeout(
+        animateTitle,
+        1000
+    );
 }
 
 animateTitle();
 
 
-/* =========================
+/* =========================================================
    INTRO
-========================= */
+========================================================= */
 
 const intro =
     document.getElementById("intro");
@@ -2445,24 +3324,10 @@ const site =
 const enterButton =
     document.getElementById("enterButton");
 
-const signinMusic =
-    document.getElementById("signinMusic");
-
 
 enterButton.addEventListener(
     "click",
     function() {
-
-        signinMusic.play().catch(
-            function(error) {
-
-                console.log(
-                    "signin music could not start:",
-                    error
-                );
-
-            }
-        );
 
         intro.style.opacity = "0";
 
@@ -2477,39 +3342,66 @@ enterButton.addEventListener(
             1500
         );
 
+        /*
+            If you add music later, THIS is where it
+            should start. Browsers allow audio after
+            a real user click.
+
+            Example:
+
+            myAudio.play();
+        */
+
     }
 );
 
 
-/* =========================
+/* =========================================================
    PANELS
-========================= */
+========================================================= */
 
 let highestZ = 20;
 
 const panelNames = {
 
-    homePanel: "meow.exe",
+    homePanel:
+        "meow.exe",
 
-    aboutPanel: "about.exe",
+    aboutPanel:
+        "about.exe",
 
-    projectsPanel: "my stuff.exe",
+    projectsPanel:
+        "my stuff.exe",
 
-    contactPanel: "contact.exe",
+    contactPanel:
+        "contact.exe",
 
-    catsPanel: "cats :3",
+    catsPanel:
+        "cats :3",
 
-    game1Panel: "alien destroyer.exe",
+    game1Panel:
+        "alien destroyer.exe",
 
-    changelogPanel: "changelog.exe",
+    changelogPanel:
+        "changelog.exe",
 
-    chatroomPanel: "chatroom.exe",
+    chatroomPanel:
+        "chatroom.exe",
 
-    friendsPanel: "friends.exe",
+    friendsPanel:
+        "friends.exe",
 
-    newsletterPanel: "newsletter.exe",
+    newsletterPanel:
+        "newsletter.exe",
 
-    rautatifyPanel: "Rautatify.exe"
+    rautatifyPanel:
+        "Rautatify.exe",
+
+    toolsPanel:
+        "RautaTools.exe",
+
+    commissionsPanel:
+        "commissions.exe"
 
 };
 
@@ -2528,7 +3420,6 @@ function openPanel(id) {
     removeTaskButton(id);
 
     bringToFront(panel);
-
 }
 
 
@@ -2542,7 +3433,6 @@ function minimizePanel(id) {
     panel.style.display = "none";
 
     addTaskButton(id);
-
 }
 
 
@@ -2558,7 +3448,6 @@ function closePanel(id) {
     panel.classList.add("hidden");
 
     removeTaskButton(id);
-
 }
 
 
@@ -2604,6 +3493,8 @@ function addTaskButton(id) {
 
             }
 
+            removeTaskButton(id);
+
             bringToFront(panel);
 
         };
@@ -2637,13 +3528,12 @@ function bringToFront(panel) {
 
     panel.style.zIndex =
         highestZ;
-
 }
 
 
-/* =========================
-   IMPROVED WINDOW DRAGGING
-========================= */
+/* =========================================================
+   WINDOW DRAGGING
+========================================================= */
 
 const dragBox =
     document.getElementById("dragBox");
@@ -2652,9 +3542,6 @@ let draggingPanel = null;
 
 let panelDragOffsetX = 0;
 let panelDragOffsetY = 0;
-
-let panelDragStartLeft = 0;
-let panelDragStartTop = 0;
 
 
 document
@@ -2669,58 +3556,29 @@ document
                 "mousedown",
                 function(e) {
 
-                    /*
-                        Don't start dragging if the
-                        user clicked a window button.
-                    */
-
                     if (
                         e.target.closest(
                             ".window-buttons"
                         )
                     ) {
-
                         return;
-
                     }
 
                     if (e.button !== 0) {
-
                         return;
-
                     }
-
-
-                    draggingPanel =
-                        panel;
-
 
                     const rect =
                         panel.getBoundingClientRect();
 
-
-                    /*
-                        The important part:
-
-                        Use the exact mouse position
-                        inside the title bar.
-
-                        This means the window doesn't
-                        jump when dragging.
-                    */
+                    draggingPanel =
+                        panel;
 
                     panelDragOffsetX =
                         e.clientX - rect.left;
 
                     panelDragOffsetY =
                         e.clientY - rect.top;
-
-
-                    /*
-                        Convert the window from
-                        transform-centered positioning
-                        into normal pixel positioning.
-                    */
 
                     panel.style.transform =
                         "none";
@@ -2731,21 +3589,7 @@ document
                     panel.style.top =
                         rect.top + "px";
 
-
-                    panelDragStartLeft =
-                        rect.left;
-
-                    panelDragStartTop =
-                        rect.top;
-
-
                     bringToFront(panel);
-
-
-                    /*
-                        Show the blue/cyan
-                        Windows-style drag outline.
-                    */
 
                     dragBox.style.display =
                         "block";
@@ -2762,10 +3606,8 @@ document
                     dragBox.style.height =
                         rect.height + "px";
 
-
                     document.body.style.cursor =
                         "move";
-
 
                     e.preventDefault();
 
@@ -2780,16 +3622,7 @@ document.addEventListener(
     "mousemove",
     function(e) {
 
-        if (!draggingPanel) {
-
-            return;
-
-        }
-
-
-        /*
-            Calculate exact new position.
-        */
+        if (!draggingPanel) return;
 
         const newLeft =
             e.clientX - panelDragOffsetX;
@@ -2797,26 +3630,14 @@ document.addEventListener(
         const newTop =
             e.clientY - panelDragOffsetY;
 
-
-        /*
-            Move the actual window.
-        */
-
         draggingPanel.style.left =
             newLeft + "px";
 
         draggingPanel.style.top =
             newTop + "px";
 
-
-        /*
-            Move the transparent cyan
-            outline at exactly the same time.
-        */
-
         const rect =
             draggingPanel.getBoundingClientRect();
-
 
         dragBox.style.left =
             newLeft + "px";
@@ -2838,19 +3659,10 @@ document.addEventListener(
     "mouseup",
     function() {
 
-        if (!draggingPanel) {
-
-            return;
-
-        }
-
-
         draggingPanel = null;
-
 
         dragBox.style.display =
             "none";
-
 
         document.body.style.cursor =
             "";
@@ -2859,29 +3671,21 @@ document.addEventListener(
 );
 
 
-/* =========================
-   ANALOG CLOCK
-========================= */
+/* =========================================================
+   CLOCK
+========================================================= */
 
 const hourHand =
-    document.getElementById(
-        "hourHand"
-    );
+    document.getElementById("hourHand");
 
 const minuteHand =
-    document.getElementById(
-        "minuteHand"
-    );
+    document.getElementById("minuteHand");
 
 const secondHand =
-    document.getElementById(
-        "secondHand"
-    );
+    document.getElementById("secondHand");
 
 const currentTime =
-    document.getElementById(
-        "currentTime"
-    );
+    document.getElementById("currentTime");
 
 
 function updateClock() {
@@ -2898,22 +3702,18 @@ function updateClock() {
     const seconds =
         now.getSeconds();
 
-
     const hourDegrees =
         ((hours % 12) * 30)
         +
         (minutes * 0.5);
-
 
     const minuteDegrees =
         (minutes * 6)
         +
         (seconds * 0.1);
 
-
     const secondDegrees =
         seconds * 6;
-
 
     hourHand.style.transform =
         `rotate(${hourDegrees}deg)`;
@@ -2924,31 +3724,14 @@ function updateClock() {
     secondHand.style.transform =
         `rotate(${secondDegrees}deg)`;
 
-
-    const displayHours =
-        String(hours).padStart(
-            2,
-            "0"
-        );
-
-    const displayMinutes =
-        String(minutes).padStart(
-            2,
-            "0"
-        );
-
-    const displaySeconds =
-        String(seconds).padStart(
-            2,
-            "0"
-        );
-
-
     currentTime.textContent =
-        `${displayHours}:${displayMinutes}:${displaySeconds}`;
+        [
+            String(hours).padStart(2,"0"),
+            String(minutes).padStart(2,"0"),
+            String(seconds).padStart(2,"0")
+        ].join(":");
 
 }
-
 
 updateClock();
 
@@ -2958,14 +3741,12 @@ setInterval(
 );
 
 
-/* =========================
+/* =========================================================
    DRAG CLOCK
-========================= */
+========================================================= */
 
 const timeBox =
-    document.getElementById(
-        "timeBox"
-    );
+    document.getElementById("timeBox");
 
 let draggingTime = false;
 
@@ -2981,17 +3762,14 @@ timeBox.addEventListener(
 
         draggingTime = true;
 
-
         const rect =
             timeBox.getBoundingClientRect();
-
 
         timeOffsetX =
             e.clientX - rect.left;
 
         timeOffsetY =
             e.clientY - rect.top;
-
 
         timeBox.style.right =
             "auto";
@@ -3004,7 +3782,6 @@ timeBox.addEventListener(
 
         timeBox.style.top =
             rect.top + "px";
-
 
         e.preventDefault();
 
@@ -3019,12 +3796,10 @@ document.addEventListener(
         if (!draggingTime) return;
 
         timeBox.style.left =
-            (e.clientX - timeOffsetX)
-            + "px";
+            (e.clientX - timeOffsetX) + "px";
 
         timeBox.style.top =
-            (e.clientY - timeOffsetY)
-            + "px";
+            (e.clientY - timeOffsetY) + "px";
 
     }
 );
@@ -3040,9 +3815,9 @@ document.addEventListener(
 );
 
 
-/* =========================
-   DESKTOP ICONS
-========================= */
+/* =========================================================
+   DESKTOP ICON DRAGGING
+========================================================= */
 
 document
     .querySelectorAll(".desktop-icon")
@@ -3064,13 +3839,10 @@ document
                 "mousedown",
                 function(e) {
 
-                    if (e.button !== 0)
-                        return;
-
+                    if (e.button !== 0) return;
 
                     const rect =
                         icon.getBoundingClientRect();
-
 
                     startX =
                         e.clientX;
@@ -3078,18 +3850,15 @@ document
                     startY =
                         e.clientY;
 
-
                     offsetX =
                         e.clientX - rect.left;
 
                     offsetY =
                         e.clientY - rect.top;
 
-
                     moved = false;
 
                     isMouseDown = true;
-
 
                     document
                         .querySelectorAll(
@@ -3098,19 +3867,16 @@ document
                         .forEach(
                             other => {
 
-                                other.classList
-                                    .remove(
-                                        "selected"
-                                    );
+                                other.classList.remove(
+                                    "selected"
+                                );
 
                             }
                         );
 
-
                     icon.classList.add(
                         "selected"
                     );
-
 
                     e.preventDefault();
 
@@ -3132,21 +3898,17 @@ document
                 "mousemove",
                 function(e) {
 
-                    if (!isMouseDown)
-                        return;
-
+                    if (!isMouseDown) return;
 
                     const distanceX =
                         Math.abs(
                             e.clientX - startX
                         );
 
-
                     const distanceY =
                         Math.abs(
                             e.clientY - startY
                         );
-
 
                     if (
                         distanceX > 5 ||
@@ -3155,20 +3917,21 @@ document
 
                         moved = true;
 
-
                         icon.classList.add(
                             "dragging"
                         );
 
-
                         icon.style.left =
-                            (e.clientX - offsetX)
-                            + "px";
-
+                            (
+                                e.clientX -
+                                offsetX
+                            ) + "px";
 
                         icon.style.top =
-                            (e.clientY - offsetY)
-                            + "px";
+                            (
+                                e.clientY -
+                                offsetY
+                            ) + "px";
 
                     }
 
@@ -3196,10 +3959,8 @@ document
 
                     if (moved) return;
 
-
                     const panel =
                         icon.dataset.panel;
-
 
                     if (panel) {
 
@@ -3214,30 +3975,19 @@ document
     );
 
 
-/* =========================
+/* =========================================================
    DESELECT ICONS
-========================= */
+========================================================= */
 
 document.addEventListener(
     "mousedown",
     function(e) {
 
         if (
-            !e.target.closest(
-                ".desktop-icon"
-            )
-            &&
-            !e.target.closest(
-                ".panel"
-            )
-            &&
-            !e.target.closest(
-                ".navbar"
-            )
-            &&
-            !e.target.closest(
-                ".time-box"
-            )
+            !e.target.closest(".desktop-icon") &&
+            !e.target.closest(".panel") &&
+            !e.target.closest(".navbar") &&
+            !e.target.closest(".time-box")
         ) {
 
             document
@@ -3260,40 +4010,30 @@ document.addEventListener(
 );
 
 
-/* =========================
-   CLIPPY TEXT
-========================= */
+/* =========================================================
+   CLIPPY
+========================================================= */
 
 const clippyLines = [
 
     "hey :3",
-
     "meow/",
-
     "what are u doing",
-
     "this Website is getting big vro",
-
     "did u check the changelog?",
-
     "why are there so many cats",
-
     "rAlseismp when",
-
     "10000r37772323 bugs",
-
     "This site is pretty cool",
-
     "what if u added another cat",
-
     ":3",
-
     ":P",
-
-    "RAUTATIFY SOON????"
+    "RAUTATIFY SOON????",
+    "RAUTATOOLS???",
+    "who let rauta cook",
+    "this website has too many windows"
 
 ];
-
 
 const clippyBubble =
     document.getElementById(
@@ -3306,48 +4046,25 @@ function clippyTalk() {
     const line =
         clippyLines[
             Math.floor(
-                Math.random()
-                *
+                Math.random() *
                 clippyLines.length
             )
         ];
-
 
     clippyBubble.textContent =
         line;
 
 }
 
-
-let clippyTimer = null;
-
-
-function startClippy() {
-
-    if (clippyTimer) {
-
-        clearInterval(
-            clippyTimer
-        );
-
-    }
+setInterval(
+    clippyTalk,
+    15000
+);
 
 
-    clippyTimer =
-        setInterval(
-            clippyTalk,
-            15000
-        );
-
-}
-
-
-startClippy();
-
-
-/* =========================
+/* =========================================================
    DRAG CLIPPY
-========================= */
+========================================================= */
 
 const clippy =
     document.getElementById(
@@ -3364,16 +4081,12 @@ clippy.addEventListener(
     "mousedown",
     function(e) {
 
-        if (e.button !== 0)
-            return;
-
+        if (e.button !== 0) return;
 
         draggingClippy = true;
 
-
         const rect =
             clippy.getBoundingClientRect();
-
 
         clippyOffsetX =
             e.clientX - rect.left;
@@ -3381,20 +4094,17 @@ clippy.addEventListener(
         clippyOffsetY =
             e.clientY - rect.top;
 
-
         clippy.style.right =
             "auto";
 
         clippy.style.bottom =
             "auto";
 
-
         clippy.style.left =
             rect.left + "px";
 
         clippy.style.top =
             rect.top + "px";
-
 
         e.preventDefault();
 
@@ -3406,9 +4116,7 @@ document.addEventListener(
     "mousemove",
     function(e) {
 
-        if (!draggingClippy)
-            return;
-
+        if (!draggingClippy) return;
 
         clippy.style.left =
             `${e.clientX - clippyOffsetX}px`;
@@ -3429,7 +4137,1043 @@ document.addEventListener(
     }
 );
 
+
+/* =========================================================
+   RAUTATIFY MUSIC PLAYER
+========================================================= */
+
+const audio =
+    new Audio();
+
+audio.preload =
+    "metadata";
+
+audio.volume =
+    0.7;
+
+
+const tracks =
+    Array.from(
+        document.querySelectorAll(
+            ".track"
+        )
+    );
+
+
+const nowPlaying =
+    document.getElementById(
+        "nowPlaying"
+    );
+
+const mainPlayButton =
+    document.getElementById(
+        "mainPlayButton"
+    );
+
+const progressBar =
+    document.getElementById(
+        "progressBar"
+    );
+
+const volumeControl =
+    document.getElementById(
+        "volumeControl"
+    );
+
+const repeatButton =
+    document.getElementById(
+        "repeatButton"
+    );
+
+const shuffleButton =
+    document.getElementById(
+        "shuffleButton"
+    );
+
+const previousButton =
+    document.getElementById(
+        "previousButton"
+    );
+
+const nextButton =
+    document.getElementById(
+        "nextButton"
+    );
+
+
+let currentTrackIndex =
+    0;
+
+let repeatPlaylist =
+    true;
+
+let shuffle =
+    false;
+
+
+function availableTracks() {
+
+    return tracks.filter(
+        track =>
+            track.dataset.src &&
+            track.dataset.src.trim() !== ""
+    );
+
+}
+
+
+function playTrack(index) {
+
+    const available =
+        availableTracks();
+
+    if (!available.length) {
+
+        nowPlaying.textContent =
+            "no music added yet :(";
+
+        mainPlayButton.textContent =
+            "▶";
+
+        return;
+
+    }
+
+    if (index < 0) {
+        index = available.length - 1;
+    }
+
+    if (index >= available.length) {
+        index = 0;
+    }
+
+    currentTrackIndex =
+        index;
+
+    const track =
+        available[index];
+
+    audio.src =
+        track.dataset.src;
+
+    nowPlaying.textContent =
+        track.dataset.title || "unknown track";
+
+    audio.play().then(
+        () => {
+
+            mainPlayButton.textContent =
+                "⏸";
+
+        }
+    ).catch(
+        () => {
+
+            mainPlayButton.textContent =
+                "▶";
+
+        }
+    );
+
+}
+
+
+function nextTrack() {
+
+    const available =
+        availableTracks();
+
+    if (!available.length) return;
+
+    if (shuffle) {
+
+        let next;
+
+        do {
+
+            next =
+                Math.floor(
+                    Math.random() *
+                    available.length
+                );
+
+        } while (
+            available.length > 1 &&
+            next === currentTrackIndex
+        );
+
+        currentTrackIndex =
+            next;
+
+    } else {
+
+        currentTrackIndex++;
+
+        if (
+            currentTrackIndex >=
+            available.length
+        ) {
+
+            currentTrackIndex = 0;
+
+        }
+
+    }
+
+    playTrack(
+        currentTrackIndex
+    );
+
+}
+
+
+function previousTrack() {
+
+    const available =
+        availableTracks();
+
+    if (!available.length) return;
+
+    currentTrackIndex--;
+
+    if (currentTrackIndex < 0) {
+
+        currentTrackIndex =
+            available.length - 1;
+
+    }
+
+    playTrack(
+        currentTrackIndex
+    );
+
+}
+
+
+mainPlayButton.addEventListener(
+    "click",
+    function() {
+
+        if (!audio.src) {
+
+            playTrack(
+                currentTrackIndex
+            );
+
+            return;
+
+        }
+
+        if (audio.paused) {
+
+            audio.play();
+
+            mainPlayButton.textContent =
+                "⏸";
+
+        } else {
+
+            audio.pause();
+
+            mainPlayButton.textContent =
+                "▶";
+
+        }
+
+    }
+);
+
+
+nextButton.addEventListener(
+    "click",
+    nextTrack
+);
+
+
+previousButton.addEventListener(
+    "click",
+    previousTrack
+);
+
+
+volumeControl.addEventListener(
+    "input",
+    function() {
+
+        audio.volume =
+            Number(
+                volumeControl.value
+            );
+
+    }
+);
+
+
+progressBar.addEventListener(
+    "input",
+    function() {
+
+        if (!audio.duration) return;
+
+        audio.currentTime =
+            (
+                Number(
+                    progressBar.value
+                ) / 100
+            ) *
+            audio.duration;
+
+    }
+);
+
+
+audio.addEventListener(
+    "timeupdate",
+    function() {
+
+        if (!audio.duration) return;
+
+        progressBar.value =
+            (
+                audio.currentTime /
+                audio.duration
+            ) * 100;
+
+    }
+);
+
+
+audio.addEventListener(
+    "ended",
+    function() {
+
+        const available =
+            availableTracks();
+
+        if (!available.length) return;
+
+        /*
+            This is the important part:
+            repeat playlist instead of stopping.
+        */
+
+        if (repeatPlaylist) {
+
+            nextTrack();
+
+        } else if (
+            currentTrackIndex <
+            available.length - 1
+        ) {
+
+            nextTrack();
+
+        } else {
+
+            mainPlayButton.textContent =
+                "▶";
+
+        }
+
+    }
+);
+
+
+repeatButton.addEventListener(
+    "click",
+    function() {
+
+        repeatPlaylist =
+            !repeatPlaylist;
+
+        repeatButton.classList.toggle(
+            "active",
+            repeatPlaylist
+        );
+
+    }
+);
+
+
+shuffleButton.addEventListener(
+    "click",
+    function() {
+
+        shuffle =
+            !shuffle;
+
+        shuffleButton.classList.toggle(
+            "active",
+            shuffle
+        );
+
+    }
+);
+
+
+tracks.forEach(
+    track => {
+
+        const play =
+            track.querySelector(
+                ".track-play"
+            );
+
+        play.addEventListener(
+            "click",
+            function(e) {
+
+                e.stopPropagation();
+
+                const available =
+                    availableTracks();
+
+                const index =
+                    available.indexOf(
+                        track
+                    );
+
+                if (index !== -1) {
+
+                    playTrack(index);
+
+                }
+
+            }
+        );
+
+
+        track.addEventListener(
+            "dblclick",
+            function() {
+
+                const available =
+                    availableTracks();
+
+                const index =
+                    available.indexOf(
+                        track
+                    );
+
+                if (index !== -1) {
+
+                    playTrack(index);
+
+                }
+
+            }
+        );
+
+    }
+);
+
+
+/*
+    If you later add your songs:
+
+    data-src="music/song.mp3"
+
+    The first song will automatically start
+    after the user presses "enter :3".
+*/
+
+function startRautatifyIfMusicExists() {
+
+    if (
+        availableTracks().length > 0
+    ) {
+
+        playTrack(0);
+
+    }
+
+}
+
+
+/* =========================================================
+   RAUTA TOOLS TABS
+========================================================= */
+
+document
+    .querySelectorAll(".tool-tab")
+    .forEach(
+        tab => {
+
+            tab.addEventListener(
+                "click",
+                function() {
+
+                    document
+                        .querySelectorAll(
+                            ".tool-tab"
+                        )
+                        .forEach(
+                            t =>
+                                t.classList.remove(
+                                    "active"
+                                )
+                        );
+
+                    document
+                        .querySelectorAll(
+                            ".tool-section"
+                        )
+                        .forEach(
+                            section =>
+                                section.classList.remove(
+                                    "active"
+                                )
+                        );
+
+                    tab.classList.add(
+                        "active"
+                    );
+
+                    const target =
+                        document.getElementById(
+                            tab.dataset.tool +
+                            "Tool"
+                        );
+
+                    if (target) {
+
+                        target.classList.add(
+                            "active"
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+
+/* =========================================================
+   RAUTA OBFUSCATOR
+========================================================= */
+
+const obfuscatorInput =
+    document.getElementById(
+        "obfuscatorInput"
+    );
+
+const obfuscatorOutput =
+    document.getElementById(
+        "obfuscatorOutput"
+    );
+
+const obfuscatorStatus =
+    document.getElementById(
+        "obfuscatorStatus"
+    );
+
+
+/*
+    Lightweight reversible text obfuscation.
+
+    This is NOT encryption.
+    It is intended for making code/text annoying
+    to read, not for protecting secrets.
+*/
+
+function rautaObfuscate(text) {
+
+    const bytes =
+        new TextEncoder().encode(
+            text
+        );
+
+    let output =
+        "";
+
+    for (
+        let i = 0;
+        i < bytes.length;
+        i++
+    ) {
+
+        const transformed =
+            (
+                bytes[i] ^
+                ((i * 31 + 73) & 255)
+            );
+
+        output +=
+            transformed
+                .toString(16)
+                .padStart(2,"0");
+
+    }
+
+    return (
+        "RAUTAOBF1:" +
+        btoa(output)
+    );
+
+}
+
+
+function rautaDeobfuscate(data) {
+
+    if (
+        !data.startsWith(
+            "RAUTAOBF1:"
+        )
+    ) {
+
+        throw new Error(
+            "invalid RautaObfuscator data"
+        );
+
+    }
+
+    const hex =
+        atob(
+            data.substring(
+                "RAUTAOBF1:".length
+            )
+        );
+
+    const bytes =
+        new Uint8Array(
+            hex.length / 2
+        );
+
+    for (
+        let i = 0;
+        i < bytes.length;
+        i++
+    ) {
+
+        const value =
+            parseInt(
+                hex.substring(
+                    i * 2,
+                    i * 2 + 2
+                ),
+                16
+            );
+
+        bytes[i] =
+            value ^
+            ((i * 31 + 73) & 255);
+
+    }
+
+    return new TextDecoder().decode(
+        bytes
+    );
+
+}
+
+
+document
+    .getElementById(
+        "obfuscateButton"
+    )
+    .addEventListener(
+        "click",
+        function() {
+
+            try {
+
+                obfuscatorOutput.value =
+                    rautaObfuscate(
+                        obfuscatorInput.value
+                    );
+
+                obfuscatorStatus.textContent =
+                    "obfuscated successfully :3";
+
+            } catch (error) {
+
+                obfuscatorStatus.textContent =
+                    "something broke :(";
+
+            }
+
+        }
+    );
+
+
+document
+    .getElementById(
+        "decodeButton"
+    )
+    .addEventListener(
+        "click",
+        function() {
+
+            try {
+
+                obfuscatorOutput.value =
+                    rautaDeobfuscate(
+                        obfuscatorInput.value
+                    );
+
+                obfuscatorStatus.textContent =
+                    "deobfuscated successfully :3";
+
+            } catch (error) {
+
+                obfuscatorStatus.textContent =
+                    "invalid RautaObfuscator data";
+
+            }
+
+        }
+    );
+
+
+document
+    .getElementById(
+        "copyOutputButton"
+    )
+    .addEventListener(
+        "click",
+        async function() {
+
+            try {
+
+                await navigator.clipboard.writeText(
+                    obfuscatorOutput.value
+                );
+
+                obfuscatorStatus.textContent =
+                    "copied!!!";
+
+            } catch {
+
+                obfuscatorStatus.textContent =
+                    "couldn't access clipboard";
+
+            }
+
+        }
+    );
+
+
+document
+    .getElementById(
+        "clearToolButton"
+    )
+    .addEventListener(
+        "click",
+        function() {
+
+            obfuscatorInput.value =
+                "";
+
+            obfuscatorOutput.value =
+                "";
+
+            obfuscatorStatus.textContent =
+                "";
+
+        }
+    );
+
+
+/* =========================================================
+   RAUTA SAFE
+========================================================= */
+
+const safePin =
+    document.getElementById(
+        "safePin"
+    );
+
+const safeInput =
+    document.getElementById(
+        "safeInput"
+    );
+
+const safeOutput =
+    document.getElementById(
+        "safeOutput"
+    );
+
+const safeStatus =
+    document.getElementById(
+        "safeStatus"
+    );
+
+
+function bytesToBase64(bytes) {
+
+    let binary = "";
+
+    bytes.forEach(
+        byte => {
+
+            binary +=
+                String.fromCharCode(
+                    byte
+                );
+
+        }
+    );
+
+    return btoa(binary);
+
+}
+
+
+function base64ToBytes(value) {
+
+    const binary =
+        atob(value);
+
+    const bytes =
+        new Uint8Array(
+            binary.length
+        );
+
+    for (
+        let i = 0;
+        i < binary.length;
+        i++
+    ) {
+
+        bytes[i] =
+            binary.charCodeAt(i);
+
+    }
+
+    return bytes;
+
+}
+
+
+async function deriveSafeKey(
+    pin,
+    salt
+) {
+
+    const baseKey =
+        await crypto.subtle.importKey(
+            "raw",
+            new TextEncoder().encode(
+                pin
+            ),
+            "PBKDF2",
+            false,
+            ["deriveKey"]
+        );
+
+    return crypto.subtle.deriveKey(
+        {
+            name: "PBKDF2",
+            salt: salt,
+            iterations: 120000,
+            hash: "SHA-256"
+        },
+        baseKey,
+        {
+            name: "AES-GCM",
+            length: 256
+        },
+        false,
+        [
+            "encrypt",
+            "decrypt"
+        ]
+    );
+
+}
+
+
+async function encryptSafe(
+    text,
+    pin
+) {
+
+    if (!pin) {
+        throw new Error(
+            "PIN required"
+        );
+    }
+
+    const salt =
+        crypto.getRandomValues(
+            new Uint8Array(16)
+        );
+
+    const iv =
+        crypto.getRandomValues(
+            new Uint8Array(12)
+        );
+
+    const key =
+        await deriveSafeKey(
+            pin,
+            salt
+        );
+
+    const encrypted =
+        await crypto.subtle.encrypt(
+            {
+                name: "AES-GCM",
+                iv: iv
+            },
+            key,
+            new TextEncoder().encode(
+                text
+            )
+        );
+
+    return JSON.stringify(
+        {
+            version: 1,
+            algorithm: "AES-GCM",
+            salt:
+                bytesToBase64(
+                    salt
+                ),
+            iv:
+                bytesToBase64(
+                    iv
+                ),
+            data:
+                bytesToBase64(
+                    new Uint8Array(
+                        encrypted
+                    )
+                )
+        }
+    );
+
+}
+
+
+async function decryptSafe(
+    data,
+    pin
+) {
+
+    if (!pin) {
+        throw new Error(
+            "PIN required"
+        );
+    }
+
+    const packet =
+        JSON.parse(data);
+
+    if (
+        packet.version !== 1 ||
+        packet.algorithm !== "AES-GCM"
+    ) {
+
+        throw new Error(
+            "invalid safe data"
+        );
+
+    }
+
+    const salt =
+        base64ToBytes(
+            packet.salt
+        );
+
+    const iv =
+        base64ToBytes(
+            packet.iv
+        );
+
+    const encrypted =
+        base64ToBytes(
+            packet.data
+        );
+
+    const key =
+        await deriveSafeKey(
+            pin,
+            salt
+        );
+
+    const decrypted =
+        await crypto.subtle.decrypt(
+            {
+                name: "AES-GCM",
+                iv: iv
+            },
+            key,
+            encrypted
+        );
+
+    return new TextDecoder().decode(
+        decrypted
+    );
+
+}
+
+
+document
+    .getElementById(
+        "safeEncryptButton"
+    )
+    .addEventListener(
+        "click",
+        async function() {
+
+            try {
+
+                safeOutput.value =
+                    await encryptSafe(
+                        safeInput.value,
+                        safePin.value
+                    );
+
+                safeStatus.textContent =
+                    "locked 🔒";
+
+            } catch (error) {
+
+                safeStatus.textContent =
+                    "couldn't lock it: " +
+                    error.message;
+
+            }
+
+        }
+    );
+
+
+document
+    .getElementById(
+        "safeDecryptButton"
+    )
+    .addEventListener(
+        "click",
+        async function() {
+
+            try {
+
+                safeInput.value =
+                    await decryptSafe(
+                        safeOutput.value,
+                        safePin.value
+                    );
+
+                safeStatus.textContent =
+                    "unlocked 🔓";
+
+            } catch {
+
+                safeStatus.textContent =
+                    "wrong PIN or damaged safe data";
+
+            }
+
+        }
+    );
+
+
 </script>
 
 </body>
 </html>
+```
