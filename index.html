@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+
 <meta charset="UTF-8">
 
-<meta property="og:title" content="rautatientorii">
+<title>RAUTATIENTORI</title>
+
+<meta property="og:title" content="RAUTATIENTORI">
 <meta property="og:description" content="hhi guys im rauta andd this is my websssite">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://rauta.cfd">
@@ -13,6 +17,11 @@
 <meta name="theme-color" content="#8B5CF6">
 
 <style>
+
+/* =========================
+   GLOBAL
+========================= */
+
 * {
     margin: 0;
     padding: 0;
@@ -29,6 +38,7 @@ body {
     overflow: hidden;
     background: black;
     font-family: Tahoma, Arial, sans-serif;
+    touch-action: none;
 }
 
 
@@ -96,6 +106,10 @@ body {
 }
 
 
+/* =========================
+   SITE
+========================= */
+
 #site {
     position: fixed;
     inset: 0;
@@ -159,10 +173,17 @@ body {
     -webkit-backdrop-filter: blur(10px);
 
     z-index: 20;
+
+    touch-action: none;
 }
 
 .panel.hidden {
     display: none;
+}
+
+.panel.dragging {
+    user-select: none;
+    cursor: grabbing;
 }
 
 .panel-title {
@@ -194,6 +215,8 @@ body {
     cursor: move;
 
     user-select: none;
+
+    touch-action: none;
 }
 
 .window-buttons {
@@ -264,6 +287,8 @@ body {
 
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
+
+    touch-action: auto;
 }
 
 .panel-content h2 {
@@ -282,6 +307,32 @@ body {
     border-bottom: 1px solid rgba(255,255,255,0.8);
 
     margin: 12px 0;
+}
+
+
+/* =========================
+   WINDOWS DRAG BOX
+========================= */
+
+.window-drag-box {
+    position: fixed;
+
+    pointer-events: none;
+
+    display: none;
+
+    background: rgba(0, 120, 215, 0.18);
+
+    border: 1px solid rgba(0, 220, 255, 0.95);
+
+    box-shadow:
+        inset 0 0 0 1px rgba(0, 120, 215, 0.35);
+
+    z-index: 19;
+}
+
+.window-drag-box.visible {
+    display: block;
 }
 
 
@@ -313,7 +364,7 @@ body {
 
 
 /* =========================
-   INVISIBLE TIME BOX
+   TIME BOX
 ========================= */
 
 .time-box {
@@ -323,7 +374,6 @@ body {
     top: 15px;
 
     width: 130px;
-    height: auto;
 
     padding: 0;
 
@@ -345,11 +395,13 @@ body {
     cursor: move;
 
     z-index: 1002;
+
+    touch-action: none;
 }
 
 
 /* =========================
-   SMALL ANALOG CLOCK
+   ANALOG CLOCK
 ========================= */
 
 .analog-clock {
@@ -425,7 +477,7 @@ body {
 
 
 /* =========================
-   CLOCK MINUTE MARKS
+   CLOCK MARKS
 ========================= */
 
 .clock-mark {
@@ -473,9 +525,6 @@ body {
     z-index: 10;
 }
 
-
-/* Hour hand */
-
 .hour-hand {
     width: 5px;
     height: 30px;
@@ -484,9 +533,6 @@ body {
 
     background: #1d1d1d;
 }
-
-
-/* Minute hand */
 
 .minute-hand {
     width: 4px;
@@ -497,9 +543,6 @@ body {
     background: #1d1d1d;
 }
 
-
-/* Second hand */
-
 .second-hand {
     width: 2px;
     height: 48px;
@@ -508,9 +551,6 @@ body {
 
     background: #4c8c75;
 }
-
-
-/* Clock center */
 
 .clock-center {
     position: absolute;
@@ -604,6 +644,10 @@ body {
     transition: 0.15s;
 }
 
+.music-button:hover {
+    transform: scale(1.05);
+}
+
 .music-button:active {
     transform: scale(0.95);
 }
@@ -671,6 +715,8 @@ body {
         0 -2px 6px rgba(0,0,0,0.6);
 
     z-index: 1000;
+
+    touch-action: auto;
 }
 
 
@@ -706,6 +752,8 @@ body {
     cursor: default;
 
     pointer-events: auto;
+
+    touch-action: none;
 }
 
 .desktop-icon img {
@@ -918,6 +966,8 @@ body {
     user-select: none;
 
     cursor: grab;
+
+    touch-action: none;
 }
 
 .ralsei-clippy:active {
@@ -934,9 +984,6 @@ body {
 
     image-rendering: pixelated;
 }
-
-
-/* Undertale-style dialogue box */
 
 .clippy-bubble {
     position: relative;
@@ -962,15 +1009,7 @@ body {
     line-height: 1.35;
 
     letter-spacing: 0.2px;
-
-    box-shadow: none;
-
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
 }
-
-
-/* Dialogue pointer */
 
 .clippy-bubble::after {
     content: "";
@@ -990,9 +1029,6 @@ body {
 
     transform: rotate(45deg);
 }
-
-
-/* Close button */
 
 .clippy-close {
     position: absolute;
@@ -1096,10 +1132,57 @@ body {
     width: 440px;
 }
 
+
+/* =========================
+   SMALL SCREEN
+========================= */
+
+@media (max-width: 700px) {
+
+    .panel {
+        max-width: calc(100vw - 20px);
+    }
+
+    #homePanel,
+    #aboutPanel,
+    #contactPanel,
+    #newsletterPanel {
+        width: calc(100vw - 20px);
+    }
+
+    #projectsPanel,
+    #friendsPanel {
+        width: calc(100vw - 20px);
+    }
+
+    #catsPanel,
+    #changelogPanel,
+    #chatroomPanel {
+        width: calc(100vw - 20px);
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+}
+
 </style>
+
 </head>
 
+
 <body>
+
+
+<!-- =========================
+     WINDOWS DRAG BOX
+========================= -->
+
+<div
+    id="windowDragBox"
+    class="window-drag-box">
+</div>
 
 
 <!-- =========================
@@ -1115,7 +1198,13 @@ body {
 </div>
 
 
-<audio id="signinMusic" preload="auto">
+<!-- =========================
+     INTRO MUSIC
+========================= -->
+
+<audio
+    id="signinMusic"
+    preload="auto">
 
     <source
         src="https://rautacfd.vercel.app/signin.mp3"
@@ -1132,7 +1221,9 @@ body {
 
 <div class="background">
 
-    <img src="background.gif">
+    <img
+        src="background.gif"
+        alt="">
 
     <div class="overlay"></div>
 
@@ -1141,11 +1232,15 @@ body {
          HOME
     ========================= -->
 
-    <div class="panel" id="homePanel">
+    <div
+        class="panel"
+        id="homePanel">
 
         <div class="panel-title">
 
-            <span>meow.exe</span>
+            <span>
+                meow.exe
+            </span>
 
             <div class="window-buttons">
 
@@ -1168,7 +1263,9 @@ body {
 
         <div class="panel-content">
 
-            <h2>hai :3</h2>
+            <h2>
+                hai :3
+            </h2>
 
             <p>
                 welcome to rauta.cfd!!!
@@ -1187,7 +1284,8 @@ body {
                 (I BASED IT OFF
                 <a
                     href="https://youtube.com/@rautatientorii"
-                    target="_blank">
+                    target="_blank"
+                    rel="noopener noreferrer">
                     MY USERNAME
                 </a>)
             </p>
@@ -1207,7 +1305,10 @@ body {
                 btw!!!! i have a mc server!!! its coming soon!
                 <br>
                 u should see its site at:
-                <a href="https://ralseismp.xo.je">
+                <a
+                    href="https://ralseismp.xo.je"
+                    target="_blank"
+                    rel="noopener noreferrer">
                     HERE
                 </a>
                 <br>
@@ -1237,11 +1338,15 @@ body {
          ABOUT
     ========================= -->
 
-    <div class="panel hidden" id="aboutPanel">
+    <div
+        class="panel hidden"
+        id="aboutPanel">
 
         <div class="panel-title">
 
-            <span>who is this chud.exe</span>
+            <span>
+                who is this chud.exe
+            </span>
 
             <div class="window-buttons">
 
@@ -1264,7 +1369,9 @@ body {
 
         <div class="panel-content">
 
-            <h2>about me</h2>
+            <h2>
+                about me
+            </h2>
 
             <p>
                 i'm rautatientoriiRR :3
@@ -1301,11 +1408,15 @@ body {
          PROJECTS
     ========================= -->
 
-    <div class="panel hidden" id="projectsPanel">
+    <div
+        class="panel hidden"
+        id="projectsPanel">
 
         <div class="panel-title">
 
-            <span>my stuff.exe</span>
+            <span>
+                my stuff.exe
+            </span>
 
             <div class="window-buttons">
 
@@ -1328,7 +1439,9 @@ body {
 
         <div class="panel-content">
 
-            <h2>my stuff</h2>
+            <h2>
+                my stuff
+            </h2>
 
             <p>
                 these are my cool and very great projects:
@@ -1349,7 +1462,8 @@ body {
                 <strong>mycontact</strong>
                 (<a
                     href="http://mycontact.reblox.vip"
-                    target="_blank">
+                    target="_blank"
+                    rel="noopener noreferrer">
                     mycontact.reblox.vip
                 </a>):
                 a Facebook 2009 type social media that i'm admin on
@@ -1385,11 +1499,15 @@ body {
          CONTACT
     ========================= -->
 
-    <div class="panel hidden" id="contactPanel">
+    <div
+        class="panel hidden"
+        id="contactPanel">
 
         <div class="panel-title">
 
-            <span>talk to me :P</span>
+            <span>
+                talk to me :P
+            </span>
 
             <div class="window-buttons">
 
@@ -1412,7 +1530,9 @@ body {
 
         <div class="panel-content">
 
-            <h2>contact</h2>
+            <h2>
+                contact
+            </h2>
 
             <p>
                 wow...you wanna talk to me?!
@@ -1432,7 +1552,9 @@ body {
 
             <hr>
 
-            <h2>socials</h2>
+            <h2>
+                socials
+            </h2>
 
             <p>
                 catch me up here:
@@ -1457,11 +1579,15 @@ body {
          CATS
     ========================= -->
 
-    <div class="panel hidden" id="catsPanel">
+    <div
+        class="panel hidden"
+        id="catsPanel">
 
         <div class="panel-title">
 
-            <span>cats :3.exe</span>
+            <span>
+                cats :3.exe
+            </span>
 
             <div class="window-buttons">
 
@@ -1498,7 +1624,8 @@ body {
 
                 <a
                     href="http://mycontact.reblox.vip"
-                    target="_blank">
+                    target="_blank"
+                    rel="noopener noreferrer">
                     MyContact
                 </a>
 
@@ -1508,7 +1635,8 @@ body {
 
                 want more cats?
 
-                <a href="https://rauta.cfd/cats">
+                <a
+                    href="https://rauta.cfd/cats">
                     go here
                 </a>
 
@@ -1531,7 +1659,9 @@ body {
     </button>
 
 
-    <audio id="siteMusic" preload="auto">
+    <audio
+        id="siteMusic"
+        preload="auto">
 
         <source
             src="https://rauta.cfd/cat.mp3"
@@ -1652,7 +1782,9 @@ body {
      ANALOG CLOCK
 ========================= -->
 
-<div class="time-box" id="timeBox">
+<div
+    class="time-box"
+    id="timeBox">
 
     <div class="analog-clock">
 
@@ -1670,13 +1802,12 @@ body {
         <div class="clock-number n11">11</div>
 
 
-        <!-- Minute marks -->
-
         <div class="clock-mark big" style="transform: rotate(0deg);"></div>
         <div class="clock-mark" style="transform: rotate(6deg);"></div>
         <div class="clock-mark" style="transform: rotate(12deg);"></div>
         <div class="clock-mark" style="transform: rotate(18deg);"></div>
         <div class="clock-mark" style="transform: rotate(24deg);"></div>
+
         <div class="clock-mark big" style="transform: rotate(30deg);"></div>
         <div class="clock-mark" style="transform: rotate(36deg);"></div>
         <div class="clock-mark" style="transform: rotate(42deg);"></div>
@@ -1744,8 +1875,6 @@ body {
         <div class="clock-mark" style="transform: rotate(354deg);"></div>
 
 
-        <!-- THREE MOVING HANDS -->
-
         <div
             class="hand hour-hand"
             id="hourHand">
@@ -1760,9 +1889,6 @@ body {
             class="hand second-hand"
             id="secondHand">
         </div>
-
-
-        <!-- Center -->
 
         <div class="clock-center"></div>
 
@@ -1840,7 +1966,9 @@ body {
      ALIEN DESTROYER
 ========================= -->
 
-<div class="panel hidden" id="game1Panel">
+<div
+    class="panel hidden"
+    id="game1Panel">
 
     <div class="panel-title">
 
@@ -1886,7 +2014,9 @@ body {
      CHANGELOG
 ========================= -->
 
-<div class="panel hidden" id="changelogPanel">
+<div
+    class="panel hidden"
+    id="changelogPanel">
 
     <div class="panel-title">
 
@@ -1913,7 +2043,8 @@ body {
     </div>
 
 
-    <div class="panel-content changelog-content">
+    <div
+        class="panel-content changelog-content">
 
         <h2>
             rauta.cfd updates
@@ -2016,7 +2147,9 @@ body {
      CHATROOM
 ========================= -->
 
-<div class="panel hidden" id="chatroomPanel">
+<div
+    class="panel hidden"
+    id="chatroomPanel">
 
     <div class="panel-title">
 
@@ -2058,6 +2191,10 @@ body {
 </div>
 
 
+<!-- =========================
+     ONEKO
+========================= -->
+
 <script src="/oneko.js"></script>
 
 
@@ -2087,7 +2224,9 @@ body {
      FRIENDS
 ========================= -->
 
-<div class="panel hidden" id="friendsPanel">
+<div
+    class="panel hidden"
+    id="friendsPanel">
 
     <div class="panel-title">
 
@@ -2176,7 +2315,9 @@ body {
      NEWSLETTER
 ========================= -->
 
-<div class="panel hidden" id="newsletterPanel">
+<div
+    class="panel hidden"
+    id="newsletterPanel">
 
     <div class="panel-title">
 
@@ -2226,18 +2367,15 @@ body {
                 placeholder="my email"
                 required>
 
-
             <input
                 type="hidden"
                 name="ml-submit"
                 value="1">
 
-
             <input
                 type="hidden"
                 name="anticsrf"
                 value="true">
-
 
             <button type="submit">
                 pls sub :3
@@ -2258,47 +2396,100 @@ body {
 
 
 /* =========================
+   ANIMATED PAGE TITLE
+========================= */
+
+const titleText =
+    "RAUTATIENTORI";
+
+let titleIndex = 0;
+
+document.title = "";
+
+const titleTimer =
+    setInterval(
+        function() {
+
+            titleIndex++;
+
+            document.title =
+                titleText.substring(
+                    0,
+                    titleIndex
+                );
+
+
+            if (
+                titleIndex >=
+                titleText.length
+            ) {
+
+                clearInterval(
+                    titleTimer
+                );
+
+            }
+
+        },
+        1000
+    );
+
+
+/* =========================
    INTRO
 ========================= */
 
 const intro =
-    document.getElementById("intro");
+    document.getElementById(
+        "intro"
+    );
 
 const site =
-    document.getElementById("site");
+    document.getElementById(
+        "site"
+    );
 
 const enterButton =
-    document.getElementById("enterButton");
+    document.getElementById(
+        "enterButton"
+    );
 
 const signinMusic =
-    document.getElementById("signinMusic");
+    document.getElementById(
+        "signinMusic"
+    );
 
 
 enterButton.addEventListener(
     "click",
     function() {
 
-        signinMusic.play().catch(
-            function(error) {
+        signinMusic
+            .play()
+            .catch(
+                function(error) {
 
-                console.log(
-                    "son btw i couldnt start the audio",
-                    error
-                );
+                    console.log(
+                        "couldn't start intro music",
+                        error
+                    );
 
-            }
-        );
+                }
+            );
 
 
-        intro.style.opacity = "0";
+        intro.style.opacity =
+            "0";
 
-        site.style.opacity = "1";
+        site.style.opacity =
+            "1";
 
 
         setTimeout(
             function() {
 
-                intro.style.display = "none";
+                intro.style.display =
+                    "none";
 
             },
             1500
@@ -2317,25 +2508,35 @@ let highestZ = 20;
 
 const panelNames = {
 
-    homePanel: "meow.exe",
+    homePanel:
+        "meow.exe",
 
-    aboutPanel: "about.exe",
+    aboutPanel:
+        "about.exe",
 
-    projectsPanel: "my stuff.exe",
+    projectsPanel:
+        "my stuff.exe",
 
-    contactPanel: "contact.exe",
+    contactPanel:
+        "contact.exe",
 
-    catsPanel: "cats :3",
+    catsPanel:
+        "cats :3",
 
-    game1Panel: "alien destroyer.exe",
+    game1Panel:
+        "alien destroyer.exe",
 
-    changelogPanel: "changelog.exe",
+    changelogPanel:
+        "changelog.exe",
 
-    chatroomPanel: "chatroom.exe",
+    chatroomPanel:
+        "chatroom.exe",
 
-    friendsPanel: "friends.exe",
+    friendsPanel:
+        "friends.exe",
 
-    newsletterPanel: "newsletter.exe"
+    newsletterPanel:
+        "newsletter.exe"
 
 };
 
@@ -2345,16 +2546,19 @@ function openPanel(id) {
     const panel =
         document.getElementById(id);
 
-    if (!panel) return;
+    if (!panel)
+        return;
 
 
-    panel.classList.remove("hidden");
+    panel.classList.remove(
+        "hidden"
+    );
 
-    panel.style.display = "block";
+    panel.style.display =
+        "block";
 
 
     removeTaskButton(id);
-
 
     bringToFront(panel);
 
@@ -2366,10 +2570,12 @@ function minimizePanel(id) {
     const panel =
         document.getElementById(id);
 
-    if (!panel) return;
+    if (!panel)
+        return;
 
 
-    panel.style.display = "none";
+    panel.style.display =
+        "none";
 
 
     addTaskButton(id);
@@ -2382,12 +2588,16 @@ function closePanel(id) {
     const panel =
         document.getElementById(id);
 
-    if (!panel) return;
+    if (!panel)
+        return;
 
 
-    panel.style.display = "none";
+    panel.style.display =
+        "none";
 
-    panel.classList.add("hidden");
+    panel.classList.add(
+        "hidden"
+    );
 
 
     removeTaskButton(id);
@@ -2403,11 +2613,14 @@ function addTaskButton(id) {
         );
 
 
-    if (existing) return;
+    if (existing)
+        return;
 
 
     const button =
-        document.createElement("button");
+        document.createElement(
+            "button"
+        );
 
 
     button.id =
@@ -2429,11 +2642,13 @@ function addTaskButton(id) {
                 document.getElementById(id);
 
 
-            if (!panel) return;
+            if (!panel)
+                return;
 
 
             if (
-                panel.style.display === "none"
+                panel.style.display ===
+                "none"
             ) {
 
                 panel.style.display =
@@ -2442,10 +2657,6 @@ function addTaskButton(id) {
                 panel.classList.remove(
                     "hidden"
                 );
-
-                bringToFront(panel);
-
-                return;
 
             }
 
@@ -2456,7 +2667,9 @@ function addTaskButton(id) {
 
 
     document
-        .getElementById("taskButtons")
+        .getElementById(
+            "taskButtons"
+        )
         .appendChild(button);
 
 }
@@ -2489,13 +2702,17 @@ function bringToFront(panel) {
 }
 
 
+/* =========================
+   WINDOW CLICK / FOCUS
+========================= */
+
 document
     .querySelectorAll(".panel")
     .forEach(
         function(panel) {
 
             panel.addEventListener(
-                "mousedown",
+                "pointerdown",
                 function() {
 
                     bringToFront(panel);
@@ -2508,27 +2725,61 @@ document
 
 
 /* =========================
-   DRAG PANELS
+   WINDOW DRAGGING
 ========================= */
+
+const windowDragBox =
+    document.getElementById(
+        "windowDragBox"
+    );
+
 
 document
     .querySelectorAll(".panel-title")
     .forEach(
         function(title) {
 
-            let dragging = false;
-
-            let offsetX = 0;
-            let offsetY = 0;
-
-
             const panel =
-                title.closest(".panel");
+                title.closest(
+                    ".panel"
+                );
+
+
+            let dragging =
+                false;
+
+            let pointerId =
+                null;
+
+            let offsetX =
+                0;
+
+            let offsetY =
+                0;
 
 
             title.addEventListener(
-                "mousedown",
+                "pointerdown",
                 function(e) {
+
+                    /*
+                        Only left mouse button.
+                    */
+
+                    if (
+                        e.pointerType ===
+                        "mouse"
+                        &&
+                        e.button !== 0
+                    ) {
+                        return;
+                    }
+
+
+                    /*
+                        Don't drag if the
+                        window buttons were clicked.
+                    */
 
                     if (
                         e.target.closest(
@@ -2539,19 +2790,20 @@ document
                     }
 
 
-                    dragging = true;
-
-
                     const rect =
                         panel.getBoundingClientRect();
 
 
-                    offsetX =
-                        e.clientX - rect.left;
+                    /*
+                        IMPORTANT:
 
-                    offsetY =
-                        e.clientY - rect.top;
+                        The original panels are centered
+                        using transform: translate(-50%, -50%).
 
+                        Once dragged, we remove that
+                        transform and convert the current
+                        visual position into pixels.
+                    */
 
                     panel.style.transform =
                         "none";
@@ -2564,7 +2816,101 @@ document
                         rect.top + "px";
 
 
-                    bringToFront(panel);
+                    /*
+                        Remember the exact place
+                        where the user grabbed the title.
+                    */
+
+                    offsetX =
+                        e.clientX -
+                        rect.left;
+
+                    offsetY =
+                        e.clientY -
+                        rect.top;
+
+
+                    dragging =
+                        true;
+
+                    pointerId =
+                        e.pointerId;
+
+
+                    panel.classList.add(
+                        "dragging"
+                    );
+
+
+                    bringToFront(
+                        panel
+                    );
+
+
+                    /*
+                        Pointer capture fixes
+                        the classic problem where
+                        dragging stops when the mouse
+                        leaves the title bar.
+                    */
+
+                    try {
+
+                        title.setPointerCapture(
+                            pointerId
+                        );
+
+                    }
+
+                    catch (error) {
+
+                        console.log(
+                            "pointer capture unavailable"
+                        );
+
+                    }
+
+
+                    /*
+                        Blue transparent box.
+                    */
+
+                    windowDragBox.style.left =
+                        rect.left + "px";
+
+                    windowDragBox.style.top =
+                        rect.top + "px";
+
+                    windowDragBox.style.width =
+                        rect.width + "px";
+
+                    windowDragBox.style.height =
+                        rect.height + "px";
+
+
+                    /*
+                        Put the box immediately
+                        behind the dragged window.
+                    */
+
+                    const panelZ =
+                        parseInt(
+                            getComputedStyle(
+                                panel
+                            ).zIndex
+                        ) || 20;
+
+
+                    windowDragBox.style.zIndex =
+                        Math.max(
+                            1,
+                            panelZ - 1
+                        );
+
+
+                    windowDragBox.classList.add(
+                        "visible"
+                    );
 
 
                     e.preventDefault();
@@ -2573,33 +2919,133 @@ document
             );
 
 
-            document.addEventListener(
-                "mousemove",
+            title.addEventListener(
+                "pointermove",
                 function(e) {
 
-                    if (!dragging) return;
+                    if (
+                        !dragging
+                        ||
+                        e.pointerId !==
+                        pointerId
+                    ) {
+                        return;
+                    }
+
+
+                    /*
+                        Exact 1:1 movement.
+
+                        If you grab the title 20px from
+                        the left edge, the cursor stays
+                        20px from the left edge while
+                        dragging.
+                    */
+
+                    const newLeft =
+                        e.clientX -
+                        offsetX;
+
+
+                    const newTop =
+                        e.clientY -
+                        offsetY;
 
 
                     panel.style.left =
-                        (e.clientX - offsetX)
-                        + "px";
-
+                        newLeft + "px";
 
                     panel.style.top =
-                        (e.clientY - offsetY)
-                        + "px";
+                        newTop + "px";
+
+
+                    /*
+                        Blue box follows the window
+                        exactly.
+                    */
+
+                    windowDragBox.style.left =
+                        newLeft + "px";
+
+                    windowDragBox.style.top =
+                        newTop + "px";
 
                 }
             );
 
 
-            document.addEventListener(
-                "mouseup",
-                function() {
+            function stopDragging(e) {
 
-                    dragging = false;
+                if (!dragging)
+                    return;
+
+
+                if (
+                    e.pointerId !==
+                    undefined
+                    &&
+                    e.pointerId !==
+                    pointerId
+                ) {
+                    return;
+                }
+
+
+                dragging =
+                    false;
+
+
+                panel.classList.remove(
+                    "dragging"
+                );
+
+
+                windowDragBox.classList.remove(
+                    "visible"
+                );
+
+
+                try {
+
+                    if (
+                        pointerId !==
+                        null
+                        &&
+                        title.hasPointerCapture(
+                            pointerId
+                        )
+                    ) {
+
+                        title.releasePointerCapture(
+                            pointerId
+                        );
+
+                    }
 
                 }
+
+                catch (error) {
+
+                    /* Already released */
+
+                }
+
+
+                pointerId =
+                    null;
+
+            }
+
+
+            title.addEventListener(
+                "pointerup",
+                stopDragging
+            );
+
+
+            title.addEventListener(
+                "pointercancel",
+                stopDragging
             );
 
         }
@@ -2647,37 +3093,42 @@ function updateClock() {
         now.getSeconds();
 
 
+    const milliseconds =
+        now.getMilliseconds();
+
+
     /*
-        Hour hand:
-        30 degrees per hour
-        + 0.5 degrees per minute
+        Smooth clock hands.
     */
 
     const hourDegrees =
-        ((hours % 12) * 30)
+        (
+            (hours % 12) * 30
+        )
         +
-        (minutes * 0.5);
+        (
+            minutes * 0.5
+        );
 
-
-    /*
-        Minute hand:
-        6 degrees per minute
-        + 0.1 degrees per second
-    */
 
     const minuteDegrees =
-        (minutes * 6)
+        (
+            minutes * 6
+        )
         +
-        (seconds * 0.1);
+        (
+            seconds * 0.1
+        );
 
-
-    /*
-        Second hand:
-        6 degrees per second
-    */
 
     const secondDegrees =
-        seconds * 6;
+        (
+            seconds * 6
+        )
+        +
+        (
+            milliseconds * 0.006
+        );
 
 
     hourHand.style.transform =
@@ -2692,27 +3143,19 @@ function updateClock() {
         `rotate(${secondDegrees}deg)`;
 
 
-    /* Digital clock */
-
     const displayHours =
-        String(hours).padStart(
-            2,
-            "0"
-        );
+        String(hours)
+            .padStart(2, "0");
 
 
     const displayMinutes =
-        String(minutes).padStart(
-            2,
-            "0"
-        );
+        String(minutes)
+            .padStart(2, "0");
 
 
     const displaySeconds =
-        String(seconds).padStart(
-            2,
-            "0"
-        );
+        String(seconds)
+            .padStart(2, "0");
 
 
     currentTime.textContent =
@@ -2726,7 +3169,7 @@ updateClock();
 
 setInterval(
     updateClock,
-    1000
+    50
 );
 
 
@@ -2740,34 +3183,55 @@ const timeBox =
     );
 
 
-let draggingTime = false;
+let draggingTime =
+    false;
 
-let timeOffsetX = 0;
-let timeOffsetY = 0;
+let timePointerId =
+    null;
+
+let timeOffsetX =
+    0;
+
+let timeOffsetY =
+    0;
 
 
 timeBox.addEventListener(
-    "mousedown",
+    "pointerdown",
     function(e) {
 
-        draggingTime = true;
+        if (
+            e.pointerType ===
+            "mouse"
+            &&
+            e.button !== 0
+        ) {
+            return;
+        }
 
 
         const rect =
             timeBox.getBoundingClientRect();
 
 
-        timeOffsetX =
-            e.clientX - rect.left;
+        draggingTime =
+            true;
 
+        timePointerId =
+            e.pointerId;
+
+
+        timeOffsetX =
+            e.clientX -
+            rect.left;
 
         timeOffsetY =
-            e.clientY - rect.top;
+            e.clientY -
+            rect.top;
 
 
         timeBox.style.right =
             "auto";
-
 
         timeBox.style.bottom =
             "auto";
@@ -2776,9 +3240,19 @@ timeBox.addEventListener(
         timeBox.style.left =
             rect.left + "px";
 
-
         timeBox.style.top =
             rect.top + "px";
+
+
+        try {
+
+            timeBox.setPointerCapture(
+                timePointerId
+            );
+
+        }
+
+        catch (error) {}
 
 
         e.preventDefault();
@@ -2787,33 +3261,94 @@ timeBox.addEventListener(
 );
 
 
-document.addEventListener(
-    "mousemove",
+timeBox.addEventListener(
+    "pointermove",
     function(e) {
 
-        if (!draggingTime) return;
+        if (
+            !draggingTime
+            ||
+            e.pointerId !==
+            timePointerId
+        ) {
+            return;
+        }
 
 
         timeBox.style.left =
-            (e.clientX - timeOffsetX)
-            + "px";
+            (
+                e.clientX -
+                timeOffsetX
+            ) + "px";
 
 
         timeBox.style.top =
-            (e.clientY - timeOffsetY)
-            + "px";
+            (
+                e.clientY -
+                timeOffsetY
+            ) + "px";
 
     }
 );
 
 
-document.addEventListener(
-    "mouseup",
-    function() {
+function stopClockDrag(e) {
 
-        draggingTime = false;
+    if (!draggingTime)
+        return;
+
+
+    if (
+        e.pointerId !==
+        undefined
+        &&
+        e.pointerId !==
+        timePointerId
+    ) {
+        return;
+    }
+
+
+    draggingTime =
+        false;
+
+
+    try {
+
+        if (
+            timePointerId !==
+            null
+            &&
+            timeBox.hasPointerCapture(
+                timePointerId
+            )
+        ) {
+
+            timeBox.releasePointerCapture(
+                timePointerId
+            );
+
+        }
 
     }
+
+    catch (error) {}
+
+
+    timePointerId =
+        null;
+
+}
+
+
+timeBox.addEventListener(
+    "pointerup",
+    stopClockDrag
+);
+
+timeBox.addEventListener(
+    "pointercancel",
+    stopClockDrag
 );
 
 
@@ -2822,27 +3357,46 @@ document.addEventListener(
 ========================= */
 
 document
-    .querySelectorAll(".desktop-icon")
+    .querySelectorAll(
+        ".desktop-icon"
+    )
     .forEach(
-        icon => {
+        function(icon) {
 
-            let moved = false;
+            let moved =
+                false;
 
-            let startX = 0;
-            let startY = 0;
+            let dragging =
+                false;
 
-            let offsetX = 0;
-            let offsetY = 0;
+            let pointerId =
+                null;
 
-            let isMouseDown = false;
+            let startX =
+                0;
+
+            let startY =
+                0;
+
+            let offsetX =
+                0;
+
+            let offsetY =
+                0;
 
 
             icon.addEventListener(
-                "mousedown",
+                "pointerdown",
                 function(e) {
 
-                    if (e.button !== 0)
+                    if (
+                        e.pointerType ===
+                        "mouse"
+                        &&
+                        e.button !== 0
+                    ) {
                         return;
+                    }
 
 
                     const rect =
@@ -2852,22 +3406,27 @@ document
                     startX =
                         e.clientX;
 
-
                     startY =
                         e.clientY;
 
 
                     offsetX =
-                        e.clientX - rect.left;
-
+                        e.clientX -
+                        rect.left;
 
                     offsetY =
-                        e.clientY - rect.top;
+                        e.clientY -
+                        rect.top;
 
 
-                    moved = false;
+                    moved =
+                        false;
 
-                    isMouseDown = true;
+                    dragging =
+                        true;
+
+                    pointerId =
+                        e.pointerId;
 
 
                     document
@@ -2875,12 +3434,11 @@ document
                             ".desktop-icon"
                         )
                         .forEach(
-                            other => {
+                            function(other) {
 
-                                other.classList
-                                    .remove(
-                                        "selected"
-                                    );
+                                other.classList.remove(
+                                    "selected"
+                                );
 
                             }
                         );
@@ -2891,38 +3449,59 @@ document
                     );
 
 
+                    try {
+
+                        icon.setPointerCapture(
+                            pointerId
+                        );
+
+                    }
+
+                    catch (error) {}
+
+
                     e.preventDefault();
 
                 }
             );
 
 
-            document.addEventListener(
-                "mousemove",
+            icon.addEventListener(
+                "pointermove",
                 function(e) {
 
-                    if (!isMouseDown)
+                    if (
+                        !dragging
+                        ||
+                        e.pointerId !==
+                        pointerId
+                    ) {
                         return;
+                    }
 
 
                     const distanceX =
                         Math.abs(
-                            e.clientX - startX
+                            e.clientX -
+                            startX
                         );
 
 
                     const distanceY =
                         Math.abs(
-                            e.clientY - startY
+                            e.clientY -
+                            startY
                         );
 
 
                     if (
-                        distanceX > 5 ||
+                        distanceX > 5
+                        ||
                         distanceY > 5
                     ) {
 
-                        moved = true;
+                        moved =
+                            true;
 
 
                         icon.classList.add(
@@ -2931,13 +3510,17 @@ document
 
 
                         icon.style.left =
-                            (e.clientX - offsetX)
-                            + "px";
+                            (
+                                e.clientX -
+                                offsetX
+                            ) + "px";
 
 
                         icon.style.top =
-                            (e.clientY - offsetY)
-                            + "px";
+                            (
+                                e.clientY -
+                                offsetY
+                            ) + "px";
 
                     }
 
@@ -2945,25 +3528,82 @@ document
             );
 
 
-            document.addEventListener(
-                "mouseup",
-                function() {
+            function stopIconDrag(e) {
 
-                    isMouseDown = false;
+                if (!dragging)
+                    return;
 
-                    icon.classList.remove(
-                        "dragging"
-                    );
+
+                if (
+                    e.pointerId !==
+                    undefined
+                    &&
+                    e.pointerId !==
+                    pointerId
+                ) {
+                    return;
+                }
+
+
+                dragging =
+                    false;
+
+
+                icon.classList.remove(
+                    "dragging"
+                );
+
+
+                try {
+
+                    if (
+                        pointerId !==
+                        null
+                        &&
+                        icon.hasPointerCapture(
+                            pointerId
+                        )
+                    ) {
+
+                        icon.releasePointerCapture(
+                            pointerId
+                        );
+
+                    }
 
                 }
+
+                catch (error) {}
+
+
+                pointerId =
+                    null;
+
+            }
+
+
+            icon.addEventListener(
+                "pointerup",
+                stopIconDrag
             );
 
+
+            icon.addEventListener(
+                "pointercancel",
+                stopIconDrag
+            );
+
+
+            /*
+                Double click opens the app.
+            */
 
             icon.addEventListener(
                 "dblclick",
                 function() {
 
-                    if (moved) return;
+                    if (moved)
+                        return;
 
 
                     const panel =
@@ -2972,7 +3612,9 @@ document
 
                     if (panel) {
 
-                        openPanel(panel);
+                        openPanel(
+                            panel
+                        );
 
                     }
 
@@ -2984,11 +3626,11 @@ document
 
 
 /* =========================
-   DESELECT ICONS
+   DESELECT DESKTOP ICONS
 ========================= */
 
 document.addEventListener(
-    "mousedown",
+    "pointerdown",
     function(e) {
 
         if (
@@ -3014,7 +3656,7 @@ document.addEventListener(
                     ".desktop-icon"
                 )
                 .forEach(
-                    icon => {
+                    function(icon) {
 
                         icon.classList.remove(
                             "selected"
@@ -3048,7 +3690,9 @@ musicButton.addEventListener(
     "click",
     function() {
 
-        if (siteMusic.paused) {
+        if (
+            siteMusic.paused
+        ) {
 
             siteMusic
                 .play()
@@ -3130,8 +3774,7 @@ function clippyTalk() {
     const line =
         clippyLines[
             Math.floor(
-                Math.random()
-                *
+                Math.random() *
                 clippyLines.length
             )
         ];
@@ -3143,7 +3786,8 @@ function clippyTalk() {
 }
 
 
-let clippyTimer = null;
+let clippyTimer =
+    null;
 
 
 function startClippy() {
@@ -3179,37 +3823,76 @@ const clippy =
     );
 
 
-let draggingClippy = false;
+let draggingClippy =
+    false;
 
-let clippyOffsetX = 0;
-let clippyOffsetY = 0;
+let clippyPointerId =
+    null;
+
+let clippyOffsetX =
+    0;
+
+let clippyOffsetY =
+    0;
 
 
 clippy.addEventListener(
-    "mousedown",
+    "pointerdown",
     function(e) {
 
-        draggingClippy = true;
+        if (
+            e.pointerType ===
+            "mouse"
+            &&
+            e.button !== 0
+        ) {
+            return;
+        }
 
 
         const rect =
             clippy.getBoundingClientRect();
 
 
-        clippyOffsetX =
-            e.clientX - rect.left;
+        draggingClippy =
+            true;
 
+        clippyPointerId =
+            e.pointerId;
+
+
+        clippyOffsetX =
+            e.clientX -
+            rect.left;
 
         clippyOffsetY =
-            e.clientY - rect.top;
+            e.clientY -
+            rect.top;
 
 
         clippy.style.right =
             "auto";
 
-
         clippy.style.bottom =
             "auto";
+
+
+        clippy.style.left =
+            rect.left + "px";
+
+        clippy.style.top =
+            rect.top + "px";
+
+
+        try {
+
+            clippy.setPointerCapture(
+                clippyPointerId
+            );
+
+        }
+
+        catch (error) {}
 
 
         e.preventDefault();
@@ -3218,35 +3901,99 @@ clippy.addEventListener(
 );
 
 
-document.addEventListener(
-    "mousemove",
+clippy.addEventListener(
+    "pointermove",
     function(e) {
 
-        if (!draggingClippy)
+        if (
+            !draggingClippy
+            ||
+            e.pointerId !==
+            clippyPointerId
+        ) {
             return;
+        }
 
 
         clippy.style.left =
-            `${e.clientX - clippyOffsetX}px`;
+            (
+                e.clientX -
+                clippyOffsetX
+            ) + "px";
 
 
         clippy.style.top =
-            `${e.clientY - clippyOffsetY}px`;
+            (
+                e.clientY -
+                clippyOffsetY
+            ) + "px";
 
     }
 );
 
 
-document.addEventListener(
-    "mouseup",
-    function() {
+function stopClippyDrag(e) {
 
-        draggingClippy = false;
+    if (!draggingClippy)
+        return;
+
+
+    if (
+        e.pointerId !==
+        undefined
+        &&
+        e.pointerId !==
+        clippyPointerId
+    ) {
+        return;
+    }
+
+
+    draggingClippy =
+        false;
+
+
+    try {
+
+        if (
+            clippyPointerId !==
+            null
+            &&
+            clippy.hasPointerCapture(
+                clippyPointerId
+            )
+        ) {
+
+            clippy.releasePointerCapture(
+                clippyPointerId
+            );
+
+        }
 
     }
+
+    catch (error) {}
+
+
+    clippyPointerId =
+        null;
+
+}
+
+
+clippy.addEventListener(
+    "pointerup",
+    stopClippyDrag
 );
+
+clippy.addEventListener(
+    "pointercancel",
+    stopClippyDrag
+);
+
 
 </script>
 
 </body>
+
 </html>
