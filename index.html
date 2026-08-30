@@ -858,16 +858,6 @@ a:visited {
    GENERIC APP ICON
 ========================================================= */
 
-.folder-icon{
-    width:48px;
-    height:48px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:42px;
-    filter:drop-shadow(0 3px 3px rgba(0,0,0,.45));
-}
-
 .app-icon {
 
     width: 48px;
@@ -1214,326 +1204,201 @@ a:visited {
 
 /* =========================================================
    RAUTATIFY
-   Spotify-style app inside the site's normal retro window.
+   Same retro / XP-like visual language as the rest of the site.
 ========================================================= */
 
 #rautatifyPanel{
-    width:760px;
-    min-height:0;
+    width:570px;
+    min-height:400px;
 }
 
 .rautatify{
     margin:-18px;
-    min-height:520px;
-    display:flex;
-    flex-direction:column;
-    color:#fff;
-    background:#121212;
-    font-family:Arial,Helvetica,sans-serif;
+    padding:14px;
+    min-height:360px;
+    color:#111;
+    background:#d4d0c8;
+    font-family:Tahoma,Arial,sans-serif;
 }
 
-.rautatify-main{
-    display:grid;
-    grid-template-columns:190px minmax(0,1fr);
-    flex:1;
-    min-height:430px;
-}
-
-.rautatify-sidebar{
-    padding:16px 12px;
-    background:#090909;
-    border-right:1px solid #292929;
-}
-
-.rautatify-brand{
+.rautatify-header{
     display:flex;
     align-items:center;
-    gap:9px;
-    margin:4px 7px 20px;
-    color:#fff;
-    font-size:18px;
-    font-weight:800;
+    gap:10px;
+    margin-bottom:12px;
+    padding:8px;
+    background:rgba(255,255,255,.35);
+    border-top:2px solid white;
+    border-left:2px solid white;
+    border-right:2px solid #777;
+    border-bottom:2px solid #777;
 }
 
-.rautatify-brand-mark{
-    width:28px;
-    height:28px;
+.rautatify-icon{
+    width:48px;
+    height:48px;
     display:flex;
     align-items:center;
     justify-content:center;
-    border-radius:50%;
-    background:#1ed760;
-    color:#000;
-    font-size:15px;
-    font-weight:900;
-}
-
-.rautatify-nav{
-    display:flex;
-    flex-direction:column;
-    gap:2px;
-}
-
-.rautatify-nav button{
-    width:100%;
-    padding:10px 9px;
-    border:0;
-    border-radius:4px;
-    color:#a7a7a7;
-    background:transparent;
-    text-align:left;
-    font-size:12px;
-    font-weight:700;
-    cursor:pointer;
-}
-
-.rautatify-nav button:hover,
-.rautatify-nav button.active{
-    color:#fff;
-    background:#282828;
-}
-
-.rautatify-side-title{
-    margin:24px 9px 8px;
-    color:#707070;
-    font-size:9px;
-    font-weight:800;
-    text-transform:uppercase;
-    letter-spacing:1px;
-}
-
-.rautatify-side-item{
-    margin:0 4px;
-    padding:7px 9px;
-    color:#8c8c8c;
-    font-size:10px;
-    overflow:hidden;
-    white-space:nowrap;
-    text-overflow:ellipsis;
-}
-
-.rautatify-content{
-    min-width:0;
-    padding:16px 22px 82px;
-    overflow:auto;
-    background:
-        linear-gradient(
-            180deg,
-            #2c2c2c 0,
-            #181818 230px,
-            #121212 370px
-        );
-}
-
-.rautatify-content-top{
-    display:flex;
-    gap:8px;
-    margin-bottom:14px;
-}
-
-.rautatify-circle-btn{
-    width:30px;
-    height:30px;
-    border:0;
-    border-radius:50%;
-    color:#fff;
-    background:#101010;
-    cursor:pointer;
-    font-size:16px;
-}
-
-.rautatify-hero{
-    display:grid;
-    grid-template-columns:155px minmax(0,1fr);
-    gap:18px;
-    align-items:end;
-    margin-bottom:18px;
-}
-
-.rautatify-cover{
-    width:155px;
-    height:155px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:4px;
-    background:
-        radial-gradient(
-            circle at 25% 20%,
-            #f36ed2,
-            transparent 27%
-        ),
-        radial-gradient(
-            circle at 76% 76%,
-            #6c48ba,
-            transparent 35%
-        ),
-        linear-gradient(
-            135deg,
-            #35123f,
-            #090909
-        );
-    box-shadow:0 8px 22px rgba(0,0,0,.45);
-    color:#fff;
-    font-size:55px;
-    font-weight:900;
-}
-
-.rautatify-type{
-    margin-bottom:6px;
-    color:#e6e6e6;
-    font-size:9px;
-    font-weight:700;
-    text-transform:uppercase;
+    border-radius:3px;
+    background:linear-gradient(to bottom,#d890f1,#8a4ab2 52%,#4f236d);
+    border:1px solid #4b235f;
+    color:white;
+    font-size:25px;
+    font-weight:bold;
+    text-shadow:1px 1px #222;
+    box-shadow:inset 1px 1px rgba(255,255,255,.55);
 }
 
 .rautatify-name{
-    margin-bottom:8px;
-    color:#fff;
-    font-size:32px;
-    line-height:1;
-    font-weight:900;
+    color:#161616;
+    font-size:22px;
+    font-weight:bold;
 }
 
 .rautatify-subtitle{
-    color:#cfcfcf;
+    margin-top:3px;
+    color:#666;
     font-size:11px;
 }
 
-.rautatify-meta{
-    margin-top:9px;
-    color:#a6a6a6;
+.rautatify-status{
+    margin-left:auto;
+    padding:4px 7px;
+    background:#eee;
+    border-top:1px solid #777;
+    border-left:1px solid #777;
+    border-right:1px solid white;
+    border-bottom:1px solid white;
+    color:#555;
     font-size:10px;
 }
 
-.rautatify-section-title{
-    margin:3px 0 9px;
-    color:#fff;
-    font-size:16px;
-    font-weight:800;
-}
-
 .playlist{
-    margin:0;
-    padding:0;
-    background:transparent;
-    border:0;
-    border-radius:0;
-    box-shadow:none;
+    padding:9px;
+    background:#f5f5f5;
+    border-top:2px solid #777;
+    border-left:2px solid #777;
+    border-right:2px solid white;
+    border-bottom:2px solid white;
 }
 
 .playlist-header{
-    display:grid;
-    grid-template-columns:35px 42px minmax(0,1fr) 55px;
+    display:flex;
     align-items:center;
-    padding:7px 10px;
-    border-bottom:1px solid #2a2a2a;
-    color:#8d8d8d;
-    font-size:9px;
-    text-transform:uppercase;
-    letter-spacing:.7px;
+    justify-content:space-between;
+    padding-bottom:7px;
+    margin-bottom:2px;
+    border-bottom:1px solid #bbb;
 }
 
 .playlist-title{
-    font-size:9px;
-    font-weight:700;
+    font-size:14px;
+    font-weight:bold;
 }
 
-.play-button{
-    width:44px;
-    height:44px;
-    border:0;
-    border-radius:50%;
-    color:#000;
-    background:#1ed760;
-    font-size:16px;
-    cursor:pointer;
-}
-
-.playlist-header .play-button{
-    justify-self:end;
-    grid-column:4;
+.playlist-subtitle{
+    color:#777;
+    font-size:10px;
 }
 
 .track{
-    display:grid;
-    grid-template-columns:35px 42px minmax(0,1fr) 55px;
+    display:flex;
     align-items:center;
-    gap:7px;
-    min-height:56px;
-    padding:4px 10px;
-    border:0;
-    border-radius:4px;
-    color:#b3b3b3;
-    background:transparent;
+    gap:8px;
+    min-height:45px;
+    padding:7px 5px;
+    background:#fff;
+    border-top:1px solid #eee;
     cursor:pointer;
 }
 
 .track:hover{
-    color:#fff;
-    background:#2a2a2a;
-    transform:none;
+    background:#eeeafd;
 }
 
 .track-number{
-    width:auto;
+    width:24px;
     color:#777;
     font-size:10px;
     text-align:center;
 }
 
 .track-art{
-    width:38px;
-    height:38px;
+    width:36px;
+    height:36px;
     display:flex;
     align-items:center;
     justify-content:center;
-    border-radius:2px;
-    color:#fff;
-    background:linear-gradient(135deg,#3d3d3d,#111);
+    flex-shrink:0;
+    background:linear-gradient(to bottom,#ececec,#bfbfbf);
+    border-top:1px solid white;
+    border-left:1px solid white;
+    border-right:1px solid #777;
+    border-bottom:1px solid #777;
+    color:#555;
     font-size:16px;
-    font-weight:900;
+    font-weight:bold;
+}
+
+.track-info{
+    min-width:0;
+    flex:1;
 }
 
 .track-name{
-    color:#fff;
-    font-size:11px;
-    font-weight:700;
+    color:#111;
+    font-size:12px;
+    font-weight:bold;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
 
 .track-artist{
-    margin-top:4px;
-    color:#8f8f8f;
-    font-size:9px;
+    margin-top:2px;
+    color:#777;
+    font-size:10px;
 }
 
-.track-play{
-    justify-self:end;
-    color:#1ed760;
-    font-size:12px;
+.track-action{
+    width:58px;
+    padding:4px 6px;
+    text-align:center;
+    background:#d4d0c8;
+    border-top:2px solid white;
+    border-left:2px solid white;
+    border-right:2px solid #404040;
+    border-bottom:2px solid #404040;
+    font-size:10px;
+    cursor:pointer;
+}
+
+.track-action:active{
+    border-top-color:#404040;
+    border-left-color:#404040;
+    border-right-color:white;
+    border-bottom-color:white;
 }
 
 .player{
-    position:relative;
-    z-index:5;
     display:grid;
-    grid-template-columns:minmax(0,1fr) 2fr minmax(130px,1fr);
+    grid-template-columns:1fr 2fr;
+    gap:10px;
     align-items:center;
-    gap:14px;
-    min-height:76px;
-    padding:10px 14px;
-    color:#fff;
-    background:#181818;
-    border-top:1px solid #292929;
-    border-radius:0;
-    margin:0;
+    margin-top:10px;
+    padding:8px;
+    background:#d4d0c8;
+    border-top:2px solid #777;
+    border-left:2px solid #777;
+    border-right:2px solid white;
+    border-bottom:2px solid white;
 }
 
 #rautatifyNowPlaying{
-    margin:0;
-    color:#fff;
+    min-width:0;
+    color:#333;
     font-size:10px;
-    font-weight:700;
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
@@ -1544,310 +1409,246 @@ a:visited {
     height:30px;
 }
 
-.rautatify-note{
-    color:#747474;
-    font-size:8px;
-    text-align:right;
-}
-
 @media(max-width:700px){
     #rautatifyPanel{
         width:calc(100vw - 20px);
     }
 
-    .rautatify-main{
-        grid-template-columns:1fr;
-    }
-
-    .rautatify-sidebar{
-        display:none;
-    }
-
-    .rautatify-hero{
-        grid-template-columns:100px minmax(0,1fr);
-    }
-
-    .rautatify-cover{
-        width:100px;
-        height:100px;
-        font-size:36px;
-    }
-
-    .rautatify-name{
-        font-size:23px;
-    }
-
     .player{
         grid-template-columns:1fr;
-        gap:7px;
-    }
-
-    .rautatify-note{
-        display:none;
     }
 }
 
 
 /* =========================================================
-   CONFUSED GIRLS FILE EXPLORER
+   XP-STYLE CONFUSED GIRLS EXPLORER
 ========================================================= */
 
 #confusedGirlsPanel{
-    width:650px;
+    width:720px;
     min-height:0;
+}
+
+.explorer-window{
+    margin:-18px;
+    background:#fff;
+    color:#111;
+    font-family:Tahoma,Arial,sans-serif;
 }
 
 .explorer-toolbar{
     display:flex;
     align-items:center;
-    gap:8px;
-    padding:8px 10px;
-    margin-bottom:10px;
-    background:#fff;
-    border:1px solid #aaa;
-    color:#333;
-    font-size:11px;
-}
-
-.explorer-list{
-    background:#fff;
-    border:1px solid #aaa;
-}
-
-.explorer-row{
-    display:grid;
-    grid-template-columns:70px minmax(0,1fr);
-    align-items:center;
-    min-height:34px;
+    gap:0;
+    height:42px;
     padding:4px 8px;
-    border-top:1px solid #eee;
+    background:linear-gradient(#fff,#eee);
+    border-bottom:1px solid #aaa;
 }
 
-.explorer-header{
-    border-top:0;
-    background:#ece9ef;
+.explorer-tool{
+    height:30px;
+    min-width:34px;
+    padding:0 8px;
+    border:0;
+    background:transparent;
+    color:#222;
+    font-size:11px;
+    cursor:pointer;
+}
+
+.explorer-tool:hover{
+    background:#dbe8ff;
+}
+
+.explorer-tool-icon{
+    font-size:18px;
+    vertical-align:middle;
+}
+
+.explorer-address{
+    display:flex;
+    align-items:center;
+    gap:5px;
+    height:30px;
+    padding:0 8px;
+    background:#fff;
+    border-top:1px solid #777;
+    border-left:1px solid #777;
+    border-right:1px solid white;
+    border-bottom:1px solid white;
+}
+
+.explorer-address-label{
     color:#555;
-    font-weight:bold;
     font-size:10px;
 }
 
-.explorer-file-icon{
-    font-size:18px;
-}
-
-.explorer-file{
+.explorer-address-path{
+    flex:1;
+    min-width:0;
     padding:5px 7px;
-    text-align:left;
-    border:0;
-    background:transparent;
-    color:#0000ee;
-    font:12px Tahoma,Arial,sans-serif;
-    cursor:pointer;
-}
-
-.explorer-file:hover{
-    text-decoration:underline;
-    background:#eef4ff;
-}
-
-.explorer-preview{
-    margin-top:12px;
-    padding:8px;
-    background:#24202a;
-    border:2px solid #777;
-}
-
-.explorer-preview.hidden{
-    display:none;
-}
-
-.anime-scene{
-    position:relative;
-    height:290px;
     overflow:hidden;
-    background:
-        linear-gradient(#c7d8ef 0 62%,#e7d7c7 62%);
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    background:#fff;
+    border:1px solid #aaa;
+    color:#222;
+    font-size:11px;
 }
 
-.anime-girl{
-    position:absolute;
-    bottom:8px;
-    width:145px;
-    height:235px;
-}
-
-.girl-a{left:115px;}
-.girl-b{right:115px;}
-
-.anime-girl .hair{
-    position:absolute;
-    left:18px;
-    top:20px;
-    width:108px;
-    height:120px;
-    border-radius:50% 50% 42% 42%;
-    background:#6b4b7a;
-    box-shadow:0 10px 0 #6b4b7a;
-}
-
-.girl-b .hair{
-    background:#536f96;
-    box-shadow:0 10px 0 #536f96;
-}
-
-.anime-girl .face{
-    position:absolute;
-    left:30px;
-    top:40px;
-    width:86px;
-    height:91px;
-    border-radius:48% 48% 45% 45%;
-    background:#ffe3d1;
-    border:2px solid rgba(70,50,60,.35);
-    z-index:2;
-}
-
-.anime-girl .eye{
-    position:absolute;
-    top:38px;
-    font-size:20px;
-}
-
-.anime-girl .e1{left:23px;}
-.anime-girl .e2{right:23px;}
-
-.anime-girl .mouth{
-    position:absolute;
-    left:34px;
-    top:59px;
-    font-size:17px;
-}
-
-.anime-girl .body{
-    position:absolute;
-    left:18px;
-    bottom:0;
-    width:108px;
-    height:100px;
-    border-radius:35px 35px 8px 8px;
-    background:#9c6d9d;
-    border:2px solid rgba(50,40,60,.35);
-}
-
-.girl-b .body{
-    background:#6685a7;
-}
-
-.qmark{
-    position:absolute;
-    z-index:5;
-    color:#553b82;
-    font:bold 64px Arial,sans-serif;
-    text-shadow:2px 2px 0 #fff;
-    animation:questionWobble 1.6s ease-in-out infinite;
-}
-
-.q1{left:145px;top:8px;}
-.q2{right:145px;top:4px;animation-delay:.35s;}
-
-.anime-caption{
-    position:absolute;
-    left:0;
-    right:0;
-    bottom:7px;
-    color:#fff;
-    text-align:center;
-    font:12px "Courier New",monospace;
-    text-shadow:1px 1px 2px #000;
-}
-
-@keyframes questionWobble{
-    0%,100%{
-        transform:rotate(-5deg) translateY(0);
-    }
-
-    50%{
-        transform:rotate(5deg) translateY(-5px);
-    }
-}
-
-
-/* =========================================================
-   MINI GAME STYLES
-========================================================= */
-
-.game-content{
-    text-align:center;
-}
-
-.game-canvas{
-    display:block;
-    width:min(100%,520px);
-    margin:12px auto;
-    background:#111;
-    border-top:2px solid #555;
-    border-left:2px solid #555;
-    border-right:2px solid white;
-    border-bottom:2px solid white;
-    image-rendering:pixelated;
-}
-
-.game-status{
-    margin:8px 0 10px;
+.explorer-address-go{
+    padding:4px 8px;
+    background:#5aa65a;
+    border-top:1px solid #c8efc8;
+    border-left:1px solid #c8efc8;
+    border-right:1px solid #2f672f;
+    border-bottom:1px solid #2f672f;
+    color:white;
+    font-size:10px;
     font-weight:bold;
 }
 
-.mine-board{
-    width:306px;
-    margin:12px auto;
+.explorer-body{
     display:grid;
-    grid-template-columns:repeat(9,34px);
-    background:#c0c0c0;
-    border:3px solid #777;
+    grid-template-columns:200px minmax(0,1fr);
+    min-height:430px;
 }
 
-.mine-cell{
-    width:34px;
-    height:34px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-top:2px solid white;
-    border-left:2px solid white;
-    border-right:2px solid #555;
-    border-bottom:2px solid #555;
-    background:#c0c0c0;
-    font:bold 12px Tahoma,Arial,sans-serif;
+.explorer-left{
+    padding:11px;
+    background:linear-gradient(#dbe6f8,#c5d4ef);
+    border-right:1px solid #8aa1d0;
+}
+
+.explorer-box{
+    margin-bottom:10px;
+    background:linear-gradient(#f9fbff,#d7e2f7);
+    border:1px solid #fff;
+    box-shadow:
+        inset 0 0 0 1px #9ab2dd;
+}
+
+.explorer-box-title{
+    padding:6px 9px;
+    background:linear-gradient(#edf4ff,#d0def4);
+    color:#16498c;
+    font-size:11px;
+    font-weight:bold;
+}
+
+.explorer-left-button{
+    display:block;
+    width:100%;
+    padding:6px 9px;
+    border:0;
+    background:transparent;
+    color:#16498c;
+    text-align:left;
+    font-size:10px;
     cursor:pointer;
-    user-select:none;
 }
 
-.mine-cell.revealed{
-    border:1px solid #999;
-    background:#d8d8d8;
+.explorer-left-button:hover{
+    text-decoration:underline;
 }
 
-.board-2048{
-    width:330px;
-    margin:12px auto;
-    padding:8px;
+.explorer-main{
+    padding:13px;
+    background:#fff;
+    overflow:auto;
+}
+
+.explorer-heading{
+    padding-bottom:6px;
+    border-bottom:1px solid #d7d7d7;
+    color:#222;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.explorer-files{
     display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:7px;
-    background:#766a5c;
-    border-radius:5px;
+    grid-template-columns:repeat(4,minmax(105px,1fr));
+    gap:18px 12px;
+    padding-top:16px;
 }
 
-.tile-2048{
-    aspect-ratio:1;
+.explorer-file-card{
+    min-width:0;
+    padding:5px;
+    border:1px solid transparent;
+    text-align:center;
+    cursor:pointer;
+}
+
+.explorer-file-card:hover,
+.explorer-file-card.selected{
+    background:#dbe8ff;
+    border-color:#8aaee8;
+}
+
+.explorer-thumb-wrap{
+    width:90px;
+    height:90px;
+    margin:0 auto 7px;
     display:flex;
     align-items:center;
     justify-content:center;
-    border-radius:4px;
-    background:#b7aaa0;
-    color:#fff;
-    font:bold 24px Tahoma,Arial,sans-serif;
+    background:#fff;
+    border:1px solid #999;
+    box-shadow:1px 1px 2px rgba(0,0,0,.15);
 }
+
+.explorer-thumb{
+    max-width:88px;
+    max-height:88px;
+    object-fit:cover;
+}
+
+.explorer-file-name{
+    color:#222;
+    font-size:10px;
+    line-height:1.25;
+    overflow-wrap:anywhere;
+}
+
+.explorer-file-type{
+    margin-top:3px;
+    color:#777;
+    font-size:9px;
+}
+
+.explorer-statusbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    min-height:26px;
+    padding:4px 8px;
+    background:linear-gradient(#eee,#ddd);
+    border-top:1px solid #aaa;
+    color:#555;
+    font-size:9px;
+}
+
+@media(max-width:700px){
+    #confusedGirlsPanel{
+        width:calc(100vw - 20px);
+    }
+
+    .explorer-body{
+        grid-template-columns:1fr;
+    }
+
+    .explorer-left{
+        display:none;
+    }
+
+    .explorer-files{
+        grid-template-columns:repeat(2,minmax(105px,1fr));
+    }
+}
+
 
 /* =========================================================
    MONACO
@@ -2785,7 +2586,7 @@ a:visited {
 <div class="panel-title">
 
     <span>
-        ConfusedGirls — File Explorer
+        My Computer - Confused Girls
     </span>
 
     <div class="window-buttons">
@@ -2810,86 +2611,303 @@ a:visited {
 
 <div class="panel-content">
 
+<div class="explorer-window">
+
     <div class="explorer-toolbar">
-        <span>📁</span>
-        <span>Desktop</span>
-        <span>›</span>
-        <span>ConfusedGirls</span>
-    </div>
 
-    <div class="explorer-list">
-
-        <div class="explorer-row explorer-header">
-            <span>Type</span>
-            <span>Name</span>
-        </div>
-
-        <div class="explorer-row">
-
-            <span class="explorer-file-icon">
-                🖼️
-            </span>
-
-            <button
-                class="explorer-file"
-                onclick="showConfusedGirls()"
-            >
-                confused_anime_girls.png
-            </button>
-
-        </div>
-
-    </div>
-
-    <div
-        id="confusedGirlsPreview"
-        class="explorer-preview hidden"
-    >
-
-        <div
-            class="anime-scene"
-            role="img"
-            aria-label="Two confused anime-style girls with interrogation marks above their heads"
+        <button
+            class="explorer-tool"
+            type="button"
+            onclick="explorerBack()"
+            title="Back"
         >
+            <span class="explorer-tool-icon">◀</span>
+            Back
+        </button>
 
-            <div class="qmark q1">?</div>
-            <div class="qmark q2">?</div>
+        <button
+            class="explorer-tool"
+            type="button"
+            onclick="explorerForward()"
+        >
+            <span class="explorer-tool-icon">▶</span>
+        </button>
 
-            <div class="anime-girl girl-a">
+        <button
+            class="explorer-tool"
+            type="button"
+            onclick="explorerUp()"
+        >
+            <span class="explorer-tool-icon">⬆</span>
+        </button>
 
-                <div class="hair"></div>
+        <button
+            class="explorer-tool"
+            type="button"
+            onclick="explorerSearch()"
+        >
+            <span class="explorer-tool-icon">🔎</span>
+            Search
+        </button>
 
-                <div class="face">
-                    <span class="eye e1">•</span>
-                    <span class="eye e2">•</span>
-                    <span class="mouth">〰</span>
-                </div>
+        <button
+            class="explorer-tool"
+            type="button"
+        >
+            <span class="explorer-tool-icon">📁</span>
+            Folders
+        </button>
 
-                <div class="body"></div>
+        <button
+            class="explorer-tool"
+            type="button"
+        >
+            ▦
+        </button>
 
-            </div>
+    </div>
 
-            <div class="anime-girl girl-b">
+    <div class="explorer-address">
 
-                <div class="hair"></div>
+        <span class="explorer-address-label">
+            Address
+        </span>
 
-                <div class="face">
-                    <span class="eye e1">•</span>
-                    <span class="eye e2">•</span>
-                    <span class="mouth">…</span>
-                </div>
+        <div class="explorer-address-path">
+            My Computer\Confused looking anime girls with interrogation marks on their heads
+        </div>
 
-                <div class="body"></div>
-
-            </div>
-
-            <div class="anime-caption">
-                "uhhh... what is happening?"
-            </div>
-
+        <div class="explorer-address-go">
+            Go
         </div>
 
     </div>
+
+    <div class="explorer-body">
+
+        <aside class="explorer-left">
+
+            <div class="explorer-box">
+
+                <div class="explorer-box-title">
+                    System Tasks
+                </div>
+
+                <button
+                    class="explorer-left-button"
+                    type="button"
+                    onclick="explorerSearch()"
+                >
+                    🔎 View image details
+                </button>
+
+                <button
+                    class="explorer-left-button"
+                    type="button"
+                >
+                    📷 View image files
+                </button>
+
+                <button
+                    class="explorer-left-button"
+                    type="button"
+                    onclick="showAllConfusedGirls()"
+                >
+                    🖼️ Show all images
+                </button>
+
+            </div>
+
+            <div class="explorer-box">
+
+                <div class="explorer-box-title">
+                    Other Places
+                </div>
+
+                <button
+                    class="explorer-left-button"
+                    type="button"
+                >
+                    🌐 My Network Places
+                </button>
+
+                <button
+                    class="explorer-left-button"
+                    type="button"
+                >
+                    📁 My Documents
+                </button>
+
+                <button
+                    class="explorer-left-button"
+                    type="button"
+                >
+                    📁 Shared Documents
+                </button>
+
+                <button
+                    class="explorer-left-button"
+                    type="button"
+                >
+                    ⚙ Control Panel
+                </button>
+
+            </div>
+
+            <div class="explorer-box">
+
+                <div class="explorer-box-title">
+                    Details
+                </div>
+
+                <div
+                    style="
+                        padding:9px;
+                        font-size:10px;
+                        color:#333;
+                    "
+                >
+                    <strong>
+                        Confused Girls
+                    </strong>
+                    <br>
+                    4 image files
+                </div>
+
+            </div>
+
+        </aside>
+
+        <main class="explorer-main">
+
+            <div class="explorer-heading">
+                Files Stored on This Computer
+            </div>
+
+            <div
+                id="confusedGirlsFiles"
+                class="explorer-files"
+            >
+
+                <div
+                    class="explorer-file-card"
+                    data-image-url="https://image.tensorartassets.com/cdn-cgi/image/anim=true,plain=false,w=2048,f=jpeg,q=85/model_showcase/826877948888899747/005c2a7e-7e49-d47a-0dec-2922ce2ded3f.jpg"
+                    onclick="openConfusedGirlImage(this)"
+                >
+
+                    <div class="explorer-thumb-wrap">
+                        <img
+                            class="explorer-thumb"
+                            src="https://image.tensorartassets.com/cdn-cgi/image/anim=true,plain=false,w=2048,f=jpeg,q=85/model_showcase/826877948888899747/005c2a7e-7e49-d47a-0dec-2922ce2ded3f.jpg"
+                            alt="Confused anime girl image 1"
+                            loading="lazy"
+                        >
+                    </div>
+
+                    <div class="explorer-file-name">
+                        confused_girl_01.jpg
+                    </div>
+
+                    <div class="explorer-file-type">
+                        JPEG Image
+                    </div>
+
+                </div>
+
+                <div
+                    class="explorer-file-card"
+                    data-image-url="https://image.tensorartassets.com/cdn-cgi/image/anim=true,plain=false,w=500,q=85/model_showcase/826877948888899747/6a546620-1b0d-4200-9e59-1d18a62b5134.jpg"
+                    onclick="openConfusedGirlImage(this)"
+                >
+
+                    <div class="explorer-thumb-wrap">
+                        <img
+                            class="explorer-thumb"
+                            src="https://image.tensorartassets.com/cdn-cgi/image/anim=true,plain=false,w=500,q=85/model_showcase/826877948888899747/6a546620-1b0d-4200-9e59-1d18a62b5134.jpg"
+                            alt="Confused anime girl image 2"
+                            loading="lazy"
+                        >
+                    </div>
+
+                    <div class="explorer-file-name">
+                        confused_girl_02.jpg
+                    </div>
+
+                    <div class="explorer-file-type">
+                        JPEG Image
+                    </div>
+
+                </div>
+
+                <div
+                    class="explorer-file-card"
+                    data-image-url="https://tse3.mm.bing.net/th/id/OIP.hNDbgNh2xoFb6B0DG9ePLwHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
+                    onclick="openConfusedGirlImage(this)"
+                >
+
+                    <div class="explorer-thumb-wrap">
+                        <img
+                            class="explorer-thumb"
+                            src="https://tse3.mm.bing.net/th/id/OIP.hNDbgNh2xoFb6B0DG9ePLwHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
+                            alt="Confused anime girl image 3"
+                            loading="lazy"
+                        >
+                    </div>
+
+                    <div class="explorer-file-name">
+                        confused_girl_03.jpg
+                    </div>
+
+                    <div class="explorer-file-type">
+                        JPEG Image
+                    </div>
+
+                </div>
+
+                <div
+                    class="explorer-file-card"
+                    data-image-url="https://image.tensorartassets.com/cdn-cgi/image/anim=true,plain=false,w=500,q=85/model_showcase/826877948888899747/c1040f25-72bf-6227-487d-c0947ab996fe.jpg"
+                    onclick="openConfusedGirlImage(this)"
+                >
+
+                    <div class="explorer-thumb-wrap">
+                        <img
+                            class="explorer-thumb"
+                            src="https://image.tensorartassets.com/cdn-cgi/image/anim=true,plain=false,w=500,q=85/model_showcase/826877948888899747/c1040f25-72bf-6227-487d-c0947ab996fe.jpg"
+                            alt="Confused anime girl image 4"
+                            loading="lazy"
+                        >
+                    </div>
+
+                    <div class="explorer-file-name">
+                        confused_girl_04.jpg
+                    </div>
+
+                    <div class="explorer-file-type">
+                        JPEG Image
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+    <div class="explorer-statusbar">
+
+        <span>
+            4 image files
+        </span>
+
+        <span>
+            My Computer
+        </span>
+
+    </div>
+
+</div>
 
 </div>
 
@@ -2907,7 +2925,9 @@ a:visited {
 
 <div class="panel-title">
 
-    <span>rautatify.exe</span>
+    <span>
+        rautatify.exe
+    </span>
 
     <div class="window-buttons">
 
@@ -2933,227 +2953,163 @@ a:visited {
 
 <div class="rautatify">
 
-    <div class="rautatify-main">
+    <div class="rautatify-header">
 
-        <aside class="rautatify-sidebar">
+        <div class="rautatify-icon">
+            R
+        </div>
 
-            <div class="rautatify-brand">
-                <div class="rautatify-brand-mark">
-                    R
-                </div>
+        <div>
+
+            <div class="rautatify-name">
                 Rautatify
             </div>
 
-            <div class="rautatify-nav">
-
-                <button
-                    class="active"
-                    type="button"
-                >
-                    ⌂ Home
-                </button>
-
-                <button type="button">
-                    🔎 Search
-                </button>
-
-                <button type="button">
-                    📚 Your Library
-                </button>
-
+            <div class="rautatify-subtitle">
+                music by rauta :3
             </div>
 
-            <div class="rautatify-side-title">
-                Playlists
-            </div>
+        </div>
 
-            <div class="rautatify-side-item">
-                rauta playlist
-            </div>
+        <div class="rautatify-status">
+            ready
+        </div>
 
-            <div class="rautatify-side-item">
-                secret stuff :3
-            </div>
+    </div>
 
-            <div class="rautatify-side-item">
-                music i probably forgot
-            </div>
+    <div class="playlist">
 
-        </aside>
+        <div class="playlist-header">
 
-        <section class="rautatify-content">
+            <div>
 
-            <div class="rautatify-content-top">
-
-                <button
-                    class="rautatify-circle-btn"
-                    type="button"
-                >
-                    ‹
-                </button>
-
-                <button
-                    class="rautatify-circle-btn"
-                    type="button"
-                >
-                    ›
-                </button>
-
-            </div>
-
-            <div class="rautatify-hero">
-
-                <div class="rautatify-cover">
-                    R
+                <div class="playlist-title">
+                    rauta playlist
                 </div>
 
-                <div>
-
-                    <div class="rautatify-type">
-                        Playlist
-                    </div>
-
-                    <div class="rautatify-name">
-                        rauta playlist
-                    </div>
-
-                    <div class="rautatify-subtitle">
-                        music by rauta :3
-                    </div>
-
-                    <div class="rautatify-meta">
-                        Rautatify • 3 tracks
-                    </div>
-
+                <div class="playlist-subtitle">
+                    local player
                 </div>
 
             </div>
 
-            <div class="rautatify-section-title">
-                Made for you
+            <button
+                class="track-action"
+                onclick="playCurrentTrack()"
+            >
+                ▶ play
+            </button>
+
+        </div>
+
+        <div
+            class="track"
+            onclick="playTrack(0)"
+        >
+
+            <div class="track-number">
+                1
             </div>
 
-            <div class="playlist">
+            <div class="track-art">
+                R
+            </div>
 
-                <div class="playlist-header">
+            <div class="track-info">
 
-                    <div>#</div>
-
-                    <div></div>
-
-                    <div class="playlist-title">
-                        Title
-                    </div>
-
-                    <div>Play</div>
-
+                <div class="track-name">
+                    Coming soon...
                 </div>
 
-                <div
-                    class="track"
-                    onclick="playTrack(0)"
-                >
-
-                    <div class="track-number">
-                        1
-                    </div>
-
-                    <div class="track-art">
-                        R
-                    </div>
-
-                    <div class="track-info">
-
-                        <div class="track-name">
-                            Coming soon...
-                        </div>
-
-                        <div class="track-artist">
-                            rauta
-                        </div>
-
-                    </div>
-
-                    <div class="track-play">
-                        ▶
-                    </div>
-
-                </div>
-
-                <div
-                    class="track"
-                    onclick="playTrack(1)"
-                >
-
-                    <div class="track-number">
-                        2
-                    </div>
-
-                    <div class="track-art">
-                        ♪
-                    </div>
-
-                    <div class="track-info">
-
-                        <div class="track-name">
-                            Another rauta song
-                        </div>
-
-                        <div class="track-artist">
-                            rauta
-                        </div>
-
-                    </div>
-
-                    <div class="track-play">
-                        ▶
-                    </div>
-
-                </div>
-
-                <div
-                    class="track"
-                    onclick="playTrack(2)"
-                >
-
-                    <div class="track-number">
-                        3
-                    </div>
-
-                    <div class="track-art">
-                        ?
-                    </div>
-
-                    <div class="track-info">
-
-                        <div class="track-name">
-                            secret track???
-                        </div>
-
-                        <div class="track-artist">
-                            rauta
-                        </div>
-
-                    </div>
-
-                    <div class="track-play">
-                        ▶
-                    </div>
-
+                <div class="track-artist">
+                    rauta
                 </div>
 
             </div>
 
-        </section>
+            <button
+                class="track-action"
+                onclick="event.stopPropagation();playTrack(0)"
+            >
+                ▶
+            </button>
+
+        </div>
+
+        <div
+            class="track"
+            onclick="playTrack(1)"
+        >
+
+            <div class="track-number">
+                2
+            </div>
+
+            <div class="track-art">
+                ♪
+            </div>
+
+            <div class="track-info">
+
+                <div class="track-name">
+                    Another rauta song
+                </div>
+
+                <div class="track-artist">
+                    rauta
+                </div>
+
+            </div>
+
+            <button
+                class="track-action"
+                onclick="event.stopPropagation();playTrack(1)"
+            >
+                ▶
+            </button>
+
+        </div>
+
+        <div
+            class="track"
+            onclick="playTrack(2)"
+        >
+
+            <div class="track-number">
+                3
+            </div>
+
+            <div class="track-art">
+                ?
+            </div>
+
+            <div class="track-info">
+
+                <div class="track-name">
+                    secret track???
+                </div>
+
+                <div class="track-artist">
+                    rauta
+                </div>
+
+            </div>
+
+            <button
+                class="track-action"
+                onclick="event.stopPropagation();playTrack(2)"
+            >
+                ▶
+            </button>
+
+        </div>
 
     </div>
 
     <div class="player">
 
-        <div>
-            <div id="rautatifyNowPlaying">
-                nothing playing :(
-            </div>
+        <div id="rautatifyNowPlaying">
+            nothing playing :(
         </div>
 
         <audio
@@ -3161,10 +3117,6 @@ a:visited {
             controls
             preload="metadata"
         ></audio>
-
-        <div class="rautatify-note">
-            Rautatify • made with too much caffeine
-        </div>
 
     </div>
 
@@ -4142,204 +4094,6 @@ a:visited {
 </div>
 
 
-
-<!-- =========================================================
-     MINESWEEPER
-========================================================= -->
-
-<div
-    class="panel hidden"
-    id="minesweeperPanel"
->
-
-<div class="panel-title">
-
-    <span>minesweeper.exe</span>
-
-    <div class="window-buttons">
-
-        <button
-            class="window-button"
-            onclick="minimizePanel('minesweeperPanel')"
-        >
-            −
-        </button>
-
-        <button
-            class="window-button close"
-            onclick="closePanel('minesweeperPanel')"
-        >
-            ×
-        </button>
-
-    </div>
-
-</div>
-
-<div class="panel-content game-content">
-
-    <h2>Minesweeper</h2>
-
-    <p>
-        left click to reveal, right click to flag :3
-    </p>
-
-    <div
-        id="mineBoard"
-        class="mine-board"
-    ></div>
-
-    <div
-        id="mineStatus"
-        class="game-status"
-    >
-        mines: 10
-    </div>
-
-    <button
-        class="xp-button"
-        onclick="resetMinesweeper()"
-    >
-        restart
-    </button>
-
-</div>
-
-</div>
-
-
-<!-- =========================================================
-     2048
-========================================================= -->
-
-<div
-    class="panel hidden"
-    id="game2048Panel"
->
-
-<div class="panel-title">
-
-    <span>2048.exe</span>
-
-    <div class="window-buttons">
-
-        <button
-            class="window-button"
-            onclick="minimizePanel('game2048Panel')"
-        >
-            −
-        </button>
-
-        <button
-            class="window-button close"
-            onclick="closePanel('game2048Panel')"
-        >
-            ×
-        </button>
-
-    </div>
-
-</div>
-
-<div class="panel-content game-content">
-
-    <h2>2048</h2>
-
-    <p>
-        use your arrow keys to merge tiles.
-    </p>
-
-    <div
-        id="board2048"
-        class="board-2048"
-    ></div>
-
-    <div
-        id="status2048"
-        class="game-status"
-    >
-        score: 0
-    </div>
-
-    <button
-        class="xp-button"
-        onclick="reset2048()"
-    >
-        restart
-    </button>
-
-</div>
-
-</div>
-
-
-<!-- =========================================================
-     BREAKOUT
-========================================================= -->
-
-<div
-    class="panel hidden"
-    id="breakoutPanel"
->
-
-<div class="panel-title">
-
-    <span>breakout.exe</span>
-
-    <div class="window-buttons">
-
-        <button
-            class="window-button"
-            onclick="minimizePanel('breakoutPanel')"
-        >
-            −
-        </button>
-
-        <button
-            class="window-button close"
-            onclick="closePanel('breakoutPanel')"
-        >
-            ×
-        </button>
-
-    </div>
-
-</div>
-
-<div class="panel-content game-content">
-
-    <h2>Breakout</h2>
-
-    <p>
-        move with A/D or ←/→.
-    </p>
-
-    <canvas
-        id="breakoutCanvas"
-        width="520"
-        height="300"
-        class="game-canvas"
-    ></canvas>
-
-    <div
-        id="breakoutStatus"
-        class="game-status"
-    >
-        score: 0
-    </div>
-
-    <button
-        class="xp-button"
-        onclick="resetBreakout()"
-    >
-        restart
-    </button>
-
-</div>
-
-</div>
-
-
 <!-- =========================================================
      CHANGELOG
 ========================================================= -->
@@ -4791,7 +4545,8 @@ for(let i = 0; i < 60; i++){
 
 <div class="desktop-icons">
 
-<!-- CONFUSED ANIME GIRLS FILE EXPLORER -->
+
+<!-- CONFUSED GIRLS FOLDER -->
 
 <div
     class="desktop-icon"
@@ -4803,8 +4558,15 @@ for(let i = 0; i < 60; i++){
 >
 
     <div
-        class="folder-icon"
-        aria-hidden="true"
+        class="app-icon"
+        style="
+            background:
+                linear-gradient(
+                    135deg,
+                    #f6c85f,
+                    #b77b16
+                );
+        "
     >
         📁
     </div>
@@ -5025,102 +4787,6 @@ for(let i = 0; i < 60; i++){
 </div>
 
 
-<!-- MINESWEEPER -->
-
-<div
-    class="desktop-icon"
-    data-panel="minesweeperPanel"
-    style="
-        left:325px;
-        top:540px;
-    "
->
-
-    <div
-        class="app-icon"
-        style="
-            background:
-                linear-gradient(
-                    135deg,
-                    #777,
-                    #222
-                );
-        "
-    >
-        💣
-    </div>
-
-    <span>
-        Minesweeper
-    </span>
-
-</div>
-
-
-<!-- 2048 -->
-
-<div
-    class="desktop-icon"
-    data-panel="game2048Panel"
-    style="
-        left:425px;
-        top:540px;
-    "
->
-
-    <div
-        class="app-icon"
-        style="
-            background:
-                linear-gradient(
-                    135deg,
-                    #e8a84b,
-                    #9c5d1f
-                );
-        "
-    >
-        2048
-    </div>
-
-    <span>
-        2048
-    </span>
-
-</div>
-
-
-<!-- BREAKOUT -->
-
-<div
-    class="desktop-icon"
-    data-panel="breakoutPanel"
-    style="
-        left:525px;
-        top:540px;
-    "
->
-
-    <div
-        class="app-icon"
-        style="
-            background:
-                linear-gradient(
-                    135deg,
-                    #d35f78,
-                    #632033
-                );
-        "
-    >
-        🧱
-    </div>
-
-    <span>
-        Breakout
-    </span>
-
-</div>
-
-
 <!-- =====================================================
      COMMISSIONS APP ICON
 ===================================================== -->
@@ -5256,28 +4922,30 @@ const enterButton =
     document.getElementById("enterButton");
 
 
-const signinAudio =
-    document.getElementById("signinAudio");
-
 enterButton.addEventListener(
     "click",
     function(){
-
-        if(signinAudio){
-            signinAudio.currentTime = 0;
-            signinAudio.play().catch(
-                error => console.warn(
-                    "Could not play /signin.mp3:",
-                    error
-                )
-            );
-        }
 
         intro.style.opacity =
             "0";
 
         site.style.opacity =
             "1";
+
+        const signinAudio =
+            document.getElementById("signinAudio");
+
+        if(signinAudio){
+            signinAudio.currentTime = 0;
+            signinAudio.volume = 1;
+            signinAudio.play().catch(
+                error =>
+                    console.warn(
+                        "Could not play /signin.mp3:",
+                        error
+                    )
+            );
+        }
 
         setTimeout(
             function(){
@@ -9004,985 +8672,115 @@ function escapeHtml(value){
 
 
 /* =========================================================
-   CONFUSED GIRLS PREVIEW
+   CONFUSED GIRLS EXPLORER
 ========================================================= */
 
-function showConfusedGirls(){
+function openConfusedGirlImage(card){
 
-    const preview =
-        document.getElementById(
-            "confusedGirlsPreview"
+    document
+        .querySelectorAll(
+            "#confusedGirlsFiles .explorer-file-card"
+        )
+        .forEach(
+            item =>
+                item.classList.remove(
+                    "selected"
+                )
         );
 
-    if(!preview)
-        return;
+    card.classList.add(
+        "selected"
+    );
 
-    preview.classList.remove(
-        "hidden"
+    const url =
+        card.dataset.imageUrl;
+
+    if(url)
+        window.open(
+            url,
+            "_blank",
+            "noopener"
+        );
+}
+
+function showAllConfusedGirls(){
+
+    document
+        .querySelectorAll(
+            "#confusedGirlsFiles .explorer-file-card"
+        )
+        .forEach(
+            card =>
+                card.classList.add(
+                    "selected"
+                )
+        );
+}
+
+function explorerBack(){
+    document
+        .querySelectorAll(
+            "#confusedGirlsFiles .explorer-file-card"
+        )
+        .forEach(
+            card =>
+                card.classList.remove(
+                    "selected"
+                )
+        );
+}
+
+function explorerForward(){
+    return;
+}
+
+function explorerUp(){
+    openPanel(
+        "confusedGirlsPanel"
     );
 }
 
+function explorerSearch(){
 
-/* =========================================================
-   MINI GAME LOGIC
-========================================================= */
-
-/* ---------- Minesweeper ---------- */
-
-const MINE_W = 9;
-const MINE_H = 9;
-const MINE_COUNT = 10;
-
-let mineCells = [];
-let mineGameOver = false;
-
-function resetMinesweeper(){
-
-    const board =
-        document.getElementById(
-            "mineBoard"
+    const term =
+        window.prompt(
+            "Search this folder:",
+            ""
         );
 
-    if(!board)
+    if(
+        term === null ||
+        term.trim() === ""
+    )
         return;
 
-    mineGameOver = false;
+    const needle =
+        term.toLowerCase();
 
-    mineCells =
-        Array.from(
-            {length:MINE_W * MINE_H},
-            () => ({
-                mine:false,
-                revealed:false,
-                flagged:false,
-                count:0
-            })
-        );
+    document
+        .querySelectorAll(
+            "#confusedGirlsFiles .explorer-file-card"
+        )
+        .forEach(
+            card => {
 
-    let placed = 0;
-
-    while(
-        placed <
-        MINE_COUNT
-    ){
-
-        const i =
-            Math.floor(
-                Math.random() *
-                mineCells.length
-            );
-
-        if(
-            !mineCells[i].mine
-        ){
-
-            mineCells[i].mine =
-                true;
-
-            placed++;
-        }
-    }
-
-    for(let y=0;y<MINE_H;y++){
-        for(let x=0;x<MINE_W;x++){
-
-            const i =
-                y*MINE_W+x;
-
-            if(
-                mineCells[i].mine
-            )
-                continue;
-
-            let count = 0;
-
-            for(let dy=-1;dy<=1;dy++){
-                for(let dx=-1;dx<=1;dx++){
-
-                    const nx = x+dx;
-                    const ny = y+dy;
-
-                    if(
-                        nx>=0 &&
-                        nx<MINE_W &&
-                        ny>=0 &&
-                        ny<MINE_H &&
-                        mineCells[
-                            ny*MINE_W+nx
-                        ].mine
-                    )
-                        count++;
-                }
-            }
-
-            mineCells[i].count =
-                count;
-        }
-    }
-
-    drawMinesweeper();
-}
-
-function drawMinesweeper(){
-
-    const board =
-        document.getElementById(
-            "mineBoard"
-        );
-
-    if(!board)
-        return;
-
-    board.innerHTML =
-        "";
-
-    mineCells.forEach(
-        (cell,index) => {
-
-            const button =
-                document.createElement(
-                    "button"
-                );
-
-            button.className =
-                "mine-cell" +
-                (
-                    cell.revealed
-                        ? " revealed"
-                        : ""
-                );
-
-            button.textContent =
-                cell.flagged
-                    ? "🚩"
-                    : cell.revealed
-                        ? (
-                            cell.mine
-                                ? "💣"
-                                : (
-                                    cell.count ||
-                                    ""
-                                )
+                const name =
+                    card
+                        .querySelector(
+                            ".explorer-file-name"
                         )
-                        : "";
+                        .textContent
+                        .toLowerCase();
 
-            button.oncontextmenu =
-                function(e){
-
-                    e.preventDefault();
-
-                    if(
-                        mineGameOver ||
-                        cell.revealed
+                card.style.display =
+                    name.includes(
+                        needle
                     )
-                        return;
-
-                    cell.flagged =
-                        !cell.flagged;
-
-                    drawMinesweeper();
-                };
-
-            button.onclick =
-                function(){
-
-                    revealMineCell(
-                        index
-                    );
-
-                };
-
-            board.appendChild(
-                button
-            );
-
-        }
-    );
-
-    const status =
-        document.getElementById(
-            "mineStatus"
-        );
-
-    const left =
-        mineCells.filter(
-            c =>
-                !c.mine &&
-                !c.revealed
-        ).length;
-
-    if(status)
-        status.textContent =
-            mineGameOver
-                ? "GAME OVER :("
-                : left === 0
-                    ? "YOU WIN :3"
-                    : "mines: " +
-                      MINE_COUNT;
-}
-
-function revealMineCell(index){
-
-    if(
-        mineGameOver ||
-        !mineCells[index] ||
-        mineCells[index].flagged ||
-        mineCells[index].revealed
-    )
-        return;
-
-    const cell =
-        mineCells[index];
-
-    cell.revealed =
-        true;
-
-    if(cell.mine){
-
-        mineGameOver =
-            true;
-
-        mineCells.forEach(
-            c => {
-                if(c.mine)
-                    c.revealed =
-                        true;
+                        ? ""
+                        : "none";
             }
         );
-
-        drawMinesweeper();
-        return;
-    }
-
-    if(
-        cell.count === 0
-    )
-        floodMineReveal(index);
-
-    if(
-        mineCells.every(
-            c =>
-                c.mine ||
-                c.revealed
-        )
-    )
-        mineGameOver =
-            true;
-
-    drawMinesweeper();
 }
-
-function floodMineReveal(start){
-
-    const queue =
-        [start];
-
-    const seen =
-        new Set([start]);
-
-    while(queue.length){
-
-        const i =
-            queue.shift();
-
-        const x =
-            i % MINE_W;
-
-        const y =
-            Math.floor(
-                i / MINE_W
-            );
-
-        for(let dy=-1;dy<=1;dy++){
-            for(let dx=-1;dx<=1;dx++){
-
-                const nx=x+dx;
-                const ny=y+dy;
-
-                if(
-                    nx<0 ||
-                    nx>=MINE_W ||
-                    ny<0 ||
-                    ny>=MINE_H
-                )
-                    continue;
-
-                const ni =
-                    ny*MINE_W+nx;
-
-                if(
-                    seen.has(ni) ||
-                    mineCells[ni].mine ||
-                    mineCells[ni].flagged
-                )
-                    continue;
-
-                mineCells[ni].revealed =
-                    true;
-
-                seen.add(
-                    ni
-                );
-
-                if(
-                    mineCells[ni].count === 0
-                )
-                    queue.push(
-                        ni
-                    );
-            }
-        }
-    }
-}
-
-resetMinesweeper();
-
-
-/* ---------- 2048 ---------- */
-
-let board2048 =
-    Array.from(
-        {length:16},
-        () => 0
-    );
-
-let score2048 =
-    0;
-
-function reset2048(){
-
-    board2048 =
-        Array.from(
-            {length:16},
-            () => 0
-        );
-
-    score2048 =
-        0;
-
-    add2048Tile();
-    add2048Tile();
-    draw2048();
-}
-
-function add2048Tile(){
-
-    const empty =
-        board2048
-            .map(
-                (v,i) =>
-                    v === 0
-                        ? i
-                        : -1
-            )
-            .filter(
-                i => i >= 0
-            );
-
-    if(!empty.length)
-        return;
-
-    const i =
-        empty[
-            Math.floor(
-                Math.random() *
-                empty.length
-            )
-        ];
-
-    board2048[i] =
-        Math.random() < .9
-            ? 2
-            : 4;
-}
-
-function slide2048(line){
-
-    const values =
-        line.filter(
-            v => v
-        );
-
-    const out =
-        [];
-
-    for(
-        let i=0;
-        i<values.length;
-        i++
-    ){
-
-        if(
-            values[i] ===
-            values[i+1]
-        ){
-
-            const merged =
-                values[i] * 2;
-
-            out.push(
-                merged
-            );
-
-            score2048 +=
-                merged;
-
-            i++;
-
-        }
-        else{
-
-            out.push(
-                values[i]
-            );
-
-        }
-    }
-
-    while(
-        out.length < 4
-    )
-        out.push(0);
-
-    return out;
-}
-
-function move2048(direction){
-
-    let next =
-        Array.from(
-            {length:16},
-            () => 0
-        );
-
-    if(
-        direction ===
-        "left"
-    ){
-
-        for(
-            let y=0;
-            y<4;
-            y++
-        ){
-
-            const merged =
-                slide2048(
-                    board2048.slice(
-                        y*4,
-                        y*4+4
-                    )
-                );
-
-            for(
-                let x=0;
-                x<4;
-                x++
-            )
-                next[
-                    y*4+x
-                ] =
-                    merged[x];
-        }
-    }
-
-    if(
-        direction ===
-        "right"
-    ){
-
-        for(
-            let y=0;
-            y<4;
-            y++
-        ){
-
-            const merged =
-                slide2048(
-                    board2048.slice(
-                        y*4,
-                        y*4+4
-                    ).reverse()
-                ).reverse();
-
-            for(
-                let x=0;
-                x<4;
-                x++
-            )
-                next[
-                    y*4+x
-                ] =
-                    merged[x];
-        }
-    }
-
-    if(
-        direction ===
-        "up"
-    ){
-
-        for(
-            let x=0;
-            x<4;
-            x++
-        ){
-
-            const merged =
-                slide2048([
-                    board2048[x],
-                    board2048[x+4],
-                    board2048[x+8],
-                    board2048[x+12]
-                ]);
-
-            for(
-                let y=0;
-                y<4;
-                y++
-            )
-                next[
-                    y*4+x
-                ] =
-                    merged[y];
-        }
-    }
-
-    if(
-        direction ===
-        "down"
-    ){
-
-        for(
-            let x=0;
-            x<4;
-            x++
-        ){
-
-            const merged =
-                slide2048([
-                    board2048[x+12],
-                    board2048[x+8],
-                    board2048[x+4],
-                    board2048[x]
-                ]).reverse();
-
-            for(
-                let y=0;
-                y<4;
-                y++
-            )
-                next[
-                    y*4+x
-                ] =
-                    merged[y];
-        }
-    }
-
-    if(
-        next.every(
-            (v,i) =>
-                v ===
-                board2048[i]
-        )
-    )
-        return;
-
-    board2048 =
-        next;
-
-    add2048Tile();
-    draw2048();
-}
-
-function draw2048(){
-
-    const board =
-        document.getElementById(
-            "board2048"
-        );
-
-    if(!board)
-        return;
-
-    board.innerHTML =
-        "";
-
-    board2048.forEach(
-        value => {
-
-            const tile =
-                document.createElement(
-                    "div"
-                );
-
-            tile.className =
-                "tile-2048";
-
-            tile.textContent =
-                value || "";
-
-            if(value)
-                tile.style.background =
-                    value >= 128
-                        ? "#b85a2e"
-                        : "#a99788";
-
-            board.appendChild(
-                tile
-            );
-        }
-    );
-
-    const status =
-        document.getElementById(
-            "status2048"
-        );
-
-    if(status)
-        status.textContent =
-            "score: " +
-            score2048;
-}
-
-document.addEventListener(
-    "keydown",
-    function(e){
-
-        const map = {
-            ArrowLeft:"left",
-            ArrowRight:"right",
-            ArrowUp:"up",
-            ArrowDown:"down"
-        };
-
-        const direction =
-            map[e.key];
-
-        if(!direction)
-            return;
-
-        const panel =
-            document.getElementById(
-                "game2048Panel"
-            );
-
-        if(
-            panel &&
-            panel.style.display ===
-            "block"
-        ){
-            move2048(
-                direction
-            );
-
-            e.preventDefault();
-        }
-
-    }
-);
-
-reset2048();
-
-
-/* ---------- Breakout ---------- */
-
-const breakoutCanvas =
-    document.getElementById(
-        "breakoutCanvas"
-    );
-
-const breakoutCtx =
-    breakoutCanvas
-        ? breakoutCanvas.getContext(
-            "2d"
-        )
-        : null;
-
-const breakoutStatus =
-    document.getElementById(
-        "breakoutStatus"
-    );
-
-let breakoutPaddle =
-    220;
-
-let breakoutBall =
-    {
-        x:260,
-        y:255,
-        vx:3.5,
-        vy:-3.5
-    };
-
-let breakoutBricks =
-    [];
-
-let breakoutScore =
-    0;
-
-let breakoutKeys =
-    {};
-
-let breakoutTimer =
-    null;
-
-function resetBreakout(){
-
-    if(!breakoutCtx)
-        return;
-
-    breakoutPaddle =
-        220;
-
-    breakoutBall =
-        {
-            x:260,
-            y:255,
-            vx:3.5,
-            vy:-3.5
-        };
-
-    breakoutScore =
-        0;
-
-    breakoutBricks =
-        [];
-
-    for(
-        let row=0;
-        row<4;
-        row++
-    ){
-
-        for(
-            let col=0;
-            col<10;
-            col++
-        ){
-
-            breakoutBricks.push({
-                x:25+col*49,
-                y:25+row*24,
-                alive:true
-            });
-
-        }
-    }
-
-    if(breakoutStatus)
-        breakoutStatus.textContent =
-            "score: 0";
-
-    clearInterval(
-        breakoutTimer
-    );
-
-    breakoutTimer =
-        setInterval(
-            tickBreakout,
-            16
-        );
-}
-
-function tickBreakout(){
-
-    if(!breakoutCtx)
-        return;
-
-    if(
-        breakoutKeys.ArrowLeft ||
-        breakoutKeys.a
-    )
-        breakoutPaddle -=
-            6;
-
-    if(
-        breakoutKeys.ArrowRight ||
-        breakoutKeys.d
-    )
-        breakoutPaddle +=
-            6;
-
-    breakoutPaddle =
-        Math.max(
-            0,
-            Math.min(
-                440,
-                breakoutPaddle
-            )
-        );
-
-    breakoutBall.x +=
-        breakoutBall.vx;
-
-    breakoutBall.y +=
-        breakoutBall.vy;
-
-    if(
-        breakoutBall.x <= 5 ||
-        breakoutBall.x >= 515
-    )
-        breakoutBall.vx *= -1;
-
-    if(
-        breakoutBall.y <= 5
-    )
-        breakoutBall.vy *= -1;
-
-    if(
-        breakoutBall.y >= 266 &&
-        breakoutBall.y <= 286 &&
-        breakoutBall.x >= breakoutPaddle &&
-        breakoutBall.x <= breakoutPaddle+80
-    ){
-
-        breakoutBall.vy =
-            -Math.abs(
-                breakoutBall.vy
-            );
-
-        breakoutBall.vx =
-            (
-                (
-                    breakoutBall.x -
-                    (
-                        breakoutPaddle+40
-                    )
-                ) / 9
-            );
-    }
-
-    breakoutBricks.forEach(
-        brick => {
-
-            if(!brick.alive)
-                return;
-
-            if(
-                breakoutBall.x >= brick.x &&
-                breakoutBall.x <= brick.x+44 &&
-                breakoutBall.y >= brick.y &&
-                breakoutBall.y <= brick.y+18
-            ){
-
-                brick.alive =
-                    false;
-
-                breakoutBall.vy *=
-                    -1;
-
-                breakoutScore++;
-
-                if(breakoutStatus)
-                    breakoutStatus.textContent =
-                        "score: " +
-                        breakoutScore;
-            }
-        }
-    );
-
-    if(
-        breakoutBricks.every(
-            b => !b.alive
-        )
-    ){
-
-        clearInterval(
-            breakoutTimer
-        );
-
-        if(breakoutStatus)
-            breakoutStatus.textContent =
-                "YOU WIN :3";
-    }
-
-    if(
-        breakoutBall.y > 310
-    ){
-
-        clearInterval(
-            breakoutTimer
-        );
-
-        if(breakoutStatus)
-            breakoutStatus.textContent =
-                "GAME OVER — score: " +
-                breakoutScore;
-    }
-
-    drawBreakout();
-}
-
-function drawBreakout(){
-
-    breakoutCtx.fillStyle =
-        "#101010";
-
-    breakoutCtx.fillRect(
-        0,
-        0,
-        breakoutCanvas.width,
-        breakoutCanvas.height
-    );
-
-    breakoutCtx.fillStyle =
-        "#c8c8c8";
-
-    breakoutCtx.fillRect(
-        breakoutPaddle,
-        274,
-        80,
-        8
-    );
-
-    breakoutCtx.fillRect(
-        breakoutBall.x-5,
-        breakoutBall.y-5,
-        10,
-        10
-    );
-
-    breakoutBricks.forEach(
-        brick => {
-
-            if(!brick.alive)
-                return;
-
-            breakoutCtx.fillStyle =
-                "#888";
-
-            breakoutCtx.fillRect(
-                brick.x,
-                brick.y,
-                44,
-                18
-            );
-        }
-    );
-}
-
-window.addEventListener(
-    "keydown",
-    function(e){
-
-        breakoutKeys[e.key] =
-            true;
-
-    }
-);
-
-window.addEventListener(
-    "keyup",
-    function(e){
-
-        breakoutKeys[e.key] =
-            false;
-
-    }
-);
-
-resetBreakout();
 
 /* =========================================================
    DESELECT ICONS
