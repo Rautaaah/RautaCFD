@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,6 +30,7 @@ body {
     background: black;
     font-family: Tahoma, Arial, sans-serif;
 }
+
 
 /* =========================
    INTRO
@@ -95,12 +95,16 @@ body {
     transform: translateY(1px);
 }
 
+
 #site {
     position: fixed;
     inset: 0;
+
     opacity: 0;
+
     transition: opacity 1.5s ease;
 }
+
 
 /* =========================
    BACKGROUND
@@ -114,14 +118,17 @@ body {
 .background img {
     width: 100%;
     height: 100%;
+
     object-fit: cover;
 }
 
 .overlay {
     position: absolute;
     inset: 0;
+
     background: rgba(0, 0, 0, 0.25);
 }
+
 
 /* =========================
    WINDOWS / PANELS
@@ -176,12 +183,16 @@ body {
         rgba(51, 24, 44, 0.88) 100%
     );
 
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
     font-size: 12px;
     font-weight: bold;
 
     text-shadow: 1px 1px #222;
 
     cursor: move;
+
     user-select: none;
 }
 
@@ -273,6 +284,7 @@ body {
     margin: 12px 0;
 }
 
+
 /* =========================
    LINKS
 ========================= */
@@ -299,8 +311,9 @@ body {
     color: #000099;
 }
 
+
 /* =========================
-   TIME BOX
+   INVISIBLE TIME BOX
 ========================= */
 
 .time-box {
@@ -310,6 +323,18 @@ body {
     top: 15px;
 
     width: 130px;
+    height: auto;
+
+    padding: 0;
+
+    background: transparent;
+
+    border: none;
+
+    box-shadow: none;
+
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
 
     color: white;
 
@@ -322,8 +347,9 @@ body {
     z-index: 1002;
 }
 
+
 /* =========================
-   ANALOG CLOCK
+   SMALL ANALOG CLOCK
 ========================= */
 
 .analog-clock {
@@ -353,6 +379,11 @@ body {
 
     overflow: visible;
 }
+
+
+/* =========================
+   CLOCK NUMBERS
+========================= */
 
 .clock-number {
     position: absolute;
@@ -392,6 +423,11 @@ body {
 .n11 { transform: rotate(330deg) translateY(-45px) rotate(-330deg); }
 .n12 { transform: rotate(360deg) translateY(-45px) rotate(-360deg); }
 
+
+/* =========================
+   CLOCK MINUTE MARKS
+========================= */
+
 .clock-mark {
     position: absolute;
 
@@ -419,6 +455,11 @@ body {
     background: #356f5b;
 }
 
+
+/* =========================
+   CLOCK HANDS
+========================= */
+
 .hand {
     position: absolute;
 
@@ -432,26 +473,44 @@ body {
     z-index: 10;
 }
 
+
+/* Hour hand */
+
 .hour-hand {
     width: 5px;
     height: 30px;
+
     margin-left: -2.5px;
+
     background: #1d1d1d;
 }
+
+
+/* Minute hand */
 
 .minute-hand {
     width: 4px;
     height: 43px;
+
     margin-left: -2px;
+
     background: #1d1d1d;
 }
+
+
+/* Second hand */
 
 .second-hand {
     width: 2px;
     height: 48px;
+
     margin-left: -1px;
+
     background: #4c8c75;
 }
+
+
+/* Clock center */
 
 .clock-center {
     position: absolute;
@@ -472,6 +531,11 @@ body {
 
     z-index: 20;
 }
+
+
+/* =========================
+   DIGITAL TIME
+========================= */
 
 #currentTime {
     margin-top: 5px;
@@ -497,41 +561,6 @@ body {
         1px 1px 3px black;
 }
 
-/* =========================
-   KRIS GIF
-========================= */
-
-.kris-container {
-    position: fixed;
-
-    left: 35px;
-    bottom: 55px;
-
-    width: 220px;
-
-    z-index: 9998;
-
-    pointer-events: none;
-
-    user-select: none;
-}
-
-.kris-gif {
-    display: block;
-
-    width: 220px;
-    height: auto;
-
-    background: transparent;
-
-    image-rendering: pixelated;
-}
-
-/*
-   The GIF must itself contain an alpha channel
-   for true transparency. CSS cannot remove an
-   opaque background baked into the GIF.
-*/
 
 /* =========================
    MUSIC BUTTON
@@ -579,6 +608,7 @@ body {
     transform: scale(0.95);
 }
 
+
 /* =========================
    XP BUTTON
 ========================= */
@@ -605,6 +635,7 @@ body {
     border-right-color: white;
     border-bottom-color: white;
 }
+
 
 /* =========================
    NAVBAR
@@ -641,6 +672,7 @@ body {
 
     z-index: 1000;
 }
+
 
 /* =========================
    DESKTOP ICONS
@@ -710,6 +742,7 @@ body {
     cursor: grabbing;
 }
 
+
 /* =========================
    START BUTTON
 ========================= */
@@ -752,6 +785,7 @@ body {
         #f0b900
     );
 }
+
 
 /* =========================
    NAV LINKS
@@ -799,6 +833,7 @@ body {
     border-color: rgba(200,160,255,0.7);
 }
 
+
 /* =========================
    TASK BUTTONS
 ========================= */
@@ -831,6 +866,9 @@ body {
 
     background: rgba(25,10,40,0.5);
 
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+
     border-top: 1px solid rgba(200,160,255,0.45);
     border-left: 1px solid rgba(200,160,255,0.45);
     border-right: 1px solid rgba(20,5,30,0.8);
@@ -861,6 +899,7 @@ body {
 
     border-left: 1px solid rgba(0,0,0,0.5);
 }
+
 
 /* =========================
    RALSEI CLIPPY
@@ -896,6 +935,9 @@ body {
     image-rendering: pixelated;
 }
 
+
+/* Undertale-style dialogue box */
+
 .clippy-bubble {
     position: relative;
 
@@ -920,7 +962,15 @@ body {
     line-height: 1.35;
 
     letter-spacing: 0.2px;
+
+    box-shadow: none;
+
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
 }
+
+
+/* Dialogue pointer */
 
 .clippy-bubble::after {
     content: "";
@@ -940,6 +990,9 @@ body {
 
     transform: rotate(45deg);
 }
+
+
+/* Close button */
 
 .clippy-close {
     position: absolute;
@@ -974,6 +1027,7 @@ body {
     color: #ffff00;
 }
 
+
 /* =========================
    FRIENDS
 ========================= */
@@ -992,6 +1046,7 @@ body {
 
     image-rendering: auto;
 }
+
 
 /* =========================
    PANEL SIZES
@@ -1040,10 +1095,12 @@ body {
 #newsletterPanel {
     width: 440px;
 }
+
 </style>
 </head>
 
 <body>
+
 
 <!-- =========================
      INTRO
@@ -1057,11 +1114,15 @@ body {
 
 </div>
 
+
 <audio id="signinMusic" preload="auto">
+
     <source
         src="https://rautacfd.vercel.app/signin.mp3"
         type="audio/mpeg">
+
 </audio>
+
 
 <!-- =========================
      SITE
@@ -1071,11 +1132,14 @@ body {
 
 <div class="background">
 
-    <img src="background.gif" alt="">
+    <img src="background.gif">
 
     <div class="overlay"></div>
 
-    <!-- HOME -->
+
+    <!-- =========================
+         HOME
+    ========================= -->
 
     <div class="panel" id="homePanel">
 
@@ -1101,6 +1165,7 @@ body {
 
         </div>
 
+
         <div class="panel-content">
 
             <h2>hai :3</h2>
@@ -1122,8 +1187,7 @@ body {
                 (I BASED IT OFF
                 <a
                     href="https://youtube.com/@rautatientorii"
-                    target="_blank"
-                    rel="noopener noreferrer">
+                    target="_blank">
                     MY USERNAME
                 </a>)
             </p>
@@ -1143,10 +1207,7 @@ body {
                 btw!!!! i have a mc server!!! its coming soon!
                 <br>
                 u should see its site at:
-                <a
-                    href="https://ralseismp.xo.je"
-                    target="_blank"
-                    rel="noopener noreferrer">
+                <a href="https://ralseismp.xo.je">
                     HERE
                 </a>
                 <br>
@@ -1171,7 +1232,10 @@ body {
 
     </div>
 
-    <!-- ABOUT -->
+
+    <!-- =========================
+         ABOUT
+    ========================= -->
 
     <div class="panel hidden" id="aboutPanel">
 
@@ -1196,6 +1260,7 @@ body {
             </div>
 
         </div>
+
 
         <div class="panel-content">
 
@@ -1231,7 +1296,10 @@ body {
 
     </div>
 
-    <!-- PROJECTS -->
+
+    <!-- =========================
+         PROJECTS
+    ========================= -->
 
     <div class="panel hidden" id="projectsPanel">
 
@@ -1257,6 +1325,7 @@ body {
 
         </div>
 
+
         <div class="panel-content">
 
             <h2>my stuff</h2>
@@ -1280,8 +1349,7 @@ body {
                 <strong>mycontact</strong>
                 (<a
                     href="http://mycontact.reblox.vip"
-                    target="_blank"
-                    rel="noopener noreferrer">
+                    target="_blank">
                     mycontact.reblox.vip
                 </a>):
                 a Facebook 2009 type social media that i'm admin on
@@ -1312,7 +1380,10 @@ body {
 
     </div>
 
-    <!-- CONTACT -->
+
+    <!-- =========================
+         CONTACT
+    ========================= -->
 
     <div class="panel hidden" id="contactPanel">
 
@@ -1337,6 +1408,7 @@ body {
             </div>
 
         </div>
+
 
         <div class="panel-content">
 
@@ -1380,7 +1452,10 @@ body {
 
     </div>
 
-    <!-- CATS -->
+
+    <!-- =========================
+         CATS
+    ========================= -->
 
     <div class="panel hidden" id="catsPanel">
 
@@ -1406,6 +1481,7 @@ body {
 
         </div>
 
+
         <div class="panel-content">
 
             <iframe
@@ -1417,27 +1493,35 @@ body {
             </iframe>
 
             <p class="powered-by">
+
                 powered by
+
                 <a
                     href="http://mycontact.reblox.vip"
-                    target="_blank"
-                    rel="noopener noreferrer">
+                    target="_blank">
                     MyContact
                 </a>
+
             </p>
 
             <p class="powered-by">
+
                 want more cats?
+
                 <a href="https://rauta.cfd/cats">
                     go here
                 </a>
+
             </p>
 
         </div>
 
     </div>
 
-    <!-- MUSIC -->
+
+    <!-- =========================
+         MUSIC
+    ========================= -->
 
     <button
         id="musicButton"
@@ -1446,13 +1530,19 @@ body {
         ▶
     </button>
 
+
     <audio id="siteMusic" preload="auto">
+
         <source
             src="https://rauta.cfd/cat.mp3"
             type="audio/mpeg">
+
     </audio>
 
-    <!-- NAVBAR -->
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
 
     <nav class="navbar">
 
@@ -1462,6 +1552,7 @@ body {
             onclick="openPanel('homePanel'); return false;">
             rautatientori :P
         </a>
+
 
         <ul class="nav-links">
 
@@ -1533,10 +1624,12 @@ body {
 
         </ul>
 
+
         <div
             class="task-buttons"
             id="taskButtons">
         </div>
+
 
         <div class="nav-right">
 
@@ -1553,6 +1646,7 @@ body {
 
 </div>
 </div>
+
 
 <!-- =========================
      ANALOG CLOCK
@@ -1575,12 +1669,14 @@ body {
         <div class="clock-number n10">10</div>
         <div class="clock-number n11">11</div>
 
+
+        <!-- Minute marks -->
+
         <div class="clock-mark big" style="transform: rotate(0deg);"></div>
         <div class="clock-mark" style="transform: rotate(6deg);"></div>
         <div class="clock-mark" style="transform: rotate(12deg);"></div>
         <div class="clock-mark" style="transform: rotate(18deg);"></div>
         <div class="clock-mark" style="transform: rotate(24deg);"></div>
-
         <div class="clock-mark big" style="transform: rotate(30deg);"></div>
         <div class="clock-mark" style="transform: rotate(36deg);"></div>
         <div class="clock-mark" style="transform: rotate(42deg);"></div>
@@ -1647,13 +1743,31 @@ body {
         <div class="clock-mark" style="transform: rotate(348deg);"></div>
         <div class="clock-mark" style="transform: rotate(354deg);"></div>
 
-        <div class="hand hour-hand" id="hourHand"></div>
-        <div class="hand minute-hand" id="minuteHand"></div>
-        <div class="hand second-hand" id="secondHand"></div>
+
+        <!-- THREE MOVING HANDS -->
+
+        <div
+            class="hand hour-hand"
+            id="hourHand">
+        </div>
+
+        <div
+            class="hand minute-hand"
+            id="minuteHand">
+        </div>
+
+        <div
+            class="hand second-hand"
+            id="secondHand">
+        </div>
+
+
+        <!-- Center -->
 
         <div class="clock-center"></div>
 
     </div>
+
 
     <div id="currentTime">
         00:00:00
@@ -1665,18 +1779,6 @@ body {
 
 </div>
 
-<!-- =========================
-     KRIS
-========================= -->
-
-<div class="kris-container" id="krisContainer">
-
-    <img
-        src="/krisgamgam.gif"
-        alt="Kris"
-        class="kris-gif">
-
-</div>
 
 <!-- =========================
      DESKTOP ICONS
@@ -1699,6 +1801,7 @@ body {
 
     </div>
 
+
     <div
         class="desktop-icon"
         data-panel="changelogPanel"
@@ -1713,6 +1816,7 @@ body {
         </span>
 
     </div>
+
 
     <div
         class="desktop-icon"
@@ -1730,6 +1834,7 @@ body {
     </div>
 
 </div>
+
 
 <!-- =========================
      ALIEN DESTROYER
@@ -1761,6 +1866,7 @@ body {
 
     </div>
 
+
     <div class="panel-content">
 
         <iframe
@@ -1774,6 +1880,7 @@ body {
     </div>
 
 </div>
+
 
 <!-- =========================
      CHANGELOG
@@ -1804,6 +1911,7 @@ body {
         </div>
 
     </div>
+
 
     <div class="panel-content changelog-content">
 
@@ -1903,6 +2011,7 @@ body {
 
 </div>
 
+
 <!-- =========================
      CHATROOM
 ========================= -->
@@ -1933,6 +2042,7 @@ body {
 
     </div>
 
+
     <div class="panel-content">
 
         <iframe
@@ -1947,7 +2057,9 @@ body {
 
 </div>
 
+
 <script src="/oneko.js"></script>
+
 
 <!-- =========================
      RALSEI CLIPPY
@@ -1969,6 +2081,7 @@ body {
         class="clippy-image">
 
 </div>
+
 
 <!-- =========================
      FRIENDS
@@ -2000,6 +2113,7 @@ body {
 
     </div>
 
+
     <div class="panel-content">
 
         <h1>
@@ -2018,6 +2132,7 @@ body {
 
             </a>
 
+
             <a
                 class="friend"
                 href="http://mycontact.reblox.vip">
@@ -2028,6 +2143,7 @@ body {
 
             </a>
 
+
             <a
                 class="friend"
                 href="https://rauta.rauta.cfd">
@@ -2037,6 +2153,7 @@ body {
                     alt="rautatientori">
 
             </a>
+
 
             <a
                 class="friend"
@@ -2053,6 +2170,7 @@ body {
     </div>
 
 </div>
+
 
 <!-- =========================
      NEWSLETTER
@@ -2084,6 +2202,7 @@ body {
 
     </div>
 
+
     <div class="panel-content">
 
         <h2>
@@ -2094,6 +2213,7 @@ body {
             sign up for updates about anything!
             blogs, projects...zzz i fell asleep
         </p>
+
 
         <form
             action="https://assets.mailerlite.com/jsonp/2568621/forms/195466784979027416/subscribe"
@@ -2106,15 +2226,18 @@ body {
                 placeholder="my email"
                 required>
 
+
             <input
                 type="hidden"
                 name="ml-submit"
                 value="1">
 
+
             <input
                 type="hidden"
                 name="anticsrf"
                 value="true">
+
 
             <button type="submit">
                 pls sub :3
@@ -2126,11 +2249,13 @@ body {
 
 </div>
 
+
 <!-- =========================
      JAVASCRIPT
 ========================= -->
 
 <script>
+
 
 /* =========================
    INTRO
@@ -2148,6 +2273,7 @@ const enterButton =
 const signinMusic =
     document.getElementById("signinMusic");
 
+
 enterButton.addEventListener(
     "click",
     function() {
@@ -2163,12 +2289,17 @@ enterButton.addEventListener(
             }
         );
 
+
         intro.style.opacity = "0";
+
         site.style.opacity = "1";
+
 
         setTimeout(
             function() {
+
                 intro.style.display = "none";
+
             },
             1500
         );
@@ -2176,26 +2307,38 @@ enterButton.addEventListener(
     }
 );
 
+
 /* =========================
    PANELS
 ========================= */
 
 let highestZ = 20;
 
+
 const panelNames = {
 
     homePanel: "meow.exe",
+
     aboutPanel: "about.exe",
+
     projectsPanel: "my stuff.exe",
+
     contactPanel: "contact.exe",
+
     catsPanel: "cats :3",
+
     game1Panel: "alien destroyer.exe",
+
     changelogPanel: "changelog.exe",
+
     chatroomPanel: "chatroom.exe",
+
     friendsPanel: "friends.exe",
+
     newsletterPanel: "newsletter.exe"
 
 };
+
 
 function openPanel(id) {
 
@@ -2204,15 +2347,19 @@ function openPanel(id) {
 
     if (!panel) return;
 
+
     panel.classList.remove("hidden");
 
     panel.style.display = "block";
 
+
     removeTaskButton(id);
+
 
     bringToFront(panel);
 
 }
+
 
 function minimizePanel(id) {
 
@@ -2221,11 +2368,14 @@ function minimizePanel(id) {
 
     if (!panel) return;
 
+
     panel.style.display = "none";
+
 
     addTaskButton(id);
 
 }
+
 
 function closePanel(id) {
 
@@ -2234,13 +2384,16 @@ function closePanel(id) {
 
     if (!panel) return;
 
+
     panel.style.display = "none";
 
     panel.classList.add("hidden");
 
+
     removeTaskButton(id);
 
 }
+
 
 function addTaskButton(id) {
 
@@ -2249,19 +2402,25 @@ function addTaskButton(id) {
             "task-" + id
         );
 
+
     if (existing) return;
+
 
     const button =
         document.createElement("button");
 
+
     button.id =
         "task-" + id;
+
 
     button.className =
         "task-window";
 
+
     button.textContent =
         panelNames[id] || id;
+
 
     button.onclick =
         function() {
@@ -2269,7 +2428,9 @@ function addTaskButton(id) {
             const panel =
                 document.getElementById(id);
 
+
             if (!panel) return;
+
 
             if (
                 panel.style.display === "none"
@@ -2288,15 +2449,18 @@ function addTaskButton(id) {
 
             }
 
+
             bringToFront(panel);
 
         };
+
 
     document
         .getElementById("taskButtons")
         .appendChild(button);
 
 }
+
 
 function removeTaskButton(id) {
 
@@ -2305,11 +2469,15 @@ function removeTaskButton(id) {
             "task-" + id
         );
 
+
     if (button) {
+
         button.remove();
+
     }
 
 }
+
 
 function bringToFront(panel) {
 
@@ -2319,6 +2487,7 @@ function bringToFront(panel) {
         highestZ;
 
 }
+
 
 document
     .querySelectorAll(".panel")
@@ -2337,6 +2506,7 @@ document
         }
     );
 
+
 /* =========================
    DRAG PANELS
 ========================= */
@@ -2351,8 +2521,10 @@ document
             let offsetX = 0;
             let offsetY = 0;
 
+
             const panel =
                 title.closest(".panel");
+
 
             title.addEventListener(
                 "mousedown",
@@ -2366,10 +2538,13 @@ document
                         return;
                     }
 
+
                     dragging = true;
+
 
                     const rect =
                         panel.getBoundingClientRect();
+
 
                     offsetX =
                         e.clientX - rect.left;
@@ -2377,8 +2552,10 @@ document
                     offsetY =
                         e.clientY - rect.top;
 
+
                     panel.style.transform =
                         "none";
+
 
                     panel.style.left =
                         rect.left + "px";
@@ -2386,12 +2563,15 @@ document
                     panel.style.top =
                         rect.top + "px";
 
+
                     bringToFront(panel);
+
 
                     e.preventDefault();
 
                 }
             );
+
 
             document.addEventListener(
                 "mousemove",
@@ -2399,9 +2579,11 @@ document
 
                     if (!dragging) return;
 
+
                     panel.style.left =
                         (e.clientX - offsetX)
                         + "px";
+
 
                     panel.style.top =
                         (e.clientY - offsetY)
@@ -2409,6 +2591,7 @@ document
 
                 }
             );
+
 
             document.addEventListener(
                 "mouseup",
@@ -2421,6 +2604,7 @@ document
 
         }
     );
+
 
 /* =========================
    ANALOG CLOCK
@@ -2446,10 +2630,12 @@ const currentTime =
         "currentTime"
     );
 
+
 function updateClock() {
 
     const now =
         new Date();
+
 
     const hours =
         now.getHours();
@@ -2460,27 +2646,53 @@ function updateClock() {
     const seconds =
         now.getSeconds();
 
+
+    /*
+        Hour hand:
+        30 degrees per hour
+        + 0.5 degrees per minute
+    */
+
     const hourDegrees =
         ((hours % 12) * 30)
         +
         (minutes * 0.5);
+
+
+    /*
+        Minute hand:
+        6 degrees per minute
+        + 0.1 degrees per second
+    */
 
     const minuteDegrees =
         (minutes * 6)
         +
         (seconds * 0.1);
 
+
+    /*
+        Second hand:
+        6 degrees per second
+    */
+
     const secondDegrees =
         seconds * 6;
+
 
     hourHand.style.transform =
         `rotate(${hourDegrees}deg)`;
 
+
     minuteHand.style.transform =
         `rotate(${minuteDegrees}deg)`;
 
+
     secondHand.style.transform =
         `rotate(${secondDegrees}deg)`;
+
+
+    /* Digital clock */
 
     const displayHours =
         String(hours).padStart(
@@ -2488,11 +2700,13 @@ function updateClock() {
             "0"
         );
 
+
     const displayMinutes =
         String(minutes).padStart(
             2,
             "0"
         );
+
 
     const displaySeconds =
         String(seconds).padStart(
@@ -2500,17 +2714,21 @@ function updateClock() {
             "0"
         );
 
+
     currentTime.textContent =
         `${displayHours}:${displayMinutes}:${displaySeconds}`;
 
 }
 
+
 updateClock();
+
 
 setInterval(
     updateClock,
     1000
 );
+
 
 /* =========================
    DRAG CLOCK
@@ -2521,10 +2739,12 @@ const timeBox =
         "timeBox"
     );
 
+
 let draggingTime = false;
 
 let timeOffsetX = 0;
 let timeOffsetY = 0;
+
 
 timeBox.addEventListener(
     "mousedown",
@@ -2532,31 +2752,40 @@ timeBox.addEventListener(
 
         draggingTime = true;
 
+
         const rect =
             timeBox.getBoundingClientRect();
+
 
         timeOffsetX =
             e.clientX - rect.left;
 
+
         timeOffsetY =
             e.clientY - rect.top;
+
 
         timeBox.style.right =
             "auto";
 
+
         timeBox.style.bottom =
             "auto";
+
 
         timeBox.style.left =
             rect.left + "px";
 
+
         timeBox.style.top =
             rect.top + "px";
+
 
         e.preventDefault();
 
     }
 );
+
 
 document.addEventListener(
     "mousemove",
@@ -2564,9 +2793,11 @@ document.addEventListener(
 
         if (!draggingTime) return;
 
+
         timeBox.style.left =
             (e.clientX - timeOffsetX)
             + "px";
+
 
         timeBox.style.top =
             (e.clientY - timeOffsetY)
@@ -2574,6 +2805,7 @@ document.addEventListener(
 
     }
 );
+
 
 document.addEventListener(
     "mouseup",
@@ -2583,6 +2815,7 @@ document.addEventListener(
 
     }
 );
+
 
 /* =========================
    DESKTOP ICONS
@@ -2603,6 +2836,7 @@ document
 
             let isMouseDown = false;
 
+
             icon.addEventListener(
                 "mousedown",
                 function(e) {
@@ -2610,24 +2844,31 @@ document
                     if (e.button !== 0)
                         return;
 
+
                     const rect =
                         icon.getBoundingClientRect();
+
 
                     startX =
                         e.clientX;
 
+
                     startY =
                         e.clientY;
+
 
                     offsetX =
                         e.clientX - rect.left;
 
+
                     offsetY =
                         e.clientY - rect.top;
+
 
                     moved = false;
 
                     isMouseDown = true;
+
 
                     document
                         .querySelectorAll(
@@ -2644,14 +2885,17 @@ document
                             }
                         );
 
+
                     icon.classList.add(
                         "selected"
                     );
+
 
                     e.preventDefault();
 
                 }
             );
+
 
             document.addEventListener(
                 "mousemove",
@@ -2660,15 +2904,18 @@ document
                     if (!isMouseDown)
                         return;
 
+
                     const distanceX =
                         Math.abs(
                             e.clientX - startX
                         );
 
+
                     const distanceY =
                         Math.abs(
                             e.clientY - startY
                         );
+
 
                     if (
                         distanceX > 5 ||
@@ -2677,13 +2924,16 @@ document
 
                         moved = true;
 
+
                         icon.classList.add(
                             "dragging"
                         );
 
+
                         icon.style.left =
                             (e.clientX - offsetX)
                             + "px";
+
 
                         icon.style.top =
                             (e.clientY - offsetY)
@@ -2693,6 +2943,7 @@ document
 
                 }
             );
+
 
             document.addEventListener(
                 "mouseup",
@@ -2707,17 +2958,22 @@ document
                 }
             );
 
+
             icon.addEventListener(
                 "dblclick",
                 function() {
 
                     if (moved) return;
 
+
                     const panel =
                         icon.dataset.panel;
 
+
                     if (panel) {
+
                         openPanel(panel);
+
                     }
 
                 }
@@ -2725,6 +2981,7 @@ document
 
         }
     );
+
 
 /* =========================
    DESELECT ICONS
@@ -2750,10 +3007,6 @@ document.addEventListener(
             !e.target.closest(
                 ".time-box"
             )
-            &&
-            !e.target.closest(
-                ".kris-container"
-            )
         ) {
 
             document
@@ -2775,6 +3028,7 @@ document.addEventListener(
     }
 );
 
+
 /* =========================
    MUSIC
 ========================= */
@@ -2788,6 +3042,7 @@ const siteMusic =
     document.getElementById(
         "siteMusic"
     );
+
 
 musicButton.addEventListener(
     "click",
@@ -2830,6 +3085,7 @@ musicButton.addEventListener(
     }
 );
 
+
 /* =========================
    CLIPPY TEXT
 ========================= */
@@ -2837,24 +3093,37 @@ musicButton.addEventListener(
 const clippyLines = [
 
     "hey :3",
+
     "meow/",
+
     "what are u doing",
+
     "this Website is getting big vro",
+
     "did u check the changelog?",
+
     "why are there so many cats",
+
     "rAlseismp when",
+
     "10000r37772323 bugs",
+
     "This site is pretty cool",
+
     "what if u added another cat",
+
     ":3",
+
     ":P"
 
 ];
+
 
 const clippyBubble =
     document.getElementById(
         "clippyBubble"
     );
+
 
 function clippyTalk() {
 
@@ -2867,12 +3136,15 @@ function clippyTalk() {
             )
         ];
 
+
     clippyBubble.textContent =
         line;
 
 }
 
+
 let clippyTimer = null;
+
 
 function startClippy() {
 
@@ -2884,6 +3156,7 @@ function startClippy() {
 
     }
 
+
     clippyTimer =
         setInterval(
             clippyTalk,
@@ -2892,7 +3165,9 @@ function startClippy() {
 
 }
 
+
 startClippy();
+
 
 /* =========================
    DRAG CLIPPY
@@ -2903,10 +3178,12 @@ const clippy =
         "ralseiClippy"
     );
 
+
 let draggingClippy = false;
 
 let clippyOffsetX = 0;
 let clippyOffsetY = 0;
+
 
 clippy.addEventListener(
     "mousedown",
@@ -2914,31 +3191,32 @@ clippy.addEventListener(
 
         draggingClippy = true;
 
+
         const rect =
             clippy.getBoundingClientRect();
+
 
         clippyOffsetX =
             e.clientX - rect.left;
 
+
         clippyOffsetY =
             e.clientY - rect.top;
+
 
         clippy.style.right =
             "auto";
 
+
         clippy.style.bottom =
             "auto";
 
-        clippy.style.left =
-            rect.left + "px";
-
-        clippy.style.top =
-            rect.top + "px";
 
         e.preventDefault();
 
     }
 );
+
 
 document.addEventListener(
     "mousemove",
@@ -2947,14 +3225,17 @@ document.addEventListener(
         if (!draggingClippy)
             return;
 
+
         clippy.style.left =
             `${e.clientX - clippyOffsetX}px`;
+
 
         clippy.style.top =
             `${e.clientY - clippyOffsetY}px`;
 
     }
 );
+
 
 document.addEventListener(
     "mouseup",
